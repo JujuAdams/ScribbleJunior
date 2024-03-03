@@ -22,7 +22,7 @@ if (keyboard_check_pressed(ord("5"))) mode = 5;
 if (keyboard_check_pressed(ord("6"))) mode = 6;
 if (keyboard_check_pressed(ord("7"))) mode = 7;
 
-if (keyboard_check_pressed(vk_space)) ScribbletSetBudget((ScribbletGetBudget() < 0)? 1000 : -1);
+if (keyboard_check_pressed(vk_space)) ScribblejrSetBudget((ScribblejrGetBudget() < 0)? 1000 : -1);
 
 if (keyboard_check_pressed(ord("F")))
 {
