@@ -179,7 +179,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
     
     
     
-    static __Draw = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative = SCRIBBLEJR_DEFAULT_FORCE_NATIVE)
+    static __Draw = function(_x, _y, _colour = c_white, _alpha = 1)
     {
         draw_set_font(__font);
         draw_set_colour(_colour);
@@ -188,12 +188,12 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         draw_set_valign(__vAlign);
         
         draw_text(_x, _y, __string);
-        if (not _forceNative) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
-    static __DrawScale = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative = SCRIBBLEJR_DEFAULT_FORCE_NATIVE)
+    static __DrawScale = function(_x, _y, _colour = c_white, _alpha = 1)
     {
         draw_set_font(__font);
         draw_set_colour(_colour);
@@ -202,12 +202,12 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         draw_set_valign(__vAlign);
         
         draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
-        if (not _forceNative) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
-    static __DrawWrap = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative = SCRIBBLEJR_DEFAULT_FORCE_NATIVE)
+    static __DrawWrap = function(_x, _y, _colour = c_white, _alpha = 1)
     {
         draw_set_font(__font);
         draw_set_colour(_colour);
@@ -216,12 +216,12 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         draw_set_valign(__vAlign);
         
         draw_text_ext(_x, _y, __string, -1, __wrapWidth);
-        if (not _forceNative) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
-    static __DrawFit = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative = SCRIBBLEJR_DEFAULT_FORCE_NATIVE)
+    static __DrawFit = function(_x, _y, _colour = c_white, _alpha = 1)
     {
         draw_set_font(__font);
         draw_set_colour(_colour);
@@ -230,7 +230,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         draw_set_valign(__vAlign);
         
         draw_text_ext_transformed(_x, _y, __string, -1, __wrapWidth, __scale, __scale, 0);
-        if (not _forceNative) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }

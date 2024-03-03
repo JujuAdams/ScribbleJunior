@@ -225,7 +225,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     
     
     
-    static __DrawSimple = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative = SCRIBBLEJR_DEFAULT_FORCE_NATIVE)
+    static __DrawSimple = function(_x, _y, _colour = c_white, _alpha = 1)
     {
         draw_set_font(__font);
         draw_set_colour(_colour);
@@ -234,12 +234,12 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         draw_set_valign(__vAlign);
         
         draw_text(_x, _y, __string);
-        if (not _forceNative) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
-    static __DrawSimpleScaled = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative = SCRIBBLEJR_DEFAULT_FORCE_NATIVE)
+    static __DrawSimpleScaled = function(_x, _y, _colour = c_white, _alpha = 1)
     {
         draw_set_font(__font);
         draw_set_colour(_colour);
@@ -248,12 +248,12 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         draw_set_valign(__vAlign);
         
         draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
-        if (not _forceNative) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
-    static __DrawNative = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative = SCRIBBLEJR_DEFAULT_FORCE_NATIVE)
+    static __DrawNative = function(_x, _y, _colour = c_white, _alpha = 1)
     {
         draw_set_font(__font);
         draw_set_alpha(_alpha);
@@ -278,7 +278,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         
         __DrawSprites(_x, _y, _alpha);
         
-        if (not _forceNative) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }

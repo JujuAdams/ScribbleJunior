@@ -368,7 +368,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     
     
     
-    static __DrawNative = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative = SCRIBBLEJR_DEFAULT_FORCE_NATIVE)
+    static __DrawNative = function(_x, _y, _colour = c_white, _alpha = 1)
     {
         draw_set_font(__font);
         draw_set_alpha(_alpha);
@@ -391,7 +391,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         
         __DrawSprites(_x, _y, _alpha);
         
-        if (not _forceNative) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
