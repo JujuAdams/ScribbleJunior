@@ -83,7 +83,6 @@ function __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontSc
     __vertexBuilder = new __ScribblejrClassBuilder(__string, _font);
     
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);
-    if (not SCRIBBLEJR_PROGRESSIVE_BUILD) __BuildVertexBuffer();
     
     
     

@@ -30,11 +30,6 @@ function __ScribblejrClassBuilderExtFit(_fragArray, _font) constructor
     __glyphX      = 0;
     __glyphY      = 0;
     
-    if (not SCRIBBLEJR_PROGRESSIVE_BUILD)
-    {
-        while(not __tickMethod()) {}
-    }
-    
     
     
     

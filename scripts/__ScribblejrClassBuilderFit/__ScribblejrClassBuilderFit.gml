@@ -42,11 +42,6 @@ function __ScribblejrClassBuilderFit(_string, _font, _hAlign, _vAlign, _wrapWidt
     __glyphX = 0;
     __glyphY = 0;
     
-    if (not SCRIBBLEJR_PROGRESSIVE_BUILD)
-    {
-        while(not __tickMethod()) {}
-    }
-    
     
     
     

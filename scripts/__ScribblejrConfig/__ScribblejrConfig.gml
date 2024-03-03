@@ -15,14 +15,8 @@
 //ScribblejrFit() and ScribblejrFitExt(). Higher numbers are more accurate but slower.
 #macro SCRIBBLEJR_FIT_ITERATIONS  6
 
-//Whether to progressively build vertex buffers. This distributes the up-front cost of building
-//vertex buffers over a few frames. Setting this macro to <false> will instead build vertex buffers
-//entirely on the first frame that Scribblejr draws some text.
-#macro SCRIBBLEJR_PROGRESSIVE_BUILD  true
-
 //Amount of time per frame that Scribblejr is allowed to bake vertex buffers. This limit is
-//approximate. If SCRIBBLEJR_PROGRESSIVE_BUILD is set to <false> then this limit will not apply.
-//You can adjust the budget time at runtime by calling ScribblejrSetBudget().
+//approximate. You can adjust the budget time at runtime by calling ScribblejrSetBudget().
 #macro SCRIBBLEJR_BUDGET  200 //microseconds
 
 //How many glyphs to write per text element per frame during progressive building. Higher values

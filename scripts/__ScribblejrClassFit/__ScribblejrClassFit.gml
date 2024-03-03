@@ -119,7 +119,6 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
     __vertexBuilder = new __ScribblejrClassBuilderFit(__string, _font, __hAlign, __vAlign, __wrapWidth);
     
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);
-    if (not SCRIBBLEJR_PROGRESSIVE_BUILD) __BuildVertexBuffer();
     
     
     

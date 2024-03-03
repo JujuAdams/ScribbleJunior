@@ -30,11 +30,6 @@ function __ScribblejrClassBuilderExt(_fragArray, _font) constructor
     __stringArray = undefined;
     __glyphX      = 0;
     
-    if (not SCRIBBLEJR_PROGRESSIVE_BUILD)
-    {
-        while(not __tickMethod()) {}
-    }
-    
     
     
     

@@ -31,11 +31,6 @@ function __ScribblejrClassBuilder(_string, _font) constructor
     __glyphCount = string_length(__string);
     __glyphX = 0;
     
-    if (not SCRIBBLEJR_PROGRESSIVE_BUILD)
-    {
-        while(not __tickMethod()) {}
-    }
-    
     
     
     

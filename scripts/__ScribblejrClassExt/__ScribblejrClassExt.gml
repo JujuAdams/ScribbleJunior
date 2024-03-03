@@ -214,7 +214,6 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
     
     if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) draw_set_font(_oldFont);
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);
-    if (not SCRIBBLEJR_PROGRESSIVE_BUILD) __BuildVertexBuffer();
     
     
     
