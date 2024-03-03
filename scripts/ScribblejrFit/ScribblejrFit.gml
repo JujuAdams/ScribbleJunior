@@ -26,6 +26,10 @@
 /// - <element>.GetHeight()
 ///   Returns the height of the text when, in pixels.
 /// 
+/// - <element>.Bake()
+///   Immediately fully bakes the vertex buffer for the text element. Helpful if you want to
+///   pre-cache text elements for drawing later.
+/// 
 /// This function relies on internal caching for performance gains. If you change any of the
 /// arguments provided to this function, Scribble Jr. will have to do extra work to recache the new
 /// text data. Try to limit how often you change these arguments to get the best performance.
