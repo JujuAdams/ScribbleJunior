@@ -7,7 +7,7 @@
 /// @param maxWidth
 /// @param maxHeight
 
-function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight) constructor
+function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight) : __ScribblejrClassBase() constructor
 {
     static _system     = __ScribblejrSystem();
     static _colourDict = _system.__colourDict;
@@ -206,11 +206,6 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     
     
     
-    static toString = function()
-    {
-        return __key;
-    }
-    
     static GetWidth = function()
     {
         return __width;
@@ -304,29 +299,6 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     
     
     
-    static __BuildVertexBufferTimed = function()
-    {
-        if (__fontIsDynamic) return; //Don't bake dynamic fonts
-        if (_system.__budgetUsed >= _system.__budget) return; //Don't exceed the baking budget
-        
-        var _timer = get_timer();
-        __BuildVertexBuffer();
-        _system.__budgetUsed += get_timer() - _timer;
-    }
-    
-    static __BuildVertexBuffer = function()
-    {
-        if (__fontIsDynamic) return; //Don't bake dynamic fonts
-        
-        if (__vertexBuilder != undefined) && (__vertexBuilder.__tickMethod())
-        {
-            if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Compiled ", self);
-            __vertexBuffer = __vertexBuilder.__vertexBuffer;
-            Draw = __ScribblejrGetFontInfo(__font).sdfEnabled? __DrawVertexBufferSDF : __DrawVertexBuffer;
-            __vertexBuilder = undefined;
-        }
-    }
-    
     static __DrawVertexBuffer = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative_UNUSED)
     {
         static _shdScribblejrExt_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColor, "u_vPositionAlphaScale");
@@ -361,24 +333,5 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         
         //Lean into GameMaker's native renderer for sprites
         __DrawSprites(_x, _y, _alpha);
-    }
-    
-    
-    
-    
-    
-    static __Destroy = function()
-    {
-        if (__vertexBuilder != undefined)
-        {
-            __vertexBuilder.__Destroy();
-            __vertexBuilder = undefined;
-        }
-        
-        if (__vertexBuffer != undefined)
-        {
-            vertex_delete_buffer(__vertexBuffer);
-            __vertexBuffer = undefined;
-        }
     }
 }

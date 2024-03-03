@@ -75,6 +75,7 @@
     {"id":{"name":"__ScribblejrGetSpaceHeight","path":"scripts/__ScribblejrGetSpaceHeight/__ScribblejrGetSpaceHeight.yy",},},
     {"id":{"name":"ScribblejrDrawNative","path":"scripts/ScribblejrDrawNative/ScribblejrDrawNative.yy",},},
     {"id":{"name":"ScribblejrShrink","path":"scripts/ScribblejrShrink/ScribblejrShrink.yy",},},
+    {"id":{"name":"__ScribblejrClassBase","path":"scripts/__ScribblejrClassBase/__ScribblejrClassBase.yy",},},
     {"id":{"name":"__ScribblejrConfig","path":"scripts/__ScribblejrConfig/__ScribblejrConfig.yy",},},
     {"id":{"name":"ScribblejrDefaultFont","path":"fonts/ScribblejrDefaultFont/ScribblejrDefaultFont.yy",},},
     {"id":{"name":"rMain","path":"rooms/rMain/rMain.yy",},},

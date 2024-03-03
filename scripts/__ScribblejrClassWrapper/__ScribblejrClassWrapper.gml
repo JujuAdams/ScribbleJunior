@@ -9,6 +9,11 @@ function __ScribblejrClassWrapper(_element) constructor
         __element.Draw(_x, _y, _colour, _alpha);
         __element.__lastDraw = current_time;
     }
+	
+	static Bake = function()
+	{
+		__element.__Bake();
+	}
     
     static GetWidth = function(_x, _y, _colour, _alpha)
     {
