@@ -68,7 +68,7 @@ function __ScribblejrClassBuilderExtFit(_fragArray, _font) constructor
         var _glyphColour = __glyphColour;
         var _glyphAlpha  = (__glyphColour >= 0);
         
-        repeat(SCRIBBLEJR_BUILD_GLYPH_ITERATIONS)
+        repeat(SCRIBBLEJR_BAKE_GLYPH_COUNT)
         {
             var _char = __stringArray[__glyph];
             if (_char == " ")

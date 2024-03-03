@@ -20,8 +20,8 @@
 #macro SCRIBBLEJR_BUDGET  200 //microseconds
 
 //How many glyphs to write per text element per frame during progressive building. Higher values
-//will build vertex buffers faster but may cause Scribblejr to exceed the time budget.
-#macro SCRIBBLEJR_BUILD_GLYPH_ITERATIONS  20
+//will bake vertex buffers faster but may cause Scribblejr to exceed the time budget.
+#macro SCRIBBLEJR_BAKE_GLYPH_COUNT  20
 
 //Default "forceNative" value for Scribblejr draw calls. Settings this macro to <true> will force
 //draw calls to use GameMaker's native draw calls. This is useful if you don't want to use

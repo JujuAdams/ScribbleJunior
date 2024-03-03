@@ -57,7 +57,7 @@ function __ScribblejrClassBuilder(_string, _font) constructor
     
     static __Tick = function()
     {
-        repeat(SCRIBBLEJR_BUILD_GLYPH_ITERATIONS)
+        repeat(SCRIBBLEJR_BAKE_GLYPH_COUNT)
         {
             var _char = __stringArray[__glyph];
             if (_char == " ")
