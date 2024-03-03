@@ -9,7 +9,7 @@
 
 //Whether to reset draw state after Scribblejr calls. This will slighly negatively impact
 //performance but is convenient.
-#macro SCRIBBLEJR_RESET_DRAW_STATE  true
+#macro SCRIBBLEJR_AUTO_RESET_DRAW_STATE  true
 
 //How many iterations to perform when fitting text inside the bounding box. This only applies to
 //ScribblejrFit() and ScribblejrFitExt(). Higher numbers are more accurate but slower.

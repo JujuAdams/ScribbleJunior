@@ -75,7 +75,7 @@ function __ScribblejrClassBuilderFit(_string, _font, _hAlign, _vAlign, _wrapWidt
     {
         var _wrapWidth = __wrapWidth;
         
-        if (SCRIBBLEJR_RESET_DRAW_STATE) var _oldFont = draw_get_font();
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
         draw_set_font(__font);
         
         //I'd love to pull this out of the glyph data but the values we get are inaccurate
@@ -158,7 +158,7 @@ function __ScribblejrClassBuilderFit(_string, _font, _hAlign, _vAlign, _wrapWidt
         
         __tickMethod = __Tick;
         
-        if (SCRIBBLEJR_RESET_DRAW_STATE) draw_set_font(_oldFont);
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) draw_set_font(_oldFont);
     }
     
     static __Tick = function()

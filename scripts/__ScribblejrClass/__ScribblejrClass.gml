@@ -32,7 +32,7 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) c
     
     
     
-    if (SCRIBBLEJR_RESET_DRAW_STATE) var _oldFont = draw_get_font();
+    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
     draw_set_font(__font);
     
     //Cache string width/height to handle alignment positioning
@@ -70,7 +70,7 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) c
         break;
     }
     
-    if (SCRIBBLEJR_RESET_DRAW_STATE) draw_set_font(_oldFont);
+    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) draw_set_font(_oldFont);
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);
     if (not SCRIBBLEJR_PROGRESSIVE_BUILD) __BuildVertexBuffer();
     
@@ -124,7 +124,7 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) c
         draw_text(_x, _y, __string);
         if (not _forceNative) __BuildVertexBufferTimed();
         
-        if (SCRIBBLEJR_RESET_DRAW_STATE) ScribblejrResetDrawState();
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
     static __DrawScale = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative = SCRIBBLEJR_DEFAULT_FORCE_NATIVE)
@@ -138,7 +138,7 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) c
         draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
         if (not _forceNative) __BuildVertexBufferTimed();
         
-        if (SCRIBBLEJR_RESET_DRAW_STATE) ScribblejrResetDrawState();
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
     

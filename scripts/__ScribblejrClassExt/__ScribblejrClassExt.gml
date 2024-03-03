@@ -34,7 +34,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
     __width  = undefined;
     __height = undefined;
     
-    if (SCRIBBLEJR_RESET_DRAW_STATE) var _oldFont = draw_get_font();
+    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
     draw_set_font(__font);
     
     var _substringArray = string_split(__string, "[");
@@ -212,7 +212,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         }
     }
     
-    if (SCRIBBLEJR_RESET_DRAW_STATE) draw_set_font(_oldFont);
+    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) draw_set_font(_oldFont);
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);
     if (not SCRIBBLEJR_PROGRESSIVE_BUILD) __BuildVertexBuffer();
     
@@ -276,7 +276,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         draw_text(_x, _y, __string);
         if (not _forceNative) __BuildVertexBufferTimed();
         
-        if (SCRIBBLEJR_RESET_DRAW_STATE) ScribblejrResetDrawState();
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
     static __DrawSimpleScaled = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative = SCRIBBLEJR_DEFAULT_FORCE_NATIVE)
@@ -290,7 +290,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
         if (not _forceNative) __BuildVertexBufferTimed();
         
-        if (SCRIBBLEJR_RESET_DRAW_STATE) ScribblejrResetDrawState();
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
     static __DrawNative = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative = SCRIBBLEJR_DEFAULT_FORCE_NATIVE)
@@ -320,7 +320,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         
         if (not _forceNative) __BuildVertexBuffer();
         
-        if (SCRIBBLEJR_RESET_DRAW_STATE) ScribblejrResetDrawState();
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
     static __DrawSprites = function(_x, _y, _alpha)

@@ -1,26 +1,35 @@
 // Feather disable all
 
-/// Draws plain text without formatting or layout. Text will appear immediately using GameMaker's
-/// native text rendering. Over a few frames and in the background, Scribble will build a vertex
-/// buffer in the background that replaces the native text rendering and is faster to draw.
-/// 
-/// This function relies on internal caching for performance gains. If you change any of the
-/// following arguments, Scribble will have to do extra work to recache the new text data. Try to
-/// limit how often you change these variables to get the best performance.
-///     - string
-///     - hAlign
-///     - vAlign
-///     - font
-///     - fontScale
+/// Caches plain text without formatting or layout. Over a few frames in the background,
+/// Scribble Jr. will bake a vertex buffer that replaces the native text rendering and is faster
+/// to draw.
 /// 
 /// N.B. This function should not be used for extremely fast changing text such as a stopwatch.
 ///      You should use ScribblejrNative() instead if you plan for the drawn text to only show for
 ///      a few frames at a time.
 /// 
+/// This function doesn't actually draw the text, it only returns a "text element struct". This
+/// struct can then be used to draw the text, as well as get the width/height of the text, by
+/// calling methods on the struct.
+/// 
+///	- <element>.Draw(x, y, [color=white], [alpha=1])
+///   Draws the text element at the given coordinates. You can also optionally specify a colour
+///   and alpha.
+/// 
+/// - <element>.GetWidth()
+///   Returns the width of the text when drawn, in pixels.
+/// 
+/// - <element>.GetHeight()
+///   Returns the height of the text when, in pixels.
+/// 
+/// This function relies on internal caching for performance gains. If you change any of the
+/// arguments provided to this function, Scribble Jr. will have to do extra work to recache the new
+/// text data. Try to limit how often you change these arguments to get the best performance.
+/// 
 /// @param string
 /// @param [hAlign=left]
 /// @param [vAlign=top]
-/// @param [font]
+/// @param [font=default]
 /// @param [fontScale=1]
 
 function Scribblejr(_string, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1)

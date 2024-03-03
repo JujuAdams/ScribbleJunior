@@ -38,7 +38,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     
     Draw = __DrawNative;
     
-    if (SCRIBBLEJR_RESET_DRAW_STATE) var _oldFont = draw_get_font();
+    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
     draw_set_font(_font);
     
     var _spriteScale = SCRIBBLEJR_SCALE_SPRITES? 1 : (1/_fontScale);
@@ -342,7 +342,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     __fontTexture   = __ScribblejrGetFontInfo(_font).__forcedTexturePointer;
     __vertexBuilder = new __ScribblejrClassBuilderExtFit(__fragmentArray, _font);
     
-    if (SCRIBBLEJR_RESET_DRAW_STATE) draw_set_font(_oldFont);
+    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) draw_set_font(_oldFont);
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);
     if (not SCRIBBLEJR_PROGRESSIVE_BUILD) __BuildVertexBuffer();
     
@@ -394,7 +394,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         
         if (not _forceNative) __BuildVertexBufferTimed();
         
-        if (SCRIBBLEJR_RESET_DRAW_STATE) ScribblejrResetDrawState();
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
     static __DrawSprites = function(_x, _y, _alpha)

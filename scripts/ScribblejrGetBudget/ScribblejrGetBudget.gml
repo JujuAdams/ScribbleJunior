@@ -1,6 +1,6 @@
 // Feather disable all
 
-/// Returns the Scribble compilation time budget.
+/// Returns the Scribble Jr. baking time budget, measured in microseconds.
 
 function ScribblejrGetBudget()
 {

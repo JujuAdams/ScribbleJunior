@@ -14,7 +14,7 @@
 /// @param [alpha=1]
 /// @param [hAlign=left]
 /// @param [vAlign=top]
-/// @param [font]
+/// @param [font=default]
 /// @param [fontScale=1]
 
 function ScribblejrNative(_x, _y, _string, _colour = c_white, _alpha = 1, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1)
@@ -31,5 +31,5 @@ function ScribblejrNative(_x, _y, _string, _colour = c_white, _alpha = 1, _hAlig
     
     draw_text_transformed(_x, _y, _string, _fontScale, _fontScale, 0);
     
-    if (SCRIBBLEJR_RESET_DRAW_STATE) ScribblejrResetDrawState();
+    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
 }

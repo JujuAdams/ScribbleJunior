@@ -1,6 +1,7 @@
 // Feather disable all
 
-/// Returns the Scribble compilation time budget.
+/// Returns how much time Scribble Jr. used to bake vertex buffers in the previous Step, measured
+/// in microseconds. This value will sometimes be a little more than the official time budget.
 
 function ScribblejrGetBudgetUsed()
 {

@@ -1,20 +1,29 @@
 // Feather disable all
 
-/// Draws plain text with limited formatting but without text wrapping. Text will appear
-/// immediately using GameMaker's native text rendering. Over a few frames and in the
-/// background, Scribble will build a vertex buffer in the background that replaces the native
-/// text rendering and is faster to draw.
+/// Caches plain text with limited formatting but without text wrapping. Over a few frames in the
+/// background, Scribble Jr. will bake a vertex buffer that replaces the native text rendering and
+/// is faster to draw.
 /// 
 /// N.B. Manual line breaks ("newlines") are not supported.
 /// 
+/// This function doesn't actually draw the text, it only returns a "text element struct". This
+/// struct can then be used to draw the text, as well as get the width/height of the text, by
+/// calling methods on the struct.
+/// 
+///	- <element>.Draw(x, y, [color=white], [alpha=1])
+///   Draws the text element at the given coordinates. You can also optionally specify a colour
+///   and alpha. The colour argument specified when calling .Draw() will only replace the colour
+///   of text that has not been coloured using a formatting tag.
+/// 
+/// - <element>.GetWidth()
+///   Returns the width of the text when drawn, in pixels.
+/// 
+/// - <element>.GetHeight()
+///   Returns the height of the text when, in pixels.
+/// 
 /// This function relies on internal caching for performance gains. If you change any of the
-/// following arguments, Scribble will have to do extra work to recache the new text data. Try to
-/// limit how often you change these variables to get the best performance.
-///     - string
-///     - hAlign
-///     - vAlign
-///     - font
-///     - fontScale
+/// arguments provided to this function, Scribble Jr. will have to do extra work to recache the new
+/// text data. Try to limit how often you change these arguments to get the best performance.
 /// 
 /// Two types of formatting command are supported:
 /// 
@@ -43,7 +52,7 @@
 /// @param string
 /// @param [hAlign=left]
 /// @param [vAlign=top]
-/// @param [font]
+/// @param [font=default]
 /// @param [fontScale=1]
 
 function ScribblejrExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1)
