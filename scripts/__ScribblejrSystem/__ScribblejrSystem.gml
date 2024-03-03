@@ -1,6 +1,6 @@
 // Feather disable all
 
-#macro __SCRIBBLEJR_VERSION  "1.0.0"
+#macro __SCRIBBLEJR_VERSION  "1.0.0 beta"
 #macro __SCRIBBLEJR_DATE     "2024-03-02"
 
 #macro __SCRIBBLEJR_TIMEOUT  1000 //microseconds
