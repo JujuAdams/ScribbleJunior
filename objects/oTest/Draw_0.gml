@@ -1,6 +1,6 @@
 var _string = "";
 _string += Concat("Test Mode=", mode, "\n");
-_string += Concat("Budget=", ScribbletGetBudget(), "us, used=", ScribbletGetBudgetUsed(), "us\n");
+_string += Concat("Budget=", ScribblejrGetBudget(), "us, used=", ScribblejrGetBudgetUsed(), "us\n");
 _string += Concat("Draw Count=", floor(stressCount), ", fps=", fps, ", fps_real (smoothed)=", floor(fpsRealSmoothed), "\n");
 _string += Concat("Box=", width, " x ", height, ", font scale=", fontScale, "\n");
 
@@ -8,7 +8,7 @@ if (showHelp)
 {
     _string += "\n";
     _string += "\n";
-    _string += Concat("Scribblet ", __SCRIBBLET_VERSION, " Tester\n");
+    _string += Concat("Scribblejr ", __SCRIBBLEJR_VERSION, " Tester\n");
     _string += "\n";
     _string += "F1 = toggle help\n";
     _string += "1-7 = change test mode\n";
@@ -35,14 +35,14 @@ switch(mode)
     case 1:
         repeat(stressCount)
         {
-            ScribbletNative(x, y, testString, un, un, hAlign, vAlign, font, fontScale);
+            ScribblejrNative(x, y, testString, un, un, hAlign, vAlign, font, fontScale);
         }
     break;
     
     case 2:
         repeat(stressCount)
         {
-            var _element = Scribblet(testString, hAlign, vAlign, font, fontScale);
+            var _element = Scribblejr(testString, hAlign, vAlign, font, fontScale);
             _element.Draw(x, y, un, un);
         }
         
@@ -53,7 +53,7 @@ switch(mode)
     case 3:
         repeat(stressCount)
         {
-            var _element = ScribbletShrink(testString, hAlign, vAlign, font, fontScale, _limitWidth, height);
+            var _element = ScribblejrShrink(testString, hAlign, vAlign, font, fontScale, _limitWidth, height);
             _element.Draw(x, y, un, un);
         }
         
@@ -64,7 +64,7 @@ switch(mode)
     case 4:
         repeat(stressCount)
         {
-            var _element = ScribbletFit(testString, hAlign, vAlign, font, fontScale, _limitWidth, height);
+            var _element = ScribblejrFit(testString, hAlign, vAlign, font, fontScale, _limitWidth, height);
             _element.Draw(x, y, un, un);
         }
         
@@ -75,7 +75,7 @@ switch(mode)
     case 5:
         repeat(stressCount)
         {
-            var _element = ScribbletExt(testStringColor, hAlign, vAlign, font, fontScale);
+            var _element = ScribblejrExt(testStringColor, hAlign, vAlign, font, fontScale);
             _element.Draw(x, y, un, un);
         }
         
@@ -86,7 +86,7 @@ switch(mode)
     case 6:
         repeat(stressCount)
         {
-            var _element = ScribbletShrinkExt(testStringColor, hAlign, vAlign, font, fontScale, _limitWidth, height);
+            var _element = ScribblejrShrinkExt(testStringColor, hAlign, vAlign, font, fontScale, _limitWidth, height);
             _element.Draw(x, y, un, un);
         }
         
@@ -97,7 +97,7 @@ switch(mode)
     case 7:
         repeat(stressCount)
         {
-            var _element = ScribbletFitExt(testStringColor, hAlign, vAlign, font, fontScale, _limitWidth, height);
+            var _element = ScribblejrFitExt(testStringColor, hAlign, vAlign, font, fontScale, _limitWidth, height);
             _element.Draw(x, y, un, un);
         }
         
