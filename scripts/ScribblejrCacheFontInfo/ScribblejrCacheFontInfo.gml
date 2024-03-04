@@ -114,32 +114,35 @@ function ScribblejrCacheFontInfo(_font)
             _fontInfo.__forcedTexturePointer = font_get_texture(_font);
             _fontInfo.__isDynamic = _fontInfo.freetype;
             
-            if (_fontInfo.sdfEnabled)
+            if (not _fontInfo.__isDynamic)
             {
-                var _offset = _fontInfo.sdfSpread;
-                var _i = 0;
-                repeat(array_length(_glyphNameArray))
+                if (_fontInfo.sdfEnabled)
                 {
-                    var _name = _glyphNameArray[_i];
-                    var _glyphInfo = _fontGlyphStruct[$ _name];
-                    
-                    _glyphInfo.offset  -=  _offset;
-                    _glyphInfo.yOffset  = -_offset;
-                    
-                    ++_i;
+                    var _offset = _fontInfo.sdfSpread;
+                    var _i = 0;
+                    repeat(array_length(_glyphNameArray))
+                    {
+                        var _name = _glyphNameArray[_i];
+                        var _glyphInfo = _fontGlyphStruct[$ _name];
+                        
+                        _glyphInfo.offset  -=  _offset;
+                        _glyphInfo.yOffset  = -_offset;
+                        
+                        ++_i;
+                    }
                 }
-            }
-            else
-            {
-                var _i = 0;
-                repeat(array_length(_glyphNameArray))
+                else
                 {
-                    var _name = _glyphNameArray[_i];
-                    var _glyphInfo = _fontGlyphStruct[$ _name];
-                    
-                    _glyphInfo.yOffset = 0;
-                    
-                    ++_i;
+                    var _i = 0;
+                    repeat(array_length(_glyphNameArray))
+                    {
+                        var _name = _glyphNameArray[_i];
+                        var _glyphInfo = _fontGlyphStruct[$ _name];
+                        
+                        _glyphInfo.yOffset = 0;
+                        
+                        ++_i;
+                    }
                 }
             }
         }
