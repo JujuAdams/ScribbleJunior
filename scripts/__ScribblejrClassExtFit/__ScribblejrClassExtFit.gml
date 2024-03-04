@@ -184,6 +184,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         var _cursorY = 0;
         
         var _lineStart = 0;
+        var _longWord = false;
         
         var _stretchStart = 0;
         var _stretchWidth = 0;
@@ -202,50 +203,76 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
             
             if (_fragment.__whitespaceFollows)
             {
-                if ((_cursorX + _stretchWidth > _adjustedWidth) && (_cursorX != 0))
+                if (_cursorX + _stretchWidth > _adjustedWidth)
                 {
-                    if (_lastIteration)
+                    if (_cursorX == 0)
                     {
-                        _overallWidth = max(_overallWidth, _cursorX - _spaceWidth);
+                        //Single word is bigger than the width
+                        _longWord = true;
                         
-                        //Sort out the horizontal alignment for the current line
-                        if (_hAlign == fa_center)
+                        if (_lastIteration)
                         {
-                            var _j = _lineStart;
-                            repeat(_stretchStart - _lineStart)
+                            _overallWidth = max(_overallWidth, _stretchWidth);
+                            
+                            var _j = _stretchStart;
+                            repeat(1 + _i - _stretchStart)
                             {
-                                with(_layoutArray[_j]) __x -= _cursorX/2;
+                                with(_layoutArray[_j])
+                                {
+                                    __x += _cursorX;
+                                    __y  = _cursorY + __yOffset;
+                                }
+                                
                                 ++_j;
                             }
                         }
-                        else if (_hAlign == fa_right)
-                        {
-                            var _j = _lineStart;
-                            repeat(_stretchStart - _lineStart)
-                            {
-                                with(_layoutArray[_j]) __x -= _cursorX;
-                                ++_j;
-                            }
-                        }
-                        
-                        _lineStart  = _stretchStart;
                     }
-                    
-                    _cursorX  = 0;
-                    _cursorY += _lineHeight;
-                    
-                    if (_lastIteration)
+                    else
                     {
-                        var _j = _stretchStart;
-                        repeat(1 + _i - _stretchStart)
+                        if (_lastIteration)
                         {
-                            with(_layoutArray[_j]) __y = _cursorY + __yOffset;
-                            ++_j;
+                            _overallWidth = max(_overallWidth, _cursorX - _spaceWidth);
+                            
+                            //Sort out the horizontal alignment for the current line
+                            if (_hAlign == fa_center)
+                            {
+                                var _j = _lineStart;
+                                repeat(_stretchStart - _lineStart)
+                                {
+                                    with(_layoutArray[_j]) __x -= _cursorX/2;
+                                    ++_j;
+                                }
+                            }
+                            else if (_hAlign == fa_right)
+                            {
+                                var _j = _lineStart;
+                                repeat(_stretchStart - _lineStart)
+                                {
+                                    with(_layoutArray[_j]) __x -= _cursorX;
+                                    ++_j;
+                                }
+                            }
+                            
+                            _lineStart  = _stretchStart;
+                        }
+                        
+                        _cursorX  = 0;
+                        _cursorY += _lineHeight;
+                        
+                        if (_lastIteration)
+                        {
+                            var _j = _stretchStart;
+                            repeat(1 + _i - _stretchStart)
+                            {
+                                with(_layoutArray[_j]) __y = _cursorY + __yOffset;
+                                ++_j;
+                            }
                         }
                     }
                 }
-                else //Stretch fits on the same line
+                else
                 {
+                    //Stretch fits on the same line
                     if (_lastIteration)
                     {
                         var _j = _stretchStart;
@@ -290,7 +317,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         //Determine if this iteration should be the new upper or lower bound based on whether we
         //exceeded the height limit
         var _height = _cursorY + _lineHeight;
-        if (_height > _adjustedHeight)
+        if (_longWord || (_height > _adjustedHeight))
         {
             _upperScale = _tryScale;
             
