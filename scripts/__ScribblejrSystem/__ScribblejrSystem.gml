@@ -33,6 +33,8 @@ function __ScribblejrSystem()
         
         __defaultFont = ScribblejrDefaultFont;
         
+        __perCharacterWrap = false;
+        
         __colourDict = {};
         __colourDict[$ "c_aqua"   ] = c_aqua;
         __colourDict[$ "c_black"  ] = c_black;
