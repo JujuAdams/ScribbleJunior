@@ -10,6 +10,6 @@
 
 function ScribblejrSetDefaultFont(_font)
 {
-	if (_font < 0) _font = ScribblejrDefaultFont;
-    __ScribblejrSystem().__defaultFont = _font;
+    static _system = __ScribblejrSystem();
+    _system.__defaultFont = (_font < 0)? ScribblejrDefaultFont : _font;
 }

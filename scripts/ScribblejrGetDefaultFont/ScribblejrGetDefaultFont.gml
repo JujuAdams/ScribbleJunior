@@ -7,5 +7,6 @@
 
 function ScribblejrGetDefaultFont()
 {
-    return __ScribblejrSystem().__defaultFont;
+    static _system = __ScribblejrSystem();
+    return _system.__defaultFont;
 }
