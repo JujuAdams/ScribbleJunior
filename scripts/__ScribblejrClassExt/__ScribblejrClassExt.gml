@@ -312,7 +312,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         
         __DrawSprites(_x, _y, _alpha);
         
-        if (not _forceNative) __BuildVertexBuffer();
+        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBuffer();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
@@ -338,7 +338,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
     
     
     
-    static __DrawVertexBuffer = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative_UNUSED)
+    static __DrawVertexBuffer = function(_x, _y, _colour = c_white, _alpha = 1)
     {
         static _shdScribblejrExt_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColor, "u_vPositionAlphaScale");
         static _shdScribblejrExt_u_iColour = shader_get_uniform(__shdScribblejrColor, "u_iColour");
@@ -356,7 +356,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         __DrawSprites(_x, _y, _alpha);
     }
     
-    static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative_UNUSED)
+    static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1)
     {
         static _shdScribblejrExt_SDF_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDF, "u_vPositionAlphaScale");
         static _shdScribblejrExt_SDF_u_iColour = shader_get_uniform(__shdScribblejrColorSDF, "u_iColour");
