@@ -61,8 +61,19 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
         draw_set_font(__font);
         
-        var _height = _fontScale*string_height_ext(_string, -1, _maxWidth/_fontScale);
-        if (_height <= _maxHeight)
+        var _fitsAlready = true;
+        var _height = _fontScale*string_height_ext(_string, -1, _maxWidth/_fontScale-1);
+        if (_height > _maxHeight)
+        {
+            _fitsAlready = false;
+        }
+        else // _height <= _maxHeight
+        {
+            var _width = string_width(_string);
+            if (_width > _maxWidth) _fitsAlready = false;
+        }
+        
+        if (_fitsAlready)
         {
             //Height limit is enough, just draw wrapped as usual
             if (_fontScale == 1)
@@ -93,20 +104,30 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                 var _adjustedWidth  = _maxWidth/_tryScale;
                 var _adjustedHeight = _maxHeight/_tryScale;
                 
-                //Subtract 1 here to fix on off-by-one in GameMaker's text layout
-                var _height = string_height_ext(_string, -1, _adjustedWidth-1);
+                var _width  = infinity;
+                var _height = string_height_ext(_string, -1, _adjustedWidth-1); //Subtract 1 here to fix on off-by-one in GameMaker's text layout
+                
                 if (_height > _adjustedHeight)
                 {
                     _upperScale = _tryScale;
                 }
                 else
                 {
-                    _lowerScale = _tryScale;
+                    var _width = string_width_ext(_string, -1, _adjustedWidth-1);
+                    if (_width > _adjustedWidth)
+                    {
+                        _upperScale = _tryScale;
+                    }
+                    else
+                    {
+                        _lowerScale = _tryScale;
+                    }
                 }
             }
             
             __scale     = _lowerScale;
             __wrapWidth = _maxWidth / _lowerScale;
+            __width     = __scale*((_width  > _adjustedWidth)?  string_width_ext( _string, -1, __wrapWidth-1) : _width);
             __height    = __scale*((_height > _adjustedHeight)? string_height_ext(_string, -1, __wrapWidth-1) : _height);
             Draw = __DrawFit;
         }
