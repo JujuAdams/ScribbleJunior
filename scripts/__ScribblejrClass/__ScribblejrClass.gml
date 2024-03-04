@@ -139,7 +139,7 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
     
     
     
-    static __DrawVertexBuffer = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative_UNUSED)
+    static __DrawVertexBuffer = function(_x, _y, _colour = c_white, _alpha = 1)
     {
         static _shdScribblejr_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejr, "u_vPositionAlphaScale");
         static _shdScribblejr_u_iColour = shader_get_uniform(__shdScribblejr, "u_iColour");
@@ -151,7 +151,7 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
         shader_reset();
     }
     
-    static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1, _forceNative_UNUSED)
+    static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1)
     {
         static _shdScribblejrSDF_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrSDF, "u_vPositionAlphaScale");
         static _shdScribblejrSDF_u_iColour = shader_get_uniform(__shdScribblejrSDF, "u_iColour");
