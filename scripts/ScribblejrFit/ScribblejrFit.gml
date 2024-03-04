@@ -5,9 +5,9 @@
 /// Scribble Jr. will bake a vertex buffer that replaces the native text rendering and is faster to
 /// draw.
 /// 
-/// N.B. Word breaks will only happen on spaces and any single words too long for a line will not
-///      be split in the middle. Per-character text wrapping (commonly used for Chinese) is not
-///      supported.
+/// N.B. Manual line breaks ("newlines") are not supported. Word breaks will only happen on spaces
+///      and any single words too long for a line will not be split in the middle. Per-character
+///      text wrapping (commonly used for Chinese) is not supported.
 /// 
 /// This function scales text whilst adding newlines. If you want to scale down text without adding
 /// newlines, which will gain you a little performance, then use ScribblejrShrink().
