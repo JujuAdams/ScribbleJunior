@@ -111,7 +111,7 @@ function __ScribblejrClassBuilderFit(_string, _font, _hAlign, _vAlign, _wrapWidt
             if (_word != "")
             {
                 var _width = string_width(_word);
-                if (_x + _width > _wrapWidth)
+                if ((_x + _width > _wrapWidth) && (_x != 0))
                 {
                     array_push(__lineWidthArray, _x - _spaceWidth);
                     array_push(__lineBreakArray, _index);
