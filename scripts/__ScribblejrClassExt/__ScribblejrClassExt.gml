@@ -20,7 +20,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
     __font   = _font;
     __scale  = _fontScale;
     
-    __fontIsDynamic = __ScribblejrGetFontInfo(_font).__isDynamic;
+    __fontIsDynamic = ScribblejrCacheFontInfo(_font).__isDynamic;
     
     Draw = __DrawNative;
         
@@ -28,7 +28,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
     __fragmentArray = [];
     __vertexBuffer  = undefined;
     __vertexBuilder = new __ScribblejrClassBuilderExt(__fragmentArray, _font);
-    __fontTexture   = __ScribblejrGetFontInfo(_font).__forcedTexturePointer;
+    __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
     
     __simple = false;
     __width  = undefined;

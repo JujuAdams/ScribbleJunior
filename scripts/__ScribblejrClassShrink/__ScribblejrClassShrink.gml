@@ -21,7 +21,7 @@ function __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontSc
     __font      = _font;
     __wrapWidth = undefined;
     
-    __fontIsDynamic = __ScribblejrGetFontInfo(_font).__isDynamic;
+    __fontIsDynamic = ScribblejrCacheFontInfo(_font).__isDynamic;
     
     Draw = __Draw;
     
@@ -79,7 +79,7 @@ function __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontSc
     }
     
     __vertexBuffer  = undefined;
-    __fontTexture   = __ScribblejrGetFontInfo(_font).__forcedTexturePointer;
+    __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
     __vertexBuilder = new __ScribblejrClassBuilder(__string, _font);
     
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);

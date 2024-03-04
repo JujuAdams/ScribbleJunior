@@ -10,7 +10,7 @@ function __ScribblejrClassBuilderExt(_fragArray, _font) constructor
     
     __tickMethod = __DecomposeFragment;
     
-    var _fontInfo = __ScribblejrGetFontInfo(_font);
+    var _fontInfo = ScribblejrCacheFontInfo(_font);
     __fontGlyphStruct = _fontInfo.glyphs;
     
     __spaceWidth  = __ScribblejrGetSpaceWidth(_font);

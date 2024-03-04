@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "__ScribblejrGetFontInfo",
+  "name": "ScribblejrCacheFontInfo",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "(System)",
-    "path": "folders/Scribble Jr./(System).yy",
+    "name": "Setup",
+    "path": "folders/Scribble Jr./Setup.yy",
   },
 }

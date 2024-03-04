@@ -22,7 +22,7 @@ function __ScribblejrClassBuilderFit(_string, _font, _hAlign, _vAlign, _wrapWidt
     __lineBreakArray = undefined;
     __tickMethod     = __Decompose;
     
-    var _fontInfo = __ScribblejrGetFontInfo(_font);
+    var _fontInfo = ScribblejrCacheFontInfo(_font);
     __fontGlyphStruct = _fontInfo.glyphs;
     __spaceWidth      = undefined;
     __spaceHeight     = undefined;

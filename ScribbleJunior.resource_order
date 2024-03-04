@@ -41,7 +41,7 @@
     {"name":"__ScribblejrClassExtFit","order":5,"path":"scripts/__ScribblejrClassExtFit/__ScribblejrClassExtFit.yy",},
     {"name":"Scribblejr","order":4,"path":"scripts/Scribblejr/Scribblejr.yy",},
     {"name":"Trace","order":3,"path":"scripts/Trace/Trace.yy",},
-    {"name":"__ScribblejrGetFontInfo","order":1,"path":"scripts/__ScribblejrGetFontInfo/__ScribblejrGetFontInfo.yy",},
+    {"name":"ScribblejrCacheFontInfo","order":10,"path":"scripts/ScribblejrCacheFontInfo/ScribblejrCacheFontInfo.yy",},
     {"name":"Concat","order":4,"path":"scripts/Concat/Concat.yy",},
     {"name":"ScribblejrGetBudgetUsed","order":3,"path":"scripts/ScribblejrGetBudgetUsed/ScribblejrGetBudgetUsed.yy",},
     {"name":"__shdScribblejrColor","order":6,"path":"shaders/__shdScribblejrColor/__shdScribblejrColor.yy",},

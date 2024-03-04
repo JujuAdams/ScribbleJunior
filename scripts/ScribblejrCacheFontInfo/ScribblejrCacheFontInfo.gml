@@ -1,4 +1,19 @@
-function __ScribblejrGetFontInfo(_font)
+// Feather disable all
+
+/// When drawing fonts that have a lot of glyphs defined (Chinese, Japanese, and Korean fonts are
+/// common examples) then you'll notice that Scribble Jr. pauses briefly the first time these
+/// fonts are drawn. This is because Scribble Jr. is requesting font information from GameMaker
+/// which is a very slow operation. This can be distracting for players so Scribble Jr. caches this
+/// information as soon as possible so the font info only needs to be fetched once. Unfortunately,
+/// that first fetch does still need to happen at some point.
+/// 
+/// This function is provided so that you can choose to trigger the slow font information fetch at
+/// a moment of your choosing. You might want to call this function for every font at the start of
+/// the game or maybe only call it when changing language.
+/// 
+/// @param font
+
+function ScribblejrCacheFontInfo(_font)
 {
     static _system         = __ScribblejrSystem();
     static _cache          = _system.__cacheFontInfo;

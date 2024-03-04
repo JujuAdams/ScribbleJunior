@@ -11,7 +11,7 @@ function __ScribblejrClassBuilder(_string, _font) constructor
     
     __tickMethod = __Decompose;
     
-    var _fontInfo = __ScribblejrGetFontInfo(_font);
+    var _fontInfo = ScribblejrCacheFontInfo(_font);
     __fontGlyphStruct = _fontInfo.glyphs;
     
     var _spaceWidth = __ScribblejrGetSpaceWidth(_font);

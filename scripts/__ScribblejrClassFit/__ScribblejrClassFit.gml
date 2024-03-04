@@ -21,7 +21,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
     __font      = _font;
     __wrapWidth = undefined;
     
-    __fontIsDynamic = __ScribblejrGetFontInfo(_font).__isDynamic;
+    __fontIsDynamic = ScribblejrCacheFontInfo(_font).__isDynamic;
     
     Draw = __Draw;
     
@@ -136,7 +136,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
     }
     
     __vertexBuffer  = undefined;
-    __fontTexture   = __ScribblejrGetFontInfo(_font).__forcedTexturePointer;
+    __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
     __vertexBuilder = new __ScribblejrClassBuilderFit(__string, _font, __hAlign, __vAlign, __wrapWidth);
     
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);

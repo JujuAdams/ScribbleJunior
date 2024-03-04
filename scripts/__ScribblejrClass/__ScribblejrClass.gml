@@ -19,12 +19,12 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
     __font   = _font;
     __scale  = _fontScale;
     
-    __fontIsDynamic = __ScribblejrGetFontInfo(_font).__isDynamic;
+    __fontIsDynamic = ScribblejrCacheFontInfo(_font).__isDynamic;
     
     Draw = (_fontScale == 1)? __Draw : __DrawScale;
     
     __vertexBuffer  = undefined;
-    __fontTexture   = __ScribblejrGetFontInfo(_font).__forcedTexturePointer;
+    __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
     __vertexBuilder = new __ScribblejrClassBuilder(__string, _font);
     
     __width  = undefined;

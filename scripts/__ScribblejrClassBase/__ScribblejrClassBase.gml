@@ -30,7 +30,7 @@ function __ScribblejrClassBase() constructor
         {
             if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Compiled ", self);
             __vertexBuffer = __vertexBuilder.__vertexBuffer;
-            Draw = __ScribblejrGetFontInfo(__font).sdfEnabled? __DrawVertexBufferSDF : __DrawVertexBuffer;
+            Draw = ScribblejrCacheFontInfo(__font).sdfEnabled? __DrawVertexBufferSDF : __DrawVertexBuffer;
             __vertexBuilder = undefined;
 			
 			return true;

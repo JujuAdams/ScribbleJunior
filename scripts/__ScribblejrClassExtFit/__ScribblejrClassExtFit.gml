@@ -23,13 +23,13 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     __scale     = _fontScale;
     __fontScale = _fontScale;
     
-    __fontIsDynamic = __ScribblejrGetFontInfo(_font).__isDynamic;
+    __fontIsDynamic = ScribblejrCacheFontInfo(_font).__isDynamic;
     
     __fragmentArray     = [];
     __spriteArray   = [];
     __vertexBuffer  = undefined;
     __vertexBuilder = new __ScribblejrClassBuilderExt(__fragmentArray, _font);
-    __fontTexture   = __ScribblejrGetFontInfo(_font).__forcedTexturePointer;
+    __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
     
     var _layoutArray = [];
     
@@ -366,7 +366,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     __yOffset = 0;
     
     __vertexBuffer  = undefined;
-    __fontTexture   = __ScribblejrGetFontInfo(_font).__forcedTexturePointer;
+    __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
     __vertexBuilder = new __ScribblejrClassBuilderExtFit(__fragmentArray, _font);
     
     if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) draw_set_font(_oldFont);
