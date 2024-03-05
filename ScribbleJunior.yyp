@@ -35,7 +35,7 @@
     {"id":{"name":"__ScribblejrClassBakerExtFit","path":"scripts/__ScribblejrClassBakerExtFit/__ScribblejrClassBakerExtFit.yy",},},
     {"id":{"name":"__ScribblejrClassExtShrink","path":"scripts/__ScribblejrClassExtShrink/__ScribblejrClassExtShrink.yy",},},
     {"id":{"name":"__ScribblejrStringDecompose","path":"scripts/__ScribblejrStringDecompose/__ScribblejrStringDecompose.yy",},},
-    {"id":{"name":"__ScribblejrClassBakerPerChar","path":"scripts/__ScribblejrClassBakerPerChar/__ScribblejrClassBakerPerChar.yy",},},
+    {"id":{"name":"__ScribblejrClassBakerFitPerChar","path":"scripts/__ScribblejrClassBakerFitPerChar/__ScribblejrClassBakerFitPerChar.yy",},},
     {"id":{"name":"__shdScribblejrColorSDF","path":"shaders/__shdScribblejrColorSDF/__shdScribblejrColorSDF.yy",},},
     {"id":{"name":"ScribblejrSetBudget","path":"scripts/ScribblejrSetBudget/ScribblejrSetBudget.yy",},},
     {"id":{"name":"__ScribblejrClassFit","path":"scripts/__ScribblejrClassFit/__ScribblejrClassFit.yy",},},
