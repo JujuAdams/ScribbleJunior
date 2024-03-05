@@ -2,7 +2,7 @@ hAlign    = fa_left;
 vAlign    = fa_top;
 font      = fntTest;
 fontScale = 1;
-width     = 500;
+width     = 300;
 height    = 200;
 
 showHelp = false;
@@ -43,3 +43,5 @@ mode = 7;
 var _mapstring = " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,.-;:_+-*/\\'\"!?~^°<>|(){[]}%&=#@$ÄÖÜäöüß";
 spriteFont = font_add_sprite_ext(sSpriteFont, _mapstring, true, 1);
 ScribblejrAttachSpritefont(spriteFont, true, 1);
+
+ScribblejrSetCharacterWrap(true);

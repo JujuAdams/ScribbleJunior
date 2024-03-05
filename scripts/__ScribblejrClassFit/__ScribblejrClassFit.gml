@@ -61,75 +61,230 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
         draw_set_font(__font);
         
-        var _fitsAlready = true;
-        var _height = _fontScale*string_height_ext(_string, -1, _maxWidth/_fontScale-1);
-        if (_height > _maxHeight)
+        if (_system.__perCharacterWrap)
         {
-            _fitsAlready = false;
-        }
-        else // _height <= _maxHeight
-        {
-            var _width = string_width(_string);
-            if (_width > _maxWidth) _fitsAlready = false;
-        }
-        
-        if (_fitsAlready)
-        {
-            //Height limit is enough, just draw wrapped as usual
-            if (_fontScale == 1)
-            {
-                __scale      = 1;
-                __wrapWidth  = _maxWidth;
-                Draw = __DrawWrap;
-            }
-            else
-            {
-                __scale      = _fontScale;
-                __wrapWidth  = _maxWidth/_fontScale;
-                Draw = __DrawFit;
-            }
-        }
-        else
-        {
-            var _upperScale = _fontScale;
-            var _lowerScale = 0;
+            #region Per-character wrapping
             
-            //Perform a binary search to find the best fit
-            repeat(SCRIBBLEJR_FIT_ITERATIONS)
+            var _charArray = __ScribblejrStringDecompose(_string);
+            
+            var _fitsAlready = true;
+            var _height = _fontScale*string_height(_string);
+            if (_height > _maxHeight)
             {
-                //Bias scale search very slighty to be larger
-                //This usually finds the global maxima rather than narrowing down on a local maxima
-                var _tryScale = lerp(_lowerScale, _upperScale, 0.51);
-                
-                var _adjustedWidth  = _maxWidth/_tryScale;
-                var _adjustedHeight = _maxHeight/_tryScale;
-                
-                var _width  = infinity;
-                var _height = string_height_ext(_string, -1, _adjustedWidth-1); //Subtract 1 here to fix on off-by-one in GameMaker's text layout
-                
-                if (_height > _adjustedHeight)
+                _fitsAlready = false;
+            }
+            else // _height <= _maxHeight
+            {
+                var _width = string_width(_string);
+                if (_width > _maxWidth) _fitsAlready = false;
+            }
+            
+            if (_fitsAlready)
+            {
+                //Height limit is enough, just draw wrapped as usual
+                if (_fontScale == 1)
                 {
-                    _upperScale = _tryScale;
+                    __scale      = 1;
+                    __wrapWidth  = _maxWidth;
+                    Draw = __DrawWrap;
                 }
                 else
                 {
-                    var _width = string_width_ext(_string, -1, _adjustedWidth-1);
-                    if (_width > _adjustedWidth)
+                    __scale      = _fontScale;
+                    __wrapWidth  = _maxWidth/_fontScale;
+                    Draw = __DrawFit;
+                }
+            }
+            else //Doesn't fit, let's do some layout!
+            {
+                __scale = _fontScale;
+                
+                Draw = __DrawStretches;
+                __stretchesArray = [];
+                
+                var _spaceWidth  = __ScribblejrGetSpaceWidth(_font);
+                var _spaceHeight = __ScribblejrGetSpaceHeight(_font);
+                
+                var _upperScale = _fontScale;
+                var _lowerScale = 0;
+                
+                var _stretchStart = 0;
+                var _overallWidth = 0;
+                
+                //Perform a binary search to find the best fit
+                var _iteration = 0;
+                repeat(SCRIBBLEJR_FIT_ITERATIONS)
+                {
+                    var _lastIteration = (_iteration >= SCRIBBLEJR_FIT_ITERATIONS-1);
+                    
+                    //Bias scale search very slighty to be larger
+                    //This usually finds the global maxima rather than narrowing down on a local maxima
+                    var _tryScale = 1; //lerp(_lowerScale, _upperScale, 0.51);
+                    
+                    var _adjustedWidth  = _maxWidth/_tryScale;
+                    var _adjustedHeight = _maxHeight/_tryScale;
+                    
+                    var _cursorX = 0;
+                    var _cursorY = 0;
+                    
+                    var _i = 0;
+                    repeat(array_length(_charArray))
+                    {
+                        var _char = _charArray[_i];
+                        if (_char == " ")
+                        {
+                            if (_stretchStart == _i) _stretchStart++;
+                        
+                            if (_cursorX + _spaceWidth > _maxWidth)
+                            {
+                                if (_lastIteration)
+                                {
+                                    _overallWidth = max(_overallWidth, _cursorX);
+                                    
+                                    array_push(__stretchesArray, {
+                                        __width:  _cursorX,
+                                        __y:      _cursorY,
+                                        __string: string_copy(_string, _stretchStart+1, _i - _stretchStart),
+                                    });
+                                    
+                                    _stretchStart = _i+1;
+                                }
+                                
+                                _cursorX  = 0;
+                                _cursorY += _spaceHeight;
+                            }
+                            else
+                            {
+                                _cursorX += _spaceWidth;
+                            }
+                        }
+                        else
+                        {
+                            var _glyphWidth = string_width(_char);
+                            if (_cursorX + _glyphWidth > _maxWidth)
+                            {
+                                if (_lastIteration)
+                                {
+                                    _overallWidth = max(_overallWidth, _cursorX);
+                                    
+                                    array_push(__stretchesArray, {
+                                        __width:  _cursorX,
+                                        __y:      _cursorY,
+                                        __string: string_copy(_string, _stretchStart+1, _i - _stretchStart),
+                                    });
+                                    
+                                    _stretchStart = _i;
+                                }
+                                
+                                _cursorX  = _glyphWidth;
+                                _cursorY += _spaceHeight;
+                            }
+                            else
+                            {
+                                _cursorX += _glyphWidth;
+                            }
+                        }
+                        
+                        ++_i;
+                    }
+                    
+                    if (_lastIteration)
+                    {
+                        if (_stretchStart < array_length(_charArray))
+                        {
+                            _overallWidth = max(_overallWidth, _cursorX);
+                            
+                            array_push(__stretchesArray, {
+                                __width:  _cursorX,
+                                __y:      _cursorY,
+                                __string: string_copy(_string, _stretchStart+1, _i - _stretchStart),
+                            });
+                            
+                            _cursorY += _spaceHeight;
+                        }
+                    }
+                    
+                    ++_iteration;
+                }
+                
+                __width  = _overallWidth;
+                __height = _cursorY;
+            }
+            
+            #endregion
+        }
+        else
+        {
+            var _fitsAlready = true;
+            var _height = _fontScale*string_height_ext(_string, -1, _maxWidth/_fontScale-1);
+            if (_height > _maxHeight)
+            {
+                _fitsAlready = false;
+            }
+            else // _height <= _maxHeight
+            {
+                var _width = string_width(_string);
+                if (_width > _maxWidth) _fitsAlready = false;
+            }
+            
+            if (_fitsAlready)
+            {
+                //Height limit is enough, just draw wrapped as usual
+                if (_fontScale == 1)
+                {
+                    __scale      = 1;
+                    __wrapWidth  = _maxWidth;
+                    Draw = __DrawWrap;
+                }
+                else
+                {
+                    __scale      = _fontScale;
+                    __wrapWidth  = _maxWidth/_fontScale;
+                    Draw = __DrawFit;
+                }
+            }
+            else //Doesn't fit, let's do some layout!
+            {
+                var _upperScale = _fontScale;
+                var _lowerScale = 0;
+                
+                //Perform a binary search to find the best fit
+                repeat(SCRIBBLEJR_FIT_ITERATIONS)
+                {
+                    //Bias scale search very slighty to be larger
+                    //This usually finds the global maxima rather than narrowing down on a local maxima
+                    var _tryScale = lerp(_lowerScale, _upperScale, 0.51);
+                    
+                    var _adjustedWidth  = _maxWidth/_tryScale;
+                    var _adjustedHeight = _maxHeight/_tryScale;
+                    
+                    var _width  = infinity;
+                    var _height = string_height_ext(_string, -1, _adjustedWidth-1); //Subtract 1 here to fix on off-by-one in GameMaker's text layout
+                    
+                    if (_height > _adjustedHeight)
                     {
                         _upperScale = _tryScale;
                     }
                     else
                     {
-                        _lowerScale = _tryScale;
+                        var _width = string_width_ext(_string, -1, _adjustedWidth-1);
+                        if (_width > _adjustedWidth)
+                        {
+                            _upperScale = _tryScale;
+                        }
+                        else
+                        {
+                            _lowerScale = _tryScale;
+                        }
                     }
                 }
+                
+                __scale     = _lowerScale;
+                __wrapWidth = _maxWidth / _lowerScale;
+                __width     = __scale*((_width  > _adjustedWidth)?  string_width_ext( _string, -1, __wrapWidth-1) : _width);
+                __height    = __scale*((_height > _adjustedHeight)? string_height_ext(_string, -1, __wrapWidth-1) : _height);
+                Draw = __DrawFit;
             }
-            
-            __scale     = _lowerScale;
-            __wrapWidth = _maxWidth / _lowerScale;
-            __width     = __scale*((_width  > _adjustedWidth)?  string_width_ext( _string, -1, __wrapWidth-1) : _width);
-            __height    = __scale*((_height > _adjustedHeight)? string_height_ext(_string, -1, __wrapWidth-1) : _height);
-            Draw = __DrawFit;
         }
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) draw_set_font(_oldFont);
@@ -246,6 +401,32 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         draw_set_valign(__vAlign);
         
         draw_text_ext_transformed(_x, _y, __string, -1, __wrapWidth, __scale, __scale, 0);
+        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
+        
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
+    }
+    
+    static __DrawStretches = function(_x, _y, _colour = c_white, _alpha = 1)
+    {
+        var _scale = __scale;
+        
+        draw_set_font(__font);
+        draw_set_colour(_colour);
+        draw_set_alpha(_alpha);
+        draw_set_halign(__hAlign);
+        draw_set_valign(__vAlign);
+        
+        var _i = 0;
+        repeat(array_length(__stretchesArray))
+        {
+            with(__stretchesArray[_i])
+            {
+                draw_text_transformed(_x, _y + __y, __string, _scale, _scale, 0);
+            }
+            
+            ++_i;
+        }
+        
         if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
