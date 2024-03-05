@@ -45,10 +45,10 @@ function __ScribblejrClassBakerPerChar(_fragmentArray, _font) constructor
         }
     }
     
-	
-	
-	
-	
+    
+    
+    
+    
     static __DecomposeFragment = function()
     {
         var _fragmentData   = __fragmentArray[__fragment];

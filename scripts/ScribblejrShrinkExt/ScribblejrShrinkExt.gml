@@ -13,7 +13,7 @@
 /// struct can then be used to draw the text, as well as get the width/height of the text, by
 /// calling methods on the struct.
 /// 
-///	- <element>.Draw(x, y, [color=white], [alpha=1])
+///    - <element>.Draw(x, y, [color=white], [alpha=1])
 ///   Draws the text element at the given coordinates. You can also optionally specify a colour
 ///   and alpha. The colour argument specified when calling .Draw() will only replace the colour
 ///   of text that has not been coloured using a formatting tag.

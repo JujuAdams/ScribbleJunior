@@ -4,13 +4,13 @@ function __ScribblejrClassBase() constructor
     {
         return __key;
     }
-	
-	static __Bake = function()
-	{
+    
+    static __Bake = function()
+    {
         if (__fontIsDynamic) return; //Don't bake dynamic fonts
-		while(not __BakeVertexBuffer()) __BakeVertexBuffer();
-	}
-	
+        while(not __BakeVertexBuffer()) __BakeVertexBuffer();
+    }
+    
     static __BakeVertexBufferTimed = function()
     {
         if (__fontIsDynamic) return; //Don't bake dynamic fonts
@@ -25,20 +25,20 @@ function __ScribblejrClassBase() constructor
     {
         if (__fontIsDynamic) return true; //Don't bake dynamic fonts
         if (__vertexBaker == undefined) return true;
-		
+        
         if (__vertexBaker.__tickMethod())
         {
             if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Compiled ", self);
             __vertexBuffer = __vertexBaker.__vertexBuffer;
             Draw = ScribblejrCacheFontInfo(__font).sdfEnabled? __DrawVertexBufferSDF : __DrawVertexBuffer;
             __vertexBaker = undefined;
-			
-			return true;
+            
+            return true;
         }
-		
-		return false;
+        
+        return false;
     }
-	
+    
     static __Destroy = function()
     {
         if (__vertexBaker != undefined)

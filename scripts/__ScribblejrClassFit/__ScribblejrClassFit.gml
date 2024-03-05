@@ -32,8 +32,8 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
     
     
     
-	
-	var _bakerFunc = __ScribblejrClassBakerFit;
+    
+    var _bakerFunc = __ScribblejrClassBakerFit;
     
     if (is_infinity(_maxWidth))
     {
@@ -67,8 +67,8 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         {
             #region Per-character wrapping
             
-			_bakerFunc = __ScribblejrClassBakerPerChar;
-			
+            _bakerFunc = __ScribblejrClassBakerPerChar;
+            
             var _charArray = __ScribblejrStringDecompose(_string);
             
             var _fitsAlready = true;
@@ -147,7 +147,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                                     
                                     array_push(__stretchesArray, {
                                         __width:  _cursorX,
-										__x:      0,
+                                        __x:      0,
                                         __y:      _cursorY,
                                         __string: string_copy(_string, _stretchStart+1, _i - _stretchStart),
                                     });
@@ -174,7 +174,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                                     
                                     array_push(__stretchesArray, {
                                         __width:  _cursorX,
-										__x:      0,
+                                        __x:      0,
                                         __y:      _cursorY,
                                         __string: string_copy(_string, _stretchStart+1, _i - _stretchStart),
                                     });
@@ -202,7 +202,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                             
                             array_push(__stretchesArray, {
                                 __width:  _cursorX,
-								__x:      0,
+                                __x:      0,
                                 __y:      _cursorY,
                                 __string: string_copy(_string, _stretchStart+1, _i - _stretchStart),
                             });
@@ -299,19 +299,19 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
     
     __vertexBuffer  = undefined;
     __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
-	
-	if (_bakerFunc == __ScribblejrClassBaker)
-	{
-		__vertexBaker = new _bakerFunc(__string, _font, __hAlign, __vAlign, __wrapWidth);
-	}
-	else if (_bakerFunc == __ScribblejrClassBakerPerChar)
-	{
-		__vertexBaker = new _bakerFunc(__stretchesArray, _font);
-	}
-	else
-	{
-		__ScribblejrError("Unhandled baker function");
-	}
+    
+    if (_bakerFunc == __ScribblejrClassBaker)
+    {
+        __vertexBaker = new _bakerFunc(__string, _font, __hAlign, __vAlign, __wrapWidth);
+    }
+    else if (_bakerFunc == __ScribblejrClassBakerPerChar)
+    {
+        __vertexBaker = new _bakerFunc(__stretchesArray, _font);
+    }
+    else
+    {
+        __ScribblejrError("Unhandled baker function");
+    }
     
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);
     
