@@ -1,10 +1,10 @@
-/// @param fragArray
+/// @param fragmentArray
 /// @param font
 
-function __ScribblejrClassBakerExtFit(_fragmentArray, _font) constructor
+function __ScribblejrClassBakerPerChar(_fragmentArray, _font) constructor
 {
     static _system       = __ScribblejrSystem();
-    static _vertexFormat = _system.__vertexFormatColor;
+    static _vertexFormat = _system.__vertexFormat;
     
     __fragmentArray = _fragmentArray;
     __font = _font;
@@ -23,9 +23,9 @@ function __ScribblejrClassBakerExtFit(_fragmentArray, _font) constructor
         
     __vertexBuffer = vertex_create_buffer();
     vertex_begin(__vertexBuffer, _vertexFormat);
-    vertex_float2(__vertexBuffer, 0, 0); vertex_colour(__vertexBuffer, c_black, 0); vertex_texcoord(__vertexBuffer, 0, 0);
-    vertex_float2(__vertexBuffer, 0, 0); vertex_colour(__vertexBuffer, c_black, 0); vertex_texcoord(__vertexBuffer, 0, 0);
-    vertex_float2(__vertexBuffer, 0, 0); vertex_colour(__vertexBuffer, c_black, 0); vertex_texcoord(__vertexBuffer, 0, 0);
+    vertex_float2(__vertexBuffer, 0, 0); vertex_texcoord(__vertexBuffer, 0, 0);
+    vertex_float2(__vertexBuffer, 0, 0); vertex_texcoord(__vertexBuffer, 0, 0);
+    vertex_float2(__vertexBuffer, 0, 0); vertex_texcoord(__vertexBuffer, 0, 0);
     
     __fragment    = 0;
     __stringArray = undefined;
@@ -45,20 +45,19 @@ function __ScribblejrClassBakerExtFit(_fragmentArray, _font) constructor
         }
     }
     
-    
-    
-    
-    
+	
+	
+	
+	
     static __DecomposeFragment = function()
     {
         var _fragmentData   = __fragmentArray[__fragment];
         var _fragmentString = _fragmentData.__string;
         
-        __glyph       = 0;
-        __glyphCount  = string_length(_fragmentString);
-        __glyphX      = _fragmentData.__x;
-        __glyphY      = _fragmentData.__y;
-        __glyphColour = _fragmentData.__colour;
+        __glyph      = 0;
+        __glyphCount = string_length(_fragmentString);
+        __glyphX     = _fragmentData.__x;
+        __glyphY     = _fragmentData.__y;
         
         __stringArray = __ScribblejrStringDecompose(_fragmentString, __glyphCount);
         __tickMethod = __Tick;
@@ -67,9 +66,6 @@ function __ScribblejrClassBakerExtFit(_fragmentArray, _font) constructor
     
     static __Tick = function()
     {
-        var _glyphColour = __glyphColour;
-        var _glyphAlpha  = (__glyphColour >= 0);
-        
         repeat(SCRIBBLEJR_BAKE_GLYPH_COUNT)
         {
             var _char = __stringArray[__glyph];
@@ -96,12 +92,12 @@ function __ScribblejrClassBakerExtFit(_fragmentArray, _font) constructor
                     var _glyphR = _glyphL + _glyphData.w;
                     var _glyphB = _glyphT + _glyphData.h;
                     
-                    vertex_float2(__vertexBuffer, _glyphL, _glyphT); vertex_colour(__vertexBuffer, _glyphColour, _glyphAlpha); vertex_texcoord(__vertexBuffer, _texL, _texT);
-                    vertex_float2(__vertexBuffer, _glyphR, _glyphT); vertex_colour(__vertexBuffer, _glyphColour, _glyphAlpha); vertex_texcoord(__vertexBuffer, _texR, _texT);
-                    vertex_float2(__vertexBuffer, _glyphL, _glyphB); vertex_colour(__vertexBuffer, _glyphColour, _glyphAlpha); vertex_texcoord(__vertexBuffer, _texL, _texB);
-                    vertex_float2(__vertexBuffer, _glyphR, _glyphT); vertex_colour(__vertexBuffer, _glyphColour, _glyphAlpha); vertex_texcoord(__vertexBuffer, _texR, _texT);
-                    vertex_float2(__vertexBuffer, _glyphR, _glyphB); vertex_colour(__vertexBuffer, _glyphColour, _glyphAlpha); vertex_texcoord(__vertexBuffer, _texR, _texB);
-                    vertex_float2(__vertexBuffer, _glyphL, _glyphB); vertex_colour(__vertexBuffer, _glyphColour, _glyphAlpha); vertex_texcoord(__vertexBuffer, _texL, _texB);
+                    vertex_float2(__vertexBuffer, _glyphL, _glyphT); vertex_texcoord(__vertexBuffer, _texL, _texT);
+                    vertex_float2(__vertexBuffer, _glyphR, _glyphT); vertex_texcoord(__vertexBuffer, _texR, _texT);
+                    vertex_float2(__vertexBuffer, _glyphL, _glyphB); vertex_texcoord(__vertexBuffer, _texL, _texB);
+                    vertex_float2(__vertexBuffer, _glyphR, _glyphT); vertex_texcoord(__vertexBuffer, _texR, _texT);
+                    vertex_float2(__vertexBuffer, _glyphR, _glyphB); vertex_texcoord(__vertexBuffer, _texR, _texB);
+                    vertex_float2(__vertexBuffer, _glyphL, _glyphB); vertex_texcoord(__vertexBuffer, _texL, _texB);
                     
                     __glyphX += _glyphData.shift;
                 }

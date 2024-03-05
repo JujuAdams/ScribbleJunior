@@ -67,6 +67,8 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         {
             #region Per-character wrapping
             
+			_bakerFunc = __ScribblejrClassBakerPerChar;
+			
             var _charArray = __ScribblejrStringDecompose(_string);
             
             var _fitsAlready = true;
@@ -297,7 +299,19 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
     
     __vertexBuffer  = undefined;
     __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
-    __vertexBaker = new _bakerFunc(__string, _font, __hAlign, __vAlign, __wrapWidth);
+	
+	if (_bakerFunc == __ScribblejrClassBaker)
+	{
+		__vertexBaker = new _bakerFunc(__string, _font, __hAlign, __vAlign, __wrapWidth);
+	}
+	else if (_bakerFunc == __ScribblejrClassBakerPerChar)
+	{
+		__vertexBaker = new _bakerFunc(__stretchesArray, _font);
+	}
+	else
+	{
+		__ScribblejrError("Unhandled baker function");
+	}
     
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);
     

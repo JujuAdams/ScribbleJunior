@@ -28,7 +28,7 @@
 
 //Whether to automatically bake vertex buffers for text drawn with Scribble Jr.  Setting this macro
 //to <false> will prevent Scribble Jr. from optimising text drawing in the background.
-#macro SCRIBBLEJR_AUTO_BAKE  false
+#macro SCRIBBLEJR_AUTO_BAKE  true
 
 //Whether to emit lots of additional debug messages to help track Scribblejr's behaviour.
 #macro SCRIBBLEJR_VERBOSE  false
