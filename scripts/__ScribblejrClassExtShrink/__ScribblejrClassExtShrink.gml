@@ -30,7 +30,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     __spriteArray   = [];
     __fragmentArray     = [];
     __vertexBuffer  = undefined;
-    __vertexBuilder = new __ScribblejrClassBuilderExt(__fragmentArray, _font);
+    __vertexBaker = new __ScribblejrClassBakerExt(__fragmentArray, _font);
     __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
     
     if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
@@ -63,7 +63,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         
         Draw = (__scale == 1)? __DrawSimple : __DrawSimpleScaled;
         
-        //Add a spoofed fragment so the vertex buffer builder has something to work on
+        //Add a spoofed fragment so the vertex buffer baker has something to work on
         array_push(__fragmentArray, {
             __colour: -1,
             __string: __string,
@@ -229,7 +229,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         draw_set_valign(__vAlign);
         
         draw_text(_x, _y, __string);
-        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
@@ -243,7 +243,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         draw_set_valign(__vAlign);
         
         draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
-        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
@@ -273,7 +273,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         
         __DrawSprites(_x, _y, _alpha);
         
-        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }

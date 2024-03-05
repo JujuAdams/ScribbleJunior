@@ -32,10 +32,12 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
     
     
     
+	
+	var _bakerFunc = __ScribblejrClassBakerFit;
     
     if (is_infinity(_maxWidth))
     {
-        //No limits!
+        //No limits
         __wrapped = false;
         __scale = _fontScale;
         if (_fontScale != 1) Draw = __DrawScale;
@@ -143,6 +145,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                                     
                                     array_push(__stretchesArray, {
                                         __width:  _cursorX,
+										__x:      0,
                                         __y:      _cursorY,
                                         __string: string_copy(_string, _stretchStart+1, _i - _stretchStart),
                                     });
@@ -169,6 +172,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                                     
                                     array_push(__stretchesArray, {
                                         __width:  _cursorX,
+										__x:      0,
                                         __y:      _cursorY,
                                         __string: string_copy(_string, _stretchStart+1, _i - _stretchStart),
                                     });
@@ -196,6 +200,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                             
                             array_push(__stretchesArray, {
                                 __width:  _cursorX,
+								__x:      0,
                                 __y:      _cursorY,
                                 __string: string_copy(_string, _stretchStart+1, _i - _stretchStart),
                             });
@@ -292,7 +297,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
     
     __vertexBuffer  = undefined;
     __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
-    __vertexBuilder = new __ScribblejrClassBuilderFit(__string, _font, __hAlign, __vAlign, __wrapWidth);
+    __vertexBaker = new _bakerFunc(__string, _font, __hAlign, __vAlign, __wrapWidth);
     
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);
     
@@ -359,7 +364,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         draw_set_valign(__vAlign);
         
         draw_text(_x, _y, __string);
-        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
@@ -373,7 +378,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         draw_set_valign(__vAlign);
         
         draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
-        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
@@ -387,7 +392,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         draw_set_valign(__vAlign);
         
         draw_text_ext(_x, _y, __string, -1, __wrapWidth);
-        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
@@ -401,7 +406,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         draw_set_valign(__vAlign);
         
         draw_text_ext_transformed(_x, _y, __string, -1, __wrapWidth, __scale, __scale, 0);
-        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
@@ -427,7 +432,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
             ++_i;
         }
         
-        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }

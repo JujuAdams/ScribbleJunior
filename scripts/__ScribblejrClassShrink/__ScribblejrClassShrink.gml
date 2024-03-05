@@ -80,7 +80,7 @@ function __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontSc
     
     __vertexBuffer  = undefined;
     __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
-    __vertexBuilder = new __ScribblejrClassBuilder(__string, _font);
+    __vertexBaker = new __ScribblejrClassBaker(__string, _font);
     
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);
     
@@ -127,7 +127,7 @@ function __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontSc
         draw_set_valign(__vAlign);
         
         draw_text(_x, _y, __string);
-        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
@@ -141,7 +141,7 @@ function __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontSc
         draw_set_valign(__vAlign);
         
         draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
-        if (SCRIBBLEJR_AUTO_BAKE) __BuildVertexBufferTimed();
+        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }

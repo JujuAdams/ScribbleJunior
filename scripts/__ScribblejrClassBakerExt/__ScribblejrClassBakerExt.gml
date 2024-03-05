@@ -1,6 +1,7 @@
 /// @param fragArray
 /// @param font
-function __ScribblejrClassBuilderExtFit(_fragArray, _font) constructor
+
+function __ScribblejrClassBakerExt(_fragArray, _font) constructor
 {
     static _system       = __ScribblejrSystem();
     static _vertexFormat = _system.__vertexFormatColor;
@@ -28,7 +29,6 @@ function __ScribblejrClassBuilderExtFit(_fragArray, _font) constructor
     __fragment    = 0;
     __stringArray = undefined;
     __glyphX      = 0;
-    __glyphY      = 0;
     
     
     
@@ -55,7 +55,6 @@ function __ScribblejrClassBuilderExtFit(_fragArray, _font) constructor
         __glyph       = 0;
         __glyphCount  = string_length(_fragmentString);
         __glyphX      = _fragmentData.__x;
-        __glyphY      = _fragmentData.__y;
         __glyphColour = _fragmentData.__colour;
         
         __stringArray = __ScribblejrStringDecompose(_fragmentString, __glyphCount);
@@ -90,7 +89,7 @@ function __ScribblejrClassBuilderExtFit(_fragArray, _font) constructor
                     var _texB = _texT + _glyphData.h*__texTexelH;
                     
                     var _glyphL = __glyphX + _glyphData.offset;
-                    var _glyphT = __glyphY + _glyphData.yOffset;
+                    var _glyphT = _glyphData.yOffset;
                     var _glyphR = _glyphL + _glyphData.w;
                     var _glyphB = _glyphT + _glyphData.h;
                     

@@ -22,7 +22,7 @@
 //ScribblejrSetBudget() is called with a positive number.
 #macro SCRIBBLEJR_BUDGET  200 //microseconds
 
-//How many glyphs to write per text element per frame during progressive building. Higher values
+//How many glyphs to write per text element per frame during progressive baking. Higher values
 //will bake vertex buffers faster but may cause Scribblejr to exceed the time budget.
 #macro SCRIBBLEJR_BAKE_GLYPH_COUNT  20
 

@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "__ScribblejrClassBuilder",
+  "name": "__ScribblejrClassBaker",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Builder",
-    "path": "folders/Scribble Jr./(System)/Classes/Builder.yy",
+    "name": "Baker",
+    "path": "folders/Scribble Jr./(System)/Classes/Baker.yy",
   },
 }

@@ -4,7 +4,7 @@
 /// @param vAlign
 /// @param wrapWidth
 
-function __ScribblejrClassBuilderFit(_string, _font, _hAlign, _vAlign, _wrapWidth) constructor
+function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth) constructor
 {
     static _system       = __ScribblejrSystem();
     static _vertexFormat = _system.__vertexFormat;

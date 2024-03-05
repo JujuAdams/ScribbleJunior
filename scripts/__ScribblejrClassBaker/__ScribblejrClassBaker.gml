@@ -1,7 +1,7 @@
 /// @param string
 /// @param font
 
-function __ScribblejrClassBuilder(_string, _font) constructor
+function __ScribblejrClassBaker(_string, _font) constructor
 {
     static _system       = __ScribblejrSystem();
     static _vertexFormat = _system.__vertexFormat;
