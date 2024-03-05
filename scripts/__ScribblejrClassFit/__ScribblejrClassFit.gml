@@ -130,6 +130,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                     
                     var _cursorX = 0;
                     var _cursorY = 0;
+                    var _cursorSpace = 0;
                     
                     var _i = 0;
                     repeat(array_length(_charArray))
@@ -146,7 +147,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                                     _overallWidth = max(_overallWidth, _cursorX);
                                     
                                     array_push(__stretchesArray, {
-                                        __width:  _cursorX,
+                                        __width:  _cursorX - _cursorSpace,
                                         __x:      0,
                                         __y:      _cursorY,
                                         __string: string_copy(_string, _stretchStart+1, _i - _stretchStart),
@@ -155,12 +156,14 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                                     _stretchStart = _i+1;
                                 }
                                 
-                                _cursorX  = 0;
-                                _cursorY += _spaceHeight;
+                                _cursorX      = 0;
+                                _cursorY     += _spaceHeight;
+                                _cursorSpace  = 0;
                             }
                             else
                             {
-                                _cursorX += _spaceWidth;
+                                _cursorX     += _spaceWidth;
+                                _cursorSpace += _spaceWidth;
                             }
                         }
                         else
@@ -173,7 +176,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                                     _overallWidth = max(_overallWidth, _cursorX);
                                     
                                     array_push(__stretchesArray, {
-                                        __width:  _cursorX,
+                                        __width:  _cursorX - _cursorSpace,
                                         __x:      0,
                                         __y:      _cursorY,
                                         __string: string_copy(_string, _stretchStart+1, _i - _stretchStart),
@@ -182,12 +185,14 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                                     _stretchStart = _i;
                                 }
                                 
-                                _cursorX  = _glyphWidth;
-                                _cursorY += _spaceHeight;
+                                _cursorX      = _glyphWidth;
+                                _cursorY     += _spaceHeight;
+                                _cursorSpace  = 0;
                             }
                             else
                             {
-                                _cursorX += _glyphWidth;
+                                _cursorX     += _glyphWidth;
+                                _cursorSpace  = 0;
                             }
                         }
                         
@@ -201,7 +206,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                             _overallWidth = max(_overallWidth, _cursorX);
                             
                             array_push(__stretchesArray, {
-                                __width:  _cursorX,
+                                __width:  _cursorX - _cursorSpace,
                                 __x:      0,
                                 __y:      _cursorY,
                                 __string: string_copy(_string, _stretchStart+1, _i - _stretchStart),
