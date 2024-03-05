@@ -1,7 +1,7 @@
 /// @param fragmentArray
 /// @param font
 
-function __ScribblejrClassBakerPerChar(_fragmentArray, _font) constructor
+function __ScribblejrClassBakerFitPerChar(_fragmentArray, _font) constructor
 {
     static _system       = __ScribblejrSystem();
     static _vertexFormat = _system.__vertexFormat;

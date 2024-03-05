@@ -67,7 +67,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         {
             #region Per-character wrapping
             
-            _bakerFunc = __ScribblejrClassBakerPerChar;
+            _bakerFunc = __ScribblejrClassBakerFitPerChar;
             
             var _charArray = __ScribblejrStringDecompose(_string);
             
@@ -216,6 +216,38 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                 
                 __width  = _overallWidth;
                 __height = _cursorY;
+                
+                //Adjust for horizontal alignment
+                if (_hAlign == fa_center)
+                {
+                    var _i = 0;
+                    repeat(array_length(__stretchesArray))
+                    {
+                        with(__stretchesArray[_i]) __x -= __width/2;
+                        ++_i;
+                    }
+                }
+                else if (_hAlign == fa_right)
+                {
+                    var _i = 0;
+                    repeat(array_length(__stretchesArray))
+                    {
+                        with(__stretchesArray[_i]) __x -= __width;
+                        ++_i;
+                    }
+                }
+                
+                //Adjust for vertical alignment
+                if ((_vAlign == fa_middle) || (_vAlign == fa_bottom))
+                {
+                    var _offset = (_vAlign == fa_middle)? (__height/2) : __height;
+                    var _i = 0;
+                    repeat(array_length(__stretchesArray))
+                    {
+                        with(__stretchesArray[_i]) __y -= _offset;
+                        ++_i;
+                    }
+                }
             }
             
             #endregion
@@ -304,7 +336,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
     {
         __vertexBaker = new _bakerFunc(__string, _font, __hAlign, __vAlign, __wrapWidth);
     }
-    else if (_bakerFunc == __ScribblejrClassBakerPerChar)
+    else if (_bakerFunc == __ScribblejrClassBakerFitPerChar)
     {
         __vertexBaker = new _bakerFunc(__stretchesArray, _font);
     }
@@ -432,15 +464,15 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         draw_set_font(__font);
         draw_set_colour(_colour);
         draw_set_alpha(_alpha);
-        draw_set_halign(__hAlign);
-        draw_set_valign(__vAlign);
+        draw_set_halign(fa_left);
+        draw_set_valign(fa_top);
         
         var _i = 0;
         repeat(array_length(__stretchesArray))
         {
             with(__stretchesArray[_i])
             {
-                draw_text_transformed(_x, _y + __y, __string, _scale, _scale, 0);
+                draw_text_transformed(_x + __x, _y + __y, __string, _scale, _scale, 0);
             }
             
             ++_i;
