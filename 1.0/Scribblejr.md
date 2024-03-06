@@ -4,13 +4,13 @@
 
 **Returns:** Text element struct, see below
 
-|Name       |Datatype |Purpose                        |
-|-----------|---------|-------------------------------|
-|`string`   |string   |Text to search for in the cache|
-|`hAlign`   |constant |                               |
-|`vAlign`   |constant |                               |
-|`font`     |reference|                               |
-|`fontScale`|number   |                               |
+|Name       |Datatype |Purpose                                                                             |
+|-----------|---------|------------------------------------------------------------------------------------|
+|`string`   |string   |Text to search for in the cache                                                     |
+|`hAlign`   |constant |Horizontal alignment, one of `fa_left` `fa_center` `fa_right`. Defaults to `fa_left`|
+|`vAlign`   |constant |Vertical alignment, one of `fa_top` `fa_middle` `fa_bottom`. Defaults to `fa_top`   |
+|`font`     |reference|Font to use. Defaults to what has been set by `ScribblejrSetDefaultFont()`          |
+|`fontScale`|number   |Scale of the font. Defaults to `1`, no change in scale                              |
 
 Caches plain text without formatting or layout. Over a few frames in the background, Scribble Jr. will bake a vertex buffer that replaces the native text rendering and is faster to draw.
 
