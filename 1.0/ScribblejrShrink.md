@@ -1,18 +1,18 @@
 # ScribblejrShrink
 
-`ScribblejrShrink(string, [hAlign=left], [vAlign=top], [font], [fontScale=1], [width], [height])`
+`ScribblejrShrink(string, [hAlign], [vAlign], [font], [fontScale], [width], [height])`
 
 **Returns:** Text element struct, see below
 
-|Name       |Datatype |Purpose                                                                             |
-|-----------|---------|------------------------------------------------------------------------------------|
-|`string`   |string   |Text to search for in the cache                                                     |
-|`hAlign`   |constant |Horizontal alignment, one of `fa_left` `fa_center` `fa_right`. Defaults to `fa_left`|
-|`vAlign`   |constant |Vertical alignment, one of `fa_top` `fa_middle` `fa_bottom`. Defaults to `fa_top`   |
-|`font`     |reference|Font to use. Defaults to what has been set by `ScribblejrSetDefaultFont()`          |
-|`fontScale`|number   |Scale of the font. Defaults to `1`, no change in scale                              |
-|`width`    |number   |Maximum width of the text. Defaults to no limit                                     |
-|`height`   |number   |Maximum height of the text. Defaults to no limit                                    |
+|Name         |Datatype |Purpose                                                                             |
+|-------------|---------|------------------------------------------------------------------------------------|
+|`string`     |string   |Text to search for in the cache                                                     |
+|`[hAlign]`   |constant |Horizontal alignment, one of `fa_left` `fa_center` `fa_right`. Defaults to `fa_left`|
+|`[vAlign]`   |constant |Vertical alignment, one of `fa_top` `fa_middle` `fa_bottom`. Defaults to `fa_top`   |
+|`[font]`     |reference|Font to use. Defaults to what has been set by `ScribblejrSetDefaultFont()`          |
+|`[fontScale]`|number   |Scale of the font. Defaults to `1`, no change in scale                              |
+|`[width]`    |number   |Maximum width of the text. Defaults to no limit                                     |
+|`[height]`   |number   |Maximum height of the text. Defaults to no limit                                    |
 
 Caches plain text without formatting. The text is shrunk down to within the given maximum width and height using simple linear scaling. Over a few frames in the background, Scribble Jr. will bake a vertex buffer that replaces the native text rendering and is faster to draw.
 
