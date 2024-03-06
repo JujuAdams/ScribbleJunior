@@ -1,8 +1,6 @@
 # Scribblejr
 
-&nbsp;
-
-## `Scribblejr(string)`
+`Scribblejr(string)`
 
 **Returns:** Text element struct, see below
 
