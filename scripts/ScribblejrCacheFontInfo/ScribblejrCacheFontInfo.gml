@@ -30,6 +30,19 @@ function ScribblejrCacheFontInfo(_font)
         var _fontGlyphStruct = _fontInfo.glyphs;
         var _glyphNameArray = variable_struct_get_names(_fontGlyphStruct);
         
+        //Create a new struct that holds character codes by hash
+        var _fastGlyphStruct = {};
+        _fontInfo.fastGlyphs = _fastGlyphStruct;
+        
+        var _i = 0;
+        repeat(array_length(_glyphNameArray))
+        {
+            var _name = _glyphNameArray[_i];
+            var _glyphInfo = _fontGlyphStruct[$ _name];
+            struct_set_from_hash(_fastGlyphStruct, ord(_name), _glyphInfo);
+            ++_i;
+        }
+        
         //Check if this is a spritefont
         if ((_fontInfo.texture < 0) && (_fontInfo.spriteIndex >= 0))
         {
