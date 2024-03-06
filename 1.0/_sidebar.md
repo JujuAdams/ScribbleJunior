@@ -4,6 +4,8 @@
 
 ---
 
+**Functions**
+
 -   [Scribblejr](Scribblejr)
 -   [ScribblejrExt](ScribblejrExt)
 -   [ScribblejrFit](ScribblejrFit)
@@ -13,4 +15,11 @@
 
 ---
 
--   [Configuration](Configuration)
+**Setup**
+
+-   [Config Macros](Config-Macros)
+-   [Spritefonts](Spritefonts)
+-   [Default Font](Default-Font)
+-   [Colors](Colors)
+-   [Spritefonts](Spritefonts)
+-   [Budget](Budget)
