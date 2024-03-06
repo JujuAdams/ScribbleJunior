@@ -5,7 +5,7 @@
 ---
 
 -   [Scribblejr](Scribblejr)
--   [ScribblejrExt](Scribblejr)
+-   [ScribblejrExt](ScribblejrExt)
 -   [ScribblejrFit](ScribblejrFit)
 -   [ScribblejrFitExt](ScribblejrFitExt)
 -   [ScribblejrShrink](ScribblejrShrink)
