@@ -1,3 +1,3 @@
-# Default Fonts
+# Default Font
 
 &nbsp;
