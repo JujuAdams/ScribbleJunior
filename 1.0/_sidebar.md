@@ -1,6 +1,5 @@
 -   [Home](README)
 -   [Alternatives](Alternatives)
--   [Frequently Asked](Frequently-Asked)
 
 ---
 
@@ -21,5 +20,5 @@
 -   [Spritefonts](Spritefonts)
 -   [Default Font](Default-Font)
 -   [Colors](Colors)
--   [Spritefonts](Spritefonts)
+-   [Prefetching Font Data](Prefetching-Font-Data)
 -   [Budget](Budget)
