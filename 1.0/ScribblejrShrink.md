@@ -1,6 +1,6 @@
 # ScribblejrShrink
 
-`ScribblejrShrink(string)`
+`ScribblejrShrink(string, [hAlign=left], [vAlign=top], [font=default], [fontScale=1], [width], [height])`
 
 **Returns:** Text element struct, see below
 

@@ -1,6 +1,6 @@
 # Scribblejr
 
-`Scribblejr(string)`
+`Scribblejr(string, [hAlign=left], [vAlign=top], [font=default], [fontScale=1])`
 
 **Returns:** Text element struct, see below
 
