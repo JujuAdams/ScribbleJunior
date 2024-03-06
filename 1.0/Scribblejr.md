@@ -4,9 +4,13 @@
 
 **Returns:** Text element struct, see below
 
-|Name    |Datatype|Purpose                        |
-|--------|--------|-------------------------------|
-|`string`|string  |Text to search for in the cache|
+|Name       |Datatype |Purpose                        |
+|-----------|---------|-------------------------------|
+|`string`   |string   |Text to search for in the cache|
+|`hAlign`   |constant |                               |
+|`vAlign`   |constant |                               |
+|`font`     |reference|                               |
+|`fontScale`|number   |                               |
 
 Caches plain text without formatting or layout. Over a few frames in the background, Scribble Jr. will bake a vertex buffer that replaces the native text rendering and is faster to draw.
 

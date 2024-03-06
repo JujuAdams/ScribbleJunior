@@ -20,7 +20,7 @@
 */
 
 const config = {
-	name: 'Input',
+	name: 'Scribble Junior',
 	description: 'Lightweight text renderer for GameMaker',
 	latestVersion: '1.0',
 	otherVersions: [],

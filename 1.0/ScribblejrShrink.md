@@ -1,6 +1,6 @@
-# ScribblejrFit
+# ScribblejrShrink
 
-`ScribblejrFit(string)`
+`ScribblejrShrink(string)`
 
 **Returns:** Text element struct, see below
 
@@ -14,11 +14,11 @@
 |`width`    |number   |                               |
 |`height`   |number   |                               |
 
-Caches plain text without formatting. The text is shrunk down to within the given maximum width and height by reflowing the text at a smaller size. Over a few frames in the background, Scribble Jr. will bake a vertex buffer that replaces the native text rendering and is faster to draw.
+Caches plain text without formatting. The text is shrunk down to within the given maximum width and height using simple linear scaling. Over a few frames in the background, Scribble Jr. will bake a vertex buffer that replaces the native text rendering and is faster to draw.
 
-This function scales text whilst adding newlines. If you want to scale down text without adding newlines, which will gain you a little performance, then use ScribblejrShrink().
+This function scales text without adding newlines. If you want to scale down text whilst adding newlines (a.k.a. "reflowing"), albeit at a performance penality, then use ScribblejrFit().
 
-!> Manual line breaks ("newlines") are not supported. Word breaks will only happen on spaces and any single words too long for a line will not be split in the middle. Per-character text wrapping (commonly used for Chinese) is not supported.
+!> Word breaks will only happen on spaces and any single words too long for a line will not be split in the middle. Per-character text wrapping (commonly used for Chinese) is not supported.
 
 ?> This function relies on internal caching for performance gains. If you change any of the arguments provided to this function, Scribble Jr. will have to do extra work to recache the new text data. Try to limit how often you change these arguments to get the best performance.
 
