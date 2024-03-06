@@ -13,6 +13,8 @@ function __ScribblejrSystem()
     __ScribblejrTrace("Welcome to Scribblejr by Juju Adams! This is version ", __SCRIBBLEJR_VERSION, ", ", __SCRIBBLEJR_DATE);
     
     _system = {};
+    if (GM_build_type == "run") global.scribblejrSystem = _system;
+    
     with(_system)
     {
         __nullWrapper = new __ScribblejrClassNullWrapper();
