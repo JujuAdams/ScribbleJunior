@@ -7,10 +7,10 @@
 **Functions**
 
 -   [Scribblejr](Scribblejr)
--   [ScribblejrExt](ScribblejrExt)
 -   [ScribblejrFit](ScribblejrFit)
--   [ScribblejrFitExt](ScribblejrFitExt)
 -   [ScribblejrShrink](ScribblejrShrink)
+-   [ScribblejrExt](ScribblejrExt)
+-   [ScribblejrFitExt](ScribblejrFitExt)
 -   [ScribblejrShrinkExt](ScribblejrShrinkExt)
 
 ---
