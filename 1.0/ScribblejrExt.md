@@ -22,9 +22,9 @@ Caches plain text with limited formatting but without text wrapping. Over a few 
 
 ## Formatting
 
-&nbsp;
-
 Two types of formatting command are supported:
+
+&nbsp;
 
 ### Partial Text Colouring
 

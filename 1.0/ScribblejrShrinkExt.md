@@ -1,4 +1,4 @@
-# ScribblejrShrink
+# ScribblejrShrinkExt
 
 `ScribblejrShrink(string, [hAlign=left], [vAlign=top], [font], [fontScale=1], [width], [height])`
 
@@ -26,9 +26,9 @@ This function scales text without adding newlines. If you want to scale down tex
 
 ## Formatting
 
-&nbsp;
-
 Two types of formatting command are supported:
+
+&nbsp;
 
 ### Partial Text Colouring
 

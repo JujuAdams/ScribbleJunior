@@ -26,9 +26,9 @@ This function scales text whilst adding newlines. If you want to scale down text
 
 ## Formatting
 
-&nbsp;
-
 Two types of formatting command are supported:
+
+&nbsp;
 
 ### Partial Text Colouring
 
