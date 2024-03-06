@@ -20,6 +20,10 @@ Caches plain text with limited formatting but without text wrapping. Over a few 
 
 &nbsp;
 
+## Formatting
+
+&nbsp;
+
 Two types of formatting command are supported:
 
 ### Partial Text Colouring
@@ -45,6 +49,8 @@ By adding a second parameter to that tag, a different subimage in a sprite can b
 You may also specify a third and fourth parameter which acts as an x/y offset for the sprite image. In this case, three images are displayed in a diagonal line from bottom to top, going left to right. This feature is helpful for adjusting sprite positions to line up better with text.
 
 &nbsp;
+
+## Methods
 
 This function doesn't actually draw the text, it only returns a "text element struct". This struct can then be used to draw the text, as well as get the width/height of the text, by calling methods on the struct.
 

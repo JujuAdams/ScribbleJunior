@@ -18,6 +18,10 @@ Caches plain text without formatting or layout. Over a few frames in the backgro
 
 ?> This function relies on internal caching for performance gains. If you change any of the arguments provided to this function, Scribble Jr. will have to do extra work to recache the new text data. Try to limit how often you change these arguments to get the best performance.
 
+&nbsp;
+
+## Methods
+
 This function doesn't actually draw the text, it only returns a "text element struct". This struct can then be used to draw the text, as well as get the width/height of the text, by calling methods on the struct.
 
 &nbsp;
