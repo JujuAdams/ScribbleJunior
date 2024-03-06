@@ -1,6 +1,6 @@
-# ScribblejrFit
+# ScribblejrFitExt
 
-`ScribblejrFit(string, [hAlign=left], [vAlign=top], [font=default], [fontScale=1], [width], [height])`
+`ScribblejrFitExt(string, [hAlign=left], [vAlign=top], [font], [fontScale=1], [width], [height])`
 
 **Returns:** Text element struct, see below
 
