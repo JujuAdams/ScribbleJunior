@@ -28,7 +28,7 @@ Two types of formatting command are supported:
 
 ### Partial Text Colouring
 
-**Example:** "This is [c_orange]orange[/c] text."
+**Example:** `"This is [c_orange]orange[/c] text."`
 
 Tags that contain the name of a colour constant will colour subsequent characters in the string. [/c] [/color] [/colour] can be used to reset the colour to the default colour for the function call. New colours can be added with ScribblejrAddColor(). Hash codes aren't parsed automatically but hash codes can be added via ScribblejrAddColor().
 
