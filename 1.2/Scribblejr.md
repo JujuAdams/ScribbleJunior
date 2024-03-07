@@ -16,11 +16,11 @@
 |`[font]`     |reference|Font to use. Defaults to what has been set by `ScribblejrSetDefaultFont()`          |
 |`[fontScale]`|number   |Scale of the font. Defaults to `1`, no change in scale                              |
 
-Caches plain text without formatting or layout. Over a few frames in the background, Scribble Jr. will bake a vertex buffer that replaces the native text rendering and is faster to draw.
+Caches plain text without formatting or layout. Over a few frames in the background, Scribble Junior will bake a vertex buffer that replaces the native text rendering and is faster to draw.
 
 !> This function should not be used for extremely fast changing text such as a stopwatch. You should use ScribblejrNative() instead if you plan for the drawn text to only show for a few frames at a time.
 
-?> This function relies on internal caching for performance gains. If you change any of the arguments provided to this function, Scribble Jr. will have to do extra work to recache the new text data. Try to limit how often you change these arguments to get the best performance.
+?> This function relies on internal caching for performance gains. If you change any of the arguments provided to this function, Scribble Junior will have to do extra work to recache the new text data. Try to limit how often you change these arguments to get the best performance.
 
 &nbsp;
 

@@ -2,7 +2,7 @@
 
 &nbsp;
 
-Scribble Jr. might not be the perfect fit for your game. The GameMaker community has produced other solutions that you might like to try:
+Scribble Junior might not be the perfect fit for your game. The GameMaker community has produced other solutions that you might like to try:
 
 - [Scribble Deluxe](https://www.github.com/jujuadams/Scribble)
 
