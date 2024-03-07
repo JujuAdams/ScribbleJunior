@@ -1,12 +1,12 @@
 # ScribblejrShrinkExt
 
-`ScribblejrShrink(string, [hAlign], [vAlign], [font], [fontScale], [width], [height])`
+**Usage:** `ScribblejrShrink(string, [hAlign], [vAlign], [font], [fontScale], [width], [height])`
+
+**Returns:** Text element struct, see below
 
 &nbsp;
 
-## Arguments
-
-**Returns:** Text element struct, see below
+## Description
 
 |Name         |Datatype |Purpose                                                                             |
 |-------------|---------|------------------------------------------------------------------------------------|

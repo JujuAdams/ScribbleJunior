@@ -1,12 +1,12 @@
 # ScribblejrExt
 
-`ScribblejrExt(string, [hAlign], [vAlign], [font], [fontScale])`
+**Usage:** `ScribblejrExt(string, [hAlign], [vAlign], [font], [fontScale])`
+
+**Returns:** Text element struct, see below
 
 &nbsp;
 
-## Arguments
-
-**Returns:** Text element struct, see below
+## Description
 
 |Name         |Datatype |Purpose                                                                             |
 |-------------|---------|------------------------------------------------------------------------------------|
