@@ -2,6 +2,10 @@
 
 `ScribblejrFitExt(string, [hAlign], [vAlign], [font], [fontScale], [width], [height])`
 
+&nbsp;
+
+## Arguments
+
 **Returns:** Text element struct, see below
 
 |Name         |Datatype |Purpose                                                                             |

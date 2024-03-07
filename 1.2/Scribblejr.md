@@ -2,6 +2,10 @@
 
 `Scribblejr(string, [hAlign], [vAlign], [font], [fontScale])`
 
+&nbsp;
+
+## Arguments
+
 **Returns:** Text element struct, see below
 
 |Name         |Datatype |Purpose                                                                             |
