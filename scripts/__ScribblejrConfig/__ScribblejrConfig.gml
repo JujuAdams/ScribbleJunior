@@ -16,21 +16,21 @@
 //than 4 tend to break!
 #macro SCRIBBLEJR_FIT_ITERATIONS  6
 
-//Amount of time per frame that Scribblejr is allowed to bake vertex buffers. This limit is
+//Amount of time per frame that Scribble Junior is allowed to bake vertex buffers. This limit is
 //approximate. You can adjust the budget time at runtime by calling ScribblejrSetBudget(). If this
 //macro is set to zero or a negative number then all vertex buffer baking will be disabled until
 //ScribblejrSetBudget() is called with a positive number.
 #macro SCRIBBLEJR_BUDGET  200 //microseconds
 
 //How many glyphs to write per text element per frame during progressive baking. Higher values
-//will bake vertex buffers faster but may cause Scribblejr to exceed the time budget.
+//will bake vertex buffers faster but may cause Scribble Junior to exceed the time budget.
 #macro SCRIBBLEJR_BAKE_GLYPH_COUNT  20
 
 //Whether to automatically bake vertex buffers for text drawn with Scribble Jr.  Setting this macro
 //to <false> will prevent Scribble Jr. from optimising text drawing in the background.
 #macro SCRIBBLEJR_AUTO_BAKE  true
 
-//Whether to emit lots of additional debug messages to help track Scribblejr's behaviour.
+//Whether to emit lots of additional debug messages to help track Scribble Junior's behaviour.
 #macro SCRIBBLEJR_VERBOSE  false
 
 //Functions to call when Scribblejr emits messages. Change these if you want to redirect Scribblejr
