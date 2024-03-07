@@ -4,6 +4,8 @@
 
 ## ScribblejrSetBudget
 
+**Usage:** `ScribblejrSetBudget(microseconds)`
+
 **Returns:** N/A (`undefined`)
 
 |Name          |Datatype|Purpose                                         |
@@ -16,6 +18,8 @@ Sets the time budget for vertex buffer baking. This is approximate and the baker
 
 ## ScribblejrGetBudget
 
+**Usage:** `ScribblejrGetBudget()`
+
 **Returns:** Number, the baking time budget, measured in microseconds
 
 |Name|Datatype|Purpose|
@@ -25,6 +29,8 @@ Sets the time budget for vertex buffer baking. This is approximate and the baker
 &nbsp;
 
 ## ScribblejrGetBudgetUsed
+
+**Usage:** `ScribblejrGetBudgetUsed()`
 
 **Returns:** Number, how much time Scribble Junior used to bake vertex buffers in the previous Step
 
