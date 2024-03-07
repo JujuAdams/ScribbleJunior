@@ -44,7 +44,7 @@ Draws the text element at the given coordinates. You can also optionally specify
 
 ### .GetWidth
 
-`<element>.GetWidth`
+`<element>.GetWidth()`
 
 Returns the width of the text when drawn, in pixels.
 
@@ -52,7 +52,7 @@ Returns the width of the text when drawn, in pixels.
 
 ### .GetHeight
 
-`<element>.GetHeight`
+`<element>.GetHeight()`
 
 Returns the height of the text when, in pixels.
 
@@ -60,6 +60,6 @@ Returns the height of the text when, in pixels.
 
 ### .Bake
 
-`<element>.Bake`
+`<element>.Bake()`
 
 Immediately fully bakes the vertex buffer for the text element. Helpful if you want to pre-cache text elements for drawing later.
