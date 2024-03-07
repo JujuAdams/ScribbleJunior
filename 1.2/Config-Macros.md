@@ -1,12 +1,12 @@
 # Config Macros
 
-The macros on this page can be found in the `__ScribblejrConfig` script.
+The macros on this page can be found in the `__ScribblejrConfig` script. All macros start with `SCRIBBLEJR_` but this part of the macro name has been removed for brevity.
 
 ?> You should edit these macros to suit your own needs when using Scribble Junior.
 
 &nbsp;
 
-## `SCRIBBLEJR_SCALE_SPRITES`
+## `…SCALE_SPRITES`
 
 *Typical value:* `true`
 
@@ -16,7 +16,7 @@ Scaling values passed to `Scribblejr*Ext` functions will scale up and down text.
 
 &nbsp;
 
-## `SCRIBBLEJR_AUTO_RESET_DRAW_STATE`
+## `…AUTO_RESET_DRAW_STATE`
 
 *Typical value:* `true`
 
@@ -24,7 +24,7 @@ Whether to reset draw state after Scribblejr calls. This slighly impacts perform
 
 &nbsp;
 
-## `SCRIBBLEJR_FIT_ITERATIONS`
+## `…FIT_ITERATIONS`
 
 *Typical value:* `6`
 
@@ -32,7 +32,7 @@ How many iterations to perform when fitting text inside the bounding box. This o
 
 &nbsp;
 
-## `SCRIBBLEJR_BUDGET`
+## `…BUDGET`
 
 *Typical value:* `200`
 
@@ -40,7 +40,7 @@ Amount of time per frame that Scribble Junior is allowed to bake vertex buffers.
 
 &nbsp;
 
-## `SCRIBBLEJR_BAKE_GLYPH_COUNT`
+## `…BAKE_GLYPH_COUNT`
 
 *Typical value:* `20`
 
@@ -48,7 +48,7 @@ How many glyphs to write per text element per frame during progressive baking. H
 
 &nbsp;
 
-## `SCRIBBLEJR_AUTO_BAKE`
+## `…AUTO_BAKE`
 
 *Typical value:* `true`
 
@@ -56,7 +56,7 @@ Whether to automatically bake vertex buffers for text drawn with Scribble Junior
 
 &nbsp;
 
-## `SCRIBBLEJR_VERBOSE`
+## `…VERBOSE`
 
 *Typical value:* `false`
 
@@ -64,7 +64,7 @@ Whether to emit lots of additional debug messages to help track Scribble Junior'
 
 &nbsp;
 
-## `SCRIBBLEJR_SHOW_DEBUG_MESSAGE`
+## `…SHOW_DEBUG_MESSAGE`
 
 *Typical value:* `show_debug_message`
 
@@ -72,7 +72,7 @@ Function to direct debug messages from Scribble Junior to.
 
 &nbsp;
 
-## `SCRIBBLEJR_SHOW_ERROR`
+## `…SHOW_ERROR`
 
 *Typical value:* `show_error`
 
