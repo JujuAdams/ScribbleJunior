@@ -8,11 +8,11 @@
 
 **Returns:** N/A (`undefined`)
 
-|Name   |Datatype |Purpose                                         |
-|-------|---------|------------------------------------------------|
-|`font` |reference|                                                |
+|Name   |Datatype |Purpose                   |
+|-------|---------|--------------------------|
+|`font` |reference|Font to set as the default|
 
-Sets the default font for Scribble Jr.  This default font will be used in cases where a font has not been specified. If a negative number is specified then Scribble Junior will fall back on its own default font (Droid Sans Mono which is close to GameMaker's native default font).
+Sets the default font for Scribble Junior. This default font will be used in cases where a font has not been specified. If a negative number is specified then Scribble Junior will fall back on `ScribblejrDefaultFont`, its own default font (which is Droid Sans Mono, close to GameMaker's native default font).
 
 ?> Unlike [Scribble Deluxe](https://www.github.com/jujuadams/Scribble), you will need to provide the font as a reference and not a string.
 
