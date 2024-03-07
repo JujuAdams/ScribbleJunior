@@ -2,7 +2,7 @@
 
 &nbsp;
 
-## ScribblejrSetDefaultFont
+## …SetDefaultFont
 
 **Usage:** `ScribblejrSetDefaultFont(font)`
 
@@ -18,7 +18,7 @@ Sets the default font for Scribble Junior. This default font will be used in cas
 
 &nbsp;
 
-## ScribblejrGetDefaultFont
+## …GetDefaultFont
 
 **Usage:** `ScribblejrGetDefaultFont()`
 

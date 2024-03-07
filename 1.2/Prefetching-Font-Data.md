@@ -2,7 +2,7 @@
 
 &nbsp;
 
-## ScribblejrCacheFontInfo
+## …CacheFontInfo
 
 **Usage:** `ScribblejrCacheFontInfo(font)`
 

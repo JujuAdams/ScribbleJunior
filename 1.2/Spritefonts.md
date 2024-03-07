@@ -2,7 +2,7 @@
 
 &nbsp;
 
-## ScribblejrAttachSpritefont
+## …AttachSpritefont
 
 **Usage:** `ScribblejrAttachSpritefont(font, proportional, separation)`
 

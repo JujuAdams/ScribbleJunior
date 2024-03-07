@@ -2,7 +2,7 @@
 
 &nbsp;
 
-## ScribblejrAddColor
+## …AddColor
 
 **Usage:** `ScribblejrAddColor(name, color)`
 
@@ -19,7 +19,7 @@ Adds a colour that Scribble Junior will recognise when used in formatting tags i
 
 &nbsp;
 
-## ScribblejrGetColor
+## …GetColor
 
 **Usage:** `ScribblejrGetColor(name)`
 
@@ -33,7 +33,7 @@ Returns the colour defined for the given name. If the colour cannot be found the
 
 &nbsp;
 
-## ScribblejrDeleteColor
+## …DeleteColor
 
 **Usage:** `ScribblejrDeleteColor(name)`
 

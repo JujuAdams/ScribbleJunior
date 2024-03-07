@@ -2,7 +2,7 @@
 
 &nbsp;
 
-## ScribblejrSetBudget
+## …SetBudget
 
 **Usage:** `ScribblejrSetBudget(microseconds)`
 
@@ -16,7 +16,7 @@ Sets the time budget for vertex buffer baking. This is approximate and the baker
 
 &nbsp;
 
-## ScribblejrGetBudget
+## …GetBudget
 
 **Usage:** `ScribblejrGetBudget()`
 
@@ -28,7 +28,7 @@ Sets the time budget for vertex buffer baking. This is approximate and the baker
 
 &nbsp;
 
-## ScribblejrGetBudgetUsed
+## …GetBudgetUsed
 
 **Usage:** `ScribblejrGetBudgetUsed()`
 

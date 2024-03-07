@@ -2,7 +2,7 @@
 
 &nbsp;
 
-## ScribblejrSetCharacterWrap
+## …SetCharacterWrap
 
 **Usage:** `ScribblejrSetCharacterWrap(state)`
 
@@ -16,7 +16,7 @@ Sets whether per-character wrapping is enabled for `ScribblejrFit()` and `Scribb
 
 &nbsp;
 
-## ScribblejrGetCharacterWrap
+## …GetCharacterWrap
 
 **Usage:** `ScribblejrGetCharacterWrap()`
 

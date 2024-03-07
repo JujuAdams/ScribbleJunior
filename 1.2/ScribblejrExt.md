@@ -60,7 +60,7 @@ This function doesn't actually draw the text, it only returns a "text element st
 
 &nbsp;
 
-### .Draw()
+### .Draw
 
 `<element>.Draw(x, y, [color=white], [alpha=1])`
 
@@ -68,24 +68,24 @@ Draws the text element at the given coordinates. You can also optionally specify
 
 &nbsp;
 
-### .GetWidth()
+### .GetWidth
 
-`<element>.GetWidth()`
+`<element>.GetWidth`
 
 Returns the width of the text when drawn, in pixels.
 
 &nbsp;
 
-### .GetHeight()
+### .GetHeight
 
-`<element>.GetHeight()`
+`<element>.GetHeight`
 
 Returns the height of the text when, in pixels.
 
 &nbsp;
 
-### .Bake()
+### .Bake
 
-`<element>.Bake()`
+`<element>.Bake`
 
 Immediately fully bakes the vertex buffer for the text element. Helpful if you want to pre-cache text elements for drawing later.
