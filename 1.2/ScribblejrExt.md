@@ -40,17 +40,17 @@ Tags that contain the name of a colour constant will colour subsequent character
 
 ### In-line Sprites
 
-**Example:** `"You need [sprCoin]100 to buy this bomb."`
-
 Sprites can be inserted by using the name of the sprite in between two square brackets. Inserted sprites cannot be animated and show only one image at a time. By default, image 0 is shown.
     
-**Example:** `"You've found [sprFairy,0][sprFairy,1][sprFairy,2]"`
+**Example:** `"You need [sprCoin]100 to buy this bomb."`
 
 By adding a second parameter to that tag, a different subimage in a sprite can be inserted.
-    
-**Example:** `"Wow, magical! [sprSparke,0,0,4][sprSparke,0,0,0][sprSparke,0,0,-4]"`
+
+**Example:** `"You've found [sprFairy,0][sprFairy,1][sprFairy,2]"`
 
 You may also specify a third and fourth parameter which acts as an x/y offset for the sprite image. In this case, three images are displayed in a diagonal line from bottom to top, going left to right. This feature is helpful for adjusting sprite positions to line up better with text.
+
+**Example:** `"Wow, magical! [sprSparke,0,0,4][sprSparke,0,0,0][sprSparke,0,0,-4]"`
 
 &nbsp;
 
