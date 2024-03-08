@@ -26,11 +26,12 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     __fontIsDynamic = ScribblejrCacheFontInfo(_font).__isDynamic;
     __fontSDFSpread = ScribblejrCacheFontInfo(_font).sdfSpread;
     
-    __fragmentArray     = [];
+    __fragmentArray = [];
     __spriteArray   = [];
-    __vertexBuffer  = undefined;
-    __vertexBaker = new __ScribblejrClassBakerExt(__fragmentArray, _font);
-    __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
+    
+    __vertexBuffer = undefined;
+    __vertexBaker  = new __ScribblejrClassBakerExt(__fragmentArray, _font);
+    __fontTexture  = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
     
     var _layoutArray = [];
     
@@ -38,183 +39,629 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     __height = undefined;
     
     Draw = __DrawNative;
-    
-    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
-    draw_set_font(_font);
-    
+        
     var _spriteScale = SCRIBBLEJR_SCALE_SPRITES? 1 : (1/_fontScale);
     var _spaceWidth  = __ScribblejrGetSpaceWidth(_font);
     var _lineHeight  = __ScribblejrGetSpaceHeight(_font);
     
-    var _substringArray = string_split(__string, "[");
-    _substringArray[0] = "]" + _substringArray[0];
+    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
+    draw_set_font(_font);
     
-    var _colour = -1;
-    
-    var _cursorX = 0;
-    var _cursorY = 0;
-    
-    //Then iterate other command tag + text fragment combos, splitting as necessary
-    var _i = 0;
-    repeat(array_length(_substringArray))
+    if (_system.__perCharacterWrap)
     {
-        var _tagSplitArray = string_split(_substringArray[_i], "]", false, 1);
-        if (array_length(_tagSplitArray) == 2)
+        var _inTag    = false;
+        var _tagStart = undefined;
+        
+        var _fastGlyphs = ScribblejrCacheFontInfo(_font).fastGlyphs;
+        var _colour = c_white;
+        
+        var _tagConcatArray = [];
+        var _tagArgumentArray = [];
+        var _unicodeArray = __ScribblejrStringDecompose(_string);
+        array_push(_unicodeArray, 0x20); //End in a space
+        
+        //Add a dummy layout fragment to simply some of the logic during parsing
+        array_push(_layoutArray, {
+            __whitespace: true,
+            __joinsRight: false,
+        });
+        
+        var _cursorX = 0;
+        var _i = 0;
+        repeat(array_length(_unicodeArray)-1) //Don't include the final space
         {
-            //Handle the contents of the tag
-            var _tagString  = _tagSplitArray[0];
-            var _textString = _tagSplitArray[1];
-            
-            if (_tagString != "")
+            var _char = ord(_unicodeArray[_i]);
+            if (_char == 0x5B) // [
             {
-                //First we try to find the colour state
-                var _foundColour = _colourDict[$ _tagString];
-                if (_foundColour != undefined)
+                if ((_i == 0) || (ord(_unicodeArray[_i-1]) != 0x5B))
                 {
-                    _colour = _foundColour;
+                    _inTag = true;
+                    _tagStart = _i+1;
+                    array_resize(_tagArgumentArray, 0);
                 }
                 else
                 {
-                    var _spriteSplitArray = string_split(_tagString, ",");
+                    _inTag = false;
+                    _tagStart = undefined;
                     
-                    //Then we try to find a sprite using the command tag
-                    var _sprite = asset_get_index(_spriteSplitArray[0]);
-                    if (sprite_exists(_sprite))
+                    var _glyphInfo = struct_get_from_hash(_fastGlyphs, 0x5B);
+                    var _fragment = {
+                        __colour: _colour,
+                        __string: "[",
+                        __x: undefined,
+                        __y: undefined,
+                        __xOffset: 0,
+                        __yOffset: 0,
+                        __width: _glyphInfo.w,
+                        __shift: _glyphInfo.shift,
+                        __whitespace: false,
+                    };
+                }
+            }
+            else if (_inTag)
+            {
+                if (_char == 0x5D) // ]
+                {
+                    array_resize(_tagConcatArray, _i - _tagStart);
+                    array_copy(_tagConcatArray, 0, _unicodeArray, _tagStart, _i - _tagStart);
+                    array_push(_tagArgumentArray, string_concat_ext(_tagConcatArray));
+                    
+                    _inTag = false;
+                    _tagStart = undefined;
+                    
+                    var _firstArg = _tagArgumentArray[0];
+                    
+                    //First we try to find the colour state
+                    var _foundColour = _colourDict[$ _firstArg];
+                    if (_foundColour != undefined)
                     {
-                        //Decode sprite arguments
-                        switch(array_length(_spriteSplitArray))
-                        {
-                            case 1:
-                                var _spriteImage = 0;
-                                var _spriteX     = 0;
-                                var _spriteY     = 0;
-                            break;
-                            
-                            case 2:
-                                var _spriteImage = real(_spriteSplitArray[1]);
-                                var _spriteX     = 0;
-                                var _spriteY     = 0;
-                            break;
-                            
-                            case 3:
-                                var _spriteImage = real(_spriteSplitArray[1]);
-                                var _spriteX     = real(_spriteSplitArray[2]);
-                                var _spriteY     = 0;
-                            break;
-                            
-                            case 4:
-                                var _spriteImage = real(_spriteSplitArray[1]);
-                                var _spriteX     = real(_spriteSplitArray[2]);
-                                var _spriteY     = real(_spriteSplitArray[3]);
-                            break;
-                        }
-                        
-                        var _fragment = {
-                            __sprite: _sprite,
-                            __image: _spriteImage,
-                            __x: undefined,
-                            __y: undefined,
-                            __xOffset: _spriteX + _spriteScale*sprite_get_xoffset(_sprite),
-                            __yOffset: _spriteY + 0.5*(_lineHeight - _spriteScale*sprite_get_height(_sprite)) + _spriteScale*sprite_get_yoffset(_sprite),
-                            __width: _spriteScale*sprite_get_width(_sprite),
-                            __whitespaceFollows: string_starts_with(_textString, " "),
-                        };
-                        
-                        array_push(_layoutArray, _fragment);
-                        array_push(__spriteArray, _fragment);
+                        _colour = _foundColour;
                     }
                     else
                     {
-                        __ScribblejrTrace("Command tag \"", _tagString, "\" not recognised");
+                        //Then we try to find a sprite using the command tag
+                        var _sprite = asset_get_index(_firstArg);
+                        if (sprite_exists(_sprite))
+                        {
+                            //Decode sprite arguments
+                            switch(array_length(_tagArgumentArray))
+                            {
+                                case 1:
+                                    var _spriteImage = 0;
+                                    var _spriteX     = 0;
+                                    var _spriteY     = 0;
+                                break;
+                                
+                                case 2:
+                                    var _spriteImage = real(_tagArgumentArray[1]);
+                                    var _spriteX     = 0;
+                                    var _spriteY     = 0;
+                                break;
+                                
+                                case 3:
+                                    var _spriteImage = real(_tagArgumentArray[1]);
+                                    var _spriteX     = real(_tagArgumentArray[2]);
+                                    var _spriteY     = 0;
+                                break;
+                                
+                                case 4:
+                                    var _spriteImage = real(_tagArgumentArray[1]);
+                                    var _spriteX     = real(_tagArgumentArray[2]);
+                                    var _spriteY     = real(_tagArgumentArray[3]);
+                                break;
+                            }
+                            
+                            var _fragment = {
+                                __sprite: _sprite,
+                                __image: _spriteImage,
+                                __x: undefined,
+                                __y: undefined,
+                                __xOffset: _spriteX + _spriteScale*sprite_get_xoffset(_sprite),
+                                __yOffset: _spriteY + 0.5*(_lineHeight - _spriteScale*sprite_get_height(_sprite)) + _spriteScale*sprite_get_yoffset(_sprite),
+                                __width: _spriteScale*sprite_get_width(_sprite),
+                                __shift: _spriteScale*sprite_get_width(_sprite),
+                                __whitespace: false,
+                                __joinsRight: true,
+                            };
+                            
+                            array_push(_layoutArray, _fragment);
+                            array_push(__spriteArray, _fragment);
+                        }
+                        else
+                        {
+                            __ScribblejrTrace("Command tag \"", _tagString, "\" not recognised");
+                        }
+                    }
+                }
+                else if (_char == 0x2C) // ,
+                {
+                    array_resize(_tagConcatArray, _i - _tagStart);
+                    array_copy(_tagConcatArray, 0, _unicodeArray, _tagStart, _i - _tagStart);
+                    array_push(_tagArgumentArray, string_concat_ext(_tagConcatArray));
+                    
+                    _tagStart = _i+1;
+                }
+            }
+            else if (_char <= 0x20)
+            {
+                var _fragment = {
+                    __x: 0,
+                    __y: 0,
+                    __xOffset: 0,
+                    __yOffset: 0,
+                    __width: _spaceWidth,
+                    __shift: _spaceWidth,
+                    __whitespace: true,
+                };
+                
+                var _layoutCount = array_length(_layoutArray);
+                _layoutArray[_layoutCount-1].__joinsRight = false;
+                
+                array_push(_layoutArray, _fragment);
+            }
+            else if (_char > 0x20)
+            {
+                var _glyphInfo = struct_get_from_hash(_fastGlyphs, _char);
+                var _fragment = {
+                    __colour: _colour,
+                    __string: chr(_char),
+                    __x: undefined,
+                    __y: undefined,
+                    __xOffset: 0,
+                    __yOffset: 0,
+                    __width: _glyphInfo.w,
+                    __shift: _glyphInfo.shift,
+                    __whitespace: false,
+                    __joinsRight: false,
+                };
+                
+                array_push(_layoutArray, _fragment);
+                array_push(__fragmentArray, _fragment);
+            }
+            
+            ++_i;
+        }
+        
+        //Delete the dummy layout fragment
+        array_delete(_layoutArray, 0, 1);
+        
+        //Ensure the final fragment terminates a stretch
+        _layoutArray[array_length(_layoutArray)-1].__joinsRight = false;
+        
+        var _overallWidth = 0;
+    
+        var _tryScale   = _fontScale;
+        var _upperScale = _fontScale;
+        var _lowerScale = 0.1;
+    
+        var _iterations = 0;
+        while(_iterations < SCRIBBLEJR_FIT_ITERATIONS)
+        {
+            //TODO - Set up special "last iteration" loop
+            var _lastIteration = (_iterations >= SCRIBBLEJR_FIT_ITERATIONS-1);
+            
+            var _adjustedWidth  = _maxWidth/_tryScale;
+            var _adjustedHeight = _maxHeight/_tryScale;
+            
+            var _cursorX = 0;
+            var _cursorY = 0;
+            
+            var _lineStart = 0;
+            var _longWord = false;
+            
+            var _stretchStart = 0;
+            var _stretchWidth = 0;
+            
+            var _i = 0;
+            repeat(array_length(_layoutArray))
+            {
+                var _fragment = _layoutArray[_i];
+                if (_fragment.__whitespace)
+                {
+                    _cursorX += _fragment.__shift;
+                }
+                else
+                {
+                    if (_lastIteration)
+                    {
+                        _fragment.__x = _stretchWidth + _fragment.__xOffset;
+                    }
+                    
+                    if (_fragment.__joinsRight)
+                    {
+                        _stretchWidth += _fragment.__shift;
+                    }
+                    else
+                    {
+                        _stretchWidth += _fragment.__width;
+                        
+                        if (_cursorX + _stretchWidth > _adjustedWidth)
+                        {
+                            if (_cursorX == 0)
+                            {
+                                //Single word is bigger than the width
+                                _longWord = true;
+                                
+                                if (_lastIteration)
+                                {
+                                    _overallWidth = max(_overallWidth, _stretchWidth);
+                            
+                                    var _j = _stretchStart;
+                                    repeat(1 + _i - _stretchStart)
+                                    {
+                                        with(_layoutArray[_j])
+                                        {
+                                            __x += _cursorX;
+                                            __y  = _cursorY + __yOffset;
+                                        }
+                                        
+                                        ++_j;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (_lastIteration)
+                                {
+                                    _overallWidth = max(_overallWidth, _cursorX);
+                                    
+                                    //Sort out the horizontal alignment for the current line
+                                    if (_hAlign == fa_center)
+                                    {
+                                        var _j = _lineStart;
+                                        repeat(_stretchStart - _lineStart)
+                                        {
+                                            with(_layoutArray[_j]) __x -= _cursorX/2;
+                                            ++_j;
+                                        }
+                                    }
+                                    else if (_hAlign == fa_right)
+                                    {
+                                        var _j = _lineStart;
+                                        repeat(_stretchStart - _lineStart)
+                                        {
+                                            with(_layoutArray[_j]) __x -= _cursorX;
+                                            ++_j;
+                                        }
+                                    }
+                            
+                                    _lineStart  = _stretchStart;
+                                }
+                        
+                                _cursorX  = 0;
+                                _cursorY += _lineHeight;
+                        
+                                if (_lastIteration)
+                                {
+                                    var _j = _stretchStart;
+                                    repeat(1 + _i - _stretchStart)
+                                    {
+                                        with(_layoutArray[_j]) __y = _cursorY + __yOffset;
+                                        ++_j;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //Stretch fits on the same line
+                            if (_lastIteration)
+                            {
+                                var _j = _stretchStart;
+                                repeat(1 + _i - _stretchStart)
+                                {
+                                    with(_layoutArray[_j])
+                                    {
+                                        __x += _cursorX;
+                                        __y  = _cursorY + __yOffset;
+                                    }
+                            
+                                    ++_j;
+                                }
+                            }
+                        }
+                
+                        _cursorX      += _stretchWidth + (_fragment.__shift - _fragment.__width);
+                        _stretchWidth  = 0;
+                        _stretchStart  = _i+1;
+                    }
+                }
+            
+                ++_i;
+            }
+        
+            if (_lastIteration)
+            {
+                _overallWidth = max(_overallWidth, _cursorX);
+                
+                //Sort out the horizontal alignment for the last line (only on the last iteration though)
+                if ((_hAlign == fa_center) || (_hAlign == fa_right))
+                {
+                    var _offset = (_hAlign == fa_center)? (_overallWidth/2) : _overallWidth;
+                    var _j = _lineStart;
+                    repeat(_stretchStart - _lineStart)
+                    {
+                        with(_layoutArray[_j]) __x -= _offset;
+                        ++_j;
                     }
                 }
             }
             
-            //Then we handle the next text fragment
-            if (_textString != "")
+            //Determine if this iteration should be the new upper or lower bound based on whether we
+            //exceeded the height limit
+            var _height = _cursorY + _lineHeight;
+            if (_longWord || (_height > _adjustedHeight))
             {
-                var _splitArray = string_split(_textString, " ");
-                var _splitCount = array_length(_splitArray);
-                var _j = 0;
-                repeat(_splitCount)
-                {
-                    var _substring = _splitArray[_j];
-                    if (_substring != "")
-                    {
-                        var _fragment = {
-                            __colour: _colour,
-                            __string: _substring,
-                            __x: undefined,
-                            __y: undefined,
-                            __xOffset: 0,
-                            __yOffset: 0,
-                            __width: string_width(_substring),
-                            __whitespaceFollows: (_j < _splitCount-1),
-                        };
-                        
-                        array_push(_layoutArray, _fragment);
-                        array_push(__fragmentArray, _fragment);
-                    }
-                    
-                    ++_j;
-                }
+                _upperScale = _tryScale;
             }
+            else
+            {
+                _lowerScale = _tryScale;
+                
+                //We start at the base starting scale in the first (0th) iteration. If we already fit
+                //into the bounding box then we can skip a lot of iterations
+                if (_iterations == 0) _iterations = SCRIBBLEJR_FIT_ITERATIONS-2;
+            }
+            
+            //Ensure the final iteration uses a valid scale
+            if (_iterations >= SCRIBBLEJR_FIT_ITERATIONS-2)
+            {
+                _tryScale = _lowerScale;
+            }
+            else
+            {
+                //Bias scale search very slighty to be larger
+                //This usually finds the global maxima rather than narrowing down on a local maxima
+                _tryScale = lerp(_lowerScale, _upperScale, 0.51);
+            }
+            
+            ++_iterations;
         }
         
-        ++_i;
+        //Adjust for vertical alignment
+        if ((_vAlign == fa_middle) || (_vAlign == fa_bottom))
+        {
+            var _offset = (_vAlign == fa_middle)? (_height/2) : _height;
+            var _i = 0;
+            repeat(array_length(_layoutArray))
+            {
+                with(_layoutArray[_i]) __y -= _offset;
+                ++_i;
+            }
+        }
     }
-    
-    _layoutArray[array_length(_layoutArray)-1].__whitespaceFollows = true;
-    
-    var _overallWidth = 0;
-    
-    var _tryScale   = _fontScale;
-    var _upperScale = _fontScale;
-    var _lowerScale = 0.1;
-    
-    var _iterations = 0;
-    while(_iterations < SCRIBBLEJR_FIT_ITERATIONS)
+    else
     {
-        //TODO - Set up special "last iteration" loop
-        var _lastIteration = (_iterations >= SCRIBBLEJR_FIT_ITERATIONS-1);
+        var _substringArray = string_split(__string, "[");
+        _substringArray[0] = "]" + _substringArray[0];
         
-        var _adjustedWidth  = _maxWidth/_tryScale;
-        var _adjustedHeight = _maxHeight/_tryScale;
+        var _colour = -1;
         
         var _cursorX = 0;
         var _cursorY = 0;
         
-        var _lineStart = 0;
-        var _longWord = false;
-        
-        var _stretchStart = 0;
-        var _stretchWidth = 0;
-        
+        //Then iterate other command tag + text fragment combos, splitting as necessary
         var _i = 0;
-        repeat(array_length(_layoutArray))
+        repeat(array_length(_substringArray))
         {
-            var _fragment = _layoutArray[_i];
-            
-            if (_lastIteration)
+            var _tagSplitArray = string_split(_substringArray[_i], "]", false, 1);
+            if (array_length(_tagSplitArray) == 2)
             {
-                _fragment.__x = _stretchWidth + _fragment.__xOffset;
+                //Handle the contents of the tag
+                var _tagString  = _tagSplitArray[0];
+                var _textString = _tagSplitArray[1];
+                
+                if (_tagString != "")
+                {
+                    //First we try to find the colour state
+                    var _foundColour = _colourDict[$ _tagString];
+                    if (_foundColour != undefined)
+                    {
+                        _colour = _foundColour;
+                    }
+                    else
+                    {
+                        var _spriteSplitArray = string_split(_tagString, ",");
+                        
+                        //Then we try to find a sprite using the command tag
+                        var _sprite = asset_get_index(_spriteSplitArray[0]);
+                        if (sprite_exists(_sprite))
+                        {
+                            //Decode sprite arguments
+                            switch(array_length(_spriteSplitArray))
+                            {
+                                case 1:
+                                    var _spriteImage = 0;
+                                    var _spriteX     = 0;
+                                    var _spriteY     = 0;
+                                break;
+                                
+                                case 2:
+                                    var _spriteImage = real(_spriteSplitArray[1]);
+                                    var _spriteX     = 0;
+                                    var _spriteY     = 0;
+                                break;
+                                
+                                case 3:
+                                    var _spriteImage = real(_spriteSplitArray[1]);
+                                    var _spriteX     = real(_spriteSplitArray[2]);
+                                    var _spriteY     = 0;
+                                break;
+                                
+                                case 4:
+                                    var _spriteImage = real(_spriteSplitArray[1]);
+                                    var _spriteX     = real(_spriteSplitArray[2]);
+                                    var _spriteY     = real(_spriteSplitArray[3]);
+                                break;
+                            }
+                            
+                            var _fragment = {
+                                __sprite: _sprite,
+                                __image: _spriteImage,
+                                __x: undefined,
+                                __y: undefined,
+                                __xOffset: _spriteX + _spriteScale*sprite_get_xoffset(_sprite),
+                                __yOffset: _spriteY + 0.5*(_lineHeight - _spriteScale*sprite_get_height(_sprite)) + _spriteScale*sprite_get_yoffset(_sprite),
+                                __width: _spriteScale*sprite_get_width(_sprite),
+                                __whitespaceFollows: string_starts_with(_textString, " "),
+                            };
+                            
+                            array_push(_layoutArray, _fragment);
+                            array_push(__spriteArray, _fragment);
+                        }
+                        else
+                        {
+                            __ScribblejrTrace("Command tag \"", _tagString, "\" not recognised");
+                        }
+                    }
+                }
+                
+                //Then we handle the next text fragment
+                if (_textString != "")
+                {
+                    var _splitArray = string_split(_textString, " ");
+                    var _splitCount = array_length(_splitArray);
+                    var _j = 0;
+                    repeat(_splitCount)
+                    {
+                        var _substring = _splitArray[_j];
+                        if (_substring != "")
+                        {
+                            var _fragment = {
+                                __colour: _colour,
+                                __string: _substring,
+                                __x: undefined,
+                                __y: undefined,
+                                __xOffset: 0,
+                                __yOffset: 0,
+                                __width: string_width(_substring),
+                                __whitespaceFollows: (_j < _splitCount-1),
+                            };
+                            
+                            array_push(_layoutArray, _fragment);
+                            array_push(__fragmentArray, _fragment);
+                        }
+                        
+                        ++_j;
+                    }
+                }
             }
             
-            _stretchWidth += _fragment.__width;
-            
-            if (_fragment.__whitespaceFollows)
+            ++_i;
+        }
+        
+        _layoutArray[array_length(_layoutArray)-1].__whitespaceFollows = true;
+        
+        var _overallWidth = 0;
+    
+        var _tryScale   = _fontScale;
+        var _upperScale = _fontScale;
+        var _lowerScale = 0.1;
+    
+        var _iterations = 0;
+        while(_iterations < SCRIBBLEJR_FIT_ITERATIONS)
+        {
+            //TODO - Set up special "last iteration" loop
+            var _lastIteration = (_iterations >= SCRIBBLEJR_FIT_ITERATIONS-1);
+        
+            var _adjustedWidth  = _maxWidth/_tryScale;
+            var _adjustedHeight = _maxHeight/_tryScale;
+        
+            var _cursorX = 0;
+            var _cursorY = 0;
+        
+            var _lineStart = 0;
+            var _longWord = false;
+        
+            var _stretchStart = 0;
+            var _stretchWidth = 0;
+        
+            var _i = 0;
+            repeat(array_length(_layoutArray))
             {
-                if (_cursorX + _stretchWidth > _adjustedWidth)
+                var _fragment = _layoutArray[_i];
+            
+                if (_lastIteration)
                 {
-                    if (_cursorX == 0)
+                    _fragment.__x = _stretchWidth + _fragment.__xOffset;
+                }
+            
+                _stretchWidth += _fragment.__width;
+            
+                if (_fragment.__whitespaceFollows)
+                {
+                    if (_cursorX + _stretchWidth > _adjustedWidth)
                     {
-                        //Single word is bigger than the width
-                        _longWord = true;
+                        if (_cursorX == 0)
+                        {
+                            //Single word is bigger than the width
+                            _longWord = true;
                         
+                            if (_lastIteration)
+                            {
+                                _overallWidth = max(_overallWidth, _stretchWidth);
+                            
+                                var _j = _stretchStart;
+                                repeat(1 + _i - _stretchStart)
+                                {
+                                    with(_layoutArray[_j])
+                                    {
+                                        __x += _cursorX;
+                                        __y  = _cursorY + __yOffset;
+                                    }
+                                
+                                    ++_j;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (_lastIteration)
+                            {
+                                _overallWidth = max(_overallWidth, _cursorX - _spaceWidth);
+                            
+                                //Sort out the horizontal alignment for the current line
+                                if (_hAlign == fa_center)
+                                {
+                                    var _j = _lineStart;
+                                    repeat(_stretchStart - _lineStart)
+                                    {
+                                        with(_layoutArray[_j]) __x -= _cursorX/2;
+                                        ++_j;
+                                    }
+                                }
+                                else if (_hAlign == fa_right)
+                                {
+                                    var _j = _lineStart;
+                                    repeat(_stretchStart - _lineStart)
+                                    {
+                                        with(_layoutArray[_j]) __x -= _cursorX;
+                                        ++_j;
+                                    }
+                                }
+                            
+                                _lineStart  = _stretchStart;
+                            }
+                        
+                            _cursorX  = 0;
+                            _cursorY += _lineHeight;
+                        
+                            if (_lastIteration)
+                            {
+                                var _j = _stretchStart;
+                                repeat(1 + _i - _stretchStart)
+                                {
+                                    with(_layoutArray[_j]) __y = _cursorY + __yOffset;
+                                    ++_j;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //Stretch fits on the same line
                         if (_lastIteration)
                         {
-                            _overallWidth = max(_overallWidth, _stretchWidth);
-                            
                             var _j = _stretchStart;
                             repeat(1 + _i - _stretchStart)
                             {
@@ -223,139 +670,79 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                                     __x += _cursorX;
                                     __y  = _cursorY + __yOffset;
                                 }
-                                
+                            
                                 ++_j;
                             }
                         }
                     }
-                    else
-                    {
-                        if (_lastIteration)
-                        {
-                            _overallWidth = max(_overallWidth, _cursorX - _spaceWidth);
-                            
-                            //Sort out the horizontal alignment for the current line
-                            if (_hAlign == fa_center)
-                            {
-                                var _j = _lineStart;
-                                repeat(_stretchStart - _lineStart)
-                                {
-                                    with(_layoutArray[_j]) __x -= _cursorX/2;
-                                    ++_j;
-                                }
-                            }
-                            else if (_hAlign == fa_right)
-                            {
-                                var _j = _lineStart;
-                                repeat(_stretchStart - _lineStart)
-                                {
-                                    with(_layoutArray[_j]) __x -= _cursorX;
-                                    ++_j;
-                                }
-                            }
-                            
-                            _lineStart  = _stretchStart;
-                        }
-                        
-                        _cursorX  = 0;
-                        _cursorY += _lineHeight;
-                        
-                        if (_lastIteration)
-                        {
-                            var _j = _stretchStart;
-                            repeat(1 + _i - _stretchStart)
-                            {
-                                with(_layoutArray[_j]) __y = _cursorY + __yOffset;
-                                ++_j;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    //Stretch fits on the same line
-                    if (_lastIteration)
-                    {
-                        var _j = _stretchStart;
-                        repeat(1 + _i - _stretchStart)
-                        {
-                            with(_layoutArray[_j])
-                            {
-                                __x += _cursorX;
-                                __y  = _cursorY + __yOffset;
-                            }
-                            
-                            ++_j;
-                        }
-                    }
-                }
                 
-                _cursorX      += _stretchWidth + _spaceWidth;
-                _stretchWidth  = 0;
-                _stretchStart  = _i+1;
+                    _cursorX      += _stretchWidth + _spaceWidth;
+                    _stretchWidth  = 0;
+                    _stretchStart  = _i+1;
+                }
+            
+                ++_i;
             }
-            
-            ++_i;
-        }
         
-        if (_lastIteration)
-        {
-            _overallWidth = max(_overallWidth, _cursorX - (_fragment.__whitespaceFollows? _spaceWidth : 0));
-            
-            //Sort out the horizontal alignment for the last line (only on the last iteration though)
-            if ((_hAlign == fa_center) || (_hAlign == fa_right))
+            if (_lastIteration)
             {
-                var _offset = (_hAlign == fa_center)? (_overallWidth/2) : _overallWidth;
-                var _j = _lineStart;
-                repeat(_stretchStart - _lineStart)
+                _overallWidth = max(_overallWidth, _cursorX - (_fragment.__whitespaceFollows? _spaceWidth : 0));
+                
+                //Sort out the horizontal alignment for the last line (only on the last iteration though)
+                if ((_hAlign == fa_center) || (_hAlign == fa_right))
                 {
-                    with(_layoutArray[_j]) __x -= _offset;
-                    ++_j;
+                    var _offset = (_hAlign == fa_center)? (_overallWidth/2) : _overallWidth;
+                    var _j = _lineStart;
+                    repeat(_stretchStart - _lineStart)
+                    {
+                        with(_layoutArray[_j]) __x -= _offset;
+                        ++_j;
+                    }
                 }
             }
-        }
-        
-        //Determine if this iteration should be the new upper or lower bound based on whether we
-        //exceeded the height limit
-        var _height = _cursorY + _lineHeight;
-        if (_longWord || (_height > _adjustedHeight))
-        {
-            _upperScale = _tryScale;
             
-        }
-        else
-        {
-            _lowerScale = _tryScale;
+            //Determine if this iteration should be the new upper or lower bound based on whether we
+            //exceeded the height limit
+            var _height = _cursorY + _lineHeight;
+            if (_longWord || (_height > _adjustedHeight))
+            {
+                _upperScale = _tryScale;
             
-            //We start at the base starting scale in the first (0th) iteration. If we already fit
-            //into the bounding box then we can skip a lot of iterations
-            if (_iterations == 0) _iterations = SCRIBBLEJR_FIT_ITERATIONS-2;
+            }
+            else
+            {
+                _lowerScale = _tryScale;
+                
+                //We start at the base starting scale in the first (0th) iteration. If we already fit
+                //into the bounding box then we can skip a lot of iterations
+                if (_iterations == 0) _iterations = SCRIBBLEJR_FIT_ITERATIONS-2;
+            }
+            
+            //Ensure the final iteration uses a valid scale
+            if (_iterations >= SCRIBBLEJR_FIT_ITERATIONS-2)
+            {
+                _tryScale = _lowerScale;
+            }
+            else
+            {
+                //Bias scale search very slighty to be larger
+                //This usually finds the global maxima rather than narrowing down on a local maxima
+                _tryScale = lerp(_lowerScale, _upperScale, 0.51);
+            }
+            
+            ++_iterations;
         }
         
-        //Ensure the final iteration uses a valid scale
-        if (_iterations >= SCRIBBLEJR_FIT_ITERATIONS-2)
+        //Adjust for vertical alignment
+        if ((_vAlign == fa_middle) || (_vAlign == fa_bottom))
         {
-            _tryScale = _lowerScale;
-        }
-        else
-        {
-            //Bias scale search very slighty to be larger
-            //This usually finds the global maxima rather than narrowing down on a local maxima
-            _tryScale = lerp(_lowerScale, _upperScale, 0.51);
-        }
-        
-        ++_iterations;
-    }
-    
-    //Adjust for vertical alignment
-    if ((_vAlign == fa_middle) || (_vAlign == fa_bottom))
-    {
-        var _offset = (_vAlign == fa_middle)? (_height/2) : _height;
-        var _i = 0;
-        repeat(array_length(_layoutArray))
-        {
-            with(_layoutArray[_i]) __y -= _offset;
-            ++_i;
+            var _offset = (_vAlign == fa_middle)? (_height/2) : _height;
+            var _i = 0;
+            repeat(array_length(_layoutArray))
+            {
+                with(_layoutArray[_i]) __y -= _offset;
+                ++_i;
+            }
         }
     }
     
