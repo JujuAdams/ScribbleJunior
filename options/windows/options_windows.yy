@@ -6,7 +6,7 @@
   "option_windows_borderless": false,
   "option_windows_company_info": "Juju Adams",
   "option_windows_copy_exe_to_dest": false,
-  "option_windows_copyright_info": "(c) Juju Adams 2023",
+  "option_windows_copyright_info": "(c) Juju Adams 2024",
   "option_windows_description_info": "Scribble Junior",
   "option_windows_disable_sandbox": false,
   "option_windows_display_cursor": true,
@@ -29,6 +29,6 @@
   "option_windows_steam_use_alternative_launcher": false,
   "option_windows_texture_page": "2048x2048",
   "option_windows_use_splash": false,
-  "option_windows_version": "1.1.0.0",
+  "option_windows_version": "1.2.2.0",
   "option_windows_vsync": false,
 }
