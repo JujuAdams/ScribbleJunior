@@ -32,6 +32,14 @@ How many iterations to perform when fitting text inside the bounding box. This o
 
 &nbsp;
 
+## `…SHADOW_SPRITES`
+
+*Typical value:* `false`
+
+Whether to give in-line sprites drop shadows in approximately the same fashion as SDF drop shadows. Sprite drop shadows will not respect the "softness" setting that is available for SDF drop shadows. Additionally, turning this feature on will incur a performance penalty.
+
+&nbsp;
+
 ## `…BUDGET`
 
 *Typical value:* `200`
