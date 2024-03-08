@@ -10,6 +10,8 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
     static _system     = __ScribblejrSystem();
     static _colourDict = _system.__colourDict;
     
+    static _dropShadowEnableHash = variable_get_hash("dropShadowEnable");
+    
     __wrapper = undefined;
     __lastDraw = current_time;
     
@@ -21,6 +23,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
     __scale  = _fontScale;
     
     __fontIsDynamic = ScribblejrCacheFontInfo(_font).__isDynamic;
+    __fontIsSDF     = ScribblejrCacheFontInfo(_font).sdfEnabled;
     __fontSDFSpread = ScribblejrCacheFontInfo(_font).sdfSpread;
     
     Draw = __DrawNative;
@@ -270,6 +273,15 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         
         if (_sdfEffects != undefined)
         {
+            if (SCRIBBLEJR_SHADOW_SPRITES && struct_get_from_hash(_sdfEffects, _dropShadowEnableHash))
+            {
+                gpu_set_fog(true, _sdfEffects.dropShadowColour, 0, 0);
+                __DrawSprites(_x + _sdfEffects.dropShadowOffsetX,
+                              _y + _sdfEffects.dropShadowOffsetY,
+                              _sdfEffects.dropShadowAlpha*_alpha);
+                gpu_set_fog(false, c_fuchsia, 0, 0);
+            }
+            
             font_enable_effects(__font, true, _sdfEffects);
             draw_text(_x, _y, __string);
             if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) font_enable_effects(__font, false);
@@ -293,6 +305,15 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         
         if (_sdfEffects != undefined)
         {
+            if (SCRIBBLEJR_SHADOW_SPRITES && struct_get_from_hash(_sdfEffects, _dropShadowEnableHash))
+            {
+                gpu_set_fog(true, _sdfEffects.dropShadowColour, 0, 0);
+                __DrawSprites(_x + __scale*_sdfEffects.dropShadowOffsetX,
+                              _y + __scale*_sdfEffects.dropShadowOffsetY,
+                              _sdfEffects.dropShadowAlpha*_alpha);
+                gpu_set_fog(false, c_fuchsia, 0, 0);
+            }
+            
             font_enable_effects(__font, true, _sdfEffects);
             draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
             if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) font_enable_effects(__font, false);
@@ -319,6 +340,15 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         
         if (_sdfEffects != undefined)
         {
+            if (SCRIBBLEJR_SHADOW_SPRITES && struct_get_from_hash(_sdfEffects, _dropShadowEnableHash))
+            {
+                gpu_set_fog(true, _sdfEffects.dropShadowColour, 0, 0);
+                __DrawSprites(_x + _scale*_sdfEffects.dropShadowOffsetX,
+                              _y + _scale*_sdfEffects.dropShadowOffsetY,
+                              _sdfEffects.dropShadowAlpha*_alpha);
+                gpu_set_fog(false, c_fuchsia, 0, 0);
+            }
+            
             font_enable_effects(__font, true, _sdfEffects);
             
             var _i = 0;
@@ -397,8 +427,6 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
     
     static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
     {
-        static _dropShadowEnableHash = variable_get_hash("dropShadowEnable");
-        
         static _shdScribblejrExt_SDF_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDF, "u_vPositionAlphaScale");
         static _shdScribblejrExt_SDF_u_iColour = shader_get_uniform(__shdScribblejrColorSDF, "u_iColour");
         
@@ -407,23 +435,38 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         
         _x += __xOffset;
         _y += __yOffset;
+        var _scale = __scale;
         
         with(_sdfEffects)
         {
-            if (struct_get_from_hash(_sdfEffects, _dropShadowEnableHash))
+            if (struct_get_from_hash(_sdfEffects, other._dropShadowEnableHash))
             {
-                var _scale = other.__scale;
                 var _color = dropShadowColour;
+                
+                var _xShadow = _x + _scale*dropShadowOffsetX;
+                var _yShadow = _y + _scale*dropShadowOffsetY;
+                
+                if (SCRIBBLEJR_SHADOW_SPRITES)
+                {
+                    gpu_set_fog(true, dropShadowColour, 0, 0);
+                    other.__DrawSprites(_xShadow, _yShadow, dropShadowAlpha*_alpha);
+                    gpu_set_fog(false, c_fuchsia, 0, 0);
+                }
+                
                 shader_set(__shdScribblejrSDFShadow);
-                shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vPositionAlphaScale, _x + _scale*dropShadowOffsetX, _y + _scale*dropShadowOffsetY, dropShadowAlpha*_alpha, _scale);
-                shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vColorSoftness, color_get_red(_color)/255, color_get_green(_color)/255, color_get_blue(_color)/255, clamp(dropShadowSoftness / (4*other.__fontSDFSpread), 0, 0.5));
+                shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vPositionAlphaScale, _xShadow, _yShadow, dropShadowAlpha*_alpha, _scale);
+                shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vColorSoftness,
+                                     color_get_red(_color)/255,
+                                     color_get_green(_color)/255,
+                                     color_get_blue(_color)/255,
+                                     clamp(dropShadowSoftness / (4*other.__fontSDFSpread), 0, 0.5));
                 vertex_submit(other.__vertexBuffer, pr_trianglelist, other.__fontTexture);
                 shader_reset();
             }
         }
         
         shader_set(__shdScribblejrColorSDF);
-        shader_set_uniform_f(_shdScribblejrExt_SDF_u_vPositionAlphaScale, _x, _y, _alpha, __scale);
+        shader_set_uniform_f(_shdScribblejrExt_SDF_u_vPositionAlphaScale, _x, _y, _alpha, _scale);
         shader_set_uniform_i(_shdScribblejrExt_SDF_u_iColour, _colour);
         vertex_submit(__vertexBuffer, pr_trianglelist, __fontTexture);
         shader_reset();

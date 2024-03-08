@@ -16,6 +16,9 @@
 //than 4 tend to break!
 #macro SCRIBBLEJR_FIT_ITERATIONS  6
 
+//
+#macro SCRIBBLEJR_SHADOW_SPRITES  true
+
 //Amount of time per frame that Scribble Junior is allowed to bake vertex buffers. This limit is
 //approximate. You can adjust the budget time at runtime by calling ScribblejrSetBudget(). If this
 //macro is set to zero or a negative number then all vertex buffer baking will be disabled until
