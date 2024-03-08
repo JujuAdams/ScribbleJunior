@@ -70,7 +70,9 @@ This function doesn't actually draw the text, it only returns a "text element st
 
 Draws the text element at the given coordinates. You can also optionally specify a colour and alpha.
 
-If you are using an SDF font, you may provide an SDF effects struct as you would use with the native function [`font_enable_effects()`](https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Asset_Management/Fonts/font_enable_effects.htm). Only the drop shadow effect is supported at this time.
+If you are using an SDF font, you may provide an SDF effects struct as you would use with the native function [`font_enable_effects()`](https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Asset_Management/Fonts/font_enable_effects.htm).
+
+?> Only the drop shadow effect is supported at this time.
 
 &nbsp;
 
