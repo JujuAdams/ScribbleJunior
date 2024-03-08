@@ -8,4 +8,5 @@
 &nbsp;
 
 - ### [Download the .yymps](https://github.com/JujuAdams/ScribbleJunior/releases/)
+- ### [Read the documentation](https://www.jujuadams.com/ScribbleJunior/)
 - ### You may also like [Scribble Deluxe](https://github.com/JujuAdams/Scribble/), [Scripture](https://pixelatedpope.itch.io/scripture), [diest’s text engine](http://michaelvandiest.com/advanced-dialogue-box/), and [gmdialogue](https://github.com/danielpancake/gmdialogue)
