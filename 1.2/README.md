@@ -10,9 +10,13 @@
 
 Scribble Junior is a stripped back lighter text rendering solution compared to Scribble Deluxe. The focus for Scribble Junior is static text that doesn't need to animate where performance is the primary concern. Scribble Deluxe is oriented towards complex text effects where there's a lot of animation and fancy effects going on.
 
-**Can I use Scribble Junior alongside Scribble Deluxe"**
+&nbsp;
+
+**Can I use Scribble Junior alongside Scribble Deluxe?"**
 
 Yes! In fact, I encourage it. Scribble Junior is excellent for static UI text whereas Scribble Deluxe is geared more towards dialogue and animated text.
+
+&nbsp;
 
 **What platforms does Scribble Junior support?**
 
