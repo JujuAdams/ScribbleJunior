@@ -6,7 +6,7 @@
 
 ---
 
-**What's the difference between Scribble Junior and Scribble Deluxe?**
+**What's the difference between Scribble Junior and [Scribble Deluxe](https://github.com/JujuAdams/Scribble/)?**
 
 Scribble Junior is a stripped back lighter text rendering solution compared to Scribble Deluxe. The focus for Scribble Junior is static text that doesn't need to animate where performance is the primary concern. Scribble Deluxe is oriented towards complex text effects where there's a lot of animation and fancy effects going on.
 
