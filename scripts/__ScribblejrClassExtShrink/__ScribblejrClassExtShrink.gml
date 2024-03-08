@@ -24,6 +24,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     __fontScale = _fontScale;
     
     __fontIsDynamic = ScribblejrCacheFontInfo(_font).__isDynamic;
+    __fontSDFSpread = ScribblejrCacheFontInfo(_font).sdfSpread;
     
     Draw = __DrawNative;
         
@@ -220,7 +221,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     
     
     
-    static __DrawSimple = function(_x, _y, _colour = c_white, _alpha = 1)
+    static __DrawSimple = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
     {
         draw_set_font(__font);
         draw_set_colour(_colour);
@@ -234,7 +235,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
-    static __DrawSimpleScaled = function(_x, _y, _colour = c_white, _alpha = 1)
+    static __DrawSimpleScaled = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
     {
         draw_set_font(__font);
         draw_set_colour(_colour);
@@ -248,7 +249,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
-    static __DrawNative = function(_x, _y, _colour = c_white, _alpha = 1)
+    static __DrawNative = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
     {
         draw_set_font(__font);
         draw_set_alpha(_alpha);
@@ -317,7 +318,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         __DrawSprites(_x, _y, _alpha);
     }
     
-    static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1)
+    static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
     {
         static _shdScribblejrExt_SDF_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDF, "u_vPositionAlphaScale");
         static _shdScribblejrExt_SDF_u_iColour = shader_get_uniform(__shdScribblejrColorSDF, "u_iColour");

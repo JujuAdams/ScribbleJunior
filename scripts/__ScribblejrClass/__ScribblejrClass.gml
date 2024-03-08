@@ -185,9 +185,10 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
         {
             if (_sdfEffects.dropShadowEnable)
             {
+                var _scale = other.__scale;
                 var _color = dropShadowColour;
                 shader_set(__shdScribblejrSDFShadow);
-                shader_set_uniform_f(_shdScribblejrSDFShadow_u_vPositionAlphaScale, _x + dropShadowOffsetX, _y + dropShadowOffsetY, dropShadowAlpha*_alpha, other.__scale);
+                shader_set_uniform_f(_shdScribblejrSDFShadow_u_vPositionAlphaScale, _x + _scale*dropShadowOffsetX, _y + _scale*dropShadowOffsetY, dropShadowAlpha*_alpha, _scale);
                 shader_set_uniform_f(_shdScribblejrSDFShadow_u_vColorSoftness, color_get_red(_color)/255, color_get_green(_color)/255, color_get_blue(_color)/255, clamp(dropShadowSoftness / (4*other.__fontSDFSpread), 0, 0.5));
                 vertex_submit(other.__vertexBuffer, pr_trianglelist, other.__fontTexture);
                 shader_reset();
