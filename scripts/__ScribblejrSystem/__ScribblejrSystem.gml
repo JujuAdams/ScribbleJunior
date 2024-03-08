@@ -75,22 +75,6 @@ function __ScribblejrSystem()
         vertex_format_add_color();
         vertex_format_add_texcoord();
         __vertexFormatColor = vertex_format_end();
-        
-        __sdfShadow = {
-            __enabled:  false,
-            __color:    c_black,
-            __red:      0,
-            __green:    0,
-            __blue:     0,
-            __alpha:    0.5,
-            __xOffset:  4,
-            __yOffset:  4,
-            __softness: 0,
-        };
-        
-        __sdfOutline = {
-            
-        };
     }
     
     time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, function()
