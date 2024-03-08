@@ -792,7 +792,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         
         if (_sdfEffects != undefined)
         {
-            if (SCRIBBLEJR_SHADOW_SPRITES && struct_get_from_hash(_sdfEffects, _dropShadowEnableHash))
+            if (SCRIBBLEJR_SHADOW_SPRITES && __fontIsSDF && struct_get_from_hash(_sdfEffects, _dropShadowEnableHash))
             {
                 gpu_set_fog(true, _sdfEffects.dropShadowColour, 0, 0);
                 __DrawSprites(_x + _scale*_sdfEffects.dropShadowOffsetX,
