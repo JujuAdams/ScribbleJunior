@@ -16,8 +16,10 @@
 //than 4 tend to break!
 #macro SCRIBBLEJR_FIT_ITERATIONS  6
 
-//
-#macro SCRIBBLEJR_SHADOW_SPRITES  true
+//Whether to give in-line sprites drop shadows in approximately the same fashion as SDF drop
+//shadows. Sprite drop shadows will not respect the "softness" setting that is available for SDF
+//drop shadows. Additionally, turning this feature on will incur a performance penalty.
+#macro SCRIBBLEJR_SHADOW_SPRITES  false
 
 //Amount of time per frame that Scribble Junior is allowed to bake vertex buffers. This limit is
 //approximate. You can adjust the budget time at runtime by calling ScribblejrSetBudget(). If this
