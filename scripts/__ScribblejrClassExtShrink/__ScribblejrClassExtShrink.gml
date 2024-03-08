@@ -229,9 +229,18 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         draw_set_halign(__hAlign);
         draw_set_valign(__vAlign);
         
-        draw_text(_x, _y, __string);
-        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
+        if (_sdfEffects != undefined)
+        {
+            font_enable_effects(__font, true, _sdfEffects);
+            draw_text(_x, _y, __string);
+            if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) font_enable_effects(__font, false);
+        }
+        else
+        {
+            draw_text(_x, _y, __string);
+        }
         
+        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
@@ -243,9 +252,18 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         draw_set_halign(__hAlign);
         draw_set_valign(__vAlign);
         
-        draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
-        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
+        if (_sdfEffects != undefined)
+        {
+            font_enable_effects(__font, true, _sdfEffects);
+            draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
+            if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) font_enable_effects(__font, false);
+        }
+        else
+        {
+            draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
+        }
         
+        if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
@@ -260,22 +278,42 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         _x += __xOffset;
         _y += __yOffset;
         
-        var _i = 0;
-        repeat(array_length(__fragmentArray))
+        if (_sdfEffects != undefined)
         {
-            with(__fragmentArray[_i])
+            font_enable_effects(__font, true, _sdfEffects);
+            
+            var _i = 0;
+            repeat(array_length(__fragmentArray))
             {
-                draw_set_colour((__colour >= 0)? __colour : _colour);
-                draw_text_transformed(_x + _scale*__x, _y, __string, _scale, _scale, 0);
+                with(__fragmentArray[_i])
+                {
+                    draw_set_colour((__colour >= 0)? __colour : _colour);
+                    draw_text_transformed(_x + _scale*__x, _y, __string, _scale, _scale, 0);
+                }
+                
+                ++_i;
             }
             
-            ++_i;
+            if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) font_enable_effects(__font, false);
+        }
+        else
+        {
+            var _i = 0;
+            repeat(array_length(__fragmentArray))
+            {
+                with(__fragmentArray[_i])
+                {
+                    draw_set_colour((__colour >= 0)? __colour : _colour);
+                    draw_text_transformed(_x + _scale*__x, _y, __string, _scale, _scale, 0);
+                }
+                
+                ++_i;
+            }
         }
         
         __DrawSprites(_x, _y, _alpha);
         
         if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
-        
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
@@ -323,11 +361,28 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         static _shdScribblejrExt_SDF_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDF, "u_vPositionAlphaScale");
         static _shdScribblejrExt_SDF_u_iColour = shader_get_uniform(__shdScribblejrColorSDF, "u_iColour");
         
+        static _shdScribblejrColorSDFShadow_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_vPositionAlphaScale");
+        static _shdScribblejrColorSDFShadow_u_vColorSoftness = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_vColorSoftness");
+        
         _x += __xOffset;
         _y += __yOffset;
+        var _scale = __scale*__fontScale;
+        
+        with(_sdfEffects)
+        {
+            if (_sdfEffects.dropShadowEnable)
+            {
+                var _color = dropShadowColour;
+                shader_set(__shdScribblejrSDFShadow);
+                shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vPositionAlphaScale, _x + _scale*dropShadowOffsetX, _y + _scale*dropShadowOffsetY, dropShadowAlpha*_alpha, _scale);
+                shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vColorSoftness, color_get_red(_color)/255, color_get_green(_color)/255, color_get_blue(_color)/255, clamp(dropShadowSoftness / (4*other.__fontSDFSpread), 0, 0.5));
+                vertex_submit(other.__vertexBuffer, pr_trianglelist, other.__fontTexture);
+                shader_reset();
+            }
+        }
         
         shader_set(__shdScribblejrColorSDF);
-        shader_set_uniform_f(_shdScribblejrExt_SDF_u_vPositionAlphaScale, _x, _y, _alpha, __scale*__fontScale);
+        shader_set_uniform_f(_shdScribblejrExt_SDF_u_vPositionAlphaScale, _x, _y, _alpha, _scale);
         shader_set_uniform_i(_shdScribblejrExt_SDF_u_iColour, _colour);
         vertex_submit(__vertexBuffer, pr_trianglelist, __fontTexture);
         shader_reset();

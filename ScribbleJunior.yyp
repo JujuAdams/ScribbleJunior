@@ -61,6 +61,7 @@
     {"id":{"name":"__ScribblejrClassNullWrapper","path":"scripts/__ScribblejrClassNullWrapper/__ScribblejrClassNullWrapper.yy",},},
     {"id":{"name":"__ScribblejrClass","path":"scripts/__ScribblejrClass/__ScribblejrClass.yy",},},
     {"id":{"name":"__ScribblejrClassBakerFit","path":"scripts/__ScribblejrClassBakerFit/__ScribblejrClassBakerFit.yy",},},
+    {"id":{"name":"__shdScribblejrColorSDFShadow","path":"shaders/__shdScribblejrColorSDFShadow/__shdScribblejrColorSDFShadow.yy",},},
     {"id":{"name":"ScribblejrExt","path":"scripts/ScribblejrExt/ScribblejrExt.yy",},},
     {"id":{"name":"ScribblejrGetBudget","path":"scripts/ScribblejrGetBudget/ScribblejrGetBudget.yy",},},
     {"id":{"name":"__ScribblejrClassExtFit","path":"scripts/__ScribblejrClassExtFit/__ScribblejrClassExtFit.yy",},},
