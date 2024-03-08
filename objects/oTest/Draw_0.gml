@@ -29,6 +29,15 @@ else
 
 draw_rectangle(x, y, x + width, y + height, true);
 
+var _sdfEffects = {
+    dropShadowEnable: true,
+    dropShadowSoftness: 16*mouse_x/room_width,
+    dropShadowOffsetX: 10,
+    dropShadowOffsetY: 10,
+    dropShadowColour: c_red,
+    dropShadowAlpha: 1,
+};
+
 var _limitWidth = max(10, width);
 switch(mode)
 {
@@ -43,7 +52,7 @@ switch(mode)
         repeat(stressCount)
         {
             var _element = Scribblejr(testString, hAlign, vAlign, font, fontScale);
-            _element.Draw(x, y, un, un);
+            _element.Draw(x, y, un, un, _sdfEffects);
         }
         
         draw_rectangle_color(x, y, x + _element.GetWidth(), y + _element.GetHeight(),
@@ -54,7 +63,7 @@ switch(mode)
         repeat(stressCount)
         {
             var _element = ScribblejrShrink(testString, hAlign, vAlign, font, fontScale, _limitWidth, height);
-            _element.Draw(x, y, un, un);
+            _element.Draw(x, y, un, un, _sdfEffects);
         }
         
         draw_rectangle_color(x, y, x + _element.GetWidth(), y + _element.GetHeight(),
@@ -65,7 +74,7 @@ switch(mode)
         repeat(stressCount)
         {
             var _element = ScribblejrFit(testString, hAlign, vAlign, font, fontScale, _limitWidth, height);
-            _element.Draw(x, y, un, un);
+            _element.Draw(x, y, un, un, _sdfEffects);
         }
         
         draw_rectangle_color(x, y, x + _element.GetWidth(), y + _element.GetHeight(),
@@ -76,7 +85,7 @@ switch(mode)
         repeat(stressCount)
         {
             var _element = ScribblejrExt(testStringColor, hAlign, vAlign, font, fontScale);
-            _element.Draw(x, y, un, un);
+            _element.Draw(x, y, un, un, _sdfEffects);
         }
         
         draw_rectangle_color(x, y, x + _element.GetWidth(), y + _element.GetHeight(),
@@ -87,7 +96,7 @@ switch(mode)
         repeat(stressCount)
         {
             var _element = ScribblejrShrinkExt(testStringColor, hAlign, vAlign, font, fontScale, _limitWidth, height);
-            _element.Draw(x, y, un, un);
+            _element.Draw(x, y, un, un, _sdfEffects);
         }
         
         draw_rectangle_color(x, y, x + _element.GetWidth(), y + _element.GetHeight(),
@@ -98,7 +107,7 @@ switch(mode)
         repeat(stressCount)
         {
             var _element = ScribblejrFitExt(testStringColor, hAlign, vAlign, font, fontScale, _limitWidth, height);
-            _element.Draw(x, y, un, un);
+            _element.Draw(x, y, un, un, _sdfEffects);
         }
         
         draw_rectangle_color(x, y, x + _element.GetWidth(), y + _element.GetHeight(),

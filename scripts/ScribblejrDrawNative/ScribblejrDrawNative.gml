@@ -16,8 +16,9 @@
 /// @param [vAlign=top]
 /// @param [font=default]
 /// @param [fontScale=1]
+/// @param [sdfEffects]
 
-function ScribblejrNative(_x, _y, _string, _colour = c_white, _alpha = 1, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1)
+function ScribblejrNative(_x, _y, _string, _colour = c_white, _alpha = 1, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1, _sdfEffects = undefined)
 {
     static _system = __ScribblejrSystem();
     
@@ -29,7 +30,16 @@ function ScribblejrNative(_x, _y, _string, _colour = c_white, _alpha = 1, _hAlig
     draw_set_halign(_hAlign);
     draw_set_valign(_vAlign);
     
-    draw_text_transformed(_x, _y, _string, _fontScale, _fontScale, 0);
+    if (_sdfEffects != undefined)
+    {
+        font_enable_effects(_font, true, _sdfEffects);
+        draw_text_transformed(_x, _y, _string, _fontScale, _fontScale, 0);
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) font_enable_effects(_font, false);
+    }
+    else
+    {
+        draw_text_transformed(_x, _y, _string, _fontScale, _fontScale, 0);
+    }
     
     if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
 }

@@ -4,9 +4,9 @@ function __ScribblejrClassWrapper(_element) constructor
 {
     __element = _element;
     
-    static Draw = function(_x, _y, _colour, _alpha)
+    static Draw = function(_x, _y, _colour, _alpha, _sdfEffects)
     {
-        __element.Draw(_x, _y, _colour, _alpha);
+        __element.Draw(_x, _y, _colour, _alpha, _sdfEffects);
         __element.__lastDraw = current_time;
     }
     
