@@ -172,6 +172,8 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
     
     static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
     {
+        static _dropShadowEnableHash = variable_get_hash("dropShadowEnable");
+        
         static _shdScribblejrSDF_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrSDF, "u_vPositionAlphaScale");
         static _shdScribblejrSDF_u_iColour = shader_get_uniform(__shdScribblejrSDF, "u_iColour");
         
@@ -183,7 +185,7 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
         
         with(_sdfEffects)
         {
-            if (_sdfEffects.dropShadowEnable)
+            if (struct_get_from_hash(_sdfEffects, _dropShadowEnableHash))
             {
                 var _scale = other.__scale;
                 var _color = dropShadowColour;
