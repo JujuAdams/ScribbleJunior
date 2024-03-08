@@ -1,8 +1,8 @@
-# Scribblejr
+# ScribblejrDrawNative
 
 **Usage:** `ScribblejrDrawNative(x, y, string, [colour], [alpha], [hAlign], [vAlign], [font], [fontScale], [sdfEffects])`
 
-**Returns:** Text element struct, see below
+**Returns:** N/A (`undefined`)
 
 &nbsp;
 

@@ -11,7 +11,8 @@
 -   [ScribblejrExt](ScribblejrExt)
 -   [ScribblejrFitExt](ScribblejrFitExt)
 -   [ScribblejrShrinkExt](ScribblejrShrinkExt)
--   [ScribblejrDrawNative](ScribblejrNative)
+-   [ScribblejrDrawNative](ScribblejrDrawNative)
+-   [ScribblejrResetDrawState](ScribblejrResetDrawState)
 
 ---
 
