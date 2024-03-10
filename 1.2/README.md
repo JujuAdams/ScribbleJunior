@@ -12,7 +12,7 @@ Scribble Junior is a stripped back lighter text rendering solution compared to S
 
 &nbsp;
 
-**Can I use Scribble Junior alongside Scribble [Scribble Deluxe](https://github.com/JujuAdams/Scribble/)?**
+**Can I use Scribble Junior alongside [Scribble Deluxe](https://github.com/JujuAdams/Scribble/)?**
 
 Yes! In fact, I encourage it. Scribble Junior is excellent for static UI text whereas Scribble Deluxe is geared more towards dialogue and animated text.
 
