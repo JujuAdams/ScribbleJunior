@@ -376,11 +376,11 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         _x += __xOffset;
         _y += __yOffset;
         
-        shader_set(__shdScribblejrColor);
+        __SCRIBBLEJR_SHADER_SET(__shdScribblejrColor);
         shader_set_uniform_f(_shdScribblejrExt_u_vPositionAlphaScale, _x, _y, _alpha, __scale*__fontScale);
         shader_set_uniform_i(_shdScribblejrExt_u_iColour, _colour);
         vertex_submit(__vertexBuffer, pr_trianglelist, __fontTexture);
-        shader_reset();
+        __SCRIBBLEJR_SHADER_RESET();
         
         //Lean into GameMaker's native renderer for sprites
         __DrawSprites(_x, _y, _alpha);
@@ -413,7 +413,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
                 }
                 
                 var _color = dropShadowColour;
-                shader_set(__shdScribblejrSDFShadow);
+                __SCRIBBLEJR_SHADER_SET(__shdScribblejrSDFShadow);
                 shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vPositionAlphaScale, _xShadow, _yShadow, dropShadowAlpha*_alpha, _scale);
                 shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vColorSoftness,
                                      color_get_red(_color)/255,
@@ -421,15 +421,15 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
                                      color_get_blue(_color)/255,
                                      clamp(dropShadowSoftness / (4*other.__fontSDFSpread), 0, 0.5));
                 vertex_submit(other.__vertexBuffer, pr_trianglelist, other.__fontTexture);
-                shader_reset();
+                __SCRIBBLEJR_SHADER_RESET();
             }
         }
         
-        shader_set(__shdScribblejrColorSDF);
+        __SCRIBBLEJR_SHADER_SET(__shdScribblejrColorSDF);
         shader_set_uniform_f(_shdScribblejrExt_SDF_u_vPositionAlphaScale, _x, _y, _alpha, _scale);
         shader_set_uniform_i(_shdScribblejrExt_SDF_u_iColour, _colour);
         vertex_submit(__vertexBuffer, pr_trianglelist, __fontTexture);
-        shader_reset();
+        __SCRIBBLEJR_SHADER_RESET();
         
         //Lean into GameMaker's native renderer for sprites
         __DrawSprites(_x, _y, _alpha);

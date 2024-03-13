@@ -3,6 +3,9 @@
 #macro __SCRIBBLEJR_VERSION  "1.2.2 beta"
 #macro __SCRIBBLEJR_DATE     "2024-03-08"
 
+#macro __SCRIBBLEJR_SHADER_SET    shader_set
+#macro __SCRIBBLEJR_SHADER_RESET  shader_reset
+
 #macro __SCRIBBLEJR_TIMEOUT  1000 //microseconds
 
 function __ScribblejrSystem()

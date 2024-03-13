@@ -163,11 +163,11 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
         static _shdScribblejr_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejr, "u_vPositionAlphaScale");
         static _shdScribblejr_u_iColour = shader_get_uniform(__shdScribblejr, "u_iColour");
         
-        shader_set(__shdScribblejr);
+        __SCRIBBLEJR_SHADER_SET(__shdScribblejr);
         shader_set_uniform_f(_shdScribblejr_u_vPositionAlphaScale, _x + __xOffset, _y + __yOffset, _alpha, __scale);
         shader_set_uniform_i(_shdScribblejr_u_iColour, _colour);
         vertex_submit(__vertexBuffer, pr_trianglelist, __fontTexture);
-        shader_reset();
+        __SCRIBBLEJR_SHADER_RESET();
     }
     
     static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
@@ -189,18 +189,18 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
             {
                 var _scale = other.__scale;
                 var _color = dropShadowColour;
-                shader_set(__shdScribblejrSDFShadow);
+                __SCRIBBLEJR_SHADER_SET(__shdScribblejrSDFShadow);
                 shader_set_uniform_f(_shdScribblejrSDFShadow_u_vPositionAlphaScale, _x + _scale*dropShadowOffsetX, _y + _scale*dropShadowOffsetY, dropShadowAlpha*_alpha, _scale);
                 shader_set_uniform_f(_shdScribblejrSDFShadow_u_vColorSoftness, color_get_red(_color)/255, color_get_green(_color)/255, color_get_blue(_color)/255, clamp(dropShadowSoftness / (4*other.__fontSDFSpread), 0, 0.5));
                 vertex_submit(other.__vertexBuffer, pr_trianglelist, other.__fontTexture);
-                shader_reset();
+                __SCRIBBLEJR_SHADER_RESET();
             }
         }
         
-        shader_set(__shdScribblejrSDF);
+        __SCRIBBLEJR_SHADER_SET(__shdScribblejrSDF);
         shader_set_uniform_f(_shdScribblejrSDF_u_vPositionAlphaScale, _x, _y, _alpha, __scale);
         shader_set_uniform_i(_shdScribblejrSDF_u_iColour, _colour);
         vertex_submit(__vertexBuffer, pr_trianglelist, __fontTexture);
-        shader_reset();
+        __SCRIBBLEJR_SHADER_RESET();
     }
 }
