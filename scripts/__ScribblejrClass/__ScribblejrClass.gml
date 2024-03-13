@@ -180,6 +180,12 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
         static _shdScribblejrSDFShadow_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrSDFShadow, "u_vPositionAlphaScale");
         static _shdScribblejrSDFShadow_u_vColorSoftness = shader_get_uniform(__shdScribblejrSDFShadow, "u_vColorSoftness");
         
+        if (SCRIBBLEJR_FORCE_BILINEAR_FOR_SDF)
+        {
+            var _oldTexFilter = gpu_get_tex_filter();
+            gpu_set_tex_filter(true);
+        }
+        
         _x += __xOffset;
         _y += __yOffset;
         
@@ -202,5 +208,7 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
         shader_set_uniform_i(_shdScribblejrSDF_u_iColour, _colour);
         vertex_submit(__vertexBuffer, pr_trianglelist, __fontTexture);
         __SCRIBBLEJR_SHADER_RESET();
+        
+        if (SCRIBBLEJR_FORCE_BILINEAR_FOR_SDF) gpu_set_tex_filter(_oldTexFilter);
     }
 }

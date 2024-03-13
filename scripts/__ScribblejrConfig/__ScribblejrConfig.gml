@@ -38,6 +38,10 @@
 //Scaling factor applied to every font.
 #macro SCRIBBLEJR_GLOBAL_FONT_SCALE  1
 
+//Whether to force bilinear filter for baked SDF rendering. Set this to <true> for convenience,
+//set this to <false> for a slight speed boost.
+#macro SCRIBBLEJR_FORCE_BILINEAR_FOR_SDF  true
+
 //Whether to emit lots of additional debug messages to help track Scribble Junior's behaviour.
 #macro SCRIBBLEJR_VERBOSE  false
 

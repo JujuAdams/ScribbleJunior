@@ -433,6 +433,12 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         static _shdScribblejrColorSDFShadow_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_vPositionAlphaScale");
         static _shdScribblejrColorSDFShadow_u_vColorSoftness = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_vColorSoftness");
         
+        if (SCRIBBLEJR_FORCE_BILINEAR_FOR_SDF)
+        {
+            var _oldTexFilter = gpu_get_tex_filter();
+            gpu_set_tex_filter(true);
+        }
+        
         _x += __xOffset;
         _y += __yOffset;
         var _scale = __scale;
@@ -470,6 +476,8 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         shader_set_uniform_i(_shdScribblejrExt_SDF_u_iColour, _colour);
         vertex_submit(__vertexBuffer, pr_trianglelist, __fontTexture);
         __SCRIBBLEJR_SHADER_RESET();
+        
+        if (SCRIBBLEJR_FORCE_BILINEAR_FOR_SDF) gpu_set_tex_filter(_oldTexFilter);
         
         //Lean into GameMaker's native renderer for sprites
         __DrawSprites(_x, _y, _alpha);
