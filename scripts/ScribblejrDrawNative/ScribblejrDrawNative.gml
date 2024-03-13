@@ -23,6 +23,7 @@ function ScribblejrNative(_x, _y, _string, _colour = c_white, _alpha = 1, _hAlig
     static _system = __ScribblejrSystem();
     
     if (_font == undefined) _font = _system.__defaultFont;
+    _fontScale *= SCRIBBLEJR_GLOBAL_FONT_SCALE;
     
     draw_set_font(_font);
     draw_set_colour(_colour);

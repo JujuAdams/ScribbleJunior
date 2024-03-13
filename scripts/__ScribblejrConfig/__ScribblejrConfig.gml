@@ -35,6 +35,9 @@
 //to <false> will prevent Scribble Jr. from optimising text drawing in the background.
 #macro SCRIBBLEJR_AUTO_BAKE  true
 
+//Scaling factor applied to every font.
+#macro SCRIBBLEJR_GLOBAL_FONT_SCALE  1
+
 //Whether to emit lots of additional debug messages to help track Scribble Junior's behaviour.
 #macro SCRIBBLEJR_VERBOSE  false
 
