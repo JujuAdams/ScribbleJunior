@@ -76,7 +76,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     }
     else
     {
-        var _spriteScale = SCRIBBLEJR_SCALE_SPRITES? 1 : (1/_fontScale);
+        var _spriteScale = (SCRIBBLEJR_SCALE_SPRITES? 1 : (1/_fontScale)) / SCRIBBLEJR_GLOBAL_FONT_SCALE;
         var _lineHeight  = __ScribblejrGetSpaceHeight(_font);
         
         //Handle the first text fragment
@@ -350,7 +350,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     static __DrawSprites = function(_x, _y, _alpha)
     {
         var _textScale   = __scale*__fontScale;
-        var _spriteScale = SCRIBBLEJR_SCALE_SPRITES? _textScale : __scale;
+        var _spriteScale = (SCRIBBLEJR_SCALE_SPRITES? _textScale : __scale) / SCRIBBLEJR_GLOBAL_FONT_SCALE;
         
         var _i = 0;
         repeat(array_length(__spriteArray))
