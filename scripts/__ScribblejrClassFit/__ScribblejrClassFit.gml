@@ -68,10 +68,6 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         {
             #region Per-character wrapping
             
-            _bakerFunc = __ScribblejrClassBakerFitPerChar;
-            
-            var _charArray = __ScribblejrStringDecompose(_string);
-            
             var _fitsAlready = true;
             var _height = _fontScale*string_height(_string);
             if (_height > _maxHeight)
@@ -80,7 +76,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
             }
             else // _height <= _maxHeight
             {
-                var _width = string_width(_string);
+                var _width = _fontScale*string_width(_string);
                 if (_width > _maxWidth) _fitsAlready = false;
             }
             
@@ -102,18 +98,18 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
             }
             else //Doesn't fit, let's do some layout!
             {
-                __scale = _fontScale;
+                _bakerFunc = __ScribblejrClassBakerFitPerChar;
+                var _charArray = __ScribblejrStringDecompose(_string);
                 
-                Draw = __DrawStretches;
                 __stretchesArray = [];
                 
                 var _spaceWidth  = __ScribblejrGetSpaceWidth(_font);
                 var _spaceHeight = __ScribblejrGetSpaceHeight(_font);
                 
+                var _tryScale   = _fontScale;
                 var _upperScale = _fontScale;
-                var _lowerScale = 0;
+                var _lowerScale = 0.1;
                 
-                var _stretchStart = 0;
                 var _overallWidth = 0;
                 
                 //Perform a binary search to find the best fit
@@ -122,16 +118,14 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                 {
                     var _lastIteration = (_iteration >= SCRIBBLEJR_FIT_ITERATIONS-1);
                     
-                    //Bias scale search very slighty to be larger
-                    //This usually finds the global maxima rather than narrowing down on a local maxima
-                    var _tryScale = 1; //lerp(_lowerScale, _upperScale, 0.51);
-                    
                     var _adjustedWidth  = _maxWidth/_tryScale;
                     var _adjustedHeight = _maxHeight/_tryScale;
                     
                     var _cursorX = 0;
                     var _cursorY = 0;
                     var _cursorSpace = 0;
+                    
+                    var _stretchStart = 0;
                     
                     var _i = 0;
                     repeat(array_length(_charArray))
@@ -141,7 +135,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                         {
                             if (_stretchStart == _i) _stretchStart++;
                         
-                            if (_cursorX + _spaceWidth > _maxWidth)
+                            if (_cursorX + _spaceWidth > _adjustedWidth)
                             {
                                 if (_lastIteration)
                                 {
@@ -170,7 +164,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                         else
                         {
                             var _glyphWidth = string_width(_char);
-                            if (_cursorX + _glyphWidth > _maxWidth)
+                            if (_cursorX + _glyphWidth > _adjustedWidth)
                             {
                                 if (_lastIteration)
                                 {
@@ -216,12 +210,43 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                             _cursorY += _spaceHeight;
                         }
                     }
+            
+                    //Determine if this iteration should be the new upper or lower bound based on whether we
+                    //exceeded the height limit
+                    var _height = _cursorY + _spaceHeight;
+                    if (_height > _adjustedHeight)
+                    {
+                        _upperScale = _tryScale;
+                    }
+                    else
+                    {
+                        _lowerScale = _tryScale;
+                        
+                        //We start at the base starting scale in the first (0th) iteration. If we already fit
+                        //into the bounding box then we can skip a lot of iterations
+                        if (_iteration == 0) _iteration = SCRIBBLEJR_FIT_ITERATIONS-2;
+                    }
+                    
+                    //Ensure the final iteration uses a valid scale
+                    if (_iteration >= SCRIBBLEJR_FIT_ITERATIONS-2)
+                    {
+                        _tryScale = _lowerScale;
+                    }
+                    else
+                    {
+                        //Bias scale search very slighty to be larger
+                        //This usually finds the global maxima rather than narrowing down on a local maxima
+                        _tryScale = lerp(_lowerScale, _upperScale, 0.51);
+                    }
                     
                     ++_iteration;
                 }
                 
+                __scale  = _lowerScale;
                 __width  = _overallWidth;
                 __height = _cursorY;
+                
+                Draw = __DrawStretches;
                 
                 //Adjust for horizontal alignment
                 if (_hAlign == fa_center)
@@ -268,7 +293,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
             }
             else // _height <= _maxHeight
             {
-                var _width = string_width(_string);
+                var _width = _fontScale*string_width(_string);
                 if (_width > _maxWidth) _fitsAlready = false;
             }
             
@@ -518,7 +543,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
             {
                 with(__stretchesArray[_i])
                 {
-                    draw_text_transformed(_x + __x, _y + __y, __string, _scale, _scale, 0);
+                    draw_text_transformed(_x + _scale*__x, _y + _scale*__y, __string, _scale, _scale, 0);
                 }
                 
                 ++_i;
@@ -533,7 +558,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
             {
                 with(__stretchesArray[_i])
                 {
-                    draw_text_transformed(_x + __x, _y + __y, __string, _scale, _scale, 0);
+                    draw_text_transformed(_x + _scale*__x, _y + _scale*__y, __string, _scale, _scale, 0);
                 }
                 
                 ++_i;
