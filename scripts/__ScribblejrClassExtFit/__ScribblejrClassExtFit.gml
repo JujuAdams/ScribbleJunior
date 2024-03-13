@@ -172,7 +172,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                         }
                         else
                         {
-                            __ScribblejrTrace("Command tag \"", _tagString, "\" not recognised");
+                            __ScribblejrTrace("Command tag ", _tagArgumentArray, " not recognised");
                         }
                     }
                 }
