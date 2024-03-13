@@ -1,6 +1,6 @@
 {
   "FolderOrderSettings": [
-    {"name":"Scribble Jr.","order":9,"path":"folders/Scribble Jr..yy",},
+    {"name":"Scribble Jr.","order":10,"path":"folders/Scribble Jr..yy",},
     {"name":"Classes","order":13,"path":"folders/Scribble Jr./(System)/Classes.yy",},
     {"name":"Baker","order":2,"path":"folders/Scribble Jr./(System)/Classes/Baker.yy",},
     {"name":"Element","order":3,"path":"folders/Scribble Jr./(System)/Classes/Element.yy",},
@@ -27,11 +27,8 @@
     {"name":"ScribblejrResetDrawState","order":4,"path":"scripts/ScribblejrResetDrawState/ScribblejrResetDrawState.yy",},
     {"name":"ScribblejrAddColor","order":4,"path":"scripts/ScribblejrAddColor/ScribblejrAddColor.yy",},
     {"name":"__ScribblejrClassExt","order":4,"path":"scripts/__ScribblejrClassExt/__ScribblejrClassExt.yy",},
-    {"name":"TexturePackrat","order":11,"path":"scripts/TexturePackrat/TexturePackrat.yy",},
     {"name":"sTestShape","order":7,"path":"sprites/sTestShape/sTestShape.yy",},
-    {"name":"oTestPackrat","order":12,"path":"objects/oTestPackrat/oTestPackrat.yy",},
     {"name":"__Misc","order":2,"path":"scripts/__Misc/__Misc.yy",},
-    {"name":"Packrat","order":10,"path":"scripts/Packrat/Packrat.yy",},
     {"name":"__shdScribblejr","order":3,"path":"shaders/__shdScribblejr/__shdScribblejr.yy",},
     {"name":"ScribblejrGetCharacterWrap","order":12,"path":"scripts/ScribblejrGetCharacterWrap/ScribblejrGetCharacterWrap.yy",},
     {"name":"__ScribblejrError","order":10,"path":"scripts/__ScribblejrError/__ScribblejrError.yy",},
@@ -61,6 +58,5 @@
     {"name":"ScribblejrDrawNative","order":3,"path":"scripts/ScribblejrDrawNative/ScribblejrDrawNative.yy",},
     {"name":"ScribblejrShrink","order":9,"path":"scripts/ScribblejrShrink/ScribblejrShrink.yy",},
     {"name":"ScribblejrDefaultFont","order":12,"path":"fonts/ScribblejrDefaultFont/ScribblejrDefaultFont.yy",},
-    {"name":"rTestPackrat","order":13,"path":"rooms/rTestPackrat/rTestPackrat.yy",},
   ],
 }
