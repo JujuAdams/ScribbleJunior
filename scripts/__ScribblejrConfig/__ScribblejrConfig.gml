@@ -16,6 +16,11 @@
 //than 4 tend to break!
 #macro SCRIBBLEJR_FIT_ITERATIONS  6
 
+//Whether to give in-line sprites drop shadows in approximately the same fashion as SDF drop
+//shadows. Sprite drop shadows will not respect the "softness" setting that is available for SDF
+//drop shadows. Additionally, turning this feature on will incur a performance penalty.
+#macro SCRIBBLEJR_SHADOW_SPRITES  false
+
 //Amount of time per frame that Scribble Junior is allowed to bake vertex buffers. This limit is
 //approximate. You can adjust the budget time at runtime by calling ScribblejrSetBudget(). If this
 //macro is set to zero or a negative number then all vertex buffer baking will be disabled until
@@ -29,6 +34,13 @@
 //Whether to automatically bake vertex buffers for text drawn with Scribble Jr.  Setting this macro
 //to <false> will prevent Scribble Jr. from optimising text drawing in the background.
 #macro SCRIBBLEJR_AUTO_BAKE  true
+
+//Scaling factor applied to every font.
+#macro SCRIBBLEJR_GLOBAL_FONT_SCALE  1
+
+//Whether to force bilinear filter for baked SDF rendering. Set this to <true> for convenience,
+//set this to <false> for a slight speed boost.
+#macro SCRIBBLEJR_FORCE_BILINEAR_FOR_SDF  true
 
 //Whether to emit lots of additional debug messages to help track Scribble Junior's behaviour.
 #macro SCRIBBLEJR_VERBOSE  false

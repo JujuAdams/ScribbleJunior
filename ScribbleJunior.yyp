@@ -83,6 +83,7 @@
     {"id":{"name":"__ScribblejrClassBase","path":"scripts/__ScribblejrClassBase/__ScribblejrClassBase.yy",},},
     {"id":{"name":"__ScribblejrConfig","path":"scripts/__ScribblejrConfig/__ScribblejrConfig.yy",},},
     {"id":{"name":"ScribblejrDefaultFont","path":"fonts/ScribblejrDefaultFont/ScribblejrDefaultFont.yy",},},
+    {"id":{"name":"ScribblejrSDFDropShadow","path":"scripts/ScribblejrSDFDropShadow/ScribblejrSDFDropShadow.yy",},},
     {"id":{"name":"rMain","path":"rooms/rMain/rMain.yy",},},
   ],
   "RoomOrderNodes": [

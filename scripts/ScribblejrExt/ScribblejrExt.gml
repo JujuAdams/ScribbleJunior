@@ -68,6 +68,7 @@ function ScribblejrExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font = und
     
     if (_string == "") return _nullWrapper;
     if (_font == undefined) _font = _system.__defaultFont;
+    _fontScale *= SCRIBBLEJR_GLOBAL_FONT_SCALE;
     
     var _key = string_concat(_string, ":",
                              _hAlign + 3*_vAlign, ":", //Pack these flags together

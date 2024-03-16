@@ -12,6 +12,8 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     static _system     = __ScribblejrSystem();
     static _colourDict = _system.__colourDict;
     
+    static _dropShadowEnableHash = variable_get_hash("dropShadowEnable");
+    
     __wrapper = undefined;
     __lastDraw = current_time;
     
@@ -24,6 +26,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     __fontScale = _fontScale;
     
     __fontIsDynamic = ScribblejrCacheFontInfo(_font).__isDynamic;
+    __fontIsSDF     = ScribblejrCacheFontInfo(_font).sdfEnabled;
     __fontSDFSpread = ScribblejrCacheFontInfo(_font).sdfSpread;
     
     __fragmentArray = [];
@@ -40,7 +43,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     
     Draw = __DrawNative;
         
-    var _spriteScale = SCRIBBLEJR_SCALE_SPRITES? 1 : (1/_fontScale);
+    var _spriteScale = (SCRIBBLEJR_SCALE_SPRITES? 1 : (1/_fontScale)) / SCRIBBLEJR_GLOBAL_FONT_SCALE;
     var _spaceWidth  = __ScribblejrGetSpaceWidth(_font);
     var _lineHeight  = __ScribblejrGetSpaceHeight(_font);
     
@@ -169,7 +172,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                         }
                         else
                         {
-                            __ScribblejrTrace("Command tag \"", _tagString, "\" not recognised");
+                            __ScribblejrTrace("Command tag ", _tagArgumentArray, " not recognised");
                         }
                     }
                 }
@@ -503,7 +506,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                                 __xOffset: _spriteX + _spriteScale*sprite_get_xoffset(_sprite),
                                 __yOffset: _spriteY + 0.5*(_lineHeight - _spriteScale*sprite_get_height(_sprite)) + _spriteScale*sprite_get_yoffset(_sprite),
                                 __width: _spriteScale*sprite_get_width(_sprite),
-                                __whitespaceFollows: string_starts_with(_textString, " "),
+                                __whitespaceFollows: false,
                             };
                             
                             array_push(_layoutArray, _fragment);
@@ -525,22 +528,19 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                     repeat(_splitCount)
                     {
                         var _substring = _splitArray[_j];
-                        if (_substring != "")
-                        {
-                            var _fragment = {
-                                __colour: _colour,
-                                __string: _substring,
-                                __x: undefined,
-                                __y: undefined,
-                                __xOffset: 0,
-                                __yOffset: 0,
-                                __width: string_width(_substring),
-                                __whitespaceFollows: (_j < _splitCount-1),
-                            };
-                            
-                            array_push(_layoutArray, _fragment);
-                            array_push(__fragmentArray, _fragment);
-                        }
+                        var _fragment = {
+                            __colour: _colour,
+                            __string: _substring,
+                            __x: undefined,
+                            __y: undefined,
+                            __xOffset: 0,
+                            __yOffset: 0,
+                            __width: string_width(_substring),
+                            __whitespaceFollows: (_j < _splitCount-1),
+                        };
+                        
+                        array_push(_layoutArray, _fragment);
+                        array_push(__fragmentArray, _fragment);
                         
                         ++_j;
                     }
@@ -789,6 +789,15 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         
         if (_sdfEffects != undefined)
         {
+            if (SCRIBBLEJR_SHADOW_SPRITES && __fontIsSDF && struct_get_from_hash(_sdfEffects, _dropShadowEnableHash))
+            {
+                gpu_set_fog(true, _sdfEffects.dropShadowColour, 0, 0);
+                __DrawSprites(_x + _scale*_sdfEffects.dropShadowOffsetX,
+                              _y + _scale*_sdfEffects.dropShadowOffsetY,
+                              _sdfEffects.dropShadowAlpha*_alpha);
+                gpu_set_fog(false, c_fuchsia, 0, 0);
+            }
+            
             font_enable_effects(__font, true, _sdfEffects);
             
             var _i = 0;
@@ -829,7 +838,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     static __DrawSprites = function(_x, _y, _alpha)
     {
         var _textScale   = __scale*__fontScale;
-        var _spriteScale = SCRIBBLEJR_SCALE_SPRITES? _textScale : __scale;
+        var _spriteScale = (SCRIBBLEJR_SCALE_SPRITES? _textScale : __scale) / SCRIBBLEJR_GLOBAL_FONT_SCALE;
         
         var _i = 0;
         repeat(array_length(__spriteArray))
@@ -852,11 +861,11 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         static _shdScribblejrExt_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColor, "u_vPositionAlphaScale");
         static _shdScribblejrExt_u_iColour = shader_get_uniform(__shdScribblejrColor, "u_iColour");
         
-        shader_set(__shdScribblejrColor);
+        __SCRIBBLEJR_SHADER_SET(__shdScribblejrColor);
         shader_set_uniform_f(_shdScribblejrExt_u_vPositionAlphaScale, _x, _y, _alpha, __scale*__fontScale);
         shader_set_uniform_i(_shdScribblejrExt_u_iColour, _colour);
         vertex_submit(__vertexBuffer, pr_trianglelist, __fontTexture);
-        shader_reset();
+        __SCRIBBLEJR_SHADER_RESET();
         
         //Lean into GameMaker's native renderer for sprites
         __DrawSprites(_x, _y, _alpha);
@@ -864,13 +873,17 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     
     static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
     {
-        static _dropShadowEnableHash = variable_get_hash("dropShadowEnable");
-        
         static _shdScribblejrExt_SDF_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDF, "u_vPositionAlphaScale");
         static _shdScribblejrExt_SDF_u_iColour = shader_get_uniform(__shdScribblejrColorSDF, "u_iColour");
         
         static _shdScribblejrColorSDFShadow_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_vPositionAlphaScale");
         static _shdScribblejrColorSDFShadow_u_vColorSoftness = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_vColorSoftness");
+        
+        if (SCRIBBLEJR_FORCE_BILINEAR_FOR_SDF)
+        {
+            var _oldTexFilter = gpu_get_tex_filter();
+            gpu_set_tex_filter(true);
+        }
         
         _x += __xOffset;
         _y += __yOffset;
@@ -878,22 +891,39 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         
         with(_sdfEffects)
         {
-            if (struct_get_from_hash(_sdfEffects, _dropShadowEnableHash))
+            if (struct_get_from_hash(_sdfEffects, other._dropShadowEnableHash))
             {
+                var _xShadow = _x + _scale*dropShadowOffsetX;
+                var _yShadow = _y + _scale*dropShadowOffsetY;
+                
+                if (SCRIBBLEJR_SHADOW_SPRITES)
+                {
+                    gpu_set_fog(true, dropShadowColour, 0, 0);
+                    other.__DrawSprites(_xShadow, _yShadow, dropShadowAlpha*_alpha);
+                    gpu_set_fog(false, c_fuchsia, 0, 0);
+                }
+                
                 var _color = dropShadowColour;
-                shader_set(__shdScribblejrSDFShadow);
-                shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vPositionAlphaScale, _x + _scale*dropShadowOffsetX, _y + _scale*dropShadowOffsetY, dropShadowAlpha*_alpha, _scale);
-                shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vColorSoftness, color_get_red(_color)/255, color_get_green(_color)/255, color_get_blue(_color)/255, clamp(dropShadowSoftness / (4*other.__fontSDFSpread), 0, 0.5));
+                __SCRIBBLEJR_SHADER_SET(__shdScribblejrSDFShadow);
+                shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vPositionAlphaScale, _xShadow, _yShadow, dropShadowAlpha*_alpha, _scale);
+                
+                shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vColorSoftness,
+                                     color_get_red(_color)/255,
+                                     color_get_green(_color)/255,
+                                     color_get_blue(_color)/255,
+                                     clamp(dropShadowSoftness / (4*other.__fontSDFSpread), 0, 0.5));
                 vertex_submit(other.__vertexBuffer, pr_trianglelist, other.__fontTexture);
-                shader_reset();
+                __SCRIBBLEJR_SHADER_RESET();
             }
         }
         
-        shader_set(__shdScribblejrColorSDF);
+        __SCRIBBLEJR_SHADER_SET(__shdScribblejrColorSDF);
         shader_set_uniform_f(_shdScribblejrExt_SDF_u_vPositionAlphaScale, _x, _y, _alpha, _scale);
         shader_set_uniform_i(_shdScribblejrExt_SDF_u_iColour, _colour);
         vertex_submit(__vertexBuffer, pr_trianglelist, __fontTexture);
-        shader_reset();
+        __SCRIBBLEJR_SHADER_RESET();
+        
+        if (SCRIBBLEJR_FORCE_BILINEAR_FOR_SDF) gpu_set_tex_filter(_oldTexFilter);
         
         //Lean into GameMaker's native renderer for sprites
         __DrawSprites(_x, _y, _alpha);

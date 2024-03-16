@@ -8,7 +8,7 @@ height    = 200;
 showHelp = false;
 
 testString = 2*"Sphinx of black quartz, judge my vow! ";
-testStringColor = 2*"Sphinx of black quartz, [sTestShape]judge my [c_red]vow[/c]! ";
+testStringColor = 2*"Sphinx of black quartz, [sTestShape]judge my[c_red] vow[/c]! ";
 
 vertex_format_begin();
 vertex_format_add_position_3d();
@@ -44,4 +44,4 @@ var _mapstring = " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678
 spriteFont = font_add_sprite_ext(sSpriteFont, _mapstring, true, 1);
 ScribblejrAttachSpritefont(spriteFont, true, 1);
 
-ScribblejrSetCharacterWrap(true);
+ScribblejrSetCharacterWrap(false);
