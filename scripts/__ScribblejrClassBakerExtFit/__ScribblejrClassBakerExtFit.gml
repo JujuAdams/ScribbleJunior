@@ -72,6 +72,22 @@ function __ScribblejrClassBakerExtFit(_fragmentArray, _font) constructor
         
         repeat(SCRIBBLEJR_BAKE_GLYPH_COUNT)
         {
+            if (__glyph >= __glyphCount)
+            {
+                __fragment++;
+                if (__fragment < array_length(__fragmentArray))
+                {
+                    __tickMethod = __DecomposeFragment;
+                    break;
+                }
+                else
+                {
+                    vertex_end(__vertexBuffer);
+                    __tickMethod = __Freeze;
+                    return false;
+                }
+            }
+            
             var _char = __stringArray[__glyph];
             if (_char == " ")
             {
@@ -108,21 +124,6 @@ function __ScribblejrClassBakerExtFit(_fragmentArray, _font) constructor
             }
             
             __glyph++;
-            if (__glyph >= __glyphCount)
-            {
-                __fragment++;
-                if (__fragment < array_length(__fragmentArray))
-                {
-                    __tickMethod = __DecomposeFragment;
-                    break;
-                }
-                else
-                {
-                    vertex_end(__vertexBuffer);
-                    __tickMethod = __Freeze;
-                    return false;
-                }
-            }
         }
         
         return false;

@@ -506,7 +506,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                                 __xOffset: _spriteX + _spriteScale*sprite_get_xoffset(_sprite),
                                 __yOffset: _spriteY + 0.5*(_lineHeight - _spriteScale*sprite_get_height(_sprite)) + _spriteScale*sprite_get_yoffset(_sprite),
                                 __width: _spriteScale*sprite_get_width(_sprite),
-                                __whitespaceFollows: string_starts_with(_textString, " "),
+                                __whitespaceFollows: false,
                             };
                             
                             array_push(_layoutArray, _fragment);
@@ -528,22 +528,19 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                     repeat(_splitCount)
                     {
                         var _substring = _splitArray[_j];
-                        if (_substring != "")
-                        {
-                            var _fragment = {
-                                __colour: _colour,
-                                __string: _substring,
-                                __x: undefined,
-                                __y: undefined,
-                                __xOffset: 0,
-                                __yOffset: 0,
-                                __width: string_width(_substring),
-                                __whitespaceFollows: (_j < _splitCount-1),
-                            };
-                            
-                            array_push(_layoutArray, _fragment);
-                            array_push(__fragmentArray, _fragment);
-                        }
+                        var _fragment = {
+                            __colour: _colour,
+                            __string: _substring,
+                            __x: undefined,
+                            __y: undefined,
+                            __xOffset: 0,
+                            __yOffset: 0,
+                            __width: string_width(_substring),
+                            __whitespaceFollows: (_j < _splitCount-1),
+                        };
+                        
+                        array_push(_layoutArray, _fragment);
+                        array_push(__fragmentArray, _fragment);
                         
                         ++_j;
                     }
