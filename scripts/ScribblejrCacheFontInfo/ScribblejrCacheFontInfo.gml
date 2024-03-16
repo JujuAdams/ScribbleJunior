@@ -138,8 +138,12 @@ function ScribblejrCacheFontInfo(_font)
                         var _name = _glyphNameArray[_i];
                         var _glyphInfo = _fontGlyphStruct[$ _name];
                         
-                        _glyphInfo.offset  -=  _offset;
-                        _glyphInfo.yOffset  = -_offset;
+                        _glyphInfo.x      -= 1;
+                        _glyphInfo.y      -= 1;
+                        _glyphInfo.w      += 2;
+                        _glyphInfo.h      += 2;
+                        _glyphInfo.offset -=  _offset;
+                        _glyphInfo.yOffset = -_offset;
                         
                         ++_i;
                     }
@@ -152,6 +156,10 @@ function ScribblejrCacheFontInfo(_font)
                         var _name = _glyphNameArray[_i];
                         var _glyphInfo = _fontGlyphStruct[$ _name];
                         
+                        _glyphInfo.x      -= 1;
+                        _glyphInfo.y      -= 1;
+                        _glyphInfo.w      += 2;
+                        _glyphInfo.h      += 2;
                         _glyphInfo.yOffset = 0;
                         
                         ++_i;

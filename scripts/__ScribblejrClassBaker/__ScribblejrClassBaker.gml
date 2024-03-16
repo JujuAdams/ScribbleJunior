@@ -78,8 +78,8 @@ function __ScribblejrClassBaker(_string, _font) constructor
                     var _texR = _texL + _glyphData.w*__texTexelW;
                     var _texB = _texT + _glyphData.h*__texTexelH;
                     
-                    var _glyphL = __glyphX + _glyphData.offset;
-                    var _glyphT = _glyphData.yOffset;
+                    var _glyphL = __glyphX + _glyphData.offset-1;
+                    var _glyphT = _glyphData.yOffset-1;
                     var _glyphR = _glyphL + _glyphData.w;
                     var _glyphB = _glyphT + _glyphData.h;
                     
