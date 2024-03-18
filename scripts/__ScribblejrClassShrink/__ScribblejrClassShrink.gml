@@ -79,9 +79,9 @@ function __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontSc
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) draw_set_font(_oldFont);
     }
     
-    __vertexBuffer  = undefined;
-    __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
-    __vertexBaker = new __ScribblejrClassBaker(__string, _font);
+    __vertexBuffer = undefined;
+    __fontTexture  = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
+    __vertexBaker  = new __ScribblejrClassBaker(__string, _font, __hAlign);
     
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);
     
@@ -175,7 +175,7 @@ function __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontSc
         static _shdScribblejr_u_iColour = shader_get_uniform(__shdScribblejr, "u_iColour");
         
         __SCRIBBLEJR_SHADER_SET(__shdScribblejr);
-        shader_set_uniform_f(_shdScribblejr_u_vPositionAlphaScale, _x + __xOffset, _y + __yOffset, _alpha, __scale);
+        shader_set_uniform_f(_shdScribblejr_u_vPositionAlphaScale, _x, _y + __yOffset, _alpha, __scale);
         shader_set_uniform_i(_shdScribblejr_u_iColour, _colour);
         vertex_submit(__vertexBuffer, pr_trianglelist, __fontTexture);
         __SCRIBBLEJR_SHADER_RESET();
@@ -197,7 +197,6 @@ function __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontSc
             gpu_set_tex_filter(true);
         }
         
-        _x += __xOffset;
         _y += __yOffset;
         
         with(_sdfEffects)
