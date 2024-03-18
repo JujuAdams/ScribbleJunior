@@ -1,4 +1,4 @@
-hAlign    = fa_left;
+hAlign    = fa_right;
 vAlign    = fa_top;
 font      = fntTest;
 fontScale = 1;
@@ -7,7 +7,7 @@ height    = 200;
 
 showHelp = false;
 
-testString = 2*"Sphinx of black quartz, judge my vow! ";
+testString = "Sphinx of black quartz,\njudge my vow! ";
 testStringColor = 2*"Sphinx of black quartz, [sTestShape]judge my[c_red] vow[/c]! ";
 
 vertex_format_begin();
@@ -38,7 +38,7 @@ vertex_freeze(vertexBuffer);
 stressCount = 1;
 startTime = current_time;
 fpsRealSmoothed = 1000;
-mode = 7;
+mode = 2;
 
 var _mapstring = " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,.-;:_+-*/\\'\"!?~^°<>|(){[]}%&=#@$ÄÖÜäöüß";
 spriteFont = font_add_sprite_ext(sSpriteFont, _mapstring, true, 1);

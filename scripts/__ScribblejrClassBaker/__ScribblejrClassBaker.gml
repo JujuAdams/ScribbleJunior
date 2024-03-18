@@ -1,21 +1,23 @@
 /// @param string
 /// @param font
+/// @param hAlign
 
-function __ScribblejrClassBaker(_string, _font) constructor
+function __ScribblejrClassBaker(_string, _font, _hAlign) constructor
 {
     static _system       = __ScribblejrSystem();
     static _vertexFormat = _system.__vertexFormat;
     
     __string = _string;
     __font   = _font;
+    __hAlign = _hAlign;
     
-    __tickMethod = __Decompose;
+    __tickMethod = __SplitLines;
     
     var _fontInfo = ScribblejrCacheFontInfo(_font);
     __fontGlyphStruct = _fontInfo.glyphs;
     
-    var _spaceWidth = __ScribblejrGetSpaceWidth(_font);
-    __spaceWidth = _spaceWidth;
+    __spaceWidth  = __ScribblejrGetSpaceWidth(_font);
+    __spaceHeight = __ScribblejrGetSpaceHeight(__font);
     
     var _fontTexture = _fontInfo.__forcedTexturePointer;
     __texTexelW = texture_get_texel_width(_fontTexture);
@@ -27,9 +29,10 @@ function __ScribblejrClassBaker(_string, _font) constructor
     vertex_float2(__vertexBuffer, 0, 0); vertex_texcoord(__vertexBuffer, 0, 0);
     vertex_float2(__vertexBuffer, 0, 0); vertex_texcoord(__vertexBuffer, 0, 0);
     
-    __glyph = 0;
-    __glyphCount = string_length(__string);
+    __line   = 0;
+    __glyph  = 0;
     __glyphX = 0;
+    __glyphY = 0;
     
     
     
@@ -44,18 +47,37 @@ function __ScribblejrClassBaker(_string, _font) constructor
         }
     }
     
-    
-    
-    
-    
-    static __Decompose = function()
+    static __SplitLines = function()
     {
-        __stringArray = __ScribblejrStringDecompose(__string, __glyphCount);
-        __tickMethod = __Tick;
+        __lineStringArray = string_split(__string, "\n");
+        __tickMethod = __DecomposeLine;
         return false;
     }
     
-    static __Tick = function()
+    static __DecomposeLine = function()
+    {
+        var _string = __lineStringArray[__line];
+        __stringArray = __ScribblejrStringDecompose(_string);
+        __glyphCount = array_length(__stringArray);
+        
+        if (__hAlign == fa_center)
+        {
+            __glyphX = -(string_width(_string) div 2);
+        }
+        else if (__hAlign == fa_right)
+        {
+            __glyphX = -string_width(_string);
+        }
+        else
+        {
+            __glyphX = 0;
+        }
+        
+        __tickMethod = __TickLine;
+        return false;
+    }
+    
+    static __TickLine = function()
     {
         repeat(SCRIBBLEJR_BAKE_GLYPH_COUNT)
         {
@@ -79,16 +101,11 @@ function __ScribblejrClassBaker(_string, _font) constructor
                     var _texB = _texT + _glyphData.h*__texTexelH;
                     
                     var _glyphL = __glyphX + _glyphData.offset-1;
-                    var _glyphT = _glyphData.yOffset-1;
+                    var _glyphT = __glyphY + _glyphData.yOffset-1;
                     var _glyphR = _glyphL + _glyphData.w;
                     var _glyphB = _glyphT + _glyphData.h;
                     
-                    vertex_float2(__vertexBuffer, _glyphL, _glyphB); vertex_texcoord(__vertexBuffer, _texL, _texB);
-                    vertex_float2(__vertexBuffer, _glyphR, _glyphB); vertex_texcoord(__vertexBuffer, _texR, _texB);
-                    vertex_float2(__vertexBuffer, _glyphR, _glyphT); vertex_texcoord(__vertexBuffer, _texR, _texT);
-                    vertex_float2(__vertexBuffer, _glyphR, _glyphT); vertex_texcoord(__vertexBuffer, _texR, _texT);
-                    vertex_float2(__vertexBuffer, _glyphL, _glyphT); vertex_texcoord(__vertexBuffer, _texL, _texT);
-                    vertex_float2(__vertexBuffer, _glyphL, _glyphB); vertex_texcoord(__vertexBuffer, _texL, _texB);
+                    __SCRIBBLEJR_WRITE
                     
                     __glyphX += _glyphData.shift;
                 }
@@ -97,9 +114,19 @@ function __ScribblejrClassBaker(_string, _font) constructor
             __glyph++;
             if (__glyph >= __glyphCount)
             {
-                vertex_end(__vertexBuffer);
+                __line++;
+                if (__line < array_length(__lineStringArray))
+                {
+                    __glyph = 0;
+                    __glyphY += __spaceHeight;
+                    __tickMethod = __DecomposeLine;
+                }
+                else
+                {
+                    vertex_end(__vertexBuffer);
+                    __tickMethod = __Freeze;
+                }
                 
-                __tickMethod = __Freeze;
                 return false;
             }
         }
