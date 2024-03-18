@@ -68,6 +68,7 @@
     {"id":{"name":"Scribblejr","path":"scripts/Scribblejr/Scribblejr.yy",},},
     {"id":{"name":"Trace","path":"scripts/Trace/Trace.yy",},},
     {"id":{"name":"ScribblejrCacheFontInfo","path":"scripts/ScribblejrCacheFontInfo/ScribblejrCacheFontInfo.yy",},},
+    {"id":{"name":"__ScribblejrMacros","path":"scripts/__ScribblejrMacros/__ScribblejrMacros.yy",},},
     {"id":{"name":"Concat","path":"scripts/Concat/Concat.yy",},},
     {"id":{"name":"__ScribblejrClassWrapper","path":"scripts/__ScribblejrClassWrapper/__ScribblejrClassWrapper.yy",},},
     {"id":{"name":"ScribblejrGetBudgetUsed","path":"scripts/ScribblejrGetBudgetUsed/ScribblejrGetBudgetUsed.yy",},},
