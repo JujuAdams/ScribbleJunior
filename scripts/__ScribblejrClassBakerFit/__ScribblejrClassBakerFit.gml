@@ -8,6 +8,7 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
 {
     static _system       = __ScribblejrSystem();
     static _vertexFormat = _system.__vertexFormat;
+    static __tempArray    = [];
     
     __string    = _string;
     __hAlign    = _hAlign;
@@ -37,6 +38,8 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
     vertex_float2(__vertexBuffer, 0, 0); vertex_texcoord(__vertexBuffer, 0, 0);
     vertex_float2(__vertexBuffer, 0, 0); vertex_texcoord(__vertexBuffer, 0, 0);
     
+    __lineStringArray = [];
+    __line = 0;
     __glyph = 0;
     __glyphCount = string_length(__string);
     __glyphX = 0;
@@ -68,6 +71,7 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
     
     static __Layout = function()
     {
+        var _tempArray = __tempArray;
         var _wrapWidth = __wrapWidth;
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
@@ -79,71 +83,73 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
         __spaceWidth  = _spaceWidth;
         __spaceHeight = _spaceHeight;
         
-        var _wordArray = string_split(__string, " ");
-        var _wordCount = array_length(_wordArray);
         
-        //Remove trailing whitespace
-        var _i = _wordCount-1;
-        repeat(_wordCount)
-        {
-            if (_wordArray[_i] == "")
-            {
-                array_delete(_wordArray, _i, 1);
-            }
-            else
-            {
-                break;
-            }
-            
-            --_i;
-        }
-        
-        __lineWidthArray = [];
-        __lineBreakArray = [];
-        
-        var _x = 0;
-        var _y = 0;
-        var _index = 0;
+        var _lineArray = string_split(__string, "\n");
         var _i = 0;
-        repeat(array_length(_wordArray))
+        repeat(array_length(_lineArray))
         {
-            var _word = _wordArray[_i];
-            if (_word != "")
+            var _lineString = _lineArray[_i];
+            
+            var _wordArray = string_split(_lineString, " ");
+            var _wordCount = array_length(_wordArray);
+        
+            //Remove trailing whitespace
+            var _j = _wordCount-1;
+            repeat(_wordCount)
             {
-                var _width = string_width(_word);
-                if ((_x + _width > _wrapWidth) && (_x != 0))
+                if (_wordArray[_j] == "")
                 {
-                    array_push(__lineWidthArray, _x - _spaceWidth);
-                    array_push(__lineBreakArray, _index);
-                    
-                    _x = 0;
-                    _y += _spaceHeight;
+                    array_delete(_wordArray, _j, 1);
                 }
-                
-                _index += string_length(_word) + 1;
+                else
+                {
+                    break;
+                }
+            
+                --_j;
             }
-            else
+        
+            var _x = 0;
+            var _y = 0;
+            var _startIndex = 0;
+            var _j = 0;
+            repeat(array_length(_wordArray))
             {
-                var _width = 0;
+                var _word = _wordArray[_j];
+                if (_word != "")
+                {
+                    var _width = string_width(_word);
+                    if ((_x + _width > _wrapWidth) && (_x != 0))
+                    {
+                        if (_j > _startIndex)
+                        {
+                            array_resize(_tempArray, _j - _startIndex);
+                            array_copy(_tempArray, 0, _wordArray, _startIndex, _j - _startIndex);
+                            array_push(__lineStringArray, string_join_ext(" ", _tempArray));
+                        }
+                        
+                        _startIndex = _j;
+                        _x = 0;
+                        _y += _spaceHeight;
+                    }
+                }
+                else
+                {
+                    var _width = 0;
+                }
+            
+                _x += _width + _spaceWidth;
+                ++_j;
             }
             
-            _x += _width + _spaceWidth;
+            array_resize(_tempArray, _j - _startIndex);
+            array_copy(_tempArray, 0, _wordArray, _startIndex, _j - _startIndex);
+            array_push(__lineStringArray, string_join_ext(" ", _tempArray));
+            
             ++_i;
         }
         
-        array_push(__lineWidthArray, _x - _spaceWidth);
-        array_push(__lineBreakArray, infinity);
-        __nextLineBreak = __lineBreakArray[0];
-        
         var _height = _y + _spaceHeight;
-        
-        switch(__hAlign)
-        {
-            case fa_left:   __glyphX = 0;                      break;
-            case fa_center: __glyphX = -__lineWidthArray[0]/2; break;
-            case fa_right:  __glyphX = -__lineWidthArray[0];   break;
-        }
-        
         switch(__vAlign)
         {
             case fa_top:    __glyphY = 0;          break;
@@ -151,12 +157,34 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
             case fa_bottom: __glyphY = -_height;   break;
         }
         
-        __tickMethod = __Tick;
-        
+        __tickMethod = __DecomposeLine;
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) draw_set_font(_oldFont);
     }
     
-    static __Tick = function()
+    static __DecomposeLine = function()
+    {
+        var _string = __lineStringArray[__line];
+        __stringArray = __ScribblejrStringDecompose(_string);
+        __glyphCount = array_length(__stringArray);
+        
+        if (__hAlign == fa_center)
+        {
+            __glyphX = -(string_width(_string) div 2);
+        }
+        else if (__hAlign == fa_right)
+        {
+            __glyphX = -string_width(_string);
+        }
+        else
+        {
+            __glyphX = 0;
+        }
+        
+        __tickMethod = __TickLine;
+        return false;
+    }
+    
+    static __TickLine = function()
     {
         repeat(SCRIBBLEJR_BAKE_GLYPH_COUNT)
         {
@@ -191,27 +219,21 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
             }
             
             __glyph++;
-            
-            if (__glyph == __nextLineBreak)
-            {
-                __lineBreakIndex++;
-                
-                switch(__hAlign)
-                {
-                    case fa_left:   __glyphX = 0;                                     break;
-                    case fa_center: __glyphX = -__lineWidthArray[__lineBreakIndex]/2; break;
-                    case fa_right:  __glyphX = -__lineWidthArray[__lineBreakIndex];   break;
-                }
-                
-                __nextLineBreak = __lineBreakArray[__lineBreakIndex];
-                
-                __glyphY += __spaceHeight;
-            }
-            
             if (__glyph >= __glyphCount)
             {
-                vertex_end(__vertexBuffer);
-                __tickMethod = __Freeze;
+                __line++;
+                if (__line < array_length(__lineStringArray))
+                {
+                    __glyph = 0;
+                    __glyphY += __spaceHeight;
+                    __tickMethod = __DecomposeLine;
+                }
+                else
+                {
+                    vertex_end(__vertexBuffer);
+                    __tickMethod = __Freeze;
+                }
+                
                 return false;
             }
         }
