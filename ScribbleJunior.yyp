@@ -20,6 +20,7 @@
   ],
   "IncludedFiles": [
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"NotoSansMono-CondensedMedium.ttf","CopyToMask":-1,"filePath":"datafiles",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"scribble_junior_license.txt","CopyToMask":-1,"filePath":"datafiles",},
   ],
   "isEcma": false,
   "LibraryEmitters": [],
