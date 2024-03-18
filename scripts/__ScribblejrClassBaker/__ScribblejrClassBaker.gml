@@ -16,8 +16,8 @@ function __ScribblejrClassBaker(_string, _font, _hAlign) constructor
     var _fontInfo = ScribblejrCacheFontInfo(_font);
     __fontGlyphStruct = _fontInfo.glyphs;
     
-    __spaceWidth  = __ScribblejrGetSpaceWidth(_font);
-    __spaceHeight = __ScribblejrGetSpaceHeight(__font);
+    __spaceWidth  = undefined;
+    __spaceHeight = undefined;
     
     var _fontTexture = _fontInfo.__forcedTexturePointer;
     __texTexelW = texture_get_texel_width(_fontTexture);
@@ -49,6 +49,10 @@ function __ScribblejrClassBaker(_string, _font, _hAlign) constructor
     
     static __SplitLines = function()
     {
+        //I'd love to pull this out of the glyph data but the values we get are inaccurate
+        __spaceWidth  = __ScribblejrGetSpaceWidth(__font);
+        __spaceHeight = __ScribblejrGetSpaceHeight(__font);
+        
         __lineStringArray = string_split(__string, "\n");
         __tickMethod = __DecomposeLine;
         return false;

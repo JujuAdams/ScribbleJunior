@@ -131,14 +131,36 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                     repeat(array_length(_charArray))
                     {
                         var _char = _charArray[_i];
-                        if (_char == " ")
+                        
+                        if (_char == "\n")
                         {
-                            if (_stretchStart == _i) _stretchStart++;
+                            if (_lastIteration)
+                            {
+                                _overallWidth = max(_overallWidth, _cursorX);
+                                
+                                array_push(__stretchesArray, {
+                                    __width:  _cursorX - _cursorSpace,
+                                    __x:      0,
+                                    __y:      _cursorY,
+                                    __string: string_copy(_string, _stretchStart+1, _i - _stretchStart),
+                                });
+                                
+                                _stretchStart = _i+1;
+                            }
+                            
+                            _cursorX      = 0;
+                            _cursorY     += _spaceHeight;
+                            _cursorSpace  = 0;
+                        }
+                        else if (_char == " ")
+                        {
                         
                             if (_cursorX + _spaceWidth > _adjustedWidth)
                             {
                                 if (_lastIteration)
                                 {
+                                    if (_stretchStart == _i) _stretchStart++;
+                                    
                                     _overallWidth = max(_overallWidth, _cursorX);
                                     
                                     array_push(__stretchesArray, {
@@ -157,6 +179,8 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                             }
                             else
                             {
+                                if (_lastIteration && (_stretchStart == _i)) _stretchStart++;
+                                
                                 _cursorX     += _spaceWidth;
                                 _cursorSpace += _spaceWidth;
                             }
@@ -285,6 +309,8 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
         }
         else
         {
+            #region Per-word wrapping
+            
             var _fitsAlready = true;
             var _height = _fontScale*string_height_ext(_string, -1, _maxWidth/_fontScale-1);
             if (_height > _maxHeight)
@@ -355,13 +381,15 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                 __height    = __scale*((_height > _adjustedHeight)? string_height_ext(_string, -1, __wrapWidth-1) : _height);
                 Draw = __DrawFit;
             }
+            
+            #endregion
         }
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) draw_set_font(_oldFont);
     }
     
-    __vertexBuffer  = undefined;
-    __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
+    __vertexBuffer = undefined;
+    __fontTexture  = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
     
     if (_bakerFunc == __ScribblejrClassBakerFit)
     {
@@ -369,7 +397,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
     }
     else if (_bakerFunc == __ScribblejrClassBakerFitPerChar)
     {
-        __vertexBaker = new _bakerFunc(__stretchesArray, _font);
+        __vertexBaker = new _bakerFunc(__stretchesArray, _font, __hAlign);
     }
     else
     {
