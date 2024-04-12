@@ -53,6 +53,7 @@
     {"id":{"name":"__Misc","path":"scripts/__Misc/__Misc.yy",},},
     {"id":{"name":"__shdScribblejr","path":"shaders/__shdScribblejr/__shdScribblejr.yy",},},
     {"id":{"name":"ScribblejrGetCharacterWrap","path":"scripts/ScribblejrGetCharacterWrap/ScribblejrGetCharacterWrap.yy",},},
+    {"id":{"name":"__ScribblejrClearCache","path":"scripts/__ScribblejrClearCache/__ScribblejrClearCache.yy",},},
     {"id":{"name":"__ScribblejrError","path":"scripts/__ScribblejrError/__ScribblejrError.yy",},},
     {"id":{"name":"ScribblejrDeleteColor","path":"scripts/ScribblejrDeleteColor/ScribblejrDeleteColor.yy",},},
     {"id":{"name":"fntTest","path":"fonts/fntTest/fntTest.yy",},},

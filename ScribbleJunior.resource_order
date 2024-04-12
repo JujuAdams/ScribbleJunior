@@ -31,6 +31,7 @@
     {"name":"__Misc","order":2,"path":"scripts/__Misc/__Misc.yy",},
     {"name":"__shdScribblejr","order":4,"path":"shaders/__shdScribblejr/__shdScribblejr.yy",},
     {"name":"ScribblejrGetCharacterWrap","order":13,"path":"scripts/ScribblejrGetCharacterWrap/ScribblejrGetCharacterWrap.yy",},
+    {"name":"__ScribblejrClearCache","order":15,"path":"scripts/__ScribblejrClearCache/__ScribblejrClearCache.yy",},
     {"name":"__ScribblejrError","order":11,"path":"scripts/__ScribblejrError/__ScribblejrError.yy",},
     {"name":"ScribblejrDeleteColor","order":7,"path":"scripts/ScribblejrDeleteColor/ScribblejrDeleteColor.yy",},
     {"name":"fntTest","order":5,"path":"fonts/fntTest/fntTest.yy",},
