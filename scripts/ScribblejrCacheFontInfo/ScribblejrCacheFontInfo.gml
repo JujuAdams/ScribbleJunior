@@ -27,8 +27,9 @@ function ScribblejrCacheFontInfo(_font)
         _fontInfo = font_get_info(_font);
         _cache[$ _name] = _fontInfo;
         
-        var _fontGlyphStruct = _fontInfo.glyphs;
-        var _glyphNameArray = variable_struct_get_names(_fontGlyphStruct);
+        var _fontAscenderOffset = _fontInfo.ascenderOffset;
+        var _fontGlyphStruct    = _fontInfo.glyphs;
+        var _glyphNameArray     = variable_struct_get_names(_fontGlyphStruct);
         
         //Create a new struct that holds character codes by hash
         var _fastGlyphStruct = {};
@@ -143,7 +144,7 @@ function ScribblejrCacheFontInfo(_font)
                         _glyphInfo.w      += 2;
                         _glyphInfo.h      += 2;
                         _glyphInfo.offset -=  _offset;
-                        _glyphInfo.yOffset = -_offset;
+                        _glyphInfo.yOffset = -(_offset + _fontAscenderOffset);
                         
                         ++_i;
                     }
@@ -160,7 +161,7 @@ function ScribblejrCacheFontInfo(_font)
                         _glyphInfo.y      -= 1;
                         _glyphInfo.w      += 2;
                         _glyphInfo.h      += 2;
-                        _glyphInfo.yOffset = 0;
+                        _glyphInfo.yOffset = -_fontAscenderOffset;
                         
                         ++_i;
                     }
