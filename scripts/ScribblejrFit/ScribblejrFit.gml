@@ -64,7 +64,7 @@ function ScribblejrFit(_string, _hAlign = fa_left, _vAlign = fa_top, _font = und
     {
         var _element = new __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight);
         var _wrapper = new __ScribblejrClassWrapper(_element);
-        _element.__wrapper = _wrapper;
+        _element.__wrapper = weak_ref_create(_wrapper);
         
         _cache[$ _key] = _wrapper;
         array_push(_array, _element);
