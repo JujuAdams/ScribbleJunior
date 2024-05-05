@@ -18,7 +18,7 @@
 /// @param [fontScale=1]
 /// @param [sdfEffects]
 
-function ScribblejrNative(_x, _y, _string, _colour = c_white, _alpha = 1, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1, _sdfEffects = undefined)
+function ScribblejrDrawNative(_x, _y, _string, _colour = c_white, _alpha = 1, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1, _sdfEffects = undefined)
 {
     static _system = __ScribblejrSystem();
     

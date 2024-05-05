@@ -5,8 +5,8 @@
 /// to draw.
 /// 
 /// N.B. This function should not be used for extremely fast changing text such as a stopwatch.
-///      You should use ScribblejrNative() instead if you plan for the drawn text to only show for
-///      a few frames at a time.
+///      You should use ScribblejrDrawNative() instead if you plan for the drawn text to only show
+///      for a few frames at a time.
 /// 
 /// This function doesn't actually draw the text, it only returns a "text element struct". This
 /// struct can then be used to draw the text, as well as get the width/height of the text, by

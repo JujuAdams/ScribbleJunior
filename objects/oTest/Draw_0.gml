@@ -44,7 +44,7 @@ switch(mode)
     case 1:
         repeat(stressCount)
         {
-            ScribblejrNative(x, y, testString, un, un, hAlign, vAlign, font, fontScale);
+            ScribblejrDrawNative(x, y, testString, un, un, hAlign, vAlign, font, fontScale);
         }
     break;
     
