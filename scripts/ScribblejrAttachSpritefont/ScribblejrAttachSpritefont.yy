@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "ScribblejrAttachSpritefont",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Setup",
-    "path": "folders/Scribble Jr./Setup.yy",
+  "$GMScript":"",
+  "%Name":"ScribblejrAttachSpritefont",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"ScribblejrAttachSpritefont",
+  "parent":{
+    "name":"Setup",
+    "path":"folders/Scribble Jr./Setup.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

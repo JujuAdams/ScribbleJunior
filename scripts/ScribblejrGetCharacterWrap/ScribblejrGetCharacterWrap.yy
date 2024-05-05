@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "ScribblejrGetCharacterWrap",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Setup",
-    "path": "folders/Scribble Jr./Setup.yy",
+  "$GMScript":"",
+  "%Name":"ScribblejrGetCharacterWrap",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"ScribblejrGetCharacterWrap",
+  "parent":{
+    "name":"Setup",
+    "path":"folders/Scribble Jr./Setup.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

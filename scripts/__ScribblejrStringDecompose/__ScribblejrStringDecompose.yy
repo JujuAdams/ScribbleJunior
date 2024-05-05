@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "__ScribblejrStringDecompose",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "(System)",
-    "path": "folders/Scribble Jr./(System).yy",
+  "$GMScript":"",
+  "%Name":"__ScribblejrStringDecompose",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__ScribblejrStringDecompose",
+  "parent":{
+    "name":"(System)",
+    "path":"folders/Scribble Jr./(System).yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

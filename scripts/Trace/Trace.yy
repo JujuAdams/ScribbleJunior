@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "Trace",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "ScribbleJunior",
-    "path": "ScribbleJunior.yyp",
+  "$GMScript":"",
+  "%Name":"Trace",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Trace",
+  "parent":{
+    "name":"ScribbleJunior",
+    "path":"ScribbleJunior.yyp",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

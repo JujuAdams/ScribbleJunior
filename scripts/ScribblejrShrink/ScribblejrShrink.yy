@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "ScribblejrShrink",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Scribble Jr.",
-    "path": "folders/Scribble Jr..yy",
+  "$GMScript":"",
+  "%Name":"ScribblejrShrink",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"ScribblejrShrink",
+  "parent":{
+    "name":"Scribble Jr.",
+    "path":"folders/Scribble Jr..yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }
