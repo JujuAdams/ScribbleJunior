@@ -22,8 +22,8 @@
 const config = {
 	name: 'Scribble Junior',
 	description: 'Lightweight text renderer for GameMaker',
-	latestVersion: '1.2',
-	otherVersions: [],
+	latestVersion: '1.3',
+	otherVersions: ['1.2'],
 	favicon: 'assets/favicon.ico',
 	themeColor: '#5084d3',
 };
