@@ -86,6 +86,7 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
         
         var _lineArray = string_split(__string, "\n");
         var _i = 0;
+        var _y = 0;
         repeat(array_length(_lineArray))
         {
             var _lineString = _lineArray[_i];
@@ -110,7 +111,6 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
             }
         
             var _x = 0;
-            var _y = 0;
             var _startIndex = 0;
             var _j = 0;
             repeat(array_length(_wordArray))
@@ -146,10 +146,11 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
             array_copy(_tempArray, 0, _wordArray, _startIndex, _j - _startIndex);
             array_push(__lineStringArray, string_join_ext(" ", _tempArray));
             
+            _y += _spaceHeight;
             ++_i;
         }
         
-        var _height = _y + _spaceHeight;
+        var _height = _y;
         switch(__vAlign)
         {
             case fa_top:    __glyphY = 0;          break;
