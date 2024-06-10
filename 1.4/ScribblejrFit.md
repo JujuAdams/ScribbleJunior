@@ -22,8 +22,6 @@ Caches plain text without formatting. The text is shrunk down to within the give
 
 This function scales text whilst adding newlines. If you want to scale down text without adding newlines, which will gain you a little performance, then use ScribblejrShrink().
 
-!> Word breaks will only happen on spaces and any single words too long for a line will not be split in the middle. Per-character text wrapping (commonly used for Chinese) is not supported.
-
 ?> This function relies on internal caching for performance gains. If you change any of the arguments provided to this function, Scribble Junior will have to do extra work to recache the new text data. Try to limit how often you change these arguments to get the best performance.
 
 &nbsp;
