@@ -37,9 +37,6 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
     __width  = undefined;
     __height = undefined;
     
-    __xOffset = 0;
-    __yOffset = 0;
-    
     if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
     draw_set_font(__font);
     
@@ -450,8 +447,6 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         draw_set_valign(fa_top);
         
         var _scale = __scale;
-        _x += __xOffset;
-        _y += __yOffset;
         
         if (_sdfEffects != undefined)
         {
@@ -527,9 +522,6 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         static _shdScribblejrExt_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColor, "u_vPositionAlphaScale");
         static _shdScribblejrExt_u_iColour = shader_get_uniform(__shdScribblejrColor, "u_iColour");
         
-        _x += __xOffset;
-        _y += __yOffset;
-        
         __SCRIBBLEJR_SHADER_SET(__shdScribblejrColor);
         shader_set_uniform_f(_shdScribblejrExt_u_vPositionAlphaScale, _x, _y, _alpha, __scale);
         shader_set_uniform_i(_shdScribblejrExt_u_iColour, _colour);
@@ -554,8 +546,6 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
             gpu_set_tex_filter(true);
         }
         
-        _x += __xOffset;
-        _y += __yOffset;
         var _scale = __scale;
         
         with(_sdfEffects)
