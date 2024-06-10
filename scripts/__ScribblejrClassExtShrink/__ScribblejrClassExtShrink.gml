@@ -72,6 +72,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
             __colour: -1,
             __string: __string,
             __x: 0,
+            __y: 0,
         });
     }
     else
@@ -87,6 +88,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
                 __colour: -1,
                 __string: _textString,
                 __x: 0,
+                __y: 0,
             });
             
             var _x = string_width(_textString);
@@ -173,6 +175,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
                         __colour: _colour,
                         __string: _tagSplitArray[1],
                         __x: _x,
+                        __y: 0,
                     });
                     
                     _x += string_width(_textString);

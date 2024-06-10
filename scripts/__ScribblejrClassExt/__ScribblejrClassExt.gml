@@ -7,8 +7,7 @@
 
 function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale) : __ScribblejrClassBase() constructor
 {
-    static _system     = __ScribblejrSystem();
-    static _colourDict = _system.__colourDict;
+    static _system = __ScribblejrSystem();
     
     static _dropShadowEnableHash = variable_get_hash("dropShadowEnable");
     
@@ -31,18 +30,20 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
     __spriteArray   = [];
     __fragmentArray = [];
     __vertexBuffer  = undefined;
-    __vertexBaker = new __ScribblejrClassBakerExt(__fragmentArray, _font);
+    __vertexBaker   = new __ScribblejrClassBakerExt(__fragmentArray, _font);
     __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
     
     __simple = false;
     __width  = undefined;
     __height = undefined;
     
+    __xOffset = 0;
+    __yOffset = 0;
+    
     if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
     draw_set_font(__font);
     
-    var _substringArray = string_split(__string, "[");
-    if (array_length(_substringArray) <= 1)
+    if (string_count("[", _string) <= 0)
     {
         //No square brackets, fall back on simple rendering
         __simple = true;
@@ -50,34 +51,34 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         switch(__hAlign)
         {
             case fa_left:
-                __xOffset = 0;
+                var _xOffset = 0;
             break;
             
             case fa_center:
                 __width = __scale*string_width(_string);
-                __xOffset = -__width/2;
+                var _xOffset = -__width/2;
             break;
             
             case fa_right:
                 __width = __scale*string_width(_string);
-                __xOffset = -__width;
+                var _xOffset = -__width;
             break;
         }
         
         switch(__vAlign)
         {
             case fa_top:
-                __yOffset = 0;
+                var _yOffset = 0;
             break;
             
             case fa_middle:
                 __height = __scale*string_height(_string);
-                __yOffset = -__height/2;
+                var _yOffset = -__height/2;
             break;
             
             case fa_bottom:
                 __height = __scale*string_height(_string);
-                __yOffset = -__height;
+                var _yOffset = -__height;
             break;
         }
         
@@ -87,132 +88,246 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         array_push(__fragmentArray, {
             __colour: -1,
             __string: __string,
-            __x: 0,
+            __x: _xOffset,
+            __y: _yOffset,
         });
     }
     else
     {
-        var _spriteScale = (SCRIBBLEJR_SCALE_SPRITES? 1 : (1/_fontScale)) / SCRIBBLEJR_GLOBAL_FONT_SCALE;
-        var _lineHeight  = __ScribblejrGetSpaceHeight(_font);
-        
-        //Handle the first text fragment
-        var _textString = _substringArray[0];
-        if (_textString != "")
+        //Function to decompose a line of text into text fragments and sprites
+        var _funcDecomposeSubstring = function(_string, _lineHeight, _spriteScale, _startColour, _fragmentArray, _spriteArray)
         {
-            array_push(__fragmentArray, {
-                __colour: -1,
-                __string: _textString,
-                __x: 0,
-            });
+            static _colourDict = __ScribblejrSystem().__colourDict;
             
-            var _x = string_width(_textString);
-        }
-        else
-        {
-            var _x = 0;
-        }
-        
-        var _colour = -1;
-        
-        //Then iterate other command tag + text fragment combos, splitting as necessary
-        var _i = 1;
-        repeat(array_length(_substringArray)-1)
-        {
-            var _tagSplitArray = string_split(_substringArray[_i], "]", false, 1);
-            if (array_length(_tagSplitArray) == 2)
+            var _colour = _startColour;
+            var _substringArray = string_split(_string, "[");
+            
+            //Handle the first text fragment
+            var _textString = _substringArray[0];
+            if (_textString != "")
             {
-                //Handle the contents of the tag
-                var _tagString = _tagSplitArray[0];
+                var _width = string_width(_textString);
                 
-                //First we try to find the colour state
-                var _foundColour = _colourDict[$ _tagString];
-                if (_foundColour != undefined)
+                array_push(_fragmentArray, {
+                    __colour: _colour,
+                    __string: _textString,
+                    __x:      0,
+                    __y:      0,
+                    __width:  _width,
+                });
+                
+                var _x = _width;
+            }
+            else
+            {
+                var _x = 0;
+            }
+            
+            //Then iterate other command tag + text fragment combos, splitting as necessary
+            var _i = 1;
+            repeat(array_length(_substringArray)-1)
+            {
+                var _tagSplitArray = string_split(_substringArray[_i], "]", false, 1);
+                if (array_length(_tagSplitArray) == 2)
                 {
-                    _colour = _foundColour;
-                }
-                else
-                {
-                    var _spriteSplitArray = string_split(_tagString, ",");
+                    //Handle the contents of the tag
+                    var _tagString = _tagSplitArray[0];
                     
-                    //Then we try to find a sprite using the command tag
-                    var _sprite = asset_get_index(_spriteSplitArray[0]);
-                    if (sprite_exists(_sprite))
+                    //First we try to find the colour state
+                    var _foundColour = _colourDict[$ _tagString];
+                    if (_foundColour != undefined)
                     {
-                        //Decode sprite arguments
-                        switch(array_length(_spriteSplitArray))
-                        {
-                            case 1:
-                                var _spriteImage = 0;
-                                var _spriteX     = 0;
-                                var _spriteY     = 0;
-                            break;
-                            
-                            case 2:
-                                var _spriteImage = real(_spriteSplitArray[1]);
-                                var _spriteX     = 0;
-                                var _spriteY     = 0;
-                            break;
-                            
-                            case 3:
-                                var _spriteImage = real(_spriteSplitArray[1]);
-                                var _spriteX     = real(_spriteSplitArray[2]);
-                                var _spriteY     = 0;
-                            break;
-                            
-                            case 4:
-                                var _spriteImage = real(_spriteSplitArray[1]);
-                                var _spriteX     = real(_spriteSplitArray[2]);
-                                var _spriteY     = real(_spriteSplitArray[3]);
-                            break;
-                        }
-                        
-                        array_push(__spriteArray, {
-                            __sprite: _sprite,
-                            __image: _spriteImage,
-                            __x: _spriteX + _x + _spriteScale*sprite_get_xoffset(_sprite),
-                            __y: _spriteY + 0.5*(_lineHeight - _spriteScale*sprite_get_height(_sprite)) + _spriteScale*sprite_get_yoffset(_sprite),
-                        });
-                        
-                        _x += _spriteScale*sprite_get_width(_sprite);
+                        _colour = _foundColour;
                     }
                     else
                     {
-                        __ScribblejrTrace("Command tag \"", _tagString, "\" not recognised");
+                        var _spriteSplitArray = string_split(_tagString, ",");
+                        
+                        //Then we try to find a sprite using the command tag
+                        var _sprite = asset_get_index(_spriteSplitArray[0]);
+                        if (sprite_exists(_sprite))
+                        {
+                            //Decode sprite arguments
+                            switch(array_length(_spriteSplitArray))
+                            {
+                                case 1:
+                                    var _spriteImage = 0;
+                                    var _spriteX     = 0;
+                                    var _spriteY     = 0;
+                                break;
+                                
+                                case 2:
+                                    var _spriteImage = real(_spriteSplitArray[1]);
+                                    var _spriteX     = 0;
+                                    var _spriteY     = 0;
+                                break;
+                                
+                                case 3:
+                                    var _spriteImage = real(_spriteSplitArray[1]);
+                                    var _spriteX     = real(_spriteSplitArray[2]);
+                                    var _spriteY     = 0;
+                                break;
+                                
+                                case 4:
+                                    var _spriteImage = real(_spriteSplitArray[1]);
+                                    var _spriteX     = real(_spriteSplitArray[2]);
+                                    var _spriteY     = real(_spriteSplitArray[3]);
+                                break;
+                            }
+                            
+                            var _width = _spriteScale*sprite_get_width(_sprite);
+                            
+                            array_push(_spriteArray, {
+                                __sprite: _sprite,
+                                __image:  _spriteImage,
+                                __x:      _spriteX + _x + _spriteScale*sprite_get_xoffset(_sprite),
+                                __y:      _spriteY + 0.5*(_lineHeight - _spriteScale*sprite_get_height(_sprite)) + _spriteScale*sprite_get_yoffset(_sprite),
+                                __width:  _width,
+                            });
+                            
+                            _x += _width;
+                        }
+                        else
+                        {
+                            __ScribblejrTrace("Command tag \"", _tagString, "\" not recognised");
+                        }
+                    }
+                    
+                    //Then we handle the next text fragment
+                    var _textString = _tagSplitArray[1];
+                    if (_textString != "")
+                    {
+                        var _width = string_width(_textString);
+                        
+                        array_push(_fragmentArray, {
+                            __colour: _colour,
+                            __string: _tagSplitArray[1],
+                            __x:      _x,
+                            __y:      0,
+                            __width:  _width,
+                        });
+                        
+                        _x += _width;
                     }
                 }
                 
-                //Then we handle the next text fragment
-                var _textString = _tagSplitArray[1];
-                if (_textString != "")
-                {
-                    array_push(__fragmentArray, {
-                        __colour: _colour,
-                        __string: _tagSplitArray[1],
-                        __x: _x,
-                    });
-                    
-                    _x += string_width(_textString);
-                }
+                ++_i;
             }
             
-            ++_i;
+            return _x;
         }
         
-        __width  = __scale*_x;
-        __height = __scale*_lineHeight;
+        //Cache some frequently used information
+        var _lineHeight    = __ScribblejrGetSpaceHeight(_font);
+        var _fragmentArray = __fragmentArray;
+        var _spriteArray   = __spriteArray;
         
-        switch(__hAlign)
+        var _maxWidth = 0;
+        var _colour   = -1;
+        
+        var _lineArray              = string_split(_string, "\n");
+        var _lineCount              = array_length(_lineArray);
+        var _lineWidthArray         = array_create(_lineCount, undefined); //TODO - Make these arrays static
+        var _lineFragmentStartArray = array_create(_lineCount, undefined);
+        var _lineFragmentEndArray   = array_create(_lineCount, undefined);
+        var _lineSpriteStartArray   = array_create(_lineCount, undefined);
+        var _lineSpriteEndArray     = array_create(_lineCount, undefined);
+        
+        var _lineIndex = 0;
+        repeat(_lineCount)
         {
-            case fa_left:   __xOffset = 0;          break;
-            case fa_center: __xOffset = -__width/2; break;
-            case fa_right:  __xOffset = -__width;   break;
+            _lineFragmentStartArray[_lineIndex] = array_length(_fragmentArray);
+            _lineSpriteStartArray[  _lineIndex] = array_length(_spriteArray);
+            
+            var _width = _funcDecomposeSubstring(_lineArray[_lineIndex],
+                                                 _lineHeight,
+                                                 (SCRIBBLEJR_SCALE_SPRITES? 1 : (1/_fontScale)) / SCRIBBLEJR_GLOBAL_FONT_SCALE, //Sprite scale
+                                                 _colour,
+                                                 _fragmentArray, _spriteArray);
+            
+            _lineWidthArray[_lineIndex] = _width;
+            _maxWidth = max(_maxWidth, _width);
+            
+            _lineFragmentEndArray[_lineIndex] = array_length(_fragmentArray);
+            _lineSpriteEndArray[  _lineIndex] = array_length(_spriteArray);
+            
+            with(array_last(_fragmentArray))
+            {
+                _colour = __colour;
+            }
+            
+            ++_lineIndex;
         }
         
-        switch(__vAlign)
+        var _lastFragment = array_last(_fragmentArray);
+        if (_lastFragment == undefined)
         {
-            case fa_top:    __yOffset = 0;           break;
-            case fa_middle: __yOffset = -__height/2; break;
-            case fa_bottom: __yOffset = -__height;   break;
+            __width  = 0;
+            __height = 0;
+        }
+        else
+        {
+            __width  = __scale*_maxWidth;
+            __height = __scale*_lineCount*_lineHeight;
+            
+            if (__vAlign == fa_center)
+            {
+                var _yOffset = -0.5*__height;
+            }
+            else if (__vAlign == fa_right)
+            {
+                var _yOffset = -__height;
+            }
+            else
+            {
+                var _yOffset = 0;
+            }
+            
+            var _lineIndex = 0;
+            repeat(_lineCount)
+            {
+                if (__hAlign == fa_center)
+                {
+                    var _xOffset = -0.5*_lineWidthArray[_lineIndex];
+                }
+                else if (__hAlign == fa_right)
+                {
+                    var _xOffset = -_lineWidthArray[_lineIndex];
+                }
+                else
+                {
+                    var _xOffset = 0;
+                }
+                
+                //Text fragments
+                var _startCount = _lineFragmentStartArray[_lineIndex];
+                var _endCount   = _lineFragmentEndArray[  _lineIndex];
+                
+                var _fragmentIndex = _startCount;
+                repeat(_endCount - _startCount)
+                {
+                    var _fragment = _fragmentArray[_fragmentIndex];
+                    _fragment.__x += _xOffset;
+                    _fragment.__y += _yOffset;
+                    ++_fragmentIndex;
+                }
+                
+                //Sprite fragments
+                var _startCount = _lineSpriteStartArray[_lineIndex];
+                var _endCount   = _lineSpriteEndArray[  _lineIndex];
+                
+                var _spriteIndex = _startCount;
+                repeat(_endCount - _startCount)
+                {
+                    var _sprite = _spriteArray[_spriteIndex];
+                    _sprite.__x += _xOffset;
+                    _sprite.__y += _yOffset;
+                    ++_spriteIndex;
+                }
+                
+                _yOffset += _lineHeight;
+                ++_lineIndex;
+            }
         }
     }
     
@@ -357,7 +472,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
                 with(__fragmentArray[_i])
                 {
                     draw_set_colour((__colour >= 0)? __colour : _colour);
-                    draw_text_transformed(_x + _scale*__x, _y, __string, _scale, _scale, 0);
+                    draw_text_transformed(_x + _scale*__x, _y + _scale*__y, __string, _scale, _scale, 0);
                 }
                 
                 ++_i;
@@ -373,7 +488,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
                 with(__fragmentArray[_i])
                 {
                     draw_set_colour((__colour >= 0)? __colour : _colour);
-                    draw_text_transformed(_x + _scale*__x, _y, __string, _scale, _scale, 0);
+                    draw_text_transformed(_x + _scale*__x, _y + _scale*__y, __string, _scale, _scale, 0);
                 }
                 
                 ++_i;
