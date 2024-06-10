@@ -54,6 +54,8 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     {
         #region Per-Character Wrap
         
+        var _newlineLayoutCountArray = [];
+        
         var _inTag    = false;
         var _tagStart = undefined;
         
@@ -76,7 +78,12 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         repeat(array_length(_unicodeArray)-1) //Don't include the final space
         {
             var _char = ord(_unicodeArray[_i]);
-            if (_char == 0x5B) // [
+            
+            if (_char == 0x0A)
+            {
+                array_push(_newlineLayoutCountArray, array_length(_layoutArray)-1); //Off by one to compensate for dummy layout
+            }
+            else if (_char == 0x5B) // [
             {
                 if ((_i == 0) || (ord(_unicodeArray[_i-1]) != 0x5B))
                 {
@@ -227,6 +234,8 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
             ++_i;
         }
         
+        array_push(_newlineLayoutCountArray, infinity);
+        
         //Delete the dummy layout fragment
         array_delete(_layoutArray, 0, 1);
         
@@ -257,9 +266,23 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
             var _stretchStart = 0;
             var _stretchWidth = 0;
             
+            var _newlineIndex = 0;
+            var _nextNewlineLayoutIndex = _newlineLayoutCountArray[_newlineIndex];
+            
             var _i = 0;
             repeat(array_length(_layoutArray))
             {
+                while(_i == _nextNewlineLayoutIndex)
+                {
+                    _cursorX       = 0;
+                    _cursorY      += _lineHeight;
+                    _stretchWidth  = 0;
+                    _stretchStart  = _i;
+                    
+                    ++_newlineIndex;
+                    _nextNewlineLayoutIndex = _newlineLayoutCountArray[_newlineIndex];
+                }
+                
                 var _fragment = _layoutArray[_i];
                 if (_fragment.__whitespace)
                 {
@@ -290,7 +313,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                                 if (_lastIteration)
                                 {
                                     _overallWidth = max(_overallWidth, _stretchWidth);
-                            
+                                    
                                     var _j = _stretchStart;
                                     repeat(1 + _i - _stretchStart)
                                     {
@@ -332,10 +355,10 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                             
                                     _lineStart  = _stretchStart;
                                 }
-                        
+                                
                                 _cursorX  = 0;
                                 _cursorY += _lineHeight;
-                        
+                                
                                 if (_lastIteration)
                                 {
                                     var _j = _stretchStart;
@@ -365,7 +388,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                                 }
                             }
                         }
-                
+                        
                         _cursorX      += _stretchWidth + (_fragment.__shift - _fragment.__width);
                         _stretchWidth  = 0;
                         _stretchStart  = _i+1;
