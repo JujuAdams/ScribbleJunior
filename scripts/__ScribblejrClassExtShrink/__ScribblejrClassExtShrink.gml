@@ -32,9 +32,9 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     Draw = __DrawNative;
         
     __spriteArray   = [];
-    __fragmentArray     = [];
+    __fragmentArray = [];
     __vertexBuffer  = undefined;
-    __vertexBaker = new __ScribblejrClassBakerExt(__fragmentArray, _font);
+    __vertexBaker   = new __ScribblejrClassBakerExt(__fragmentArray, _font);
     __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
     
     if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();

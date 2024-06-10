@@ -753,9 +753,9 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     __xOffset = 0;
     __yOffset = 0;
     
-    __vertexBuffer  = undefined;
-    __fontTexture   = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
-    __vertexBaker = new __ScribblejrClassBakerExtFit(__fragmentArray, _font);
+    __vertexBuffer = undefined;
+    __fontTexture  = ScribblejrCacheFontInfo(_font).__forcedTexturePointer;
+    __vertexBaker  = new __ScribblejrClassBakerExt(__fragmentArray, _font);
     
     if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) draw_set_font(_oldFont);
     if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Created ", self);
