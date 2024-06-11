@@ -61,7 +61,7 @@
     {"name":"__shdScribblejrColor","order":3,"path":"shaders/__shdScribblejrColor/__shdScribblejrColor.yy",},
     {"name":"__shdScribblejrColorSDF","order":4,"path":"shaders/__shdScribblejrColorSDF/__shdScribblejrColorSDF.yy",},
     {"name":"__shdScribblejrColorSDFShadow","order":5,"path":"shaders/__shdScribblejrColorSDFShadow/__shdScribblejrColorSDFShadow.yy",},
-    {"name":"__shdScribblejrNativeSDF_PMA","order":1,"path":"shaders/__shdScribblejrNativeSDF_PMA/__shdScribblejrNativeSDF_PMA.yy",},
+    {"name":"__shdScribblejrPMA_SDF","order":1,"path":"shaders/__shdScribblejrPMA_SDF/__shdScribblejrPMA_SDF.yy",},
     {"name":"__shdScribblejrSDF","order":1,"path":"shaders/__shdScribblejrSDF/__shdScribblejrSDF.yy",},
     {"name":"__shdScribblejrSDFShadow","order":2,"path":"shaders/__shdScribblejrSDFShadow/__shdScribblejrSDFShadow.yy",},
     {"name":"sSpriteFont","order":8,"path":"sprites/sSpriteFont/sSpriteFont.yy",},

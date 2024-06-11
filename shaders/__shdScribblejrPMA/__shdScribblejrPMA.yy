@@ -1,7 +1,7 @@
 {
   "$GMShader":"",
-  "%Name":"__shdScribblejrNativeSDF_PMA",
-  "name":"__shdScribblejrNativeSDF_PMA",
+  "%Name":"__shdScribblejrPMA",
+  "name":"__shdScribblejrPMA",
   "parent":{
     "name":"Native",
     "path":"folders/Scribble Jr./(System)/Shaders/Native.yy",
