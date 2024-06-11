@@ -22,6 +22,8 @@ function __ScribblejrSystem()
     {
         __nullWrapper = new __ScribblejrClassNullWrapper();
         
+        __fontUsesSDFMap = ds_map_create();
+        
         __wrappersCache     = {};
         __elementsArray     = [];
         __elementSweepIndex = 0;

@@ -113,7 +113,12 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
         }
         
         if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
-        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
+        
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE)
+        {
+            ScribblejrResetDrawState();
+            if (_system.__preMultipliedAlpha) __SCRIBBLEJR_SHADER_RESET();
+        }
     }
     
     static __DrawScale = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
@@ -136,7 +141,12 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
         }
         
         if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
-        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
+        
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE)
+        {
+            ScribblejrResetDrawState();
+            if (_system.__preMultipliedAlpha) __SCRIBBLEJR_SHADER_RESET();
+        }
     }
     
     

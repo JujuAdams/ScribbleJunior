@@ -3,8 +3,8 @@
   "%Name":"__shdScribblejr",
   "name":"__shdScribblejr",
   "parent":{
-    "name":"(System)",
-    "path":"folders/Scribble Jr./(System).yy",
+    "name":"Custom",
+    "path":"folders/Scribble Jr./(System)/Shaders/Custom.yy",
   },
   "resourceType":"GMShader",
   "resourceVersion":"2.0",

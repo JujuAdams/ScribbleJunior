@@ -42,5 +42,9 @@ function ScribblejrDrawNative(_x, _y, _string, _colour = c_white, _alpha = 1, _h
         draw_text_transformed(_x, _y, _string, _fontScale, _fontScale, 0);
     }
     
-    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
+    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE)
+    {
+        ScribblejrResetDrawState();
+        if (_system.__preMultipliedAlpha) __SCRIBBLEJR_SHADER_RESET();
+    }
 }
