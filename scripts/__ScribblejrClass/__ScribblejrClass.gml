@@ -9,6 +9,24 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
 {
     static _system = __ScribblejrSystem();
     
+    static _dropShadowEnableHash = variable_get_hash("dropShadowEnable");
+    
+    static _shdScribblejr_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejr, "u_vPositionAlphaScale");
+    static _shdScribblejr_u_iColour             = shader_get_uniform(__shdScribblejr, "u_iColour");
+    static _shdScribblejr_u_iPMA                = shader_get_uniform(__shdScribblejr, "u_iPMA");
+    
+    static _shdScribblejrSDF_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrSDF, "u_vPositionAlphaScale");
+    static _shdScribblejrSDF_u_iColour             = shader_get_uniform(__shdScribblejrSDF, "u_iColour");
+    static _shdScribblejrSDF_u_iPMA                = shader_get_uniform(__shdScribblejrSDF, "u_iPMA");
+    
+    static _shdScribblejrSDFShadow_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrSDFShadow, "u_vPositionAlphaScale");
+    static _shdScribblejrSDFShadow_u_vColorSoftness      = shader_get_uniform(__shdScribblejrSDFShadow, "u_vColorSoftness");
+    static _shdScribblejrSDFShadow_u_iPMA                = shader_get_uniform(__shdScribblejrSDFShadow, "u_iPMA");
+    
+    
+    
+    
+    
     __wrapper = undefined;
     __lastDraw = current_time;
     
@@ -101,24 +119,10 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
         draw_set_halign(__hAlign);
         draw_set_valign(__vAlign);
         
-        if (_sdfEffects != undefined)
-        {
-            font_enable_effects(__font, true, _sdfEffects);
-            draw_text(_x, _y, __string);
-            if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) font_enable_effects(__font, false);
-        }
-        else
-        {
-            draw_text(_x, _y, __string);
-        }
+        __ScribblejrDrawText(_x, _y, __string, _sdfEffects);
         
         if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
-        
-        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE)
-        {
-            ScribblejrResetDrawState();
-            if (_system.__preMultipliedAlpha) __SCRIBBLEJR_SHADER_RESET();
-        }
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
     static __DrawScale = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
@@ -129,24 +133,10 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
         draw_set_halign(__hAlign);
         draw_set_valign(__vAlign);
         
-        if (_sdfEffects != undefined)
-        {
-            font_enable_effects(__font, true, _sdfEffects);
-            draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
-            if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) font_enable_effects(__font, false);
-        }
-        else
-        {
-            draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
-        }
+        __ScribblejrDrawTextTransformed(_x, _y, __string, __scale, _sdfEffects);
         
         if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
-        
-        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE)
-        {
-            ScribblejrResetDrawState();
-            if (_system.__preMultipliedAlpha) __SCRIBBLEJR_SHADER_RESET();
-        }
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
     
@@ -155,10 +145,6 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
     
     static __DrawVertexBuffer = function(_x, _y, _colour = c_white, _alpha = 1)
     {
-        static _shdScribblejr_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejr, "u_vPositionAlphaScale");
-        static _shdScribblejr_u_iColour             = shader_get_uniform(__shdScribblejr, "u_iColour");
-        static _shdScribblejr_u_iPMA                = shader_get_uniform(__shdScribblejr, "u_iPMA");
-        
         __SCRIBBLEJR_SHADER_SET(__shdScribblejr);
         shader_set_uniform_f(_shdScribblejr_u_vPositionAlphaScale, _x, _y + __yOffset, _alpha, __scale);
         shader_set_uniform_i(_shdScribblejr_u_iColour, _colour);
@@ -168,16 +154,6 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
     
     static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
     {
-        static _dropShadowEnableHash = variable_get_hash("dropShadowEnable");
-        
-        static _shdScribblejrSDF_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrSDF, "u_vPositionAlphaScale");
-        static _shdScribblejrSDF_u_iColour             = shader_get_uniform(__shdScribblejrSDF, "u_iColour");
-        static _shdScribblejrSDF_u_iPMA                = shader_get_uniform(__shdScribblejrSDF, "u_iPMA");
-        
-        static _shdScribblejrSDFShadow_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrSDFShadow, "u_vPositionAlphaScale");
-        static _shdScribblejrSDFShadow_u_vColorSoftness      = shader_get_uniform(__shdScribblejrSDFShadow, "u_vColorSoftness");
-        static _shdScribblejrSDFShadow_u_iPMA                = shader_get_uniform(__shdScribblejrSDFShadow, "u_iPMA");
-        
         if (SCRIBBLEJR_FORCE_BILINEAR_FOR_SDF)
         {
             var _oldTexFilter = gpu_get_tex_filter();

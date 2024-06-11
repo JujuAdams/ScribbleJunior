@@ -14,6 +14,22 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     
     static _dropShadowEnableHash = variable_get_hash("dropShadowEnable");
     
+    static _shdScribblejrExt_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColor, "u_vPositionAlphaScale");
+    static _shdScribblejrExt_u_iColour             = shader_get_uniform(__shdScribblejrColor, "u_iColour");
+    static _shdScribblejrExt_u_iPMA                = shader_get_uniform(__shdScribblejrColor, "u_iPMA");
+    
+    static _shdScribblejrExt_SDF_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDF, "u_vPositionAlphaScale");
+    static _shdScribblejrExt_SDF_u_iColour             = shader_get_uniform(__shdScribblejrColorSDF, "u_iColour");
+    static _shdScribblejrExt_SDF_u_iPMA                = shader_get_uniform(__shdScribblejrColorSDF, "u_iPMA");
+    
+    static _shdScribblejrColorSDFShadow_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_vPositionAlphaScale");
+    static _shdScribblejrColorSDFShadow_u_vColorSoftness      = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_vColorSoftness");
+    static _shdScribblejrColorSDFShadow_u_iPMA                = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_iPMA");
+    
+    
+    
+    
+    
     __wrapper = undefined;
     __lastDraw = current_time;
     
@@ -226,33 +242,10 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         draw_set_halign(__hAlign);
         draw_set_valign(__vAlign);
         
-        if (_sdfEffects != undefined)
-        {
-            if (SCRIBBLEJR_SHADOW_SPRITES && __fontIsSDF && struct_get_from_hash(_sdfEffects, _dropShadowEnableHash))
-            {
-                gpu_set_fog(true, _sdfEffects.dropShadowColour, 0, 0);
-                __DrawSprites(_x + _sdfEffects.dropShadowOffsetX,
-                              _y + _sdfEffects.dropShadowOffsetY,
-                              _sdfEffects.dropShadowAlpha*_alpha);
-                gpu_set_fog(false, c_fuchsia, 0, 0);
-            }
-            
-            font_enable_effects(__font, true, _sdfEffects);
-            draw_text(_x, _y, __string);
-            if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) font_enable_effects(__font, false);
-        }
-        else
-        {
-            draw_text(_x, _y, __string);
-        }
+        __ScribblejrDrawText(_x, _y, __string, _sdfEffects);
         
         if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
-        
-        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE)
-        {
-            ScribblejrResetDrawState();
-            if (_system.__preMultipliedAlpha) __SCRIBBLEJR_SHADER_RESET();
-        }
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
     static __DrawSimpleScaled = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
@@ -273,23 +266,12 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
                               _sdfEffects.dropShadowAlpha*_alpha);
                 gpu_set_fog(false, c_fuchsia, 0, 0);
             }
-            
-            font_enable_effects(__font, true, _sdfEffects);
-            draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
-            if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) font_enable_effects(__font, false);
         }
-        else
-        {
-            draw_text_transformed(_x, _y, __string, __scale, __scale, 0);
-        }
+        
+        __ScribblejrDrawTextTransformed(_x, _y, __string, __scale, _sdfEffects);
         
         if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
-        
-        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE)
-        {
-            ScribblejrResetDrawState();
-            if (_system.__preMultipliedAlpha) __SCRIBBLEJR_SHADER_RESET();
-        }
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
     static __DrawNative = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
@@ -312,24 +294,33 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
                 gpu_set_fog(false, c_fuchsia, 0, 0);
             }
             
-            font_enable_effects(__font, true, _sdfEffects);
-            
-            var _i = 0;
-            repeat(array_length(__fragmentArray))
+            if (_system.__preMultipliedAlpha)
             {
-                with(__fragmentArray[_i])
+                
+            }
+            else
+            {
+                __SCRIBBLEJR_CLASS_SET_SDF_EFFECTS;
+                
+                var _i = 0;
+                repeat(array_length(__fragmentArray))
                 {
-                    draw_set_colour((__colour >= 0)? __colour : _colour);
-                    draw_text_transformed(_x + _scale*__x, _y + _scale*__y, __string, _scale, _scale, 0);
+                    with(__fragmentArray[_i])
+                    {
+                        draw_set_colour((__colour >= 0)? __colour : _colour);
+                        draw_text_transformed(_x + _scale*__x, _y + _scale*__y, __string, _scale, _scale, 0);
+                    }
+                    
+                    ++_i;
                 }
                 
-                ++_i;
+                __SCRIBBLEJR_CLASS_RESET_SDF_EFFECTS;
             }
-            
-            if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) font_enable_effects(__font, false);
         }
         else
         {
+            __SCRIBBLEJR_CLASS_SET_PMA_SHADER;
+            
             var _i = 0;
             repeat(array_length(__fragmentArray))
             {
@@ -341,17 +332,14 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
                 
                 ++_i;
             }
+            
+            __SCRIBBLEJR_CLASS_RESET_PMA_SHADER;
         }
         
         __DrawSprites(_x, _y, _alpha);
         
         if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
-        
-        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE)
-        {
-            ScribblejrResetDrawState();
-            if (_system.__preMultipliedAlpha) __SCRIBBLEJR_SHADER_RESET();
-        }
+        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
     static __DrawSprites = function(_x, _y, _alpha)
@@ -377,10 +365,6 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     
     static __DrawVertexBuffer = function(_x, _y, _colour = c_white, _alpha = 1)
     {
-        static _shdScribblejrExt_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColor, "u_vPositionAlphaScale");
-        static _shdScribblejrExt_u_iColour             = shader_get_uniform(__shdScribblejrColor, "u_iColour");
-        static _shdScribblejrExt_u_iPMA                = shader_get_uniform(__shdScribblejrColor, "u_iPMA");
-        
         __SCRIBBLEJR_SHADER_SET(__shdScribblejrColor);
         shader_set_uniform_f(_shdScribblejrExt_u_vPositionAlphaScale, _x, _y, _alpha, __scale*__fontScale);
         shader_set_uniform_i(_shdScribblejrExt_u_iColour,             _colour);
@@ -394,14 +378,6 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     
     static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
     {
-        static _shdScribblejrExt_SDF_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDF, "u_vPositionAlphaScale");
-        static _shdScribblejrExt_SDF_u_iColour             = shader_get_uniform(__shdScribblejrColorSDF, "u_iColour");
-        static _shdScribblejrExt_SDF_u_iPMA                = shader_get_uniform(__shdScribblejrColorSDF, "u_iPMA");
-        
-        static _shdScribblejrColorSDFShadow_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_vPositionAlphaScale");
-        static _shdScribblejrColorSDFShadow_u_vColorSoftness      = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_vColorSoftness");
-        static _shdScribblejrColorSDFShadow_u_iPMA                = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_iPMA");
-        
         if (SCRIBBLEJR_FORCE_BILINEAR_FOR_SDF)
         {
             var _oldTexFilter = gpu_get_tex_filter();

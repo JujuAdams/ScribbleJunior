@@ -31,20 +31,7 @@ function ScribblejrDrawNative(_x, _y, _string, _colour = c_white, _alpha = 1, _h
     draw_set_halign(_hAlign);
     draw_set_valign(_vAlign);
     
-    if (_sdfEffects != undefined)
-    {
-        font_enable_effects(_font, true, _sdfEffects);
-        draw_text_transformed(_x, _y, _string, _fontScale, _fontScale, 0);
-        if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) font_enable_effects(_font, false);
-    }
-    else
-    {
-        draw_text_transformed(_x, _y, _string, _fontScale, _fontScale, 0);
-    }
+    __ScribblejrDrawTextTransformed(_x, _y, _string, _fontScale, _sdfEffects);
     
-    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE)
-    {
-        ScribblejrResetDrawState();
-        if (_system.__preMultipliedAlpha) __SCRIBBLEJR_SHADER_RESET();
-    }
+    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
 }
