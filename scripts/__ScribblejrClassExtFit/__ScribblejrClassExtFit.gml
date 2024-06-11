@@ -938,11 +938,13 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     static __DrawVertexBuffer = function(_x, _y, _colour = c_white, _alpha = 1)
     {
         static _shdScribblejrExt_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColor, "u_vPositionAlphaScale");
-        static _shdScribblejrExt_u_iColour = shader_get_uniform(__shdScribblejrColor, "u_iColour");
+        static _shdScribblejrExt_u_iColour             = shader_get_uniform(__shdScribblejrColor, "u_iColour");
+        static _shdScribblejrExt_u_iPMA                = shader_get_uniform(__shdScribblejrColor, "u_iPMA");
         
         __SCRIBBLEJR_SHADER_SET(__shdScribblejrColor);
         shader_set_uniform_f(_shdScribblejrExt_u_vPositionAlphaScale, _x, _y, _alpha, __scale*__fontScale);
-        shader_set_uniform_i(_shdScribblejrExt_u_iColour, _colour);
+        shader_set_uniform_i(_shdScribblejrExt_u_iColour,             _colour);
+        shader_set_uniform_i(_shdScribblejrExt_u_iPMA,                _system.__preMultipliedAlpha);
         vertex_submit(__vertexBuffer, pr_trianglelist, __fontTexture);
         __SCRIBBLEJR_SHADER_RESET();
         
@@ -953,10 +955,12 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
     {
         static _shdScribblejrExt_SDF_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDF, "u_vPositionAlphaScale");
-        static _shdScribblejrExt_SDF_u_iColour = shader_get_uniform(__shdScribblejrColorSDF, "u_iColour");
+        static _shdScribblejrExt_SDF_u_iColour             = shader_get_uniform(__shdScribblejrColorSDF, "u_iColour");
+        static _shdScribblejrExt_SDF_u_iPMA                = shader_get_uniform(__shdScribblejrColorSDF, "u_iPMA");
         
         static _shdScribblejrColorSDFShadow_u_vPositionAlphaScale = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_vPositionAlphaScale");
-        static _shdScribblejrColorSDFShadow_u_vColorSoftness = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_vColorSoftness");
+        static _shdScribblejrColorSDFShadow_u_vColorSoftness      = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_vColorSoftness");
+        static _shdScribblejrColorSDFShadow_u_iPMA                = shader_get_uniform(__shdScribblejrColorSDFShadow, "u_iPMA");
         
         if (SCRIBBLEJR_FORCE_BILINEAR_FOR_SDF)
         {
@@ -985,12 +989,11 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                 var _color = dropShadowColour;
                 __SCRIBBLEJR_SHADER_SET(__shdScribblejrSDFShadow);
                 shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vPositionAlphaScale, _xShadow, _yShadow, dropShadowAlpha*_alpha, _scale);
-                
-                shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vColorSoftness,
-                                     color_get_red(_color)/255,
-                                     color_get_green(_color)/255,
-                                     color_get_blue(_color)/255,
-                                     clamp(dropShadowSoftness / (4*other.__fontSDFSpread), 0, 0.5));
+                shader_set_uniform_i(_shdScribblejrColorSDFShadow_u_iPMA,                _system.__preMultipliedAlpha);
+                shader_set_uniform_f(_shdScribblejrColorSDFShadow_u_vColorSoftness,      color_get_red(_color)/255,
+                                                                                         color_get_green(_color)/255,
+                                                                                         color_get_blue(_color)/255,
+                                                                                         clamp(dropShadowSoftness / (4*other.__fontSDFSpread), 0, 0.5));
                 vertex_submit(other.__vertexBuffer, pr_trianglelist, other.__fontTexture);
                 __SCRIBBLEJR_SHADER_RESET();
             }
@@ -998,7 +1001,8 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         
         __SCRIBBLEJR_SHADER_SET(__shdScribblejrColorSDF);
         shader_set_uniform_f(_shdScribblejrExt_SDF_u_vPositionAlphaScale, _x, _y, _alpha, _scale);
-        shader_set_uniform_i(_shdScribblejrExt_SDF_u_iColour, _colour);
+        shader_set_uniform_i(_shdScribblejrExt_SDF_u_iColour,             _colour);
+        shader_set_uniform_i(_shdScribblejrExt_SDF_u_iPMA,                _system.__preMultipliedAlpha);
         vertex_submit(__vertexBuffer, pr_trianglelist, __fontTexture);
         __SCRIBBLEJR_SHADER_RESET();
         
