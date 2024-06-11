@@ -674,7 +674,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                     ++_layoutIndex;
                 }
                 
-                if (_layoutIndex > array_last(_lineLayoutStartArray) + 1)
+                if (_layoutIndex > array_last(_lineLayoutStartArray))
                 {
                     _overallWidth = max(_overallWidth, _cursorX - _prevSpaceWidth);
                     array_push(_lineWidthArray,        _cursorX - _prevSpaceWidth);
