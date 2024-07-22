@@ -36,6 +36,22 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
     draw_set_font(__font);
     
     //Cache string width/height to handle alignment positioning
+    switch(_hAlign)
+    {
+        case fa_left:
+            __xOffset = 0;
+        break;
+        
+        case fa_center:
+            __width = __scale*string_width(_string);
+            __xOffset = -__width/2;
+        break;
+        
+        case fa_right:
+            __width = __scale*string_width(_string);
+            __xOffset = -__width;
+        break;
+    }
     
     switch(_vAlign)
     {
