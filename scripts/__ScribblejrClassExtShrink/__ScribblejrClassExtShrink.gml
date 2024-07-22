@@ -204,6 +204,16 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     
     
     
+    static GetHAlign = function()
+    {
+        return __hAlign;
+    }
+    
+    static GetVAlign = function()
+    {
+        return __vAlign;
+    }
+    
     static GetWidth = function()
     {
         return __width;

@@ -63,10 +63,10 @@ function __ScribblejrClassBaker(_string, _font, _hAlign) constructor
         var _string = __lineStringArray[__line];
         __stringArray = __ScribblejrStringDecompose(_string);
         __glyphCount = array_length(__stringArray);
-
+        
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
         draw_set_font(__font);
-
+        
         if (__hAlign == fa_center)
         {
             __glyphX = -(string_width(_string) div 2);
