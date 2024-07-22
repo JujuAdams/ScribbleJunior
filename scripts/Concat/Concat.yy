@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"Concat",
   "isCompatibility":false,
   "isDnD":false,
