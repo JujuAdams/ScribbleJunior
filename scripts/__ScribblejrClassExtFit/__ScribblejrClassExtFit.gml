@@ -60,7 +60,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         var _tagStart = undefined;
         
         var _fastGlyphs = ScribblejrCacheFontInfo(_font).fastGlyphs;
-        var _colour = c_white;
+        var _colour = -1;
         
         var _tagConcatArray = [];
         var _tagArgumentArray = [];
@@ -837,6 +837,16 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     
     
     
+    
+    static GetHAlign = function()
+    {
+        return __hAlign;
+    }
+    
+    static GetVAlign = function()
+    {
+        return __vAlign;
+    }
     
     static GetWidth = function()
     {

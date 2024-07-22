@@ -16,6 +16,7 @@
     {"$GMFolder":"","%Name":"Baker","folderPath":"folders/Scribble Jr./(System)/Classes/Baker.yy","name":"Baker","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Element","folderPath":"folders/Scribble Jr./(System)/Classes/Element.yy","name":"Element","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Setup","folderPath":"folders/Scribble Jr./Setup.yy","name":"Setup","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Font","folderPath":"folders/Scribble Jr./Setup/Font.yy","name":"Font","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "IncludedFiles":[
     {"$GMIncludedFile":"","%Name":"NotoSansMono-CondensedMedium.ttf","CopyToMask":-1,"filePath":"datafiles","name":"NotoSansMono-CondensedMedium.ttf","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -24,7 +25,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.4.0.137",
+    "IDEVersion":"2024.6.2.162",
   },
   "name":"ScribbleJunior",
   "resources":[
