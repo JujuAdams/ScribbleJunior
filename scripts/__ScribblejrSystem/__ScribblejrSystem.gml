@@ -1,7 +1,7 @@
 // Feather disable all
 
-#macro __SCRIBBLEJR_VERSION  "1.4.0.1 beta"
-#macro __SCRIBBLEJR_DATE     "2024-06-10"
+#macro __SCRIBBLEJR_VERSION  "1.5.0"
+#macro __SCRIBBLEJR_DATE     "2024-07-22"
 
 #macro __SCRIBBLEJR_SHADER_SET    shader_set
 #macro __SCRIBBLEJR_SHADER_RESET  shader_reset
