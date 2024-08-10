@@ -8,6 +8,7 @@
 &nbsp;
 
 - ### Got questions? [Make a new issue!](https://github.com/JujuAdams/ScribbleJunior/issues/new)
+- ### There is also a [Discord server](https://discord.gg/hwgWpnsNw2) (but GitHub issues are preferred)
 - ### [Download the .yymps](https://github.com/JujuAdams/ScribbleJunior/releases/)
 - ### [Read the documentation](https://www.jujuadams.com/ScribbleJunior/)
 - ### You may also like [Scribble Deluxe](https://github.com/JujuAdams/Scribble/), [Scripture](https://pixelatedpope.itch.io/scripture), [diest’s text engine](http://michaelvandiest.com/advanced-dialogue-box/), and [gmdialogue](https://github.com/danielpancake/gmdialogue)
