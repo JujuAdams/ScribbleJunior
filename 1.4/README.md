@@ -4,7 +4,9 @@
 
 <p align="center"><a href="https://github.com/jujuadams/ScribbleJunior/releases/" target="_blank">Download the .yymps</a></p>
 
----
+&nbsp;
+
+## Frequently Asked Questions
 
 **What's the difference between Scribble Junior and [Scribble Deluxe](https://github.com/JujuAdams/Scribble/)?**
 
@@ -57,3 +59,21 @@ Scribble Junior is built and maintained by [@jujuadams](https://twitter.com/juju
 **Can I send you donations? Are you going to start a Patreon?**
 
 Thank you for wanting to show your appreciation - it really does mean a lot to me personally - but I'm fortunate enough to have a stable income from gamedev. I'm not looking to join Patreon as a creator at this moment in time. If you'd like to support my work then drop me a credit in your game and/or gimme a shout-out on the social media platform of your choice.
+
+&nbsp;
+
+## Updating
+
+Releases go out once in while, typically expedited if there is a serious bug. This library uses [semantic versioning](https://semver.org/). In short, if the left-most number in the version is increased then this is a "major version increase". Major version increases introduce breaking changes and you'll almost certainly have to rewrite some code. However, if the middle or right-most number in the version is increased then you probably won't have to rewrite any code. For example, moving from `1.1.0` to `2.0.0` is a major version increase but moving from `1.1.0` to `1.2.0` isn't.
+
+?> Please always read patch notes. Very occasionally a minor breaking change in an obscure feature may be introduced by a minor version increase.
+
+At any rate, the process to update is as follows:
+
+1. **Back up your whole project using source control!**
+2. Back up the contents of your configuration script (`__ScribblejrConfig`) within your project. Duplicating the script is sufficient
+3. Delete all library scripts from your project. Unless you've moved things around, this means deleting the library folder from the asset browser
+4. Import the latest [.yymps](https://github.com/JujuAdams/ScribbleJunior/releases/)
+5. Restore your configuration script from the back-up line by line
+
+!> Because configuration macros might be added or removed between versions, it's important to restore your configuration script carefully.
