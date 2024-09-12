@@ -62,6 +62,22 @@ Returns the height of the text when, in pixels.
 
 &nbsp;
 
+### .GetHAlign
+
+`<element>.GetHAlign()`
+
+Returns the horizontal alignment of the text.
+
+&nbsp;
+
+### .GetVAlign
+
+`<element>.GetVAlign()`
+
+Returns the vertical alignment of the text.
+
+&nbsp;
+
 ### .Bake
 
 `<element>.Bake()`
