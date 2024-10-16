@@ -383,7 +383,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         {
             with(__spriteArray[_i])
             {
-                draw_sprite_ext(__sprite, __image, _x + _textScale*__x, _y + _textScale*__y, _spriteScale, _spriteScale, 0, c_white, _alpha);
+                draw_sprite_ext(__sprite, __image, _x + _textScale*__x, _y + _textScale*__y, _spriteScale*__localScale, _spriteScale*__localScale, 0, c_white, _alpha);
             }
             
             ++_i;

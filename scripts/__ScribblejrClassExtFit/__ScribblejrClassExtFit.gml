@@ -141,27 +141,38 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                             switch(array_length(_tagArgumentArray))
                             {
                                 case 1:
-                                    var _spriteImage = 0;
-                                    var _spriteX     = 0;
-                                    var _spriteY     = 0;
+                                    var _spriteImage      = 0;
+                                    var _spriteX          = 0;
+                                    var _spriteY          = 0;
+                                    var _spriteLocalScale = 1;
                                 break;
                                 
                                 case 2:
-                                    var _spriteImage = real(_tagArgumentArray[1]);
-                                    var _spriteX     = 0;
-                                    var _spriteY     = 0;
+                                    var _spriteImage      = real(_tagArgumentArray[1]);
+                                    var _spriteX          = 0;
+                                    var _spriteY          = 0;
+                                    var _spriteLocalScale = 1;
                                 break;
                                 
                                 case 3:
-                                    var _spriteImage = real(_tagArgumentArray[1]);
-                                    var _spriteX     = real(_tagArgumentArray[2]);
-                                    var _spriteY     = 0;
+                                    var _spriteImage      = real(_tagArgumentArray[1]);
+                                    var _spriteX          = real(_tagArgumentArray[2]);
+                                    var _spriteY          = 0;
+                                    var _spriteLocalScale = 1;
                                 break;
                                 
                                 case 4:
-                                    var _spriteImage = real(_tagArgumentArray[1]);
-                                    var _spriteX     = real(_tagArgumentArray[2]);
-                                    var _spriteY     = real(_tagArgumentArray[3]);
+                                    var _spriteImage      = real(_tagArgumentArray[1]);
+                                    var _spriteX          = real(_tagArgumentArray[2]);
+                                    var _spriteY          = real(_tagArgumentArray[3]);
+                                    var _spriteLocalScale = 1;
+                                break;
+                                
+                                case 5:
+                                    var _spriteImage      = real(_tagArgumentArray[1]);
+                                    var _spriteX          = real(_tagArgumentArray[2]);
+                                    var _spriteY          = real(_tagArgumentArray[3]);
+                                    var _spriteLocalScale = real(_tagArgumentArray[4]);
                                 break;
                             }
                             
@@ -170,12 +181,13 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                                 __image: _spriteImage,
                                 __x: undefined,
                                 __y: undefined,
-                                __xOffset: _spriteX + _spriteScale*sprite_get_xoffset(_sprite),
-                                __yOffset: _spriteY + 0.5*(_lineHeight - _spriteScale*sprite_get_height(_sprite)) + _spriteScale*sprite_get_yoffset(_sprite),
-                                __width: _spriteScale*sprite_get_width(_sprite),
-                                __shift: _spriteScale*sprite_get_width(_sprite),
+                                __xOffset: _spriteX + _spriteScale*_spriteLocalScale*sprite_get_xoffset(_sprite),
+                                __yOffset: _spriteY + 0.5*(_lineHeight - _spriteScale*_spriteLocalScale*sprite_get_height(_sprite)) + _spriteScale*_spriteLocalScale*sprite_get_yoffset(_sprite),
+                                __width: _spriteScale*_spriteLocalScale*sprite_get_width(_sprite),
+                                __shift: _spriteScale*_spriteLocalScale*sprite_get_width(_sprite),
                                 __whitespace: false,
                                 __joinsRight: true,
+                                __scaleLocal: _spriteLocalScale,
                             };
                             
                             array_push(_layoutArray, _fragment);
@@ -510,38 +522,50 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                                 switch(array_length(_spriteSplitArray))
                                 {
                                     case 1:
-                                        var _spriteImage = 0;
-                                        var _spriteX     = 0;
-                                        var _spriteY     = 0;
+                                        var _spriteImage      = 0;
+                                        var _spriteX          = 0;
+                                        var _spriteY          = 0;
+                                        var _spriteLocalScale = 1;
                                     break;
                                     
                                     case 2:
-                                        var _spriteImage = real(_spriteSplitArray[1]);
-                                        var _spriteX     = 0;
-                                        var _spriteY     = 0;
+                                        var _spriteImage      = real(_tagArgumentArray[1]);
+                                        var _spriteX          = 0;
+                                        var _spriteY          = 0;
+                                        var _spriteLocalScale = 1;
                                     break;
                                     
                                     case 3:
-                                        var _spriteImage = real(_spriteSplitArray[1]);
-                                        var _spriteX     = real(_spriteSplitArray[2]);
-                                        var _spriteY     = 0;
+                                        var _spriteImage      = real(_tagArgumentArray[1]);
+                                        var _spriteX          = real(_tagArgumentArray[2]);
+                                        var _spriteY          = 0;
+                                        var _spriteLocalScale = 1;
                                     break;
                                     
                                     case 4:
-                                        var _spriteImage = real(_spriteSplitArray[1]);
-                                        var _spriteX     = real(_spriteSplitArray[2]);
-                                        var _spriteY     = real(_spriteSplitArray[3]);
+                                        var _spriteImage      = real(_tagArgumentArray[1]);
+                                        var _spriteX          = real(_tagArgumentArray[2]);
+                                        var _spriteY          = real(_tagArgumentArray[3]);
+                                        var _spriteLocalScale = 1;
+                                    break;
+                                    
+                                    case 5:
+                                        var _spriteImage      = real(_tagArgumentArray[1]);
+                                        var _spriteX          = real(_tagArgumentArray[2]);
+                                        var _spriteY          = real(_tagArgumentArray[3]);
+                                        var _spriteLocalScale = real(_tagArgumentArray[4]);
                                     break;
                                 }
                                 
                                 var _fragment = {
-                                    __sprite:  _sprite,
-                                    __image:   _spriteImage,
-                                    __x:       0,
-                                    __y:       0,
-                                    __xOffset: _spriteX + _spriteScale*sprite_get_xoffset(_sprite),
-                                    __yOffset: _spriteY + 0.5*(_lineHeight - _spriteScale*sprite_get_height(_sprite)) + _spriteScale*sprite_get_yoffset(_sprite),
-                                    __width:   _spriteScale*sprite_get_width(_sprite),
+                                    __sprite:     _sprite,
+                                    __image:      _spriteImage,
+                                    __x:          0,
+                                    __y:          0,
+                                    __xOffset:    _spriteX + _spriteScale*_spriteLocalScale*sprite_get_xoffset(_sprite),
+                                    __yOffset:    _spriteY + 0.5*(_lineHeight - _spriteScale*_spriteLocalScale*sprite_get_height(_sprite)) + _spriteScale*_spriteLocalScale*sprite_get_yoffset(_sprite),
+                                    __width:      _spriteScale*_spriteLocalScale*sprite_get_width(_sprite),
+                                    __localScale: _spriteLocalScale,
                                     
                                     __whitespaceFollows: false,
                                 };
@@ -931,7 +955,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         {
             with(__spriteArray[_i])
             {
-                draw_sprite_ext(__sprite, __image, _x + _textScale*__x, _y + _textScale*__y, _spriteScale, _spriteScale, 0, c_white, _alpha);
+                draw_sprite_ext(__sprite, __image, _x + _textScale*__x, _y + _textScale*__y, _spriteScale*__localScale, _spriteScale*__localScale, 0, c_white, _alpha);
             }
             
             ++_i;

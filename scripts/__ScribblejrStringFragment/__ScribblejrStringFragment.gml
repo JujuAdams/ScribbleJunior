@@ -54,38 +54,50 @@ function __ScribblejrStringFragment(_string, _lineHeight, _spriteScale, _startCo
                     switch(array_length(_spriteSplitArray))
                     {
                         case 1:
-                            var _spriteImage = 0;
-                            var _spriteX     = 0;
-                            var _spriteY     = 0;
+                            var _spriteImage      = 0;
+                            var _spriteX          = 0;
+                            var _spriteY          = 0;
+                            var _spriteLocalScale = 1;
                         break;
                                 
                         case 2:
-                            var _spriteImage = real(_spriteSplitArray[1]);
-                            var _spriteX     = 0;
-                            var _spriteY     = 0;
+                            var _spriteImage      = real(_spriteSplitArray[1]);
+                            var _spriteX          = 0;
+                            var _spriteY          = 0;
+                            var _spriteLocalScale = 1;
                         break;
                                 
                         case 3:
-                            var _spriteImage = real(_spriteSplitArray[1]);
-                            var _spriteX     = real(_spriteSplitArray[2]);
-                            var _spriteY     = 0;
+                            var _spriteImage      = real(_spriteSplitArray[1]);
+                            var _spriteX          = real(_spriteSplitArray[2]);
+                            var _spriteY          = 0;
+                            var _spriteLocalScale = 1;
                         break;
                                 
                         case 4:
-                            var _spriteImage = real(_spriteSplitArray[1]);
-                            var _spriteX     = real(_spriteSplitArray[2]);
-                            var _spriteY     = real(_spriteSplitArray[3]);
+                            var _spriteImage      = real(_spriteSplitArray[1]);
+                            var _spriteX          = real(_spriteSplitArray[2]);
+                            var _spriteY          = real(_spriteSplitArray[3]);
+                            var _spriteLocalScale = 1;
+                        break;
+                        
+                        case 5:
+                            var _spriteImage      = real(_spriteSplitArray[1]);
+                            var _spriteX          = real(_spriteSplitArray[2]);
+                            var _spriteY          = real(_spriteSplitArray[3]);
+                            var _spriteLocalScale = real(_spriteSplitArray[4]);
                         break;
                     }
                             
-                    var _width = _spriteScale*sprite_get_width(_sprite);
+                    var _width = _spriteScale*_spriteLocalScale*sprite_get_width(_sprite);
                             
                     array_push(_spriteArray, {
-                        __sprite: _sprite,
-                        __image:  _spriteImage,
-                        __x:      _spriteX + _x + _spriteScale*sprite_get_xoffset(_sprite),
-                        __y:      _spriteY + 0.5*(_lineHeight - _spriteScale*sprite_get_height(_sprite)) + _spriteScale*sprite_get_yoffset(_sprite),
-                        __width:  _width,
+                        __sprite:     _sprite,
+                        __image:      _spriteImage,
+                        __x:          _spriteX + _x + _spriteScale*_spriteLocalScale*sprite_get_xoffset(_sprite),
+                        __y:          _spriteY + 0.5*(_lineHeight - _spriteScale*_spriteLocalScale*sprite_get_height(_sprite)) + _spriteScale*_spriteLocalScale*sprite_get_yoffset(_sprite),
+                        __width:      _width,
+                        __localScale: _spriteLocalScale,
                     });
                             
                     _x += _width;
