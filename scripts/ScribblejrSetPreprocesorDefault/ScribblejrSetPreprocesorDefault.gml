@@ -1,5 +1,11 @@
 // Feather disable all
 
+/// Sets the default preprocessor. Any future calls to the extended functions (`ScribblejrExt`
+/// etc.) will use this preprocessor as the default. Calling `ScribblejrResetPreprocesor()` will
+/// reset the current preprocessor to the default preprocessor set by this function.
+/// 
+/// N.B. Any text elements that have already cached will **not** be updated.
+/// 
 /// @param [method=SCRIBBLEJR_NO_PREPROCESS]
 
 function ScribblejrSetPreprocesorDefault(_method = SCRIBBLEJR_NO_PREPROCESS)

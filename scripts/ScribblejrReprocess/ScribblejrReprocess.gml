@@ -1,5 +1,14 @@
 // Feather disable all
 
+/// Reprocesses all Scribble Jr. text elements. If any text elements have changed the string that
+/// they are displaying then the text element will be regenerated. This is useful to update text
+/// based on changing game state.
+/// 
+/// N.B. This function is very slow. You should only call this function when there has been a
+///      significant change in fundamental game state, such as the player changed what type of
+///      gamepad they're using. Do not use this function to rapdily update Scribble Jr. text
+///      elements.
+
 function ScribblejrReprocess()
 {
     static _system        = __ScribblejrSystem();
