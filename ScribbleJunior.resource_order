@@ -49,6 +49,7 @@
     {"name":"ScribblejrGetCharacterWrap","order":7,"path":"scripts/ScribblejrGetCharacterWrap/ScribblejrGetCharacterWrap.yy",},
     {"name":"ScribblejrGetColor","order":8,"path":"scripts/ScribblejrGetColor/ScribblejrGetColor.yy",},
     {"name":"ScribblejrGetDefaultFont","order":2,"path":"scripts/ScribblejrGetDefaultFont/ScribblejrGetDefaultFont.yy",},
+    {"name":"ScribblejrReprocess","order":4,"path":"scripts/ScribblejrReprocess/ScribblejrReprocess.yy",},
     {"name":"ScribblejrResetDrawState","order":8,"path":"scripts/ScribblejrResetDrawState/ScribblejrResetDrawState.yy",},
     {"name":"ScribblejrResetPreprocesor","order":1,"path":"scripts/ScribblejrResetPreprocesor/ScribblejrResetPreprocesor.yy",},
     {"name":"ScribblejrSDFDropShadow","order":9,"path":"scripts/ScribblejrSDFDropShadow/ScribblejrSDFDropShadow.yy",},

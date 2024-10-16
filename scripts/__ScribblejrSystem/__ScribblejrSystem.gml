@@ -84,7 +84,7 @@ function __ScribblejrSystem()
         __preprocessorDefault      = SCRIBBLEJR_NO_PREPROCESS;
         __preprocessorDefaultName  = string(__preprocessorDefault);
         __preprocessorUsingDefault = true;
-        __preprocessor             = __preprocessorDefault;
+        __preprocessorMethod       = __preprocessorDefault;
         __preprocessorName         = __preprocessorDefaultName;
         __preprocessorOnce         = false;
     }

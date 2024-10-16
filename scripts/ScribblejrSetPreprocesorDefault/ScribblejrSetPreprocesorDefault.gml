@@ -15,8 +15,8 @@ function ScribblejrSetPreprocesorDefault(_method = SCRIBBLEJR_NO_PREPROCESS)
             
             if (__preprocessorUsingDefault)
             {
-                __preprocessor     = __preprocessorDefault;
-                __preprocessorName = __preprocessorDefaultName;
+                __preprocessorMethod = __preprocessorDefault;
+                __preprocessorName   = __preprocessorDefaultName;
             }
         }
     }

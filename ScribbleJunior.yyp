@@ -74,6 +74,7 @@
     {"id":{"name":"ScribblejrGetCharacterWrap","path":"scripts/ScribblejrGetCharacterWrap/ScribblejrGetCharacterWrap.yy",},},
     {"id":{"name":"ScribblejrGetColor","path":"scripts/ScribblejrGetColor/ScribblejrGetColor.yy",},},
     {"id":{"name":"ScribblejrGetDefaultFont","path":"scripts/ScribblejrGetDefaultFont/ScribblejrGetDefaultFont.yy",},},
+    {"id":{"name":"ScribblejrReprocess","path":"scripts/ScribblejrReprocess/ScribblejrReprocess.yy",},},
     {"id":{"name":"ScribblejrResetDrawState","path":"scripts/ScribblejrResetDrawState/ScribblejrResetDrawState.yy",},},
     {"id":{"name":"ScribblejrResetPreprocesor","path":"scripts/ScribblejrResetPreprocesor/ScribblejrResetPreprocesor.yy",},},
     {"id":{"name":"ScribblejrSDFDropShadow","path":"scripts/ScribblejrSDFDropShadow/ScribblejrSDFDropShadow.yy",},},

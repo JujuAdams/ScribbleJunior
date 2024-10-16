@@ -20,12 +20,14 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
     __stringOriginal = _string;
     
     __key       = _key;
-    __string    = _system.__preprocessor(_string);
+    __string    = _system.__preprocessorMethod(_string);
     __hAlign    = _hAlign;
     __vAlign    = _vAlign;
     __font      = _font;
     __scale     = _fontScale;
     __fontScale = _fontScale;
+    __maxWidth  = _maxWidth;
+    __maxHeight = _maxHeight;
     
     __fontIsDynamic = ScribblejrCacheFontInfo(_font).__isDynamic;
     __fontIsSDF     = ScribblejrCacheFontInfo(_font).sdfEnabled;

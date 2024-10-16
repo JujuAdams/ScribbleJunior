@@ -10,8 +10,8 @@ function ScribblejrResetPreprocesor()
         {
             __preprocessorUsingDefault = true;
             
-            __preprocessor     = __preprocessorDefault;
-            __preprocessorName = __preprocessorDefaultName;
+            __preprocessorMethod = __preprocessorDefault;
+            __preprocessorName   = __preprocessorDefaultName;
             
             __preprocessorOnce = false;
         }

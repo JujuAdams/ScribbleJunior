@@ -8,12 +8,12 @@ function ScribblejrSetPreprocesor(_method)
     
     with(_system)
     {
-        if (__preprocessor != _method)
+        if (__preprocessorMethod != _method)
         {
             __preprocessorUsingDefault = false;
             
-            __preprocessor     = _method;
-            __preprocessorName = string(_method);
+            __preprocessorMethod = _method;
+            __preprocessorName   = string(_method);
             
             __preprocessorOnce = false;
         }
