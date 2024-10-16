@@ -18,9 +18,10 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     __lastDraw = current_time;
     
     __stringOriginal = _string;
+    _string = _system.__preprocessorMethod(_string);
     
     __key       = _key;
-    __string    = _system.__preprocessorMethod(_string);
+    __string    = _string;
     __hAlign    = _hAlign;
     __vAlign    = _vAlign;
     __font      = _font;

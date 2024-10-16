@@ -24,8 +24,9 @@ function ScribblejrReprocess()
                     var _newString = _preprocessorMethod(__stringOriginal);
                     if (_newString != _element.__string)
                     {
-                        //TODO - We're processing the string twice (once to keep, and another time in the constructor)
+                        __wrapper = undefined;
                         
+                        //TODO - We're processing the string twice (once to keep, and another time in the constructor)
                         if (is_instanceof(self, __ScribblejrClassExt))
                         {
                             var _newElement = new __ScribblejrClassExt(__key, __stringOriginal, __hAlign, __vAlign, __font, __scale);
@@ -44,7 +45,7 @@ function ScribblejrReprocess()
                         }
                         
                         _newElement.__wrapper = _wrapperRef;
-                        _wrapperRef.ref = _newElement;
+                        _wrapperRef.ref.__element = _newElement;
                         
                         //TODO - Handle this in the element constructor
                         array_push(_elementsArray, _newElement);

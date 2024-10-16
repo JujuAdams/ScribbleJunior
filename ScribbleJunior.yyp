@@ -34,6 +34,7 @@
     {"id":{"name":"fntTestSDF","path":"fonts/fntTestSDF/fntTestSDF.yy",},},
     {"id":{"name":"ScribblejrDefaultFont","path":"fonts/ScribblejrDefaultFont/ScribblejrDefaultFont.yy",},},
     {"id":{"name":"oTest","path":"objects/oTest/oTest.yy",},},
+    {"id":{"name":"oTestPreprocessor","path":"objects/oTestPreprocessor/oTestPreprocessor.yy",},},
     {"id":{"name":"rMain","path":"rooms/rMain/rMain.yy",},},
     {"id":{"name":"__Misc","path":"scripts/__Misc/__Misc.yy",},},
     {"id":{"name":"__ScribblejrClass","path":"scripts/__ScribblejrClass/__ScribblejrClass.yy",},},
