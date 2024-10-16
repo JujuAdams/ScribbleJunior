@@ -92,5 +92,10 @@ function ScribblejrShrinkExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font
         array_push(_array, _element);
     }
     
+    if (_system.__preprocessorOnce)
+    {
+        ScribblejrResetPreprocesor();
+    }
+    
     return _wrapper;
 }
