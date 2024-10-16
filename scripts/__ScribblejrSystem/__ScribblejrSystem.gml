@@ -8,12 +8,14 @@
 
 #macro __SCRIBBLEJR_TIMEOUT  1000 //microseconds
 
+#macro SCRIBBLEJR_NO_PREPROCESS  (function(_string) { return _string; })
+
 function __ScribblejrSystem()
 {
     static _system = undefined;
     if (is_struct(_system)) return _system;
     
-    __ScribblejrTrace("Welcome to Scribblejr by Juju Adams! This is version ", __SCRIBBLEJR_VERSION, ", ", __SCRIBBLEJR_DATE);
+    __ScribblejrTrace("Welcome to Scribble Junior by Juju Adams! This is version ", __SCRIBBLEJR_VERSION, ", ", __SCRIBBLEJR_DATE);
     
     _system = {};
     if (GM_build_type == "run") global.scribblejrSystem = _system;
@@ -78,6 +80,13 @@ function __ScribblejrSystem()
         vertex_format_add_color();
         vertex_format_add_texcoord();
         __vertexFormatColor = vertex_format_end();
+        
+        __preprocessorDefault      = SCRIBBLEJR_NO_PREPROCESS;
+        __preprocessorDefaultName  = string(__preprocessorDefault);
+        __preprocessorUsingDefault = true;
+        __preprocessor             = __preprocessorDefault;
+        __preprocessorName         = __preprocessorDefaultName;
+        __preprocessorOnce         = false;
     }
     
     time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, function()

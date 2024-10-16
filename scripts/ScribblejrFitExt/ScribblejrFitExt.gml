@@ -79,7 +79,8 @@ function ScribblejrFitExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font = 
                              _font, ":",
                              _fontScale, ":",
                              _maxWidth, ":",
-                             _maxHeight, ":E");
+                             _maxHeight, ":",
+                             _system.__preprocessorName, ":E");
     
     var _wrapper = _cache[$ _key];
     if (_wrapper == undefined)

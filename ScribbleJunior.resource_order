@@ -1,11 +1,11 @@
 {
   "FolderOrderSettings":[
     {"name":"Scribble Jr.","order":9,"path":"folders/Scribble Jr..yy",},
-    {"name":"(System)","order":1,"path":"folders/Scribble Jr./(System).yy",},
     {"name":"Classes","order":1,"path":"folders/Scribble Jr./(System)/Classes.yy",},
     {"name":"Baker","order":1,"path":"folders/Scribble Jr./(System)/Classes/Baker.yy",},
     {"name":"Element","order":2,"path":"folders/Scribble Jr./(System)/Classes/Element.yy",},
-    {"name":"Setup","order":2,"path":"folders/Scribble Jr./Setup.yy",},
+    {"name":"Preprocessor","order":2,"path":"folders/Scribble Jr./Preprocessor.yy",},
+    {"name":"Setup","order":1,"path":"folders/Scribble Jr./Setup.yy",},
     {"name":"Font","order":1,"path":"folders/Scribble Jr./Setup/Font.yy",},
   ],
   "ResourceOrderSettings":[
@@ -50,10 +50,13 @@
     {"name":"ScribblejrGetColor","order":8,"path":"scripts/ScribblejrGetColor/ScribblejrGetColor.yy",},
     {"name":"ScribblejrGetDefaultFont","order":2,"path":"scripts/ScribblejrGetDefaultFont/ScribblejrGetDefaultFont.yy",},
     {"name":"ScribblejrResetDrawState","order":8,"path":"scripts/ScribblejrResetDrawState/ScribblejrResetDrawState.yy",},
+    {"name":"ScribblejrResetPreprocesor","order":1,"path":"scripts/ScribblejrResetPreprocesor/ScribblejrResetPreprocesor.yy",},
     {"name":"ScribblejrSDFDropShadow","order":9,"path":"scripts/ScribblejrSDFDropShadow/ScribblejrSDFDropShadow.yy",},
     {"name":"ScribblejrSetBudget","order":10,"path":"scripts/ScribblejrSetBudget/ScribblejrSetBudget.yy",},
     {"name":"ScribblejrSetCharacterWrap","order":11,"path":"scripts/ScribblejrSetCharacterWrap/ScribblejrSetCharacterWrap.yy",},
     {"name":"ScribblejrSetDefaultFont","order":3,"path":"scripts/ScribblejrSetDefaultFont/ScribblejrSetDefaultFont.yy",},
+    {"name":"ScribblejrSetPreprocesor","order":2,"path":"scripts/ScribblejrSetPreprocesor/ScribblejrSetPreprocesor.yy",},
+    {"name":"ScribblejrSetPreprocesorOnce","order":3,"path":"scripts/ScribblejrSetPreprocesorOnce/ScribblejrSetPreprocesorOnce.yy",},
     {"name":"ScribblejrShrink","order":9,"path":"scripts/ScribblejrShrink/ScribblejrShrink.yy",},
     {"name":"ScribblejrShrinkExt","order":10,"path":"scripts/ScribblejrShrinkExt/ScribblejrShrinkExt.yy",},
     {"name":"Trace","order":3,"path":"scripts/Trace/Trace.yy",},
