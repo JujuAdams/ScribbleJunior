@@ -532,31 +532,31 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                                     break;
                                     
                                     case 2:
-                                        var _spriteImage      = real(_tagArgumentArray[1]);
+                                        var _spriteImage      = real(_spriteSplitArray[1]);
                                         var _spriteX          = 0;
                                         var _spriteY          = 0;
                                         var _spriteLocalScale = 1;
                                     break;
                                     
                                     case 3:
-                                        var _spriteImage      = real(_tagArgumentArray[1]);
-                                        var _spriteX          = real(_tagArgumentArray[2]);
+                                        var _spriteImage      = real(_spriteSplitArray[1]);
+                                        var _spriteX          = real(_spriteSplitArray[2]);
                                         var _spriteY          = 0;
                                         var _spriteLocalScale = 1;
                                     break;
                                     
                                     case 4:
-                                        var _spriteImage      = real(_tagArgumentArray[1]);
-                                        var _spriteX          = real(_tagArgumentArray[2]);
-                                        var _spriteY          = real(_tagArgumentArray[3]);
+                                        var _spriteImage      = real(_spriteSplitArray[1]);
+                                        var _spriteX          = real(_spriteSplitArray[2]);
+                                        var _spriteY          = real(_spriteSplitArray[3]);
                                         var _spriteLocalScale = 1;
                                     break;
                                     
                                     case 5:
-                                        var _spriteImage      = real(_tagArgumentArray[1]);
-                                        var _spriteX          = real(_tagArgumentArray[2]);
-                                        var _spriteY          = real(_tagArgumentArray[3]);
-                                        var _spriteLocalScale = real(_tagArgumentArray[4]);
+                                        var _spriteImage      = real(_spriteSplitArray[1]);
+                                        var _spriteX          = real(_spriteSplitArray[2]);
+                                        var _spriteY          = real(_spriteSplitArray[3]);
+                                        var _spriteLocalScale = real(_spriteSplitArray[4]);
                                     break;
                                 }
                                 
