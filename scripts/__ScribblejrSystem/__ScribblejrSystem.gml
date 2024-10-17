@@ -1,21 +1,18 @@
 // Feather disable all
 
-#macro __SCRIBBLEJR_VERSION  "1.6.0 (alpha)"
-#macro __SCRIBBLEJR_DATE     "2024-10-16"
-
 #macro __SCRIBBLEJR_SHADER_SET    shader_set
 #macro __SCRIBBLEJR_SHADER_RESET  shader_reset
 
 #macro __SCRIBBLEJR_TIMEOUT  1000 //microseconds
 
-#macro SCRIBBLEJR_NO_PREPROCESS  (function(_string) { return _string; })
+
 
 function __ScribblejrSystem()
 {
     static _system = undefined;
     if (is_struct(_system)) return _system;
     
-    __ScribblejrTrace("Welcome to Scribble Junior by Juju Adams! This is version ", __SCRIBBLEJR_VERSION, ", ", __SCRIBBLEJR_DATE);
+    __ScribblejrTrace("Welcome to Scribble Junior by Juju Adams! This is version ", SCRIBBLEJR_VERSION, ", ", SCRIBBLEJR_DATE);
     
     _system = {};
     if (GM_build_type == "run") global.scribblejrSystem = _system;

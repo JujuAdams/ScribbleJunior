@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"__ScribblejrConfig",
+  "%Name":"TestPreprocessor",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__ScribblejrConfig",
+  "name":"TestPreprocessor",
   "parent":{
-    "name":"Scribble Jr.",
-    "path":"folders/Scribble Jr..yy",
+    "name":"ScribbleJunior",
+    "path":"ScribbleJunior.yyp",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -4,7 +4,7 @@
 
 function __ScribblejrError()
 {
-    var _string = "Scribblejr " + string(__SCRIBBLEJR_VERSION) + ":\n";
+    var _string = "Scribblejr " + string(SCRIBBLEJR_VERSION) + ":\n";
     
     var _i = 0;
     repeat(argument_count)

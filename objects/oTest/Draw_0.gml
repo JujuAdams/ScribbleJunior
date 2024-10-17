@@ -8,7 +8,7 @@ if (showHelp)
 {
     _string += "\n";
     _string += "\n";
-    _string += Concat("Scribblejr ", __SCRIBBLEJR_VERSION, " Tester\n");
+    _string += Concat("Scribblejr ", SCRIBBLEJR_VERSION, " Tester\n");
     _string += "\n";
     _string += "F1 = toggle help\n";
     _string += "1-7 = change test mode\n";
