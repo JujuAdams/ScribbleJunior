@@ -14,8 +14,10 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
     __wrapper = undefined;
     __lastDraw = current_time;
     
-    __stringOriginal = _string;
-    _string = _system.__preprocessorMethod(_string);
+    __stringOriginal     = _string;
+    __preprocessorMethod = _system.__preprocessorMethod;
+    
+    _string = __preprocessorMethod(_string);
     
     __key    = _key;
     __string = _string;

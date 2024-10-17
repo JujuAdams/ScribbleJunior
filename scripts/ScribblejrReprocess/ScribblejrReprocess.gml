@@ -14,7 +14,7 @@ function ScribblejrReprocess()
     static _system        = __ScribblejrSystem();
     static _elementsArray = __ScribblejrSystem().__elementsArray;
     
-    var _preprocessorMethod = _system.__preprocessorMethod;
+    var _oldPreprocessorMethod = _system.__preprocessorMethod;
     
     var _i = 0;
     repeat(array_length(_elementsArray)) //We add elements to the cache during this sweep - make sure we don't process new elements
@@ -30,10 +30,12 @@ function ScribblejrReprocess()
                 var _wrapperRef = __wrapper;
                 if ((_wrapperRef != undefined) && weak_ref_alive(_wrapperRef))
                 {
-                    var _newString = _preprocessorMethod(__stringOriginal);
+                    var _newString = __preprocessorMethod(__stringOriginal);
                     if (_newString != _element.__string)
                     {
                         __wrapper = undefined;
+                        
+                        _system.__preprocessorMethod = __preprocessorMethod;
                         
                         //TODO - We're processing the string twice (once to keep, and another time in the constructor)
                         if (is_instanceof(self, __ScribblejrClassExt))
@@ -65,4 +67,6 @@ function ScribblejrReprocess()
         
         ++_i;
     }
+    
+    _system.__preprocessorMethod = _oldPreprocessorMethod;
 }
