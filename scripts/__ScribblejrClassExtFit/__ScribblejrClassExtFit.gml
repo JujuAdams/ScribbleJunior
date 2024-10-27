@@ -193,6 +193,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                                 __whitespace: false,
                                 __joinsRight: true,
                                 __scaleLocal: _spriteLocalScale,
+                                __localScale: _spriteLocalScale,
                             };
                             
                             array_push(_layoutArray, _fragment);
