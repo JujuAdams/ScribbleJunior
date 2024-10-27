@@ -8,7 +8,7 @@ height    = 200;
 showHelp = false;
 
 testString = "Sphinx of black quartz,\njudge my vow! ";
-testStringColor = 2*"Sphinx of black quartz, [sTestShape]judge my[c_red] vow[/c]! ";
+testStringColor = "Sphinx of [[[[black quartz]], [sTestShape]judge my[c_red] vow[/c]! ";
 
 vertex_format_begin();
 vertex_format_add_position_3d();
