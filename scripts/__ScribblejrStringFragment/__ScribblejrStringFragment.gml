@@ -1,7 +1,7 @@
 function __ScribblejrStringFragment(_string, _lineHeight, _spriteScale, _startColour, _fragmentArray, _spriteArray)
 {
     static _colourDict = __ScribblejrSystem().__colourDict;
-            
+    
     var _colour = _startColour;
     var _substringArray = string_split(_string, "[");
             
@@ -27,104 +27,133 @@ function __ScribblejrStringFragment(_string, _lineHeight, _spriteScale, _startCo
     }
             
     //Then iterate other command tag + text fragment combos, splitting as necessary
+    var _ignoreNext = false;
+    
     var _i = 1;
     repeat(array_length(_substringArray)-1)
     {
-        var _tagSplitArray = string_split(_substringArray[_i], "]", false, 1);
-        if (array_length(_tagSplitArray) == 2)
+        if (_ignoreNext)
         {
-            //Handle the contents of the tag
-            var _tagString = _tagSplitArray[0];
-                    
-            //First we try to find the colour state
-            var _foundColour = _colourDict[$ _tagString];
-            if (_foundColour != undefined)
+            var _substring = "[" + _substringArray[_i];
+            var _width = string_width(_substring);
+            
+            array_push(_fragmentArray, {
+                __colour: _colour,
+                __string: _substring,
+                __x:      _x,
+                __y:      0,
+                __width:  _width,
+            });
+            
+            _x += _width;
+            _ignoreNext = false;
+        }
+        else
+        {
+            var _tagSplitArray = string_split(_substringArray[_i], "]", false, 1);
+            
+            if (array_length(_tagSplitArray) <= 1)
             {
-                _colour = _foundColour;
-            }
-            else
-            {
-                var _spriteSplitArray = string_split(_tagString, ",");
-                        
-                //Then we try to find a sprite using the command tag
-                var _sprite = asset_get_index(_spriteSplitArray[0]);
-                if (sprite_exists(_sprite))
+                if (_tagSplitArray[0] == "")
                 {
-                    //Decode sprite arguments
-                    switch(array_length(_spriteSplitArray))
-                    {
-                        case 1:
-                            var _spriteImage      = 0;
-                            var _spriteX          = 0;
-                            var _spriteY          = 0;
-                            var _spriteLocalScale = 1;
-                        break;
-                                
-                        case 2:
-                            var _spriteImage      = real(_spriteSplitArray[1]);
-                            var _spriteX          = 0;
-                            var _spriteY          = 0;
-                            var _spriteLocalScale = 1;
-                        break;
-                                
-                        case 3:
-                            var _spriteImage      = real(_spriteSplitArray[1]);
-                            var _spriteX          = real(_spriteSplitArray[2]);
-                            var _spriteY          = 0;
-                            var _spriteLocalScale = 1;
-                        break;
-                                
-                        case 4:
-                            var _spriteImage      = real(_spriteSplitArray[1]);
-                            var _spriteX          = real(_spriteSplitArray[2]);
-                            var _spriteY          = real(_spriteSplitArray[3]);
-                            var _spriteLocalScale = 1;
-                        break;
-                        
-                        case 5:
-                            var _spriteImage      = real(_spriteSplitArray[1]);
-                            var _spriteX          = real(_spriteSplitArray[2]);
-                            var _spriteY          = real(_spriteSplitArray[3]);
-                            var _spriteLocalScale = real(_spriteSplitArray[4]);
-                        break;
-                    }
-                            
-                    var _width = _spriteScale*_spriteLocalScale*sprite_get_width(_sprite);
-                            
-                    array_push(_spriteArray, {
-                        __sprite:     _sprite,
-                        __image:      _spriteImage,
-                        __x:          _spriteX + _x + _spriteScale*_spriteLocalScale*sprite_get_xoffset(_sprite),
-                        __y:          _spriteY + 0.5*(_lineHeight - _spriteScale*_spriteLocalScale*sprite_get_height(_sprite)) + _spriteScale*_spriteLocalScale*sprite_get_yoffset(_sprite),
-                        __width:      _width,
-                        __localScale: _spriteLocalScale,
-                    });
-                            
-                    _x += _width;
+                    _ignoreNext = true;
+                }
+            }
+            else if (array_length(_tagSplitArray) == 2)
+            {
+                //Handle the contents of the tag
+                var _tagString = _tagSplitArray[0];
+                
+                //First we try to find the colour state
+                var _foundColour = _colourDict[$ _tagString];
+                if (_foundColour != undefined)
+                {
+                    _colour = _foundColour;
                 }
                 else
                 {
-                    __ScribblejrTrace("Command tag \"", _tagString, "\" not recognised");
+                    var _spriteSplitArray = string_split(_tagString, ",");
+                    
+                    //Then we try to find a sprite using the command tag
+                    var _sprite = asset_get_index(_spriteSplitArray[0]);
+                    if (sprite_exists(_sprite))
+                    {
+                        //Decode sprite arguments
+                        switch(array_length(_spriteSplitArray))
+                        {
+                            case 1:
+                                var _spriteImage      = 0;
+                                var _spriteX          = 0;
+                                var _spriteY          = 0;
+                                var _spriteLocalScale = 1;
+                            break;
+                            
+                            case 2:
+                                var _spriteImage      = real(_spriteSplitArray[1]);
+                                var _spriteX          = 0;
+                                var _spriteY          = 0;
+                                var _spriteLocalScale = 1;
+                            break;
+                            
+                            case 3:
+                                var _spriteImage      = real(_spriteSplitArray[1]);
+                                var _spriteX          = real(_spriteSplitArray[2]);
+                                var _spriteY          = 0;
+                                var _spriteLocalScale = 1;
+                            break;
+                            
+                            case 4:
+                                var _spriteImage      = real(_spriteSplitArray[1]);
+                                var _spriteX          = real(_spriteSplitArray[2]);
+                                var _spriteY          = real(_spriteSplitArray[3]);
+                                var _spriteLocalScale = 1;
+                            break;
+                            
+                            case 5:
+                                var _spriteImage      = real(_spriteSplitArray[1]);
+                                var _spriteX          = real(_spriteSplitArray[2]);
+                                var _spriteY          = real(_spriteSplitArray[3]);
+                                var _spriteLocalScale = real(_spriteSplitArray[4]);
+                            break;
+                        }
+                        
+                        var _width = _spriteScale*_spriteLocalScale*sprite_get_width(_sprite);
+                        
+                        array_push(_spriteArray, {
+                            __sprite:     _sprite,
+                            __image:      _spriteImage,
+                            __x:          _spriteX + _x + _spriteScale*_spriteLocalScale*sprite_get_xoffset(_sprite),
+                            __y:          _spriteY + 0.5*(_lineHeight - _spriteScale*_spriteLocalScale*sprite_get_height(_sprite)) + _spriteScale*_spriteLocalScale*sprite_get_yoffset(_sprite),
+                            __width:      _width,
+                            __localScale: _spriteLocalScale,
+                        });
+                        
+                        _x += _width;
+                    }
+                    else
+                    {
+                        __ScribblejrTrace("Command tag \"", _tagString, "\" not recognised");
+                    }
+                }
+                
+                //Then we handle the next text fragment
+                var _textString = _tagSplitArray[1];
+                if (_textString != "")
+                {
+                    var _width = string_width(_textString);
+                    
+                    array_push(_fragmentArray, {
+                        __colour: _colour,
+                        __string: _tagSplitArray[1],
+                        __x:      _x,
+                        __y:      0,
+                        __width:  _width,
+                    });
+                    
+                    _x += _width;
                 }
             }
-                    
-            //Then we handle the next text fragment
-            var _textString = _tagSplitArray[1];
-            if (_textString != "")
-            {
-                var _width = string_width(_textString);
-                        
-                array_push(_fragmentArray, {
-                    __colour: _colour,
-                    __string: _tagSplitArray[1],
-                    __x:      _x,
-                    __y:      0,
-                    __width:  _width,
-                });
-                        
-                _x += _width;
-            }
-        }
+    }
                 
         ++_i;
     }
