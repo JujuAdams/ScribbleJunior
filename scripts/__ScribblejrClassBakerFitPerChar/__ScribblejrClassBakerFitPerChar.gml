@@ -66,6 +66,24 @@ function __ScribblejrClassBakerFitPerChar(_fragmentArray, _font) constructor
     
     static __Tick = function()
     {
+        if (__glyph >= array_length(__stringArray))
+        {
+            __line++;
+            if (__line < array_length(__lineStringArray))
+            {
+                __glyph = 0;
+                __glyphY += __spaceHeight;
+                __tickMethod = __DecomposeLine;
+            }
+            else
+            {
+                vertex_end(__vertexBuffer);
+                __tickMethod = __Freeze;
+            }
+            
+            return false;
+        }
+        
         repeat(SCRIBBLEJR_BAKE_GLYPH_COUNT)
         {
             var _char = __stringArray[__glyph];
