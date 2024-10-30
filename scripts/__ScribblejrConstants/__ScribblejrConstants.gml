@@ -11,7 +11,7 @@
 //                                                                        //
 ////////////////////////////////////////////////////////////////////////////
 
-#macro SCRIBBLEJR_VERSION  "1.6.1 (alpha)"
-#macro SCRIBBLEJR_DATE     "2024-10-27"
+#macro SCRIBBLEJR_VERSION  "1.6.2 (beta)"
+#macro SCRIBBLEJR_DATE     "2024-10-30"
 
 #macro SCRIBBLEJR_NO_PREPROCESS  __ScribbleJjrNoPreprocessing
