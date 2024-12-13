@@ -116,8 +116,17 @@ function ScribblejrCacheFontInfo(_font)
                 _glyphInfo.w       = _imageInfo.crop_width;
                 _glyphInfo.h       = _imageInfo.crop_height;
                 _glyphInfo.shift   = _glyphSeparation;
-                _glyphInfo.offset  = _xOffset;
-                _glyphInfo.yOffset = _imageInfo.y_offset;
+                
+                if (SCRIBBLEJR_FIX_SPRITEFONT_OFFSET)
+                {
+                    _glyphInfo.offset  = _xOffset+1;
+                    _glyphInfo.yOffset = _imageInfo.y_offset+1;
+                }
+                else
+                {
+                    _glyphInfo.offset  = _xOffset;
+                    _glyphInfo.yOffset = _imageInfo.y_offset;
+                }
                 
                 ++_i;
             }

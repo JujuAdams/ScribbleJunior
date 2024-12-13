@@ -45,6 +45,11 @@
 //Whether to emit lots of additional debug messages to help track Scribble Junior's behaviour.
 #macro SCRIBBLEJR_VERBOSE  false
 
+//Adds 1 pixel offset to spritefont glyphs pushing them slightly right and down. This should
+//improve consistency with GameMaker's native spritefont rendering. This feature was added in
+//version 1.6.3 - for compatibility with older versions, set this macro to `false`.
+#macro SCRIBBLEJR_FIX_SPRITEFONT_OFFSET  true
+
 //Functions to call when Scribblejr emits messages. Change these if you want to redirect Scribblejr
 //messages to something other than the console / native error handler.
 #macro SCRIBBLEJR_SHOW_DEBUG_MESSAGE  show_debug_message //Warnings and general information
