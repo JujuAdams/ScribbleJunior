@@ -50,8 +50,9 @@ function ScribblejrCacheFontInfo(_font)
             var _sprite  = _fontInfo.spriteIndex;
             var _spriteInfo = sprite_get_info(_sprite);
             
-            var _framesArray = _spriteInfo.frames;
-            var _textureIndex = _framesArray[0].texture;
+            var _framesArray    = _spriteInfo.frames;
+            var _framesCount    = array_length(_framesArray);
+            var _textureIndex   = _framesArray[0].texture;
             var _texturePointer = sprite_get_texture(_sprite, 0);
             
             //Force the texture information for the font
@@ -87,65 +88,70 @@ function ScribblejrCacheFontInfo(_font)
             var _separation   = _extraData.__separation;
             var _spriteWidth  = sprite_get_width(_sprite);
             
-            if (SCRIBBLEJR_SAFE_SPRITEFONTS && (GM_build_type == "run"))
-            {
-                var _framesCount = array_length(_framesArray);
-                
-                var _i = 0;
-                repeat(array_length(_glyphNameArray))
-                {
-                    var _name = _glyphNameArray[_i];
-                    var _glyphInfo = _fontGlyphStruct[$ _name];
-                    var _image = _glyphInfo.char;
-                    
-                    if ((_image < 0) || (_image >= _framesCount))
-                    {
-                        __ScribblejrError($"Image number {_image} invalid for sprite {sprite_get_name(_sprite)}\nGlyph was \"{_name}\"\nPlease run in debug mode and inspect local variable `_fontInfo`");
-                    }
-                    
-                    ++_i;
-                }
-            }
-            
             var _i = 0;
             repeat(array_length(_glyphNameArray))
             {
                 var _name = _glyphNameArray[_i];
                 var _glyphInfo = _fontGlyphStruct[$ _name];
                 var _image = _glyphInfo.char;
-                var _imageInfo = _framesArray[_image];
                 
-                var _uvs  = sprite_get_uvs(_sprite, _image);
-                var _left = round(_uvs[0] / _texTexelW);
-                var _top  = round(_uvs[1] / _texTexelH);
-                
-                
-                if (_proportional)
+                if ((_image < 0) || (_image >= _framesCount))
                 {
-                    var _xOffset = 0;
-                    var _glyphSeparation = _imageInfo.crop_width + _separation;
-                }
-                else
-                {            
-                    var _xOffset = _imageInfo.x_offset;
-                    var _glyphSeparation = _spriteWidth + _separation;
-                }
-                
-                _glyphInfo.x       = _left;
-                _glyphInfo.y       = _top;
-                _glyphInfo.w       = _imageInfo.crop_width;
-                _glyphInfo.h       = _imageInfo.crop_height;
-                _glyphInfo.shift   = _glyphSeparation;
-                
-                if (SCRIBBLEJR_FIX_SPRITEFONT_OFFSET)
-                {
-                    _glyphInfo.offset  = _xOffset+1;
-                    _glyphInfo.yOffset = _imageInfo.y_offset+1;
+                    if (_name == " ")
+                    {
+                        _glyphInfo.x     = 0;
+                        _glyphInfo.y     = 0;
+                        _glyphInfo.w     = 0;
+                        _glyphInfo.h     = 0;
+                        _glyphInfo.shift = sprite_get_width(_sprite);
+                    }
+                    else if (SCRIBBLEJR_SAFE_SPRITEFONTS)
+                    {
+                        if (GM_build_type == "run")
+                        {
+                            __ScribblejrError($"Image number {_image} invalid for sprite {sprite_get_name(_sprite)}\nGlyph was \"{_name}\"\nPlease run in debug mode and inspect local variable `_fontInfo`");
+                        }
+                        else
+                        {
+                            __ScribblejrTrace($"Image number {_image} invalid for sprite {sprite_get_name(_sprite)}. Glyph was \"{_name}\"");
+                        }
+                    }
                 }
                 else
                 {
-                    _glyphInfo.offset  = _xOffset;
-                    _glyphInfo.yOffset = _imageInfo.y_offset;
+                    var _imageInfo = _framesArray[_image];
+                    
+                    var _uvs  = sprite_get_uvs(_sprite, _image);
+                    var _left = round(_uvs[0] / _texTexelW);
+                    var _top  = round(_uvs[1] / _texTexelH);
+                    
+                    if (_proportional)
+                    {
+                        var _xOffset = 0;
+                        var _glyphSeparation = _imageInfo.crop_width + _separation;
+                    }
+                    else
+                    {            
+                        var _xOffset = _imageInfo.x_offset;
+                        var _glyphSeparation = _spriteWidth + _separation;
+                    }
+                    
+                    _glyphInfo.x       = _left;
+                    _glyphInfo.y       = _top;
+                    _glyphInfo.w       = _imageInfo.crop_width;
+                    _glyphInfo.h       = _imageInfo.crop_height;
+                    _glyphInfo.shift   = _glyphSeparation;
+                    
+                    if (SCRIBBLEJR_FIX_SPRITEFONT_OFFSET)
+                    {
+                        _glyphInfo.offset  = _xOffset+1;
+                        _glyphInfo.yOffset = _imageInfo.y_offset+1;
+                    }
+                    else
+                    {
+                        _glyphInfo.offset  = _xOffset;
+                        _glyphInfo.yOffset = _imageInfo.y_offset;
+                    }
                 }
                 
                 ++_i;
