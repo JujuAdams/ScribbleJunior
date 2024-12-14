@@ -44,4 +44,8 @@ var _mapstring = " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678
 spriteFont = font_add_sprite_ext(sSpriteFont, _mapstring, true, 1);
 ScribblejrAttachSpritefont(spriteFont, true, 1);
 
+var _mapstring = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,.-;:_+-*/\\'\"!?~^°<>|(){[]}%&=#@$ÄÖÜäöüß";
+spriteFontNoSpace = font_add_sprite_ext(sSpriteFontNoSpace, _mapstring, true, 1);
+ScribblejrAttachSpritefont(spriteFontNoSpace, true, 1);
+
 ScribblejrSetCharacterWrap(false);

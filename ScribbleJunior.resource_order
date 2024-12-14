@@ -1,6 +1,6 @@
 {
   "FolderOrderSettings":[
-    {"name":"Scribble Jr.","order":11,"path":"folders/Scribble Jr..yy",},
+    {"name":"Scribble Jr.","order":12,"path":"folders/Scribble Jr..yy",},
     {"name":"Baker","order":1,"path":"folders/Scribble Jr./(System)/Classes/Baker.yy",},
     {"name":"Element","order":2,"path":"folders/Scribble Jr./(System)/Classes/Element.yy",},
     {"name":"Preprocessor","order":4,"path":"folders/Scribble Jr./Preprocessor.yy",},
@@ -71,6 +71,7 @@
     {"name":"__shdScribblejrSDF","order":15,"path":"shaders/__shdScribblejrSDF/__shdScribblejrSDF.yy",},
     {"name":"__shdScribblejrSDFShadow","order":16,"path":"shaders/__shdScribblejrSDFShadow/__shdScribblejrSDFShadow.yy",},
     {"name":"sSpriteFont","order":10,"path":"sprites/sSpriteFont/sSpriteFont.yy",},
+    {"name":"sSpriteFontNoSpace","order":11,"path":"sprites/sSpriteFontNoSpace/sSpriteFontNoSpace.yy",},
     {"name":"sTestShape","order":9,"path":"sprites/sTestShape/sTestShape.yy",},
   ],
 }

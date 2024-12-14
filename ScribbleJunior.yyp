@@ -98,6 +98,7 @@
     {"id":{"name":"__shdScribblejrSDF","path":"shaders/__shdScribblejrSDF/__shdScribblejrSDF.yy",},},
     {"id":{"name":"__shdScribblejrSDFShadow","path":"shaders/__shdScribblejrSDFShadow/__shdScribblejrSDFShadow.yy",},},
     {"id":{"name":"sSpriteFont","path":"sprites/sSpriteFont/sSpriteFont.yy",},},
+    {"id":{"name":"sSpriteFontNoSpace","path":"sprites/sSpriteFontNoSpace/sSpriteFontNoSpace.yy",},},
     {"id":{"name":"sTestShape","path":"sprites/sTestShape/sTestShape.yy",},},
   ],
   "resourceType":"GMProject",
