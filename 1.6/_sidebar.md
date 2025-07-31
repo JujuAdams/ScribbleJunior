@@ -23,5 +23,6 @@
 -   [Default Font](Default-Font)
 -   [Colors](Colors)
 -   [Character Wrap](Character-Wrap)
+-   [Preprocessor](Preprocessor)
 -   [Prefetching Font Data](Prefetching-Font-Data)
 -   [Budget](Budget)
