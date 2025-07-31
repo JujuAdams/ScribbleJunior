@@ -88,6 +88,9 @@ function ScribblejrCacheFontInfo(_font)
             var _separation   = _extraData.__separation;
             var _spriteWidth  = sprite_get_width(_sprite);
             
+            var _spriteXOrigin = sprite_get_xoffset(_sprite);
+            var _spriteYOrigin = sprite_get_yoffset(_sprite);
+            
             var _i = 0;
             repeat(array_length(_glyphNameArray))
             {
@@ -127,12 +130,12 @@ function ScribblejrCacheFontInfo(_font)
                     
                     if (_proportional)
                     {
-                        var _xOffset = 0;
+                        var _xOffset = -_spriteXOrigin;
                         var _glyphSeparation = _imageInfo.crop_width + _separation;
                     }
                     else
                     {            
-                        var _xOffset = _imageInfo.x_offset;
+                        var _xOffset = _imageInfo.x_offset - _spriteXOrigin;
                         var _glyphSeparation = _spriteWidth + _separation;
                     }
                     
@@ -145,12 +148,12 @@ function ScribblejrCacheFontInfo(_font)
                     if (SCRIBBLEJR_FIX_SPRITEFONT_OFFSET)
                     {
                         _glyphInfo.offset  = _xOffset+1;
-                        _glyphInfo.yOffset = _imageInfo.y_offset+1;
+                        _glyphInfo.yOffset = _imageInfo.y_offset+1 - _spriteYOrigin;
                     }
                     else
                     {
                         _glyphInfo.offset  = _xOffset;
-                        _glyphInfo.yOffset = _imageInfo.y_offset;
+                        _glyphInfo.yOffset = _imageInfo.y_offset - _spriteYOrigin;
                     }
                 }
                 
