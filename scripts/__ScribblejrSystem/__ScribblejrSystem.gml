@@ -1,19 +1,18 @@
 // Feather disable all
 
-#macro __SCRIBBLEJR_VERSION  "1.5.0"
-#macro __SCRIBBLEJR_DATE     "2024-07-22"
-
 #macro __SCRIBBLEJR_SHADER_SET    shader_set
 #macro __SCRIBBLEJR_SHADER_RESET  shader_reset
 
 #macro __SCRIBBLEJR_TIMEOUT  1000 //microseconds
+
+
 
 function __ScribblejrSystem()
 {
     static _system = undefined;
     if (is_struct(_system)) return _system;
     
-    __ScribblejrTrace("Welcome to Scribblejr by Juju Adams! This is version ", __SCRIBBLEJR_VERSION, ", ", __SCRIBBLEJR_DATE);
+    __ScribblejrTrace("Welcome to Scribble Junior by Juju Adams! This is version ", SCRIBBLEJR_VERSION, ", ", SCRIBBLEJR_DATE);
     
     _system = {};
     if (GM_build_type == "run") global.scribblejrSystem = _system;
@@ -78,6 +77,13 @@ function __ScribblejrSystem()
         vertex_format_add_color();
         vertex_format_add_texcoord();
         __vertexFormatColor = vertex_format_end();
+        
+        __preprocessorDefault      = SCRIBBLEJR_NO_PREPROCESS;
+        __preprocessorDefaultName  = string(__preprocessorDefault);
+        __preprocessorUsingDefault = true;
+        __preprocessorMethod       = __preprocessorDefault;
+        __preprocessorName         = __preprocessorDefaultName;
+        __preprocessorOnce         = false;
     }
     
     time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, function()

@@ -51,6 +51,13 @@ function __ScribblejrClassBakerExt(_fragArray, _font) constructor
     
     static __DecomposeFragment = function()
     {
+        if (__fragment >= array_length(__fragmentArray))
+        {
+            vertex_end(__vertexBuffer);
+            __tickMethod = __Freeze;
+            return false;
+        }
+        
         var _fragmentData   = __fragmentArray[__fragment];
         var _fragmentString = _fragmentData.__string;
         

@@ -19,6 +19,8 @@ function __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontSc
     __hAlign    = _hAlign;
     __vAlign    = _vAlign;
     __font      = _font;
+    __maxWidth  = _maxWidth;
+    __maxHeight = _maxHeight;
     __wrapWidth = undefined;
     
     __fontIsDynamic = ScribblejrCacheFontInfo(_font).__isDynamic;

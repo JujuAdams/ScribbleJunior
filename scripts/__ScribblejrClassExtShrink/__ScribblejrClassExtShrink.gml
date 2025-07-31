@@ -17,6 +17,11 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     __wrapper = undefined;
     __lastDraw = current_time;
     
+    __stringOriginal     = _string;
+    __preprocessorMethod = _system.__preprocessorMethod;
+    
+    _string = __preprocessorMethod(_string);
+    
     __key       = _key;
     __string    = _string;
     __hAlign    = _hAlign;
@@ -24,6 +29,8 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     __font      = _font;
     __scale     = _fontScale;
     __fontScale = _fontScale;
+    __maxWidth  = _maxWidth;
+    __maxHeight = _maxHeight;
     
     __fontIsDynamic = ScribblejrCacheFontInfo(_font).__isDynamic;
     __fontIsSDF     = ScribblejrCacheFontInfo(_font).sdfEnabled;
@@ -359,7 +366,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         {
             with(__spriteArray[_i])
             {
-                draw_sprite_ext(__sprite, __image, _x + _textScale*__x, _y + _textScale*__y, _spriteScale, _spriteScale, 0, c_white, _alpha);
+                draw_sprite_ext(__sprite, __image, _x + _textScale*__x, _y + _textScale*__y, _spriteScale*__localScale, _spriteScale*__localScale, 0, c_white, _alpha);
             }
             
             ++_i;

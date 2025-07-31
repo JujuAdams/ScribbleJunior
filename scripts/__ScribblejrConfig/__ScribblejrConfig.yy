@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"__ScribblejrConfig",
   "parent":{
-    "name":"Setup",
-    "path":"folders/Scribble Jr./Setup.yy",
+    "name":"Scribble Jr.",
+    "path":"folders/Scribble Jr..yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

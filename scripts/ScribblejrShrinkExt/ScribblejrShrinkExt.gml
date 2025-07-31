@@ -78,7 +78,8 @@ function ScribblejrShrinkExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font
                              _font, ":",
                              _fontScale, ":",
                              _maxWidth, ":",
-                             _maxHeight, ":F");
+                             _maxHeight, ":",
+                             _system.__preprocessorName, ":F");
     
     var _wrapper = _cache[$ _key];
     if (_wrapper == undefined)
@@ -89,6 +90,11 @@ function ScribblejrShrinkExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font
         
         _cache[$ _key] = _wrapper;
         array_push(_array, _element);
+    }
+    
+    if (_system.__preprocessorOnce)
+    {
+        ScribblejrResetPreprocesor();
     }
     
     return _wrapper;

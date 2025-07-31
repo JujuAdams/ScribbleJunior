@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"TestPreprocessor",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"TestPreprocessor",
+  "parent":{
+    "name":"ScribbleJunior",
+    "path":"ScribbleJunior.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

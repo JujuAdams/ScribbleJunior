@@ -14,6 +14,11 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
     __wrapper = undefined;
     __lastDraw = current_time;
     
+    __stringOriginal     = _string;
+    __preprocessorMethod = _system.__preprocessorMethod;
+    
+    _string = __preprocessorMethod(_string);
+    
     __key    = _key;
     __string = _string;
     __hAlign = _hAlign;
@@ -381,7 +386,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         {
             with(__spriteArray[_i])
             {
-                draw_sprite_ext(__sprite, __image, _x + _textScale*__x, _y + _textScale*__y, _spriteScale, _spriteScale, 0, c_white, _alpha);
+                draw_sprite_ext(__sprite, __image, _x + _textScale*__x, _y + _textScale*__y, _spriteScale*__localScale, _spriteScale*__localScale, 0, c_white, _alpha);
             }
             
             ++_i;

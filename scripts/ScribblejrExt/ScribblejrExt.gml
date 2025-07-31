@@ -71,7 +71,8 @@ function ScribblejrExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font = und
     var _key = string_concat(_string, ":",
                              _hAlign + 3*_vAlign, ":", //Pack these flags together
                              _font, ":",
-                             _fontScale, ":D");
+                             _fontScale, ":",
+                             _system.__preprocessorName, ":D");
     
     var _wrapper = _cache[$ _key];
     if (_wrapper == undefined)
@@ -82,6 +83,11 @@ function ScribblejrExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font = und
         
         _cache[$ _key] = _wrapper;
         array_push(_array, _element);
+    }
+    
+    if (_system.__preprocessorOnce)
+    {
+        ScribblejrResetPreprocesor();
     }
     
     return _wrapper;
