@@ -28,10 +28,6 @@ This function scales text without adding newlines. If you want to scale down tex
 
 ## Formatting
 
-Two types of formatting command are supported:
-
-&nbsp;
-
 ### Partial Text Colouring
 
 **Example:** `"This is [c_orange]orange[/c] text."`
@@ -53,6 +49,14 @@ By adding a second parameter to that tag, a different subimage in a sprite can b
 You may also specify a third and fourth parameter which acts as an x/y offset for the sprite image. In this case, three images are displayed in a diagonal line from bottom to top, going left to right. This feature is helpful for adjusting sprite positions to line up better with text.
 
 **Example:** `"Wow, magical! [sprSparke,0,0,4][sprSparke,0,0,0][sprSparke,0,0,-4]"`
+
+&nbsp;
+
+### Inserting `[`
+
+Normally, an open square bracket will be interpreted as the start to a formatting tag. However, occasionally you'll want to put a literal square bracket character in your text. To insert a square bracket, use two square brackets together in your string.
+    
+**Example:** `"Press the [[space] key to begin!"`
 
 &nbsp;
 
