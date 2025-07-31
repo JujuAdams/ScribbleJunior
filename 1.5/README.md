@@ -32,6 +32,12 @@ Scribble Junior primarily supports GameMaker 2023.8, and in theory supports ever
 
 &nbsp;
 
+## Does this library support GMRT / "new runtime"?
+
+No, GMRT is not supported by this library.
+
+&nbsp;
+
 **How is Scribble Junior licensed? Can I use it for commercial projects?**
 
 [Scribble Junior is released under the MIT license](https://github.com/JujuAdams/ScribbleJunior/blob/master/LICENSE). This means you can use it for whatever purpose you want, including commercial projects. It'd mean a lot to me if you'd drop my name in your credits (Juju Adams) and/or say thanks, but you're under no obligation to do so.
