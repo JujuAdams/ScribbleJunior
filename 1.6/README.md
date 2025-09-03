@@ -14,6 +14,30 @@ Scribble Junior is a stripped back lighter text rendering solution compared to S
 
 &nbsp;
 
+**Which function should I use?**
+
+The decision primarily falls down to features. The first decision is whether you'd like to use in-line sprites and colours. The second decision is how you'd like text to respond to limited space. This is easiest to understand as a table:
+
+|                         |Plain text        |In-line sprites and colours|
+|-------------------------|------------------|---------------------------|
+|**No layout**            |`Scribblejr`      |`ScribblejrExt`            |
+|**Shrink without reflow**|`ScribblejrShrink`|`ScribblejrShrinkExt`      |
+|**Fit-to-box**           |`ScribblejrFit`   |`ScribblejrFitExt`         |
+
+&nbsp;
+
+**Which function is the fastest?**
+
+There are two kinds of performance to consider: up-front cost to parse text, and the on-going cost to render text.
+
+The cost to parse text varies a lot depending on how much text you have; however, as a rule of thumb, `ScribblejrFit()` and `ScribblejrFitExt()` are the most expensive functions in general. `ScribblejrExt()` and `ScribblejrShrinkExt()` are more expensive than their plain text siblings.
+
+The on-going cost is less for plain text and higher for text that contain in-line sprites. The difference is small but if you're looking for one, there is one.
+
+Overall, `Scribblejr()` is the fastest and `ScribblejrFitExt()` is the slowest. If a function has more features, it'll operate slower. Try to use the right function for the job if you're concerned about performance - don't use `ScribblejrFitExt()` when `Scribblejr()` will do.
+
+&nbsp;
+
 **Can I use Scribble Junior alongside [Scribble Deluxe](https://github.com/JujuAdams/Scribble/)?**
 
 Yes! In fact, I encourage it. Scribble Junior is excellent for static UI text whereas Scribble Deluxe is geared more towards dialogue and animated text.
