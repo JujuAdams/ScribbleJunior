@@ -44,7 +44,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
     if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
     draw_set_font(__font);
     
-    if (string_count("[", _string) <= 0)
+    if ((string_pos("[", _string) <= 0) && (string_pos("\n", _string) <= 0))
     {
         //No square brackets, fall back on simple rendering
         
@@ -56,7 +56,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
             
             case fa_center:
                 __width = __scale*string_width(_string);
-                var _xOffset = -__width/2;
+                var _xOffset = -0.5*__width;
             break;
             
             case fa_right:
@@ -73,7 +73,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
             
             case fa_middle:
                 __height = __scale*string_height(_string);
-                var _yOffset = -__height/2;
+                var _yOffset = -0.5*__height;
             break;
             
             case fa_bottom:
@@ -88,8 +88,8 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
         array_push(__fragmentArray, {
             __colour: -1,
             __string: __string,
-            __x:      _xOffset,
-            __y:      _yOffset,
+            __x:      _xOffset / __scale,
+            __y:      _yOffset / __scale,
         });
     }
     else
