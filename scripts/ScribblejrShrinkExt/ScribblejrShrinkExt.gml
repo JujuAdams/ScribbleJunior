@@ -84,7 +84,15 @@ function ScribblejrShrinkExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font
     var _wrapper = _cache[$ _key];
     if (_wrapper == undefined)
     {
-        var _element = new __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight);
+        if (string_pos("[", _string) <= 0)
+        {
+            var _element = new __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight);
+        }
+        else
+        {
+            var _element = new __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight);
+        }
+        
         var _wrapper = new __ScribblejrClassWrapper(_element);
         _element.__wrapper = weak_ref_create(_wrapper);
         

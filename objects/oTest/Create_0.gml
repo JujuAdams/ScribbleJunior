@@ -1,6 +1,6 @@
 hAlign    = fa_center;
 vAlign    = fa_top;
-font      = fntThin;
+font      = fntTest;
 fontScale = 1;
 width     = 300;
 height    = 200;

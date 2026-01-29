@@ -50,41 +50,44 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
     draw_set_font(__font);
     
-    if (string_count("[", _string) <= 0)
-    {
-        //No square brackets, fall back on simple rendering
-        
-        __width   = string_width(__string);
-        __height  = string_height(__string);
-        __scale   = min(1, _maxWidth/__width, _maxHeight/__height);
-        __width  *= __scale;
-        __height *= __scale;
-        
-        switch(__hAlign)
-        {
-            case fa_left:   var _xOffset = 0;          break;
-            case fa_center: var _xOffset = -__width/2; break;
-            case fa_right:  var _xOffset = -__width;   break;
-        }
-        
-        switch(__vAlign)
-        {
-            case fa_top:    var _yOffset = 0;           break;
-            case fa_middle: var _yOffset = -__height/2; break;
-            case fa_bottom: var _yOffset = -__height;   break;
-        }
-        
-        Draw = (__scale == 1)? __DrawSimple : __DrawSimpleScaled;
-        
-        //Add a spoofed fragment so the vertex buffer baker has something to work on
-        array_push(__fragmentArray, {
-            __colour: -1,
-            __string: __string,
-            __x:      _xOffset,
-            __y:      _yOffset,
-        });
-    }
-    else
+    //Juju: This caused issues when the string contained a newline. Instead of using string splits
+    //      and so on, we branch in `ScribblejrShrinkExt()` to choose the simpler Shrink class.
+    //
+    //if (string_count("[", _string) <= 0)
+    //{
+    //    //No square brackets, fall back on simple rendering
+    //    
+    //    __width   = string_width(__string);
+    //    __height  = string_height(__string);
+    //    __scale   = min(1, _maxWidth/__width, _maxHeight/__height);
+    //    __width  *= __scale;
+    //    __height *= __scale;
+    //    
+    //    switch(__hAlign)
+    //    {
+    //        case fa_left:   var _xOffset = 0;          break;
+    //        case fa_center: var _xOffset = -__width/2; break;
+    //        case fa_right:  var _xOffset = -__width;   break;
+    //    }
+    //    
+    //    switch(__vAlign)
+    //    {
+    //        case fa_top:    var _yOffset = 0;           break;
+    //        case fa_middle: var _yOffset = -__height/2; break;
+    //        case fa_bottom: var _yOffset = -__height;   break;
+    //    }
+    //    
+    //    Draw = (__scale == 1)? __DrawSimple : __DrawSimpleScaled;
+    //    
+    //    //Add a spoofed fragment so the vertex buffer baker has something to work on
+    //    array_push(__fragmentArray, {
+    //        __colour: -1,
+    //        __string: __string,
+    //        __x:      _xOffset,
+    //        __y:      _yOffset,
+    //    });
+    //}
+    //else
     {
         //Cache some frequently used information
         var _lineHeight    = __ScribblejrGetSpaceHeight(_font);
