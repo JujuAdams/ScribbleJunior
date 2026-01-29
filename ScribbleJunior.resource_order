@@ -10,6 +10,7 @@
   "ResourceOrderSettings":[
     {"name":"fntTest","order":9,"path":"fonts/fntTest/fntTest.yy",},
     {"name":"fntTestSDF","order":10,"path":"fonts/fntTestSDF/fntTestSDF.yy",},
+    {"name":"fntThin","order":8,"path":"fonts/fntThin/fntThin.yy",},
     {"name":"ScribblejrDefaultFont","order":17,"path":"fonts/ScribblejrDefaultFont/ScribblejrDefaultFont.yy",},
     {"name":"oTest","order":1,"path":"objects/oTest/oTest.yy",},
     {"name":"oTestPreprocessor","order":3,"path":"objects/oTestPreprocessor/oTestPreprocessor.yy",},
