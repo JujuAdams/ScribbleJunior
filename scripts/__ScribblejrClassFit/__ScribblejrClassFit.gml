@@ -280,7 +280,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                     var _i = 0;
                     repeat(array_length(__stretchesArray))
                     {
-                        with(__stretchesArray[_i]) __x -= __width/2;
+                        with(__stretchesArray[_i]) __x -= __width div 2;
                         ++_i;
                     }
                 }

@@ -56,7 +56,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
             
             case fa_center:
                 __width = __scale*string_width(_string);
-                var _xOffset = -0.5*__width;
+                var _xOffset = -(__width div 2);
             break;
             
             case fa_right:
@@ -149,7 +149,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
             
             if (__vAlign == fa_center)
             {
-                var _yOffset = -0.5*__height;
+                var _yOffset = -(__height div 2);
             }
             else if (__vAlign == fa_right)
             {
@@ -165,7 +165,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
             {
                 if (__hAlign == fa_center)
                 {
-                    var _xOffset = -0.5*_lineWidthArray[_lineIndex];
+                    var _xOffset = -(_lineWidthArray[_lineIndex] div 2);
                 }
                 else if (__hAlign == fa_right)
                 {

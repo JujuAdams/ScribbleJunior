@@ -35,21 +35,7 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
     if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();
     draw_set_font(__font);
     
-    //Cache string width/height to handle alignment positioning
-    switch(_hAlign)
-    {
-        case fa_left:
-        break;
-        
-        case fa_center:
-            __width = __scale*string_width(_string);
-        break;
-        
-        case fa_right:
-            __width = __scale*string_width(_string);
-        break;
-    }
-    
+    //Cache string height to handle alignment positioning
     switch(_vAlign)
     {
         case fa_top:

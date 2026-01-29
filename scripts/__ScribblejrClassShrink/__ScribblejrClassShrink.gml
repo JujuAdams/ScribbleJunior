@@ -69,9 +69,9 @@ function __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontSc
     //Cache string width/height to handle alignment positioning
     switch(_hAlign)
     {
-        case fa_left:   __xOffset = 0;             break;
-        case fa_center: __xOffset = -GetWidth()/2; break;
-        case fa_right:  __xOffset = -GetWidth();   break;
+        case fa_left:   __xOffset = 0;                   break;
+        case fa_center: __xOffset = -(GetWidth() div 2); break;
+        case fa_right:  __xOffset = -GetWidth();         break;
     }
     
     switch(_vAlign)

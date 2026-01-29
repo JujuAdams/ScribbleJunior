@@ -370,7 +370,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                                         var _j = _lineStart;
                                         repeat(_stretchStart - _lineStart)
                                         {
-                                            with(_layoutArray[_j]) __x -= _cursorX/2;
+                                            with(_layoutArray[_j]) __x -= (_cursorX div 2);
                                             ++_j;
                                         }
                                     }
@@ -436,7 +436,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                 //Sort out the horizontal alignment for the last line (only on the last iteration though)
                 if ((_hAlign == fa_center) || (_hAlign == fa_right))
                 {
-                    var _offset = (_hAlign == fa_center)? (_overallWidth/2) : _overallWidth;
+                    var _offset = (_hAlign == fa_center)? (_overallWidth div 2) : _overallWidth;
                     var _j = _lineStart;
                     repeat(_stretchStart - _lineStart)
                     {
@@ -828,7 +828,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         
         if (__vAlign == fa_center)
         {
-            var _yOffset = -0.5*_overallHeight;
+            var _yOffset = -(_overallHeight div 2);
         }
         else if (__vAlign == fa_right)
         {
@@ -846,7 +846,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                 
             if (__hAlign == fa_center)
             {
-                var _xOffset = -0.5*_lineWidthArray[_lineIndex];
+                var _xOffset = -(_lineWidthArray[_lineIndex] div 2);
             }
             else if (__hAlign == fa_right)
             {

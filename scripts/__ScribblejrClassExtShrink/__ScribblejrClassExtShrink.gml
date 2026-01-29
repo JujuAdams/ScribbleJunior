@@ -65,9 +65,9 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     //    
     //    switch(__hAlign)
     //    {
-    //        case fa_left:   var _xOffset = 0;          break;
-    //        case fa_center: var _xOffset = -__width/2; break;
-    //        case fa_right:  var _xOffset = -__width;   break;
+    //        case fa_left:   var _xOffset = 0;                break;
+    //        case fa_center: var _xOffset = -(__width div 2); break;
+    //        case fa_right:  var _xOffset = -__width;         break;
     //    }
     //    
     //    switch(__vAlign)
@@ -148,7 +148,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
             
             if (__vAlign == fa_center)
             {
-                var _yOffset = -0.5*__height;
+                var _yOffset = -(__height div 2);
             }
             else if (__vAlign == fa_right)
             {
@@ -164,7 +164,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
             {
                 if (__hAlign == fa_center)
                 {
-                    var _xOffset = -0.5*_lineWidthArray[_lineIndex];
+                    var _xOffset = -(_lineWidthArray[_lineIndex] div 2);
                 }
                 else if (__hAlign == fa_right)
                 {
