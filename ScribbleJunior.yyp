@@ -1,8 +1,8 @@
 {
-  "$GMProject":"",
+  "$GMProject":"v1",
   "%Name":"ScribbleJunior",
   "AudioGroups":[
-    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -19,6 +19,9 @@
     {"$GMFolder":"","%Name":"Setup","folderPath":"folders/Scribble Jr./Setup.yy","name":"Setup","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Font","folderPath":"folders/Scribble Jr./Setup/Font.yy","name":"Font","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
+  "ForcedPrefabProjectReferences":[
+    {"link":"io.gamemaker.sdfshaders-1.0.0","name":"io.gamemaker.sdfshaders-1.0.0","path":"io.gamemaker.sdfshaders-1.0.0.yyp",},
+  ],
   "IncludedFiles":[
     {"$GMIncludedFile":"","%Name":"NotoSansMono-CondensedMedium.ttf","CopyToMask":-1,"filePath":"datafiles","name":"NotoSansMono-CondensedMedium.ttf","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"scribble_junior_license.txt","CopyToMask":-1,"filePath":"datafiles","name":"scribble_junior_license.txt","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -26,7 +29,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.11.0.179",
+    "IDEVersion":"2024.14.1.210",
   },
   "name":"ScribbleJunior",
   "resources":[
