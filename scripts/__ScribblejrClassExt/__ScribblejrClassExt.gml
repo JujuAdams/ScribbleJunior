@@ -73,7 +73,7 @@ function __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale
             
             case fa_middle:
                 __height = __scale*string_height(_string);
-                var _yOffset = -0.5*__height;
+                var _yOffset = -(__height div 2);
             break;
             
             case fa_bottom:

@@ -297,7 +297,7 @@ function __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale
                 //Adjust for vertical alignment
                 if ((_vAlign == fa_middle) || (_vAlign == fa_bottom))
                 {
-                    var _offset = (_vAlign == fa_middle)? (__height/2) : __height;
+                    var _offset = (_vAlign == fa_middle)? (__height div 2) : __height;
                     var _i = 0;
                     repeat(array_length(__stretchesArray))
                     {

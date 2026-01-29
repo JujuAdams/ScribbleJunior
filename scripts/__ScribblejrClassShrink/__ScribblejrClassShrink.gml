@@ -76,9 +76,9 @@ function __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontSc
     
     switch(_vAlign)
     { 
-        case fa_top:    __yOffset = 0;              break;
-        case fa_middle: __yOffset = -GetHeight()/2; break;
-        case fa_bottom: __yOffset = -GetHeight();   break;
+        case fa_top:    __yOffset = 0;                    break;
+        case fa_middle: __yOffset = -(GetHeight() div 2); break;
+        case fa_bottom: __yOffset = -GetHeight();         break;
     }
     
     __vertexBuffer = undefined;

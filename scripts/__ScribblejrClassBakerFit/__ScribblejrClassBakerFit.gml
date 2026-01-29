@@ -153,9 +153,9 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
         var _height = _y;
         switch(__vAlign)
         {
-            case fa_top:    __glyphY = 0;          break;
-            case fa_middle: __glyphY = -_height/2; break;
-            case fa_bottom: __glyphY = -_height;   break;
+            case fa_top:    __glyphY = 0;                break;
+            case fa_middle: __glyphY = -(_height div 2); break;
+            case fa_bottom: __glyphY = -_height;         break;
         }
         
         __tickMethod = __DecomposeLine;

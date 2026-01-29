@@ -72,9 +72,9 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
     //    
     //    switch(__vAlign)
     //    {
-    //        case fa_top:    var _yOffset = 0;           break;
-    //        case fa_middle: var _yOffset = -__height/2; break;
-    //        case fa_bottom: var _yOffset = -__height;   break;
+    //        case fa_top:    var _yOffset = 0;                 break;
+    //        case fa_middle: var _yOffset = -(__height div 2); break;
+    //        case fa_bottom: var _yOffset = -__height;         break;
     //    }
     //    
     //    Draw = (__scale == 1)? __DrawSimple : __DrawSimpleScaled;

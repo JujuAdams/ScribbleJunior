@@ -58,7 +58,7 @@ function __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale) :
         
         case fa_middle:
             __height = __scale*string_height(_string);
-            __yOffset = -__height/2;
+            __yOffset = -(__height div 2);
         break;
         
         case fa_bottom:
