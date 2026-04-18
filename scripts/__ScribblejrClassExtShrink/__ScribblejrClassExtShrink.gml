@@ -131,8 +131,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
             ++_lineIndex;
         }
         
-        var _lastFragment = array_last(_fragmentArray);
-        if (_lastFragment == undefined)
+        if ((array_length(_fragmentArray) <= 0) && (array_length(_spriteArray) <= 0))
         {
             __width  = 0;
             __height = 0;
