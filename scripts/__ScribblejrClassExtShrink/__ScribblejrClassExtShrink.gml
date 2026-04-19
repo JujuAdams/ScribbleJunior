@@ -252,7 +252,9 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
                 gpu_set_fog(true, _sdfEffects.dropShadowColour, 0, 0);
                 __DrawSprites(_x + _sdfEffects.dropShadowOffsetX,
                               _y + _sdfEffects.dropShadowOffsetY,
-                              _sdfEffects.dropShadowAlpha*_alpha);
+							  _colour,
+                              _sdfEffects.dropShadowAlpha*_alpha,
+							  );
                 gpu_set_fog(false, c_fuchsia, 0, 0);
             }
             
@@ -284,7 +286,9 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
                 gpu_set_fog(true, _sdfEffects.dropShadowColour, 0, 0);
                 __DrawSprites(_x + __scale*_sdfEffects.dropShadowOffsetX,
                               _y + __scale*_sdfEffects.dropShadowOffsetY,
-                              _sdfEffects.dropShadowAlpha*_alpha);
+							  _colour,
+                              _sdfEffects.dropShadowAlpha*_alpha,
+							  );
                 gpu_set_fog(false, c_fuchsia, 0, 0);
             }
             
@@ -317,7 +321,9 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
                 gpu_set_fog(true, _sdfEffects.dropShadowColour, 0, 0);
                 __DrawSprites(_x + _scale*_sdfEffects.dropShadowOffsetX,
                               _y + _scale*_sdfEffects.dropShadowOffsetY,
-                              _sdfEffects.dropShadowAlpha*_alpha);
+							  _colour,
+                              _sdfEffects.dropShadowAlpha*_alpha,
+							  );
                 gpu_set_fog(false, c_fuchsia, 0, 0);
             }
             
@@ -352,13 +358,13 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
             }
         }
         
-        __DrawSprites(_x, _y, _alpha);
+        __DrawSprites(_x, _y, _colour, _alpha);
         
         if (SCRIBBLEJR_AUTO_BAKE) __BakeVertexBufferTimed();
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
-    static __DrawSprites = function(_x, _y, _alpha)
+    static __DrawSprites = function(_x, _y, _color = c_white, _alpha)
     {
         var _textScale   = __scale*__fontScale;
         var _spriteScale = (SCRIBBLEJR_SCALE_SPRITES? _textScale : __scale) / SCRIBBLEJR_GLOBAL_FONT_SCALE;
@@ -368,7 +374,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         {
             with(__spriteArray[_i])
             {
-                draw_sprite_ext(__sprite, __image, _x + _textScale*__x, _y + _textScale*__y, _spriteScale*__localScale, _spriteScale*__localScale, 0, c_white, _alpha);
+                draw_sprite_ext(__sprite, __image, _x + _textScale*__x, _y + _textScale*__y, _spriteScale*__localScale, _spriteScale*__localScale, 0, _color, _alpha);
             }
             
             ++_i;
@@ -391,7 +397,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         __SCRIBBLEJR_SHADER_RESET();
         
         //Lean into GameMaker's native renderer for sprites
-        __DrawSprites(_x, _y, _alpha);
+        __DrawSprites(_x, _y, _colour, _alpha);
     }
     
     static __DrawVertexBufferSDF = function(_x, _y, _colour = c_white, _alpha = 1, _sdfEffects = undefined)
@@ -420,7 +426,7 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
                 if (SCRIBBLEJR_SHADOW_SPRITES)
                 {
                     gpu_set_fog(true, dropShadowColour, 0, 0);
-                    other.__DrawSprites(_xShadow, _yShadow, dropShadowAlpha*_alpha);
+                    other.__DrawSprites(_xShadow, _yShadow, _colour, dropShadowAlpha*_alpha);
                     gpu_set_fog(false, c_fuchsia, 0, 0);
                 }
                 
@@ -446,6 +452,6 @@ function __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fon
         if (SCRIBBLEJR_FORCE_BILINEAR_FOR_SDF) gpu_set_tex_filter(_oldTexFilter);
         
         //Lean into GameMaker's native renderer for sprites
-        __DrawSprites(_x, _y, _alpha);
+        __DrawSprites(_x, _y, _colour, _alpha);
     }
 }
