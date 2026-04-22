@@ -941,9 +941,8 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
                 gpu_set_fog(true, _sdfEffects.dropShadowColour, 0, 0);
                 __DrawSprites(_x + _scale*_sdfEffects.dropShadowOffsetX,
                               _y + _scale*_sdfEffects.dropShadowOffsetY,
-							  _colour,
-                              _sdfEffects.dropShadowAlpha*_alpha,
-							  );
+                              _colour,
+                              _sdfEffects.dropShadowAlpha*_alpha);
                 gpu_set_fog(false, c_fuchsia, 0, 0);
             }
             
@@ -984,7 +983,7 @@ function __ScribblejrClassExtFit(_key, _string, _hAlign, _vAlign, _font, _fontSc
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
     }
     
-    static __DrawSprites = function(_x, _y, _color = c_white, _alpha)
+    static __DrawSprites = function(_x, _y, _color, _alpha)
     {
         var _textScale   = __scale*__fontScale;
         var _spriteScale = (SCRIBBLEJR_SCALE_SPRITES? _textScale : __scale) / SCRIBBLEJR_GLOBAL_FONT_SCALE;
