@@ -16,6 +16,15 @@
 //than 4 tend to break!
 #macro SCRIBBLEJR_FIT_ITERATIONS  6
 
+//Whether to blend the colour of in-line sprites using whatever colour is specified when a draw
+//method is executed. For example:
+//
+//    ScribblejrExt("You don't have 200 [sprCoins]").Draw(x, y, c_red)
+//
+//This draw call will only blend the sprite red when this macro is set to `true`. In-line sprites
+//will always be alpha blended.
+#macro SCRIBBLEJR_COLOR_BLEND_SPRITES  false
+
 //Whether to give in-line sprites drop shadows in approximately the same fashion as SDF drop
 //shadows. Sprite drop shadows will not respect the "softness" setting that is available for SDF
 //drop shadows. Additionally, turning this feature on will incur a performance penalty.
