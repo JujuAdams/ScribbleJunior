@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/jujuadams/ScribbleJunior/master/LOGO.png" width="50%" style="display: block; margin: auto;" />
-<h1 align="center">Scribble Junior 1.6</h1>
-<p align="center">Lightweight text renderer for GameMaker 2024.11 by <a href="https://www.jujuadams.com/" target="_blank">Juju Adams</a></p>
+<h1 align="center">Scribble Junior 2.0</h1>
+<p align="center">Lightweight text renderer for GameMaker LTS 2026 by <a href="https://www.jujuadams.com/" target="_blank">Juju Adams</a></p>
 
 <p align="center"><a href="https://github.com/jujuadams/ScribbleJunior/releases/" target="_blank">Download the .yymps</a></p>
 
