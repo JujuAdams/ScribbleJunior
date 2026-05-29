@@ -4,7 +4,7 @@
 
 ## …SetDefaultFont
 
-**Usage:** `ScribblejrSetDefaultFont(font)`
+**Usage:** `ScribbleJrSetDefaultFont(font)`
 
 **Returns:** N/A (`undefined`)
 
@@ -12,7 +12,7 @@
 |-------|---------|--------------------------|
 |`font` |reference|Font to set as the default|
 
-Sets the default font for Scribble Junior. This default font will be used in cases where a font has not been specified. If a negative number is specified then Scribble Junior will fall back on `ScribblejrDefaultFont`, its own default font (which is Droid Sans Mono, close to GameMaker's native default font).
+Sets the default font for Scribble Junior. This default font will be used in cases where a font has not been specified. If a negative number is specified then Scribble Junior will fall back on `ScribbleJrDefaultFont`, its own default font (which is Droid Sans Mono, close to GameMaker's native default font).
 
 ?> Unlike [Scribble Deluxe](https://www.github.com/jujuadams/Scribble), you will need to provide the font as a reference and not a string.
 
@@ -20,7 +20,7 @@ Sets the default font for Scribble Junior. This default font will be used in cas
 
 ## …GetDefaultFont
 
-**Usage:** `ScribblejrGetDefaultFont()`
+**Usage:** `ScribbleJrGetDefaultFont()`
 
 **Returns:** Reference, the current default font for Scribble Junior
 
@@ -28,4 +28,4 @@ Sets the default font for Scribble Junior. This default font will be used in cas
 |----|--------|-------|
 |None|        |       |
 
-Returns the default font. If `ScribblejrSetDefaultFont()` has never been called, this function will return Scribble Junior's fallback font `ScribblejrDefaultFont`.
+Returns the default font. If `ScribbleJrSetDefaultFont()` has never been called, this function will return Scribble Junior's fallback font `ScribbleJrDefaultFont`.

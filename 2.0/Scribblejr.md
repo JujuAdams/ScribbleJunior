@@ -1,6 +1,6 @@
-# Scribblejr
+# ScribbleJr
 
-**Usage:** `Scribblejr(string, [hAlign], [vAlign], [font], [fontScale])`
+**Usage:** `ScribbleJr(string, [hAlign], [vAlign], [font], [fontScale])`
 
 **Returns:** Text element struct, see below
 
@@ -13,12 +13,12 @@
 |`string`     |string   |Text to search for in the cache                                                     |
 |`[hAlign]`   |constant |Horizontal alignment, one of `fa_left` `fa_center` `fa_right`. Defaults to `fa_left`|
 |`[vAlign]`   |constant |Vertical alignment, one of `fa_top` `fa_middle` `fa_bottom`. Defaults to `fa_top`   |
-|`[font]`     |reference|Font to use. Defaults to what has been set by `ScribblejrSetDefaultFont()`          |
+|`[font]`     |reference|Font to use. Defaults to what has been set by `ScribbleJrSetDefaultFont()`          |
 |`[fontScale]`|number   |Scale of the font. Defaults to `1`, no change in scale                              |
 
 Caches plain text without formatting or layout. Over a few frames in the background, Scribble Junior will bake a vertex buffer that replaces the native text rendering and is faster to draw.
 
-!> This function should not be used for extremely fast changing text such as a stopwatch. You should use `ScribblejrNative()` instead if you plan for the drawn text to only show for a few frames at a time.
+!> This function should not be used for extremely fast changing text such as a stopwatch. You should use `ScribbleJrNative()` instead if you plan for the drawn text to only show for a few frames at a time.
 
 ?> This function relies on internal caching for performance gains. If you change any of the arguments provided to this function, Scribble Junior will have to do extra work to recache the new text data. Try to limit how often you change these arguments to get the best performance.
 

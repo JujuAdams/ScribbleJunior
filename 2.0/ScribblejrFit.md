@@ -1,6 +1,6 @@
-# ScribblejrFit
+# ScribbleJrFit
 
-**Usage:** `ScribblejrFit(string, [hAlign], [vAlign], [font], [fontScale], [width], [height])`
+**Usage:** `ScribbleJrFit(string, [hAlign], [vAlign], [font], [fontScale], [width], [height])`
 
 **Returns:** Text element struct, see below
 
@@ -13,14 +13,14 @@
 |`string`     |string   |Text to search for in the cache                                                     |
 |`[hAlign]`   |constant |Horizontal alignment, one of `fa_left` `fa_center` `fa_right`. Defaults to `fa_left`|
 |`[vAlign]`   |constant |Vertical alignment, one of `fa_top` `fa_middle` `fa_bottom`. Defaults to `fa_top`   |
-|`[font]`     |reference|Font to use. Defaults to what has been set by `ScribblejrSetDefaultFont()`          |
+|`[font]`     |reference|Font to use. Defaults to what has been set by `ScribbleJrSetDefaultFont()`          |
 |`[fontScale]`|number   |Scale of the font. Defaults to `1`, no change in scale                              |
 |`[width]`    |number   |Maximum width of the text. Defaults to no limit                                     |
 |`[height]`   |number   |Maximum height of the text. Defaults to no limit                                    |
 
 Caches plain text without formatting. The text is shrunk down to within the given maximum width and height by reflowing the text at a smaller size. Over a few frames in the background, Scribble Junior will bake a vertex buffer that replaces the native text rendering and is faster to draw.
 
-This function scales text whilst adding newlines. If you want to scale down text without adding newlines, which will gain you a little performance, then use ScribblejrShrink().
+This function scales text whilst adding newlines. If you want to scale down text without adding newlines, which will gain you a little performance, then use ScribbleJrShrink().
 
 ?> This function relies on internal caching for performance gains. If you change any of the arguments provided to this function, Scribble Junior will have to do extra work to recache the new text data. Try to limit how often you change these arguments to get the best performance.
 

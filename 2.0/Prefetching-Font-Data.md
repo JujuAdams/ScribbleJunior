@@ -4,7 +4,7 @@
 
 ## …CacheFontInfo
 
-**Usage:** `ScribblejrCacheFontInfo(font)`
+**Usage:** `ScribbleJrCacheFontInfo(font)`
 
 **Returns:** N/A (`undefined`)
 

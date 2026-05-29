@@ -5,14 +5,14 @@
 
 **Functions**
 
--   [Scribblejr](Scribblejr)
--   [ScribblejrFit](ScribblejrFit)
--   [ScribblejrShrink](ScribblejrShrink)
--   [ScribblejrExt](ScribblejrExt)
--   [ScribblejrFitExt](ScribblejrFitExt)
--   [ScribblejrShrinkExt](ScribblejrShrinkExt)
--   [ScribblejrDrawNative](ScribblejrDrawNative)
--   [ScribblejrResetDrawState](ScribblejrResetDrawState)
+-   [ScribbleJr](ScribbleJr)
+-   [ScribbleJrFit](ScribbleJrFit)
+-   [ScribbleJrShrink](ScribbleJrShrink)
+-   [ScribbleJrExt](ScribbleJrExt)
+-   [ScribbleJrFitExt](ScribbleJrFitExt)
+-   [ScribbleJrShrinkExt](ScribbleJrShrinkExt)
+-   [ScribbleJrDrawNative](ScribbleJrDrawNative)
+-   [ScribbleJrResetDrawState](ScribbleJrResetDrawState)
 
 ---
 

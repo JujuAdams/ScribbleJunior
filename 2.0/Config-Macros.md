@@ -1,6 +1,6 @@
 # Config Macros
 
-The macros on this page can be found in the `__ScribblejrConfig` script. All macros start with `SCRIBBLEJR_` but this part of the macro name has been removed for brevity.
+The macros on this page can be found in the `__ScribbleJrConfig` script. All macros start with `SCRIBBLEJR_` but this part of the macro name has been removed for brevity.
 
 ?> You should edit these macros to suit your own needs when using Scribble Junior.
 
@@ -10,9 +10,9 @@ The macros on this page can be found in the `__ScribblejrConfig` script. All mac
 
 *Typical value:* `true`
 
-Scaling values passed to `Scribblejr*Ext` functions will scale up and down text. However, you may not want to scale sprites that have been inserted into the string in the same way. Setting this macro to `false` will keep sprites unscaled (scaling factor = 1) relative to the specified text scale.
+Scaling values passed to `ScribbleJr*Ext` functions will scale up and down text. However, you may not want to scale sprites that have been inserted into the string in the same way. Setting this macro to `false` will keep sprites unscaled (scaling factor = 1) relative to the specified text scale.
 
-?> If `ScribblejrShrinkExt()` or `ScribblejrFitExt()` require the string to be scaled down then sprites will be scaled down regardless of this macro's value.
+?> If `ScribbleJrShrinkExt()` or `ScribbleJrFitExt()` require the string to be scaled down then sprites will be scaled down regardless of this macro's value.
 
 &nbsp;
 
@@ -20,7 +20,7 @@ Scaling values passed to `Scribblejr*Ext` functions will scale up and down text.
 
 *Typical value:* `true`
 
-Whether to reset draw state after Scribblejr calls. This slighly impacts performance for the worse but it is very convenient.
+Whether to reset draw state after ScribbleJr calls. This slighly impacts performance for the worse but it is very convenient.
 
 &nbsp;
 
@@ -28,7 +28,7 @@ Whether to reset draw state after Scribblejr calls. This slighly impacts perform
 
 *Typical value:* `6`
 
-How many iterations to perform when fitting text inside the bounding box. This only applies to `ScribblejrFit()` and `ScribblejrFitExt()`. Higher numbers are more accurate but slower. Values lower than `4` tend to break!
+How many iterations to perform when fitting text inside the bounding box. This only applies to `ScribbleJrFit()` and `ScribbleJrFitExt()`. Higher numbers are more accurate but slower. Values lower than `4` tend to break!
 
 &nbsp;
 
@@ -44,7 +44,7 @@ Whether to give in-line sprites drop shadows in approximately the same fashion a
 
 *Typical value:* `200`
 
-Amount of time per frame that Scribble Junior is allowed to bake vertex buffers. This limit is approximate. You can adjust the budget time at runtime by calling `ScribblejrSetBudget()`. If this macro is set to zero or a negative number then all vertex buffer baking will be disabled until `ScribblejrSetBudget()` is called with a positive number.
+Amount of time per frame that Scribble Junior is allowed to bake vertex buffers. This limit is approximate. You can adjust the budget time at runtime by calling `ScribbleJrSetBudget()`. If this macro is set to zero or a negative number then all vertex buffer baking will be disabled until `ScribbleJrSetBudget()` is called with a positive number.
 
 &nbsp;
 

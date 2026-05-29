@@ -1,6 +1,6 @@
-# ScribblejrExt
+# ScribbleJrExt
 
-**Usage:** `ScribblejrExt(string, [hAlign], [vAlign], [font], [fontScale])`
+**Usage:** `ScribbleJrExt(string, [hAlign], [vAlign], [font], [fontScale])`
 
 **Returns:** Text element struct, see below
 
@@ -13,7 +13,7 @@
 |`string`     |string   |Text to search for in the cache                                                     |
 |`[hAlign]`   |constant |Horizontal alignment, one of `fa_left` `fa_center` `fa_right`. Defaults to `fa_left`|
 |`[vAlign]`   |constant |Vertical alignment, one of `fa_top` `fa_middle` `fa_bottom`. Defaults to `fa_top`   |
-|`[font]`     |reference|Font to use. Defaults to what has been set by `ScribblejrSetDefaultFont()`          |
+|`[font]`     |reference|Font to use. Defaults to what has been set by `ScribbleJrSetDefaultFont()`          |
 |`[fontScale]`|number   |Scale of the font. Defaults to `1`, no change in scale                              |
 
 Caches plain text with limited formatting but without text wrapping. Over a few frames in the background, Scribble Junior will bake a vertex buffer that replaces the native text rendering and is faster to draw.
@@ -28,7 +28,7 @@ Caches plain text with limited formatting but without text wrapping. Over a few 
 
 **Example:** `"This is [c_orange]orange[/c] text."`
 
-Tags that contain the name of a colour constant will colour subsequent characters in the string. [/c] [/color] [/colour] can be used to reset the colour to the default colour for the function call. New colours can be added with ScribblejrAddColor(). Hash codes aren't parsed automatically but hash codes can be added via ScribblejrAddColor().
+Tags that contain the name of a colour constant will colour subsequent characters in the string. [/c] [/color] [/colour] can be used to reset the colour to the default colour for the function call. New colours can be added with ScribbleJrAddColor(). Hash codes aren't parsed automatically but hash codes can be added via ScribbleJrAddColor().
 
 &nbsp;
 

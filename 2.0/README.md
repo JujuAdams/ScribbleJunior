@@ -20,9 +20,9 @@ The decision primarily falls down to features. The first decision is whether you
 
 |                         |Plain text        |In-line sprites and colours|
 |-------------------------|------------------|---------------------------|
-|**No layout**            |`Scribblejr`      |`ScribblejrExt`            |
-|**Shrink without reflow**|`ScribblejrShrink`|`ScribblejrShrinkExt`      |
-|**Fit-to-box**           |`ScribblejrFit`   |`ScribblejrFitExt`         |
+|**No layout**            |`ScribbleJr`      |`ScribbleJrExt`            |
+|**Shrink without reflow**|`ScribbleJrShrink`|`ScribbleJrShrinkExt`      |
+|**Fit-to-box**           |`ScribbleJrFit`   |`ScribbleJrFitExt`         |
 
 &nbsp;
 
@@ -30,11 +30,11 @@ The decision primarily falls down to features. The first decision is whether you
 
 There are two kinds of performance to consider: up-front cost to parse text, and the on-going cost to render text.
 
-The cost to parse text varies a lot depending on how much text you have; however, as a rule of thumb, `ScribblejrFit()` and `ScribblejrFitExt()` are the most expensive functions in general. `ScribblejrExt()` and `ScribblejrShrinkExt()` are more expensive than their plain text siblings.
+The cost to parse text varies a lot depending on how much text you have; however, as a rule of thumb, `ScribbleJrFit()` and `ScribbleJrFitExt()` are the most expensive functions in general. `ScribbleJrExt()` and `ScribbleJrShrinkExt()` are more expensive than their plain text siblings.
 
 The on-going cost is less for plain text and higher for text that contain in-line sprites. The difference is small but if you're looking for one, there is one.
 
-Overall, `Scribblejr()` is the fastest and `ScribblejrFitExt()` is the slowest. If a function has more features, it'll operate slower. Try to use the right function for the job if you're concerned about performance - don't use `ScribblejrFitExt()` when `Scribblejr()` will do.
+Overall, `ScribbleJr()` is the fastest and `ScribbleJrFitExt()` is the slowest. If a function has more features, it'll operate slower. Try to use the right function for the job if you're concerned about performance - don't use `ScribbleJrFitExt()` when `ScribbleJr()` will do.
 
 &nbsp;
 
@@ -101,7 +101,7 @@ Releases go out once in while, typically expedited if there is a serious bug. Th
 At any rate, the process to update is as follows:
 
 1. **Back up your whole project using source control!**
-2. Back up the contents of your configuration script (`__ScribblejrConfig`) within your project. Duplicating the script is sufficient
+2. Back up the contents of your configuration script (`__ScribbleJrConfig`) within your project. Duplicating the script is sufficient
 3. Delete all library scripts from your project. Unless you've moved things around, this means deleting the library folder from the asset browser
 4. Import the latest [.yymps](https://github.com/JujuAdams/ScribbleJunior/releases/)
 5. Restore your configuration script from the back-up line by line

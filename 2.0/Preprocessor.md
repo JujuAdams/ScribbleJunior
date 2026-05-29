@@ -4,7 +4,7 @@
 
 ## …SetPreprocesorDefault
 
-**Usage:** `ScribblejrSetPreprocesorDefault(method)`
+**Usage:** `ScribbleJrSetPreprocesorDefault(method)`
 
 **Returns:** N/A (`undefined`)
 
@@ -12,7 +12,7 @@
 |--------|--------|-----------------------------------------|
 |`method`|method  |Method to set as the default preprocessor|
 
-Sets the default preprocessor. Any future calls to the extended functions (`ScribblejrExt` etc.) will use this preprocessor as the default. Calling `ScribblejrResetPreprocesor()` will reset the current preprocessor to the default preprocessor set by this function.
+Sets the default preprocessor. Any future calls to the extended functions (`ScribbleJrExt` etc.) will use this preprocessor as the default. Calling `ScribbleJrResetPreprocesor()` will reset the current preprocessor to the default preprocessor set by this function.
 
 !> Any text elements that have already cached will **not** be updated.
 
@@ -20,7 +20,7 @@ Sets the default preprocessor. Any future calls to the extended functions (`Scri
 
 ## …SetPreprocesorOnce
 
-**Usage:** `ScribblejrSetPreprocesorOnce()`
+**Usage:** `ScribbleJrSetPreprocesorOnce()`
 
 **Returns:** N/A (`undefined`)
 
@@ -28,13 +28,13 @@ Sets the default preprocessor. Any future calls to the extended functions (`Scri
 |--------|--------|---------------------------------|
 |`method`|method  |Method to set as the preprocessor|
 
-Sets the current preprocessor but only temporarily. The preprocessor set by this function will affect the next calls to an extended Scribble Jr. function (e.g. `ScribblejrExt()`). After that function has been called, the preprocessor will be set to the default preprocessor.
+Sets the current preprocessor but only temporarily. The preprocessor set by this function will affect the next calls to an extended Scribble Jr. function (e.g. `ScribbleJrExt()`). After that function has been called, the preprocessor will be set to the default preprocessor.
 
 &nbsp;
 
 ## …SetPreprocesor
 
-**Usage:** `ScribblejrSetPreprocesor()`
+**Usage:** `ScribbleJrSetPreprocesor()`
 
 **Returns:** N/A (`undefined`)
 
@@ -42,13 +42,13 @@ Sets the current preprocessor but only temporarily. The preprocessor set by this
 |--------|--------|---------------------------------|
 |`method`|method  |Method to set as the preprocessor|
 
-Sets the current preprocessor. This will affect all future calls to extended Scribble Jr. functions (e.g. `ScribblejrExt()`).
+Sets the current preprocessor. This will affect all future calls to extended Scribble Jr. functions (e.g. `ScribbleJrExt()`).
 
 &nbsp;
 
 ## …ResetPreprocesor
 
-**Usage:** `ScribblejrResetPreprocesor()`
+**Usage:** `ScribbleJrResetPreprocesor()`
 
 **Returns:** N/A (`undefined`)
 
@@ -56,13 +56,13 @@ Sets the current preprocessor. This will affect all future calls to extended Scr
 |----|--------|-------|
 |None|        |       |
 
-Resets the current preprocessor to the default, as set by `ScribblejrSetPreprocesorDefault()`.
+Resets the current preprocessor to the default, as set by `ScribbleJrSetPreprocesorDefault()`.
 
 &nbsp;
 
 ## …Reprocess
 
-**Usage:** `ScribblejrReprocess()`
+**Usage:** `ScribbleJrReprocess()`
 
 **Returns:** N/A (`undefined`)
 

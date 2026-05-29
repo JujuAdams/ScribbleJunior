@@ -1,6 +1,6 @@
-# ScribblejrResetDrawState
+# ScribbleJrResetDrawState
 
-**Usage:** `ScribblejrResetDrawState()`
+**Usage:** `ScribbleJrResetDrawState()`
 
 **Returns:** N/A (`undefined`)
 
