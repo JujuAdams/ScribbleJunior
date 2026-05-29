@@ -40,6 +40,20 @@ Whether to give in-line sprites drop shadows in approximately the same fashion a
 
 &nbsp;
 
+## `…COLOR_BLEND_SPRITES`
+
+*Typical value:* `false`
+
+Whether to blend the colour of in-line sprites using whatever colour is specified when a draw method is executed. For example:
+
+```gml
+ScribbleJrExt("You don't have 200 [sprCoins]").Draw(x, y, c_red)
+```
+
+This draw call will only blend the sprite red when this macro is set to `true`. In-line sprites will always be alpha blended.
+
+&nbsp;
+
 ## `…BUDGET`
 
 *Typical value:* `200`
