@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__ScribblejrClassNullWrapper",
+  "%Name":"__ScribbleJrClassNullWrapper",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__ScribblejrClassNullWrapper",
+  "name":"__ScribbleJrClassNullWrapper",
   "parent":{
     "name":"Classes",
     "path":"folders/Scribble Jr./(System)/Classes.yy",

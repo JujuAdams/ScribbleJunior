@@ -5,8 +5,8 @@
 /// 
 /// @param name
 
-function ScribblejrGetColor(_name)
+function ScribbleJrGetColor(_name)
 {
-    static _colourDict = __ScribblejrSystem().__colourDict;
+    static _colourDict = __ScribbleJrSystem().__colourDict;
     return _colourDict[$ _name];
 }

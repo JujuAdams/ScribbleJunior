@@ -2,8 +2,8 @@
 
 /// Returns the Scribble Jr. baking time budget, measured in microseconds.
 
-function ScribblejrGetBudget()
+function ScribbleJrGetBudget()
 {
-    static _system = __ScribblejrSystem();
+    static _system = __ScribbleJrSystem();
     return _system.__budget;
 }

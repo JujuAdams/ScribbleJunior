@@ -9,7 +9,7 @@
 ///      split in the middle.
 /// 
 /// This function scales text whilst adding newlines. If you want to scale down text without adding
-/// newlines, which will gain you a little performance, then use ScribblejrShrink().
+/// newlines, which will gain you a little performance, then use ScribbleJrShrink().
 /// 
 /// This function doesn't actually draw the text, it only returns a "text element struct". This
 /// struct can then be used to draw the text, as well as get the width/height of the text, by
@@ -41,9 +41,9 @@
 /// @param [width]
 /// @param [height]
 
-function ScribblejrFit(_string, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1, _maxWidth = infinity, _maxHeight = infinity)
+function ScribbleJrFit(_string, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1, _maxWidth = infinity, _maxHeight = infinity)
 {
-    static _system      = __ScribblejrSystem();
+    static _system      = __ScribbleJrSystem();
     static _nullWrapper = _system.__nullWrapper;
     static _cache       = _system.__wrappersCache;
     static _array       = _system.__elementsArray;
@@ -62,8 +62,8 @@ function ScribblejrFit(_string, _hAlign = fa_left, _vAlign = fa_top, _font = und
     var _wrapper = _cache[$ _key];
     if (_wrapper == undefined)
     {
-        var _element = new __ScribblejrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight);
-        var _wrapper = new __ScribblejrClassWrapper(_element);
+        var _element = new __ScribbleJrClassFit(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight);
+        var _wrapper = new __ScribbleJrClassWrapper(_element);
         _element.__wrapper = weak_ref_create(_wrapper);
         
         _cache[$ _key] = _wrapper;

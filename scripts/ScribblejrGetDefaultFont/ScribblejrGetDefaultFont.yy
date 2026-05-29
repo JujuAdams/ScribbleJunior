@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"ScribblejrGetDefaultFont",
+  "%Name":"ScribbleJrGetDefaultFont",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"ScribblejrGetDefaultFont",
+  "name":"ScribbleJrGetDefaultFont",
   "parent":{
     "name":"Font",
     "path":"folders/Scribble Jr./Setup/Font.yy",

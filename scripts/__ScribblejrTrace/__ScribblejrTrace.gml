@@ -2,9 +2,9 @@
 
 /// @param value
 
-function __ScribblejrTrace()
+function __ScribbleJrTrace()
 {
-    var _string = "Scribblejr: ";
+    var _string = "ScribbleJr: ";
     
     var _i = 0;
     repeat(argument_count)

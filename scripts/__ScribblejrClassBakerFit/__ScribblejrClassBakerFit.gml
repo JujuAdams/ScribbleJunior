@@ -4,9 +4,9 @@
 /// @param vAlign
 /// @param wrapWidth
 
-function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth) constructor
+function __ScribbleJrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth) constructor
 {
-    static _system       = __ScribblejrSystem();
+    static _system       = __ScribbleJrSystem();
     static _vertexFormat = _system.__vertexFormat;
     static __tempArray    = [];
     
@@ -23,7 +23,7 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
     __lineBreakArray = undefined;
     __tickMethod     = __Decompose;
     
-    var _fontInfo = ScribblejrCacheFontInfo(_font);
+    var _fontInfo = ScribbleJrCacheFontInfo(_font);
     __fontGlyphStruct = _fontInfo.glyphs;
     __spaceWidth      = undefined;
     __spaceHeight     = undefined;
@@ -64,7 +64,7 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
     
     static __Decompose = function()
     {
-        __stringArray = __ScribblejrStringDecompose(__string, __glyphCount);
+        __stringArray = __ScribbleJrStringDecompose(__string, __glyphCount);
         __tickMethod = __Layout;
         return false;
     }
@@ -78,8 +78,8 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
         draw_set_font(__font);
         
         //I'd love to pull this out of the glyph data but the values we get are inaccurate
-        var _spaceWidth  = __ScribblejrGetSpaceWidth(__font);
-        var _spaceHeight = __ScribblejrGetSpaceHeight(__font);
+        var _spaceWidth  = __ScribbleJrGetSpaceWidth(__font);
+        var _spaceHeight = __ScribbleJrGetSpaceHeight(__font);
         __spaceWidth  = _spaceWidth;
         __spaceHeight = _spaceHeight;
         
@@ -165,7 +165,7 @@ function __ScribblejrClassBakerFit(_string, _font, _hAlign, _vAlign, _wrapWidth)
     static __DecomposeLine = function()
     {
         var _string = __lineStringArray[__line];
-        __stringArray = __ScribblejrStringDecompose(_string);
+        __stringArray = __ScribbleJrStringDecompose(_string);
         __glyphCount = array_length(__stringArray);
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();

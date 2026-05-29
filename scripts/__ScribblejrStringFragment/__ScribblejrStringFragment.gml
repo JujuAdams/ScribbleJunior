@@ -1,6 +1,6 @@
-function __ScribblejrStringFragment(_string, _lineHeight, _spriteScale, _startColour, _fragmentArray, _spriteArray)
+function __ScribbleJrStringFragment(_string, _lineHeight, _spriteScale, _startColour, _fragmentArray, _spriteArray)
 {
-    static _colourDict = __ScribblejrSystem().__colourDict;
+    static _colourDict = __ScribbleJrSystem().__colourDict;
     
     var _colour = _startColour;
     var _substringArray = string_split(_string, "[");
@@ -132,7 +132,7 @@ function __ScribblejrStringFragment(_string, _lineHeight, _spriteScale, _startCo
                     }
                     else
                     {
-                        __ScribblejrTrace("Command tag \"", _tagString, "\" not recognised");
+                        __ScribbleJrTrace("Command tag \"", _tagString, "\" not recognised");
                     }
                 }
                 

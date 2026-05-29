@@ -1,18 +1,18 @@
 // Feather disable all
 
 /// Sets the current preprocessor but only temporarily. The preprocessor set by this function will
-/// affect the next calls to an extended Scribble Jr. function (e.g. `ScribblejrExt()`). After that
+/// affect the next calls to an extended Scribble Jr. function (e.g. `ScribbleJrExt()`). After that
 /// function has been called, the preprocessor will be set to the default preprocessor.
 /// 
 /// @param method
 
-function ScribblejrSetPreprocesorOnce(_method)
+function ScribbleJrSetPreprocesorOnce(_method)
 {
-    static _system = __ScribblejrSystem();
+    static _system = __ScribbleJrSystem();
     
     if ((_method != undefined) && (not script_exists(_method)))
     {
-        __ScribblejrError("Preprocessor functions must be stored in scripts in global scope");
+        __ScribbleJrError("Preprocessor functions must be stored in scripts in global scope");
     }
     
     with(_system)

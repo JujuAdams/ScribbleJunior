@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__ScribblejrTrace",
+  "%Name":"__ScribbleJrTrace",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__ScribblejrTrace",
+  "name":"__ScribbleJrTrace",
   "parent":{
     "name":"(System)",
     "path":"folders/Scribble Jr./(System).yy",

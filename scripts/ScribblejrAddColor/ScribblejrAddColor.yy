@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"ScribblejrAddColor",
+  "%Name":"ScribbleJrAddColor",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"ScribblejrAddColor",
+  "name":"ScribbleJrAddColor",
   "parent":{
     "name":"Setup",
     "path":"folders/Scribble Jr./Setup.yy",

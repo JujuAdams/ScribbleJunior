@@ -1,6 +1,6 @@
 {
   "$GMFont":"",
-  "%Name":"ScribbleJrDefaultFont",
+  "%Name":"ScribblejrDefaultFont",
   "AntiAlias":1,
   "applyKerning":0,
   "ascender":15,
@@ -117,7 +117,7 @@
   "last":0,
   "lineHeight":19,
   "maintainGms1Font":false,
-  "name":"ScribbleJrDefaultFont",
+  "name":"ScribblejrDefaultFont",
   "parent":{
     "name":"(System)",
     "path":"folders/Scribble Jr./(System).yy",

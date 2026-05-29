@@ -1,6 +1,6 @@
 // Feather disable all
 
-function __ScribblejrClassNullWrapper() constructor
+function __ScribbleJrClassNullWrapper() constructor
 {
     static Draw = function() {}
     static GetHAlign = function() { return fa_left; }

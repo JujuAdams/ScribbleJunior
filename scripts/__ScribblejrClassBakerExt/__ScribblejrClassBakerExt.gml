@@ -1,9 +1,9 @@
 /// @param fragArray
 /// @param font
 
-function __ScribblejrClassBakerExt(_fragArray, _font) constructor
+function __ScribbleJrClassBakerExt(_fragArray, _font) constructor
 {
-    static _system       = __ScribblejrSystem();
+    static _system       = __ScribbleJrSystem();
     static _vertexFormat = _system.__vertexFormatColor;
     
     __fragmentArray = _fragArray;
@@ -11,11 +11,11 @@ function __ScribblejrClassBakerExt(_fragArray, _font) constructor
     
     __tickMethod = __DecomposeFragment;
     
-    var _fontInfo = ScribblejrCacheFontInfo(_font);
+    var _fontInfo = ScribbleJrCacheFontInfo(_font);
     __fontGlyphStruct = _fontInfo.glyphs;
     
-    __spaceWidth  = __ScribblejrGetSpaceWidth(_font);
-    __spaceHeight = __ScribblejrGetSpaceHeight(_font);
+    __spaceWidth  = __ScribbleJrGetSpaceWidth(_font);
+    __spaceHeight = __ScribbleJrGetSpaceHeight(_font);
     
     var _fontTexture = _fontInfo.__forcedTexturePointer;
     __texTexelW = texture_get_texel_width(_fontTexture);
@@ -67,7 +67,7 @@ function __ScribblejrClassBakerExt(_fragArray, _font) constructor
         __glyphY      = _fragmentData.__y;
         __glyphColour = _fragmentData.__colour;
         
-        __stringArray = __ScribblejrStringDecompose(_fragmentString, __glyphCount);
+        __stringArray = __ScribbleJrStringDecompose(_fragmentString, __glyphCount);
         __tickMethod = __Tick;
         return false;
     }

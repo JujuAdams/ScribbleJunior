@@ -1,7 +1,7 @@
 {
   "$GMShader":"",
-  "%Name":"__shdScribblejrColor",
-  "name":"__shdScribblejrColor",
+  "%Name":"__shdScribbleJrColor",
+  "name":"__shdScribbleJrColor",
   "parent":{
     "name":"(System)",
     "path":"folders/Scribble Jr./(System).yy",

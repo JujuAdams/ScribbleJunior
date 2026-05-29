@@ -4,7 +4,7 @@
 /// GameMaker's native text drawing. Nothing special!
 /// 
 /// N.B. This function should only be used for extremely fast changing text such as a stopwatch.
-///      You should use Scribblejr() instead if you plan for the drawn text to persist for
+///      You should use ScribbleJr() instead if you plan for the drawn text to persist for
 ///      around a second or more.
 /// 
 /// @param x
@@ -18,9 +18,9 @@
 /// @param [fontScale=1]
 /// @param [sdfEffects]
 
-function ScribblejrDrawNative(_x, _y, _string, _colour = c_white, _alpha = 1, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1, _sdfEffects = undefined)
+function ScribbleJrDrawNative(_x, _y, _string, _colour = c_white, _alpha = 1, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1, _sdfEffects = undefined)
 {
-    static _system = __ScribblejrSystem();
+    static _system = __ScribbleJrSystem();
     
     if (_font == undefined) _font = _system.__defaultFont;
     _fontScale *= SCRIBBLEJR_GLOBAL_FONT_SCALE;
@@ -42,5 +42,5 @@ function ScribblejrDrawNative(_x, _y, _string, _colour = c_white, _alpha = 1, _h
         draw_text_transformed(_x, _y, _string, _fontScale, _fontScale, 0);
     }
     
-    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribblejrResetDrawState();
+    if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) ScribbleJrResetDrawState();
 }

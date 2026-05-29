@@ -1,4 +1,4 @@
-function __ScribblejrClassBase() constructor
+function __ScribbleJrClassBase() constructor
 {
     static toString = function()
     {
@@ -28,9 +28,9 @@ function __ScribblejrClassBase() constructor
         
         if (__vertexBaker.__tickMethod())
         {
-            if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Compiled ", self);
+            if (SCRIBBLEJR_VERBOSE) __ScribbleJrTrace("Compiled ", self);
             __vertexBuffer = __vertexBaker.__vertexBuffer;
-            Draw = ScribblejrCacheFontInfo(__font).sdfEnabled? __DrawVertexBufferSDF : __DrawVertexBuffer;
+            Draw = ScribbleJrCacheFontInfo(__font).sdfEnabled? __DrawVertexBufferSDF : __DrawVertexBuffer;
             __vertexBaker = undefined;
             
             return true;

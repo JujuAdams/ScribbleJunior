@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"ScribblejrGetCharacterWrap",
+  "%Name":"ScribbleJrGetCharacterWrap",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"ScribblejrGetCharacterWrap",
+  "name":"ScribbleJrGetCharacterWrap",
   "parent":{
     "name":"Setup",
     "path":"folders/Scribble Jr./Setup.yy",

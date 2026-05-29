@@ -6,8 +6,8 @@
 /// 
 /// @param name
 
-function ScribblejrDeleteColor(_name)
+function ScribbleJrDeleteColor(_name)
 {
-    static _colourDict = __ScribblejrSystem().__colourDict;
+    static _colourDict = __ScribbleJrSystem().__colourDict;
     variable_struct_remove(_colourDict, _name);
 }

@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"ScribblejrSDFDropShadow",
+  "%Name":"ScribbleJrSDFDropShadow",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"ScribblejrSDFDropShadow",
+  "name":"ScribbleJrSDFDropShadow",
   "parent":{
     "name":"Setup",
     "path":"folders/Scribble Jr./Setup.yy",

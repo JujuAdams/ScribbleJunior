@@ -1,6 +1,6 @@
 // Feather disable all
 
-function __ScribblejrClassWrapper(_element) constructor
+function __ScribbleJrClassWrapper(_element) constructor
 {
     __element = _element;
     

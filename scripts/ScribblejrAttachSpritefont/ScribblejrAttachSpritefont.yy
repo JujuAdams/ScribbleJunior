@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"ScribblejrAttachSpritefont",
+  "%Name":"ScribbleJrAttachSpritefont",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"ScribblejrAttachSpritefont",
+  "name":"ScribbleJrAttachSpritefont",
   "parent":{
     "name":"Font",
     "path":"folders/Scribble Jr./Setup/Font.yy",

@@ -5,7 +5,7 @@
 /// bake a vertex buffer that replaces the native text rendering and is faster to draw.
 /// 
 /// This function scales text without adding newlines. If you want to scale down text whilst adding
-/// newlines (a.k.a. "reflowing"), albeit at a performance penality, then use ScribblejrFit().
+/// newlines (a.k.a. "reflowing"), albeit at a performance penality, then use ScribbleJrFit().
 /// 
 /// This function doesn't actually draw the text, it only returns a "text element struct". This
 /// struct can then be used to draw the text, as well as get the width/height of the text, by
@@ -37,9 +37,9 @@
 /// @param [width]
 /// @param [height]
 
-function ScribblejrShrink(_string, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1, _maxWidth = infinity, _maxHeight = infinity)
+function ScribbleJrShrink(_string, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1, _maxWidth = infinity, _maxHeight = infinity)
 {
-    static _system      = __ScribblejrSystem();
+    static _system      = __ScribbleJrSystem();
     static _nullWrapper = _system.__nullWrapper;
     static _cache       = _system.__wrappersCache;
     static _array       = _system.__elementsArray;
@@ -58,8 +58,8 @@ function ScribblejrShrink(_string, _hAlign = fa_left, _vAlign = fa_top, _font = 
     var _wrapper = _cache[$ _key];
     if (_wrapper == undefined)
     {
-        var _element = new __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight);
-        var _wrapper = new __ScribblejrClassWrapper(_element);
+        var _element = new __ScribbleJrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight);
+        var _wrapper = new __ScribbleJrClassWrapper(_element);
         _element.__wrapper = weak_ref_create(_wrapper);
         
         _cache[$ _key] = _wrapper;

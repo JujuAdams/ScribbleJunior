@@ -2,9 +2,9 @@
 
 /// @param value
 
-function __ScribblejrError()
+function __ScribbleJrError()
 {
-    var _string = " \nScribblejr " + string(SCRIBBLEJR_VERSION) + ":\n";
+    var _string = " \nScribbleJr " + string(SCRIBBLEJR_VERSION) + ":\n";
     
     var _i = 0;
     repeat(argument_count)

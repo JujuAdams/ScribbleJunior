@@ -5,7 +5,7 @@
 /// will bake a vertex buffer that replaces the native text rendering and is faster to draw.
 /// 
 /// This function scales text without adding newlines. If you want to scale down text whilst adding
-/// newlines (a.k.a. "reflowing"), albeit at a performance penality, then use ScribblejrFitExt().
+/// newlines (a.k.a. "reflowing"), albeit at a performance penality, then use ScribbleJrFitExt().
 /// 
 /// This function doesn't actually draw the text, it only returns a "text element struct". This
 /// struct can then be used to draw the text, as well as get the width/height of the text, by
@@ -36,8 +36,8 @@
 ///     "This is [c_orange]orange[/c] text."
 ///     Tags that contain the name of a colour constant will colour subsequent characters in the
 ///     string. [/c] [/color] [/colour] can be used to reset the colour to the default colour for
-///     the function call. New colours can be added with ScribblejrAddColor(). Hash codes aren't
-///     parsed automatically but hash codes can be added via ScribblejrAddColor().
+///     the function call. New colours can be added with ScribbleJrAddColor(). Hash codes aren't
+///     parsed automatically but hash codes can be added via ScribbleJrAddColor().
 /// 
 /// 2. In-line Sprites
 ///     "You need [sprCoin]100 to buy this bomb."
@@ -62,9 +62,9 @@
 /// @param [width]
 /// @param [height]
 
-function ScribblejrShrinkExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1, _maxWidth = infinity, _maxHeight = infinity)
+function ScribbleJrShrinkExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1, _maxWidth = infinity, _maxHeight = infinity)
 {
-    static _system      = __ScribblejrSystem();
+    static _system      = __ScribbleJrSystem();
     static _nullWrapper = _system.__nullWrapper;
     static _cache       = _system.__wrappersCache;
     static _array       = _system.__elementsArray;
@@ -86,14 +86,14 @@ function ScribblejrShrinkExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font
     {
         if (string_pos("[", _string) <= 0)
         {
-            var _element = new __ScribblejrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight);
+            var _element = new __ScribbleJrClassShrink(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight);
         }
         else
         {
-            var _element = new __ScribblejrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight);
+            var _element = new __ScribbleJrClassExtShrink(_key, _string, _hAlign, _vAlign, _font, _fontScale, _maxWidth, _maxHeight);
         }
         
-        var _wrapper = new __ScribblejrClassWrapper(_element);
+        var _wrapper = new __ScribbleJrClassWrapper(_element);
         _element.__wrapper = weak_ref_create(_wrapper);
         
         _cache[$ _key] = _wrapper;
@@ -102,7 +102,7 @@ function ScribblejrShrinkExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font
     
     if (_system.__preprocessorOnce)
     {
-        ScribblejrResetPreprocesor();
+        ScribbleJrResetPreprocesor();
     }
     
     return _wrapper;

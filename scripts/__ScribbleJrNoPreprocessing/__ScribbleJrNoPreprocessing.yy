@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__ScribbleJjrNoPreprocessing",
+  "%Name":"__ScribbleJrNoPreprocessing",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__ScribbleJjrNoPreprocessing",
+  "name":"__ScribbleJrNoPreprocessing",
   "parent":{
     "name":"(System)",
     "path":"folders/Scribble Jr./(System).yy",

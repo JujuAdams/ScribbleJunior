@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"ScribblejrReprocess",
+  "%Name":"ScribbleJrReprocess",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"ScribblejrReprocess",
+  "name":"ScribbleJrReprocess",
   "parent":{
     "name":"Preprocessor",
     "path":"folders/Scribble Jr./Preprocessor.yy",

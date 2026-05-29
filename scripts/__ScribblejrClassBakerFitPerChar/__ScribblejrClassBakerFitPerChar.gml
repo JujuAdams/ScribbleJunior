@@ -1,9 +1,9 @@
 /// @param fragmentArray
 /// @param font
 
-function __ScribblejrClassBakerFitPerChar(_fragmentArray, _font) constructor
+function __ScribbleJrClassBakerFitPerChar(_fragmentArray, _font) constructor
 {
-    static _system       = __ScribblejrSystem();
+    static _system       = __ScribbleJrSystem();
     static _vertexFormat = _system.__vertexFormat;
     
     __fragmentArray = _fragmentArray;
@@ -11,11 +11,11 @@ function __ScribblejrClassBakerFitPerChar(_fragmentArray, _font) constructor
     
     __tickMethod = __DecomposeFragment;
     
-    var _fontInfo = ScribblejrCacheFontInfo(_font);
+    var _fontInfo = ScribbleJrCacheFontInfo(_font);
     __fontGlyphStruct = _fontInfo.glyphs;
     
-    __spaceWidth  = __ScribblejrGetSpaceWidth(_font);
-    __spaceHeight = __ScribblejrGetSpaceHeight(_font);
+    __spaceWidth  = __ScribbleJrGetSpaceWidth(_font);
+    __spaceHeight = __ScribbleJrGetSpaceHeight(_font);
     
     var _fontTexture = _fontInfo.__forcedTexturePointer;
     __texTexelW = texture_get_texel_width(_fontTexture);
@@ -59,7 +59,7 @@ function __ScribblejrClassBakerFitPerChar(_fragmentArray, _font) constructor
         __glyphX     = _fragmentData.__x;
         __glyphY     = _fragmentData.__y;
         
-        __stringArray = __ScribblejrStringDecompose(_fragmentString, __glyphCount);
+        __stringArray = __ScribbleJrStringDecompose(_fragmentString, __glyphCount);
         __tickMethod = __Tick;
         return false;
     }

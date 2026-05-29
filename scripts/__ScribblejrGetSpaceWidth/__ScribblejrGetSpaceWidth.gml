@@ -1,6 +1,6 @@
-function __ScribblejrGetSpaceWidth(_font)
+function __ScribbleJrGetSpaceWidth(_font)
 {
-    static _system = __ScribblejrSystem();
+    static _system = __ScribbleJrSystem();
     static _cache  = _system.__cacheSpaceWidth;
     
     var _name = font_get_name(_font);

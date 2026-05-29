@@ -2,9 +2,9 @@
 /// @param font
 /// @param hAlign
 
-function __ScribblejrClassBaker(_string, _font, _hAlign) constructor
+function __ScribbleJrClassBaker(_string, _font, _hAlign) constructor
 {
-    static _system       = __ScribblejrSystem();
+    static _system       = __ScribbleJrSystem();
     static _vertexFormat = _system.__vertexFormat;
     
     __string = _string;
@@ -13,7 +13,7 @@ function __ScribblejrClassBaker(_string, _font, _hAlign) constructor
     
     __tickMethod = __SplitLines;
     
-    var _fontInfo = ScribblejrCacheFontInfo(_font);
+    var _fontInfo = ScribbleJrCacheFontInfo(_font);
     __fontGlyphStruct = _fontInfo.glyphs;
     
     __spaceWidth  = undefined;
@@ -50,8 +50,8 @@ function __ScribblejrClassBaker(_string, _font, _hAlign) constructor
     static __SplitLines = function()
     {
         //I'd love to pull this out of the glyph data but the values we get are inaccurate
-        __spaceWidth  = __ScribblejrGetSpaceWidth(__font);
-        __spaceHeight = __ScribblejrGetSpaceHeight(__font);
+        __spaceWidth  = __ScribbleJrGetSpaceWidth(__font);
+        __spaceHeight = __ScribbleJrGetSpaceHeight(__font);
         
         __lineStringArray = string_split(__string, "\n");
         __tickMethod = __DecomposeLine;
@@ -61,7 +61,7 @@ function __ScribblejrClassBaker(_string, _font, _hAlign) constructor
     static __DecomposeLine = function()
     {
         var _string = __lineStringArray[__line];
-        __stringArray = __ScribblejrStringDecompose(_string);
+        __stringArray = __ScribbleJrStringDecompose(_string);
         __glyphCount = array_length(__stringArray);
         
         if (SCRIBBLEJR_AUTO_RESET_DRAW_STATE) var _oldFont = draw_get_font();

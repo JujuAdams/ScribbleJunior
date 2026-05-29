@@ -2,10 +2,10 @@
 
 /// Returns how much time Scribble Jr. used to bake vertex buffers in the previous Step, measured
 /// in microseconds. This value will sometimes be a little more than the time budget set by
-/// ScribblejrGetBudget().
+/// ScribbleJrGetBudget().
 
-function ScribblejrGetBudgetUsed()
+function ScribbleJrGetBudgetUsed()
 {
-    static _system = __ScribblejrSystem();
+    static _system = __ScribbleJrSystem();
     return _system.__budgetUsedPrev;
 }

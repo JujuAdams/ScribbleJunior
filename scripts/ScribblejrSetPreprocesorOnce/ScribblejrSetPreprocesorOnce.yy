@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"ScribblejrSetPreprocesorOnce",
+  "%Name":"ScribbleJrSetPreprocesorOnce",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"ScribblejrSetPreprocesorOnce",
+  "name":"ScribbleJrSetPreprocesorOnce",
   "parent":{
     "name":"Preprocessor",
     "path":"folders/Scribble Jr./Preprocessor.yy",

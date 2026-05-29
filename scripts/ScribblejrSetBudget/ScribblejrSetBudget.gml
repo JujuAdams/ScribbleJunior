@@ -8,8 +8,8 @@
 /// 
 /// @param microseconds
 
-function ScribblejrSetBudget(_microseconds)
+function ScribbleJrSetBudget(_microseconds)
 {
-    static _system = __ScribblejrSystem();
+    static _system = __ScribbleJrSystem();
     _system.__budget = _microseconds;
 }

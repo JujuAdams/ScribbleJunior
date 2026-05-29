@@ -2,8 +2,8 @@
 
 /// Returns whether per-character wrapping is enabled or not.
 
-function ScribblejrGetCharacterWrap()
+function ScribbleJrGetCharacterWrap()
 {
-    static _system = __ScribblejrSystem();
+    static _system = __ScribbleJrSystem();
     return _system.__perCharacterWrap;
 }

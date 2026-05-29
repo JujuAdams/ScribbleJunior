@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__ScribblejrClearCache",
+  "%Name":"__ScribbleJrClearCache",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__ScribblejrClearCache",
+  "name":"__ScribbleJrClearCache",
   "parent":{
     "name":"(System)",
     "path":"folders/Scribble Jr./(System).yy",

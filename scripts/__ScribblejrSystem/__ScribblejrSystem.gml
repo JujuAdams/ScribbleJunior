@@ -7,19 +7,19 @@
 
 
 
-function __ScribblejrSystem()
+function __ScribbleJrSystem()
 {
     static _system = undefined;
     if (is_struct(_system)) return _system;
     
-    __ScribblejrTrace("Welcome to Scribble Junior by Juju Adams! This is version ", SCRIBBLEJR_VERSION, ", ", SCRIBBLEJR_DATE);
+    __ScribbleJrTrace("Welcome to Scribble Junior by Juju Adams! This is version ", SCRIBBLEJR_VERSION, ", ", SCRIBBLEJR_DATE);
     
     _system = {};
     if (GM_build_type == "run") global.scribblejrSystem = _system;
     
     with(_system)
     {
-        __nullWrapper = new __ScribblejrClassNullWrapper();
+        __nullWrapper = new __ScribbleJrClassNullWrapper();
         
         __wrappersCache     = {};
         __elementsArray     = [];
@@ -35,7 +35,7 @@ function __ScribblejrSystem()
         __budgetUsed     = 0;
         __budgetUsedPrev = 0;
         
-        __defaultFont = ScribblejrDefaultFont;
+        __defaultFont = ScribbleJrDefaultFont;
         
         __perCharacterWrap = false;
         
@@ -88,7 +88,7 @@ function __ScribblejrSystem()
     
     time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, function()
     {
-        static _system = __ScribblejrSystem();
+        static _system = __ScribbleJrSystem();
         static _cache  = _system.__wrappersCache;
         static _array  = _system.__elementsArray;
         
@@ -105,7 +105,7 @@ function __ScribblejrSystem()
                 var _element = _array[_index];
                 if ((not weak_ref_alive(_element.__wrapper)) && (current_time > _element.__lastDraw + __SCRIBBLEJR_TIMEOUT))
                 {
-                    if (SCRIBBLEJR_VERBOSE) __ScribblejrTrace("Freeing ", _element.__key);
+                    if (SCRIBBLEJR_VERBOSE) __ScribbleJrTrace("Freeing ", _element.__key);
                     
                     array_delete(_array, _index, 1);
                     variable_struct_remove(_cache, _element.__key);

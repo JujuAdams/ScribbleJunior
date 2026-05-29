@@ -1,3 +1,3 @@
-ScribblejrSetPreprocesor(TestPreprocessor);
+ScribbleJrSetPreprocesor(TestPreprocessor);
 
-element = ScribblejrExt("mouse_x = [mouse_x].");
+element = ScribbleJrExt("mouse_x = [mouse_x].");

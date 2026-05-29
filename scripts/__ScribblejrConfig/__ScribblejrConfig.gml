@@ -1,25 +1,25 @@
-//Scaling values passed to Scribblejr*Ext functions will scale up and down text. However, you may
+//Scaling values passed to ScribbleJr*Ext functions will scale up and down text. However, you may
 //not want to scale sprites that have been inserted into the string in the same way. Setting this
 //macro to <false> will keep sprites unscaled (scaling factor = 1) relative to the specified text
 //scale.
 //
-// N.B. If ScribblejrShrinkExt() or ScribblejrFitExt() require the string to be scaled down then
+// N.B. If ScribbleJrShrinkExt() or ScribbleJrFitExt() require the string to be scaled down then
 //      sprites will be scaled down regardless of this macro's value.
 #macro SCRIBBLEJR_SCALE_SPRITES  true
 
-//Whether to reset draw state after Scribblejr calls. This slighly impacts performance for the
+//Whether to reset draw state after ScribbleJr calls. This slighly impacts performance for the
 //worse but it is very convenient.
 #macro SCRIBBLEJR_AUTO_RESET_DRAW_STATE  true
 
 //How many iterations to perform when fitting text inside the bounding box. This only applies to
-//ScribblejrFit() and ScribblejrFitExt(). Higher numbers are more accurate but slower. Values lower
+//ScribbleJrFit() and ScribbleJrFitExt(). Higher numbers are more accurate but slower. Values lower
 //than 4 tend to break!
 #macro SCRIBBLEJR_FIT_ITERATIONS  6
 
 //Whether to blend the colour of in-line sprites using whatever colour is specified when a draw
 //method is executed. For example:
 //
-//    ScribblejrExt("You don't have 200 [sprCoins]").Draw(x, y, c_red)
+//    ScribbleJrExt("You don't have 200 [sprCoins]").Draw(x, y, c_red)
 //
 //This draw call will only blend the sprite red when this macro is set to `true`. In-line sprites
 //will always be alpha blended.
@@ -31,9 +31,9 @@
 #macro SCRIBBLEJR_SHADOW_SPRITES  false
 
 //Amount of time per frame that Scribble Junior is allowed to bake vertex buffers. This limit is
-//approximate. You can adjust the budget time at runtime by calling ScribblejrSetBudget(). If this
+//approximate. You can adjust the budget time at runtime by calling ScribbleJrSetBudget(). If this
 //macro is set to zero or a negative number then all vertex buffer baking will be disabled until
-//ScribblejrSetBudget() is called with a positive number.
+//ScribbleJrSetBudget() is called with a positive number.
 #macro SCRIBBLEJR_BUDGET  200 //microseconds
 
 //How many glyphs to write per text element per frame during progressive baking. Higher values
@@ -64,7 +64,7 @@
 //penalty so should typically be left as `false`.
 #macro SCRIBBLEJR_SAFE_SPRITEFONTS  false
 
-//Functions to call when Scribblejr emits messages. Change these if you want to redirect Scribblejr
+//Functions to call when ScribbleJr emits messages. Change these if you want to redirect ScribbleJr
 //messages to something other than the console / native error handler.
 #macro SCRIBBLEJR_SHOW_DEBUG_MESSAGE  show_debug_message //Warnings and general information
 #macro SCRIBBLEJR_SHOW_ERROR          show_error         //Fatal errors

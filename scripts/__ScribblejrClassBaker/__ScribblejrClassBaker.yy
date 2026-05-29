@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__ScribblejrClassBaker",
+  "%Name":"__ScribbleJrClassBaker",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__ScribblejrClassBaker",
+  "name":"__ScribbleJrClassBaker",
   "parent":{
     "name":"Baker",
     "path":"folders/Scribble Jr./(System)/Classes/Baker.yy",

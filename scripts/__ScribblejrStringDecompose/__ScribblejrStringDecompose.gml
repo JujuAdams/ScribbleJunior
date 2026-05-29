@@ -3,7 +3,7 @@
 /// @param string
 /// @param [characterCount]
 
-function __ScribblejrStringDecompose(_string, _characterCount = string_length(_string))
+function __ScribbleJrStringDecompose(_string, _characterCount = string_length(_string))
 {
     var _array = array_create(_characterCount);
     

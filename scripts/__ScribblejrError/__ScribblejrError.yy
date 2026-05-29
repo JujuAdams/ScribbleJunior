@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__ScribblejrError",
+  "%Name":"__ScribbleJrError",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__ScribblejrError",
+  "name":"__ScribbleJrError",
   "parent":{
     "name":"(System)",
     "path":"folders/Scribble Jr./(System).yy",

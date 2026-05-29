@@ -13,9 +13,9 @@
 /// 
 /// @param font
 
-function ScribblejrCacheFontInfo(_font)
+function ScribbleJrCacheFontInfo(_font)
 {
-    static _system         = __ScribblejrSystem();
+    static _system         = __ScribbleJrSystem();
     static _cache          = _system.__cacheFontInfo;
     static _spriteFontData = _system.__spriteFontData;
     
@@ -62,7 +62,7 @@ function ScribblejrCacheFontInfo(_font)
             var _texTexelW = texture_get_texel_width(_texturePointer);
             var _texTexelH = texture_get_texel_height(_texturePointer);
             
-            //Check if all textures match. Scribblejr doesn't support split texture pages!
+            //Check if all textures match. ScribbleJr doesn't support split texture pages!
             if (GM_build_type == "run")
             {
                 var _i = 0;
@@ -71,7 +71,7 @@ function ScribblejrCacheFontInfo(_font)
                     var _frameInfo = _framesArray[_i];
                     if (_frameInfo.texture != _textureIndex)
                     {
-                        __ScribblejrError("Spritefont ", sprite_get_name(_sprite), " is not on one texture");
+                        __ScribbleJrError("Spritefont ", sprite_get_name(_sprite), " is not on one texture");
                     }
                     
                     ++_i;
@@ -81,7 +81,7 @@ function ScribblejrCacheFontInfo(_font)
             var _extraData = _spriteFontData[$ font_get_name(_font)];
             if (_extraData == undefined)
             {
-                __ScribblejrError("Spritefont ", _font, " (sprite=", sprite_get_name(_sprite), ") has not been attached with ScribblejrAddSpriteFont()");
+                __ScribbleJrError("Spritefont ", _font, " (sprite=", sprite_get_name(_sprite), ") has not been attached with ScribbleJrAddSpriteFont()");
             }
             
             var _proportional = _extraData.__proportional;
@@ -112,11 +112,11 @@ function ScribblejrCacheFontInfo(_font)
                     {
                         if (GM_build_type == "run")
                         {
-                            __ScribblejrError($"Image number {_image} invalid for sprite {sprite_get_name(_sprite)}\nGlyph was \"{_name}\"\nPlease run in debug mode and inspect local variable `_fontInfo`");
+                            __ScribbleJrError($"Image number {_image} invalid for sprite {sprite_get_name(_sprite)}\nGlyph was \"{_name}\"\nPlease run in debug mode and inspect local variable `_fontInfo`");
                         }
                         else
                         {
-                            __ScribblejrTrace($"Image number {_image} invalid for sprite {sprite_get_name(_sprite)}. Glyph was \"{_name}\"");
+                            __ScribbleJrTrace($"Image number {_image} invalid for sprite {sprite_get_name(_sprite)}. Glyph was \"{_name}\"");
                         }
                     }
                 }

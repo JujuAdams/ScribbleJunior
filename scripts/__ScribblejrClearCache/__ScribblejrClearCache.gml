@@ -1,8 +1,8 @@
 // Feather disable all
 
-function __ScribblejrClearCache()
+function __ScribbleJrClearCache()
 {
-    static _system = __ScribblejrSystem();
+    static _system = __ScribbleJrSystem();
     with(_system)
     {
         var _i = 0;

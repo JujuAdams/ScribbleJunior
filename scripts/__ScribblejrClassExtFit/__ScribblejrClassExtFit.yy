@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__ScribblejrClassExtFit",
+  "%Name":"__ScribbleJrClassExtFit",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__ScribblejrClassExtFit",
+  "name":"__ScribbleJrClassExtFit",
   "parent":{
     "name":"Element",
     "path":"folders/Scribble Jr./(System)/Classes/Element.yy",

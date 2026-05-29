@@ -5,7 +5,7 @@
 /// to draw.
 /// 
 /// N.B. This function should not be used for extremely fast changing text such as a stopwatch.
-///      You should use ScribblejrDrawNative() instead if you plan for the drawn text to only show
+///      You should use ScribbleJrDrawNative() instead if you plan for the drawn text to only show
 ///      for a few frames at a time.
 /// 
 /// This function doesn't actually draw the text, it only returns a "text element struct". This
@@ -36,9 +36,9 @@
 /// @param [font=default]
 /// @param [fontScale=1]
 
-function Scribblejr(_string, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1)
+function ScribbleJr(_string, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1)
 {
-    static _system      = __ScribblejrSystem();
+    static _system      = __ScribbleJrSystem();
     static _nullWrapper = _system.__nullWrapper;
     static _cache       = _system.__wrappersCache;
     static _array       = _system.__elementsArray;
@@ -55,8 +55,8 @@ function Scribblejr(_string, _hAlign = fa_left, _vAlign = fa_top, _font = undefi
     var _wrapper = _cache[$ _key];
     if (_wrapper == undefined)
     {
-        var _element = new __ScribblejrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale);
-        var _wrapper = new __ScribblejrClassWrapper(_element);
+        var _element = new __ScribbleJrClass(_key, _string, _hAlign, _vAlign, _font, _fontScale);
+        var _wrapper = new __ScribbleJrClassWrapper(_element);
         _element.__wrapper = weak_ref_create(_wrapper);
         
         _cache[$ _key] = _wrapper;

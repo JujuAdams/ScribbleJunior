@@ -33,8 +33,8 @@
 ///     "This is [c_orange]orange[/c] text."
 ///     Tags that contain the name of a colour constant will colour subsequent characters in the
 ///     string. [/c] [/color] [/colour] can be used to reset the colour to the default colour for
-///     the function call. New colours can be added with ScribblejrAddColor(). Hash codes aren't
-///     parsed automatically but hash codes can be added via ScribblejrAddColor().
+///     the function call. New colours can be added with ScribbleJrAddColor(). Hash codes aren't
+///     parsed automatically but hash codes can be added via ScribbleJrAddColor().
 /// 
 /// 2. In-line Sprites
 ///     "You need [sprCoin]100 to buy this bomb."
@@ -57,9 +57,9 @@
 /// @param [font=default]
 /// @param [fontScale=1]
 
-function ScribblejrExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1)
+function ScribbleJrExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font = undefined, _fontScale = 1)
 {
-    static _system      = __ScribblejrSystem();
+    static _system      = __ScribbleJrSystem();
     static _nullWrapper = _system.__nullWrapper;
     static _cache       = _system.__wrappersCache;
     static _array       = _system.__elementsArray;
@@ -77,8 +77,8 @@ function ScribblejrExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font = und
     var _wrapper = _cache[$ _key];
     if (_wrapper == undefined)
     {
-        var _element = new __ScribblejrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale);
-        var _wrapper = new __ScribblejrClassWrapper(_element);
+        var _element = new __ScribbleJrClassExt(_key, _string, _hAlign, _vAlign, _font, _fontScale);
+        var _wrapper = new __ScribbleJrClassWrapper(_element);
         _element.__wrapper = weak_ref_create(_wrapper);
         
         _cache[$ _key] = _wrapper;
@@ -87,7 +87,7 @@ function ScribblejrExt(_string, _hAlign = fa_left, _vAlign = fa_top, _font = und
     
     if (_system.__preprocessorOnce)
     {
-        ScribblejrResetPreprocesor();
+        ScribbleJrResetPreprocesor();
     }
     
     return _wrapper;

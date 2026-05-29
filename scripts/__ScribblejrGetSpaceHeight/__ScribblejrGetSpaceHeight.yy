@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"__ScribblejrGetSpaceHeight",
+  "%Name":"__ScribbleJrGetSpaceHeight",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__ScribblejrGetSpaceHeight",
+  "name":"__ScribbleJrGetSpaceHeight",
   "parent":{
     "name":"(System)",
     "path":"folders/Scribble Jr./(System).yy",

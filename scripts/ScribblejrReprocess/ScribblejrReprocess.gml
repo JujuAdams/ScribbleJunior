@@ -9,10 +9,10 @@
 ///      gamepad they're using. Do not use this function to rapdily update Scribble Jr. text
 ///      elements.
 
-function ScribblejrReprocess()
+function ScribbleJrReprocess()
 {
-    static _system        = __ScribblejrSystem();
-    static _elementsArray = __ScribblejrSystem().__elementsArray;
+    static _system        = __ScribbleJrSystem();
+    static _elementsArray = __ScribbleJrSystem().__elementsArray;
     
     var _oldPreprocessorMethod = _system.__preprocessorMethod;
     
@@ -21,9 +21,9 @@ function ScribblejrReprocess()
     {
         var _element = _elementsArray[_i];
         
-        if (is_instanceof(_element, __ScribblejrClassExt)
-        ||  is_instanceof(_element, __ScribblejrClassExtFit)
-        ||  is_instanceof(_element, __ScribblejrClassExtShrink))
+        if (is_instanceof(_element, __ScribbleJrClassExt)
+        ||  is_instanceof(_element, __ScribbleJrClassExtFit)
+        ||  is_instanceof(_element, __ScribbleJrClassExtShrink))
         {
             with(_element)
             {
@@ -38,21 +38,21 @@ function ScribblejrReprocess()
                         _system.__preprocessorMethod = __preprocessorMethod;
                         
                         //TODO - We're processing the string twice (once to keep, and another time in the constructor)
-                        if (is_instanceof(self, __ScribblejrClassExt))
+                        if (is_instanceof(self, __ScribbleJrClassExt))
                         {
-                            var _newElement = new __ScribblejrClassExt(__key, __stringOriginal, __hAlign, __vAlign, __font, __scale);
+                            var _newElement = new __ScribbleJrClassExt(__key, __stringOriginal, __hAlign, __vAlign, __font, __scale);
                         }
-                        else if (is_instanceof(self, __ScribblejrClassExtFit))
+                        else if (is_instanceof(self, __ScribbleJrClassExtFit))
                         {
-                            var _newElement = new __ScribblejrClassExtFit(__key, __stringOriginal, __hAlign, __vAlign, __font, __scale, __maxWidth, __maxHeight);
+                            var _newElement = new __ScribbleJrClassExtFit(__key, __stringOriginal, __hAlign, __vAlign, __font, __scale, __maxWidth, __maxHeight);
                         }
-                        else if (is_instanceof(self, __ScribblejrClassExtShrink))
+                        else if (is_instanceof(self, __ScribbleJrClassExtShrink))
                         {
-                            var _newElement = new __ScribblejrClassExtShrink(__key, __stringOriginal, __hAlign, __vAlign, __font, __scale, __maxWidth, __maxHeight);
+                            var _newElement = new __ScribbleJrClassExtShrink(__key, __stringOriginal, __hAlign, __vAlign, __font, __scale, __maxWidth, __maxHeight);
                         }
                         else
                         {
-                            __ScribblejrError($"Could not recreate text element, unrecognised instanceof ({instanceof(self)})");
+                            __ScribbleJrError($"Could not recreate text element, unrecognised instanceof ({instanceof(self)})");
                         }
                         
                         _newElement.__wrapper = _wrapperRef;

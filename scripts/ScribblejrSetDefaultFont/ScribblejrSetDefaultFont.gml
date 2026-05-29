@@ -8,8 +8,8 @@
 /// 
 /// @param font
 
-function ScribblejrSetDefaultFont(_font)
+function ScribbleJrSetDefaultFont(_font)
 {
-    static _system = __ScribblejrSystem();
-    _system.__defaultFont = (_font < 0)? ScribblejrDefaultFont : _font;
+    static _system = __ScribbleJrSystem();
+    _system.__defaultFont = (_font < 0)? ScribbleJrDefaultFont : _font;
 }

@@ -1,10 +1,10 @@
 // Feather disable all
 
-/// Resets the current preprocessor to the default, as set by `ScribblejrSetPreprocesorDefault()`.
+/// Resets the current preprocessor to the default, as set by `ScribbleJrSetPreprocesorDefault()`.
 
-function ScribblejrResetPreprocesor()
+function ScribbleJrResetPreprocesor()
 {
-    static _system = __ScribblejrSystem();
+    static _system = __ScribbleJrSystem();
     
     with(_system)
     {

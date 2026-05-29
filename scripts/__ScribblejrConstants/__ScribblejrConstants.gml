@@ -7,7 +7,7 @@
 //                       DO NOT EDIT THIS SCRIPT                          //
 //                       Bad things might happen.                         //
 //                                                                        //
-//      Customisation options can be found in `__ScribblejrConfig()`.     //
+//      Customisation options can be found in `__ScribbleJrConfig()`.     //
 //                                                                        //
 ////////////////////////////////////////////////////////////////////////////
 

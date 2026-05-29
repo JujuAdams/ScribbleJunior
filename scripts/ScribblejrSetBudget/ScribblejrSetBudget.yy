@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"ScribblejrSetBudget",
+  "%Name":"ScribbleJrSetBudget",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"ScribblejrSetBudget",
+  "name":"ScribbleJrSetBudget",
   "parent":{
     "name":"Setup",
     "path":"folders/Scribble Jr./Setup.yy",

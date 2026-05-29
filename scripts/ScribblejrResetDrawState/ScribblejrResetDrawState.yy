@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"ScribblejrResetDrawState",
+  "%Name":"ScribbleJrResetDrawState",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"ScribblejrResetDrawState",
+  "name":"ScribbleJrResetDrawState",
   "parent":{
     "name":"Scribble Jr.",
     "path":"folders/Scribble Jr..yy",
