@@ -1,5 +1,5 @@
 <p align="center"><img src="https://raw.githubusercontent.com/JujuAdams/ScribbleJunior/master/LOGO.png" style="display:block; margin:auto; width:300px"></p>
-<h1 align="center">Scribble Junior 2.0.0</h1>
+<h1 align="center">Scribble Junior 2.0.1-alpha</h1>
 
 <p align="center">Lightweight text renderer for GameMaker</p>
 

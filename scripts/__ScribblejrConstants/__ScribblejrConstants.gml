@@ -6,7 +6,7 @@
 //                                                                        //
 ////////////////////////////////////////////////////////////////////////////
 
-#macro SCRIBBLEJR_VERSION  "2.0.0"
-#macro SCRIBBLEJR_DATE     "2026-05-29"
+#macro SCRIBBLEJR_VERSION  "2.0.1-alpha"
+#macro SCRIBBLEJR_DATE     "2026-07-16"
 
 #macro SCRIBBLEJR_NO_PREPROCESS  __ScribbleJjrNoPreprocessing
