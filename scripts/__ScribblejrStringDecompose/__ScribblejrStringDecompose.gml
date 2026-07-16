@@ -7,13 +7,16 @@ function __ScribbleJrStringDecompose(_string, _characterCount = string_length(_s
 {
     var _array = array_create(_characterCount);
     
-    //GameMaker needs a function to decompose a string into glyphs
-    string_foreach(_string, method({
-        __array: _array,
-    }, function(_character, _position)
+    if (_characterCount > 0)
     {
-        __array[_position-1] = _character;
-    }));
+        //GameMaker needs a function to decompose a string into glyphs
+        string_foreach(_string, method({
+            __array: _array,
+        }, function(_character, _position)
+        {
+            __array[_position-1] = _character;
+        }));
+    }
     
     return _array;
 }
