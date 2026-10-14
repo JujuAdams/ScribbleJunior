@@ -96,7 +96,7 @@ function __ScribbleJrClassBakerFitPerChar(_fragmentArray, _font) constructor
                 var _glyphData = __fontGlyphStruct[$ _char];
                 if (_glyphData == undefined)
                 {
-                    //Oh dear
+                    __ScribbleJrTrace($"Couldn't find glyph data for character code {ord(_char)} ({_char}) in font \"{font_get_name(__font)}\"");
                 }
                 else
                 {
